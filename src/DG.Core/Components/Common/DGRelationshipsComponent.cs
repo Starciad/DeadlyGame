@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using DG.Core.Entities;
+﻿using DG.Core.Entities;
 using DG.Core.Relationships;
+
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DG.Core.Components.Common
 {
@@ -13,20 +13,13 @@ namespace DG.Core.Components.Common
         internal DGRelationship AddRelationship(DGEntity anotherEntity, float value = 50)
         {
             DGRelationship relationship = new(this.Entity, anotherEntity, value);
-            this.relationships.TryAdd(anotherEntity, relationship);
+            _ = this.relationships.TryAdd(anotherEntity, relationship);
             return relationship;
         }
 
         internal DGRelationship GetRelationship(DGEntity anotherEntity)
         {
-            if (this.relationships.TryGetValue(anotherEntity, out DGRelationship value))
-            {
-                return value;
-            }
-            else
-            {
-                return AddRelationship(anotherEntity);
-            }
+            return this.relationships.TryGetValue(anotherEntity, out DGRelationship value) ? value : AddRelationship(anotherEntity);
         }
 
         internal float GetRelationshipValue(DGEntity anotherEntity)
@@ -43,7 +36,7 @@ namespace DG.Core.Components.Common
         {
             return
             [
-                .. relationships.Values.OrderByDescending(x => x.RelationshipValue)
+                .. this.relationships.Values.OrderByDescending(x => x.RelationshipValue)
             ];
         }
 
@@ -51,7 +44,7 @@ namespace DG.Core.Components.Common
         {
             return
             [
-                .. relationships.Values.OrderBy(x => x.RelationshipValue)
+                .. this.relationships.Values.OrderBy(x => x.RelationshipValue)
             ];
         }
 

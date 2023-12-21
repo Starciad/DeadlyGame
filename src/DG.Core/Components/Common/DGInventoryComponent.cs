@@ -57,7 +57,7 @@ namespace DG.Core.Components.Common
 
         internal void ModifyNumberOfSlots(int value)
         {
-            this.numberOfSlots = (int)value;
+            this.numberOfSlots = value;
         }
     }
 
@@ -70,18 +70,18 @@ namespace DG.Core.Components.Common
         internal DGInventorySlot(DGItem item, int amount)
         {
             this.Item = item;
-            this.Amount = (int)amount;
+            this.Amount = amount;
         }
 
         internal void Add(int value)
         {
-            this.Amount += (int)value;
+            this.Amount += value;
             Clamp();
         }
 
         internal void Remove(int value)
         {
-            this.Amount -= (int)value;
+            this.Amount -= value;
             Clamp();
         }
 

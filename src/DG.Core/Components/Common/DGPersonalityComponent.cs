@@ -23,8 +23,8 @@
 
         internal void Randomize()
         {
-            PersonalityType = (DGPersonalityType)this.Game.Random.Range(0, 6);
-            CourageLevel = (DGCourageLevel)this.Game.Random.Range(0, 5);
+            this.PersonalityType = (DGPersonalityType)this.Game.Random.Range(0, 6);
+            this.CourageLevel = (DGCourageLevel)this.Game.Random.Range(0, 5);
         }
     }
 }

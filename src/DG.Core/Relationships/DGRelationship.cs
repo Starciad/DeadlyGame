@@ -72,17 +72,11 @@ namespace DG.Core.Relationships
             {
                 return DGRelationshipLevelType.Low;
             }
-            else if (this.relationshipValue <= 50)
-            {
-                return DGRelationshipLevelType.Neutral;
-            }
-            else if (this.relationshipValue <= 80)
-            {
-                return DGRelationshipLevelType.High;
-            }
             else
             {
-                return DGRelationshipLevelType.VeryHigh;
+                return this.relationshipValue <= 50
+                    ? DGRelationshipLevelType.Neutral
+                    : this.relationshipValue <= 80 ? DGRelationshipLevelType.High : DGRelationshipLevelType.VeryHigh;
             }
         }
     }

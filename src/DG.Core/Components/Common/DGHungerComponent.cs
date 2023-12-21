@@ -10,7 +10,7 @@
         {
             base.Update();
 
-            if (IsHungry && this.Entity.ComponentContainer.TryGetComponent(out DGHealthComponent value))
+            if (this.IsHungry && this.Entity.ComponentContainer.TryGetComponent(out DGHealthComponent value))
             {
                 ApplyDamage(value);
             }

@@ -1,7 +1,7 @@
 ﻿using DG.Core.Behaviour.Models;
 using DG.Core.Components.Common;
-using DG.Core.Managers;
 using DG.Core.Entities;
+using DG.Core.Managers;
 
 namespace DG.Core.Behaviour.Common
 {

@@ -6,7 +6,6 @@ using DG.Core.Objects;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using System.Threading.Tasks;
 
 namespace DG.Core.Managers
 {
@@ -29,7 +28,7 @@ namespace DG.Core.Managers
 
             for (int i = 0; i < length; i++)
             {
-                this.players[i] = new(playerBuildersArray[i], (int)i);
+                this.players[i] = new(playerBuildersArray[i], i);
                 this.players[i].SetGameInstance(this.Game);
                 this.players[i].Initialize();
             }
@@ -37,7 +36,7 @@ namespace DG.Core.Managers
 
         public override void Update()
         {
-            foreach (DGPlayer player in ActivePlayers)
+            foreach (DGPlayer player in this.ActivePlayers)
             {
                 player.Update();
             }
@@ -55,7 +54,7 @@ namespace DG.Core.Managers
         {
             return
             [
-                .. players.OrderByDescending(x => Vector2.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, position)),
+                .. this.players.OrderByDescending(x => Vector2.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, position)),
             ];
         }
     }

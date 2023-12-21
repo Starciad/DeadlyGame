@@ -1,7 +1,6 @@
 ﻿using DG.Core.Behaviour;
 using DG.Core.Entities;
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,7 +24,7 @@ namespace DG.Core.Components.Common
 
         internal void RegisterBehaviour(IDGBehaviour behaviour)
         {
-            definedBehaviors.Add(behaviour);
+            this.definedBehaviors.Add(behaviour);
         }
 
         internal void Act()
@@ -42,12 +41,12 @@ namespace DG.Core.Components.Common
 
         private DGAction[] GetPossibleActions(DGEntity entity, DGGame game)
         {
-            int count = definedBehaviors.Count;
+            int count = this.definedBehaviors.Count;
 
             DGAction[] actions = new DGAction[count];
             for (int i = 0; i < count; i++)
             {
-                IDGBehaviour behaviour = definedBehaviors[i];
+                IDGBehaviour behaviour = this.definedBehaviors[i];
                 actions[i] = new(behaviour, behaviour.GetWeight(entity, game).Value);
             }
 
@@ -56,7 +55,7 @@ namespace DG.Core.Components.Common
 
         private static void ExecuteAction(DGAction action, DGEntity entity, DGGame game)
         {
-            action.Behaviour.Act(entity, game);
+            _ = action.Behaviour.Act(entity, game);
         }
     }
 }

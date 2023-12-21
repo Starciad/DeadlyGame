@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DG.Core.Components.Common
+﻿namespace DG.Core.Components.Common
 {
     internal sealed class DGInformationsComponent : DGComponent
     {
@@ -8,7 +6,7 @@ namespace DG.Core.Components.Common
 
         internal void Randomize()
         {
-            Age = (byte)this.Game.Random.Range(20, 60);
+            this.Age = (byte)this.Game.Random.Range(20, 60);
         }
     }
 }

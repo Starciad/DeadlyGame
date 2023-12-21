@@ -9,7 +9,7 @@ namespace DG.Core.Components.Common
     internal sealed class DGEquipmentComponent : DGComponent
     {
         internal DGArmor[] Armor { get; } = new DGArmor[DGInventoryConstants.MAXIMUM_ARMOR_CAPACITY];
-        internal DGAccessory[] Accessories => accessories.ToArray();
+        internal DGAccessory[] Accessories => this.accessories.ToArray();
 
         private readonly List<DGAccessory> accessories = new(DGInventoryConstants.MAXIMUM_ACCESSORY_CAPACITY);
 
@@ -18,7 +18,7 @@ namespace DG.Core.Components.Common
         {
             float value = 0;
 
-            foreach (DGArmor armor in Armor)
+            foreach (DGArmor armor in this.Armor)
             {
                 if (armor == null)
                 {
@@ -32,28 +32,28 @@ namespace DG.Core.Components.Common
         }
         internal DGArmor GetArmor(DGArmorType armorType)
         {
-            return Armor[(int)armorType];
+            return this.Armor[(int)armorType];
         }
         internal DGArmor UnequipArmor(DGArmorType armorType)
         {
             int slot = (int)armorType;
-            DGArmor targetArmor = Armor[slot];
-            Armor[slot] = null;
+            DGArmor targetArmor = this.Armor[slot];
+            this.Armor[slot] = null;
 
             return targetArmor;
         }
         internal void EquipArmor(DGArmor newArmor, out DGArmor oldArmor)
         {
             oldArmor = UnequipArmor(newArmor.ArmorType);
-            Armor[(int)newArmor.ArmorType] = newArmor;
+            this.Armor[(int)newArmor.ArmorType] = newArmor;
         }
 
         // Accessories
         internal bool TryEquipAccessory(DGAccessory accessory)
         {
-            if (accessories.Count < DGInventoryConstants.MAXIMUM_ACCESSORY_CAPACITY)
+            if (this.accessories.Count < DGInventoryConstants.MAXIMUM_ACCESSORY_CAPACITY)
             {
-                accessories.Add(accessory);
+                this.accessories.Add(accessory);
                 return true;
             }
 
@@ -61,7 +61,7 @@ namespace DG.Core.Components.Common
         }
         internal bool TryUnequipAccessory(DGAccessory accessory)
         {
-            return accessories.Remove(accessory);
+            return this.accessories.Remove(accessory);
         }
     }
 }
