@@ -1,4 +1,5 @@
-﻿using DG.Core.Builders;
+﻿using DG.Core.Behaviour.Common;
+using DG.Core.Builders;
 using DG.Core.Components;
 using DG.Core.Components.Common;
 using DG.Core.Utilities;
@@ -17,6 +18,7 @@ namespace DG.Core.Entities.Players
         private readonly DGInventoryComponent _inventory;
         private readonly DGEquipmentComponent _equipment;
         private readonly DGCombatComponent _action;
+        private readonly DGBehaviourComponent _behaviour;
 
         internal DGPlayer(DGPlayerBuilder builder, int index)
         {
@@ -31,6 +33,7 @@ namespace DG.Core.Entities.Players
             this._inventory = this.ComponentContainer.AddComponent<DGInventoryComponent>();
             this._equipment = this.ComponentContainer.AddComponent<DGEquipmentComponent>();
             this._action = this.ComponentContainer.AddComponent<DGCombatComponent>();
+            this._behaviour = this.ComponentContainer.AddComponent<DGBehaviourComponent>();
         }
 
         public override void Initialize()
@@ -53,6 +56,9 @@ namespace DG.Core.Entities.Players
             // action
             this._action.SetInitiativeValue(DGAttributesUtilities.GetAttributeModifier(this._characteristics.Dexterity));
             this._action.SetDisplacementRateValue(9 + this.Game.Random.Range(-2, 3));
+
+            // behaviour
+            this._behaviour.RegisterBehaviour(new DGMovementBehaviour());
         }
 
         public override void Update()
