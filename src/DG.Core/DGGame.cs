@@ -2,6 +2,7 @@
 using DG.Core.Dice;
 using DG.Core.Managers;
 using DG.Core.Settings;
+using DG.Core.Utilities;
 
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ namespace DG.Core
     {
         internal DGPlayerManager PlayerManager => this._playersManager;
         internal DGWorldManager WorldManager => this._worldManager;
+        internal DGRandom Random { get; } = new();
         internal DGDice Dice { get; } = new();
 
         // Settings

@@ -23,7 +23,7 @@ namespace DG.Core.Components.Common
             _ = this.slots.RemoveAll(x => x.IsEmpty);
         }
 
-        internal bool TryAddItem(DGItem item, uint amount)
+        internal bool TryAddItem(DGItem item, int amount)
         {
             if (this.slots.Count < this.numberOfSlots)
             {
@@ -43,7 +43,7 @@ namespace DG.Core.Components.Common
             return false;
         }
 
-        internal bool TryRemoveItem(DGItem item, uint amount)
+        internal bool TryRemoveItem(DGItem item, int amount)
         {
             DGInventorySlot targetSlot = this.slots.Find(x => x.Item == item);
             if (targetSlot != null)
@@ -55,7 +55,7 @@ namespace DG.Core.Components.Common
             return false;
         }
 
-        internal void ModifyNumberOfSlots(uint value)
+        internal void ModifyNumberOfSlots(int value)
         {
             this.numberOfSlots = (int)value;
         }
@@ -67,19 +67,19 @@ namespace DG.Core.Components.Common
         internal DGItem Item { get; private set; }
         internal int Amount { get; private set; }
 
-        internal DGInventorySlot(DGItem item, uint amount)
+        internal DGInventorySlot(DGItem item, int amount)
         {
             this.Item = item;
             this.Amount = (int)amount;
         }
 
-        internal void Add(uint value)
+        internal void Add(int value)
         {
             this.Amount += (int)value;
             Clamp();
         }
 
-        internal void Remove(uint value)
+        internal void Remove(int value)
         {
             this.Amount -= (int)value;
             Clamp();

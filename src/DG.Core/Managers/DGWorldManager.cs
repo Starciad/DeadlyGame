@@ -1,6 +1,7 @@
 ﻿using DG.Core.Builders;
 using DG.Core.Objects;
 
+using System;
 using System.Numerics;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace DG.Core.Managers
         public DGWorldDaylightCycleState CurrentDaylightCycle => this.currentDaylightCycle;
         public Vector2 Size => this.worldSize;
 
-        private uint currentDay;
+        private int currentDay;
         private DGWorldDaylightCycleState currentDaylightCycle;
         private Vector2 worldSize;
 
@@ -52,6 +53,22 @@ namespace DG.Core.Managers
                 default:
                     break;
             }
+        }
+
+        internal Vector2 ClampWithinTheLimitsOfTheWorld(Vector2 position)
+        {
+            float pos_x = Math.Clamp(position.X, -Size.X, Size.X);
+            float pos_y = Math.Clamp(position.Y, -Size.Y, Size.Y);
+
+            return new(pos_x, pos_y);
+        }
+
+        internal Vector2 GetRandomPosition()
+        {
+            float pos_x = this.Game.Random.Range(-Size.X, Size.X + 1);
+            float pos_y = this.Game.Random.Range(-Size.Y, Size.Y + 1);
+
+            return new(pos_x, pos_y);
         }
     }
 }

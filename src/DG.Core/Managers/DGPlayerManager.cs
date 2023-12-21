@@ -28,7 +28,7 @@ namespace DG.Core.Managers
 
             for (int i = 0; i < length; i++)
             {
-                this.players[i] = new(playerBuildersArray[i], (uint)i);
+                this.players[i] = new(playerBuildersArray[i], (int)i);
                 this.players[i].SetGameInstance(this.Game);
                 this.players[i].Initialize();
             }

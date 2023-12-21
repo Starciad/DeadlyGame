@@ -2,22 +2,66 @@
 using DG.Core.Items.Accessories;
 using DG.Core.Items.Armor;
 
+using System.Collections.Generic;
+
 namespace DG.Core.Components.Common
 {
-    internal sealed class DGEquipmentComponent
+    internal sealed class DGEquipmentComponent : DGComponent
     {
-        // Armor Parts
-        internal DGHelmet Helmet { get; private set; }
-        internal DGBreastplate Breastplate { get; private set; }
-        internal DGPants Pants { get; private set; }
-        internal DGBoots Boots { get; private set; }
+        internal DGArmor[] Armor { get; } = new DGArmor[DGInventoryConstants.MAXIMUM_ARMOR_CAPACITY];
+        internal DGAccessory[] Accessories => accessories.ToArray();
+
+        private readonly List<DGAccessory> accessories = new(DGInventoryConstants.MAXIMUM_ACCESSORY_CAPACITY);
+
+        // Armor
+        internal float GetArmoredClass()
+        {
+            float value = 0;
+
+            foreach (DGArmor armor in Armor)
+            {
+                if (armor == null)
+                {
+                    continue;
+                }
+
+                value += armor.Defense;
+            }
+
+            return value;
+        }
+        internal DGArmor GetArmor(DGArmorType armorType)
+        {
+            return Armor[(int)armorType];
+        }
+        internal DGArmor UnequipArmor(DGArmorType armorType)
+        {
+            int slot = (int)armorType;
+            DGArmor targetArmor = Armor[slot];
+            Armor[slot] = null;
+
+            return targetArmor;
+        }
+        internal void EquipArmor(DGArmor newArmor, out DGArmor oldArmor)
+        {
+            oldArmor = UnequipArmor(newArmor.ArmorType);
+            Armor[(int)newArmor.ArmorType] = newArmor;
+        }
 
         // Accessories
-        internal DGAccessory[] Accessories { get; private set; } = new DGAccessory[DGInventoryConstants.MAXIMUM_ACCESSORY_CAPACITY];
-
-        internal int GetArmoredClass()
+        internal bool TryEquipAccessory(DGAccessory accessory)
         {
-            return Helmet.Defense + Breastplate.Defense + Pants.Defense + Boots.Defense;
+            if (accessories.Count < DGInventoryConstants.MAXIMUM_ACCESSORY_CAPACITY)
+            {
+                accessories.Add(accessory);
+                return true;
+            }
+
+            return false;
+        }
+        internal bool TryUnequipAccessory(DGAccessory accessory)
+        {
+            return accessories.Remove(accessory);
         }
     }
 }

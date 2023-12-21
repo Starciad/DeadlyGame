@@ -16,5 +16,17 @@ namespace DG.Core.Entities
             this.componentContainer.SetEntityInstance(this);
             base.SetGameInstance(game);
         }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            this.componentContainer.Initialize();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            this.componentContainer.Update();
+        }
     }
 }

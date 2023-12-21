@@ -36,7 +36,7 @@ namespace DG.Tests.Components.Common
         [InlineData(10)]
         [InlineData(20)]
         [InlineData(30)]
-        public void SetCurrentHealth_DefiningAValueForCurrentHealth(uint healthDefined)
+        public void SetCurrentHealth_DefiningAValueForCurrentHealth(int healthDefined)
         {
             DGHealthComponent health = new();
             health.SetCurrentHealth(healthDefined);
@@ -48,7 +48,7 @@ namespace DG.Tests.Components.Common
         [InlineData(10)]
         [InlineData(20)]
         [InlineData(30)]
-        public void SetMaximumHealth_DefiningAValueForMaximumHealth(uint healthDefined)
+        public void SetMaximumHealth_DefiningAValueForMaximumHealth(int healthDefined)
         {
             DGHealthComponent health = new();
             health.SetMaximumHealth(healthDefined);
@@ -60,7 +60,7 @@ namespace DG.Tests.Components.Common
         [InlineData(50, 30, 20)]
         [InlineData(30, 50, 0)]
         [InlineData(0, 20, 0)]
-        public void Hurt_ReducesCurrentHealth(uint initialHealth, uint damage, int expectedHealth)
+        public void Hurt_ReducesCurrentHealth(int initialHealth, int damage, int expectedHealth)
         {
             // Arrange
             DGHealthComponent health = new();
@@ -77,7 +77,7 @@ namespace DG.Tests.Components.Common
         [InlineData(50, 50, 30, 50)]
         [InlineData(80, 80, 30, 80)]
         [InlineData(70, 100, 30, 100)]
-        public void Heal_IncreasesCurrentHealth(uint initialHealth, uint initialMaximumHealth, uint healAmount, int expectedHealth)
+        public void Heal_IncreasesCurrentHealth(int initialHealth, int initialMaximumHealth, int healAmount, int expectedHealth)
         {
             // Arrange
             DGHealthComponent health = new();
