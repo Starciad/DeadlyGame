@@ -15,7 +15,7 @@ namespace DG.Core.Managers
 
     internal sealed class DGWorldManager : DGObject
     {
-        public int CurrentDay => (int)this.currentDay;
+        public int CurrentDay => this.currentDay;
         public DGWorldDaylightCycleState CurrentDaylightCycle => this.currentDaylightCycle;
         public Vector2 Size => this.worldSize;
 
@@ -23,18 +23,16 @@ namespace DG.Core.Managers
         private DGWorldDaylightCycleState currentDaylightCycle;
         private Vector2 worldSize;
 
-        internal async Task InitializeAsync(DGWorldBuilder builder)
+        public void Initialize(DGWorldBuilder builder)
         {
             this.currentDay = 1;
             this.currentDaylightCycle = DGWorldDaylightCycleState.Day;
             this.worldSize = builder.Size;
-            await Task.CompletedTask;
         }
 
-        internal async Task UpdateAsync()
+        public override void Update()
         {
             UpdateDay();
-            await Task.CompletedTask;
         }
 
         private void UpdateDay()
@@ -55,7 +53,7 @@ namespace DG.Core.Managers
             }
         }
 
-        internal Vector2 ClampWithinTheLimitsOfTheWorld(Vector2 position)
+        internal Vector2 Clamp(Vector2 position)
         {
             float pos_x = Math.Clamp(position.X, -Size.X, Size.X);
             float pos_y = Math.Clamp(position.Y, -Size.Y, Size.Y);

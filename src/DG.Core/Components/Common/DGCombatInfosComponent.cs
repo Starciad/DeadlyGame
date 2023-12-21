@@ -1,6 +1,6 @@
 ﻿namespace DG.Core.Components.Common
 {
-    internal sealed class DGCombatComponent : DGComponent
+    internal sealed class DGCombatInfosComponent : DGComponent
     {
         internal int Initiative { get; private set; }
         internal int DisplacementRate { get; private set; }

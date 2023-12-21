@@ -22,24 +22,22 @@ namespace DG.Core
         private readonly DGPlayerManager _playersManager = new();
         private readonly DGWorldManager _worldManager = new();
 
-        public async Task InitializeAsync()
+        public void Initialize()
         {
             this._worldManager.SetGameInstance(this);
             this._playersManager.SetGameInstance(this);
 
-            await this._worldManager.InitializeAsync(worldBuilder);
-            await this._playersManager.InitializeAsync(this._gameSettings.Players);
+            this._worldManager.Initialize(worldBuilder);
+            this._playersManager.Initialize(this._gameSettings.Players);
         }
 
-        public async Task StartAsync()
+        public void Start()
         {
             while (!this._playersManager.OnlyOneActivePlayer)
             {
-                await this._playersManager.UpdateAsync();
-                await this._worldManager.UpdateAsync();
+                this._playersManager.Update();
+                this._worldManager.Update();
             }
-
-            await Task.CompletedTask;
         }
     }
 }

@@ -48,7 +48,7 @@ namespace DG.Core.Components.Common
             for (int i = 0; i < count; i++)
             {
                 IDGBehaviour behaviour = definedBehaviors[i];
-                actions[i] = new(behaviour, behaviour.GetWeight(entity, game));
+                actions[i] = new(behaviour, behaviour.GetWeight(entity, game).Value);
             }
 
             return actions;

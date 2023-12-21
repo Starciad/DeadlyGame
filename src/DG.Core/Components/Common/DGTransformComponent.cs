@@ -10,5 +10,10 @@ namespace DG.Core.Components.Common
         {
             this.Position = position;
         }
+
+        internal void Move(Vector2 value)
+        {
+            this.Position += value;
+        }
     }
 }

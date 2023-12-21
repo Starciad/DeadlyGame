@@ -12,9 +12,9 @@ namespace DG.Core.Entities
 
         internal override void SetGameInstance(DGGame game)
         {
+            base.SetGameInstance(game);
             this.componentContainer.SetGameInstance(game);
             this.componentContainer.SetEntityInstance(this);
-            base.SetGameInstance(game);
         }
 
         public override void Initialize()

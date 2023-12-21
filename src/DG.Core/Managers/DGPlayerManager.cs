@@ -5,6 +5,7 @@ using DG.Core.Objects;
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 
 namespace DG.Core.Managers
@@ -12,14 +13,14 @@ namespace DG.Core.Managers
     internal sealed class DGPlayerManager : DGObject
     {
         internal DGPlayer[] TotalPlayers => this.players;
-        internal DGPlayer[] ActivePlayers => this.players.Where(x => x.ComponentContainer.GetComponent<DGHealthComponent>().IsDead).ToArray();
-        internal DGPlayer[] DisabledPlayers => this.players.Where(x => !x.ComponentContainer.GetComponent<DGHealthComponent>().IsDead).ToArray();
+        internal DGPlayer[] ActivePlayers => this.players.Where(x => !x.ComponentContainer.GetComponent<DGHealthComponent>().IsDead).ToArray();
+        internal DGPlayer[] DisabledPlayers => this.players.Where(x => x.ComponentContainer.GetComponent<DGHealthComponent>().IsDead).ToArray();
 
-        internal bool OnlyOneActivePlayer => this.ActivePlayers.Length > 0;
+        internal bool OnlyOneActivePlayer => this.ActivePlayers.Length == 1;
 
         private DGPlayer[] players;
 
-        internal async Task InitializeAsync(IEnumerable<DGPlayerBuilder> playerBuilders)
+        public void Initialize(IEnumerable<DGPlayerBuilder> playerBuilders)
         {
             DGPlayerBuilder[] playerBuildersArray = playerBuilders.ToArray();
             int length = playerBuildersArray.Length;
@@ -32,13 +33,30 @@ namespace DG.Core.Managers
                 this.players[i].SetGameInstance(this.Game);
                 this.players[i].Initialize();
             }
-
-            await Task.CompletedTask;
         }
 
-        internal async Task UpdateAsync()
+        public override void Update()
         {
-            await Task.CompletedTask;
+            foreach (DGPlayer player in ActivePlayers)
+            {
+                player.Update();
+            }
+        }
+
+        internal DGPlayer[] GetPlayersNearAnotherPlayer(DGPlayer target)
+        {
+            return
+            [
+                .. GetNearbyPlayersFromALocation(target.ComponentContainer.GetComponent<DGTransformComponent>().Position).Where(x => x != target)
+            ];
+        }
+
+        internal DGPlayer[] GetNearbyPlayersFromALocation(Vector2 position)
+        {
+            return
+            [
+                .. players.OrderByDescending(x => Vector2.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, position)),
+            ];
         }
     }
 }
