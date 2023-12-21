@@ -1,4 +1,5 @@
 ﻿using DG.Core.Builders;
+using DG.Core.Objects;
 
 using System.Numerics;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace DG.Core.Managers
         Night = 1
     }
 
-    internal sealed class DGWorldManager
+    internal sealed class DGWorldManager : DGObject
     {
         public int CurrentDay => (int)this.currentDay;
         public DGWorldDaylightCycleState CurrentDaylightCycle => this.currentDaylightCycle;
@@ -37,7 +38,7 @@ namespace DG.Core.Managers
 
         private void UpdateDay()
         {
-            switch (currentDaylightCycle)
+            switch (this.currentDaylightCycle)
             {
                 case DGWorldDaylightCycleState.Day:
                     this.currentDaylightCycle = DGWorldDaylightCycleState.Night;

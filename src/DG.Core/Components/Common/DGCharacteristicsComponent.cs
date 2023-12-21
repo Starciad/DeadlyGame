@@ -1,8 +1,4 @@
-﻿using DG.Core.Dice;
-
-using System;
-
-namespace DG.Core.Components.Common
+﻿namespace DG.Core.Components.Common
 {
     internal sealed class DGCharacteristicsComponent : DGComponent
     {
@@ -56,12 +52,12 @@ namespace DG.Core.Components.Common
 
         internal void Randomize()
         {
-            this.Strength = DGDice.RollAndGetTotalSum(3, 6);
-            this.Constitution = DGDice.RollAndGetTotalSum(3, 6);
-            this.Dexterity = DGDice.RollAndGetTotalSum(3, 6);
-            this.Charisma = DGDice.RollAndGetTotalSum(3, 6);
-            this.Intelligence = DGDice.RollAndGetTotalSum(3, 6);
-            this.Wisdom = DGDice.RollAndGetTotalSum(3, 6);
+            this.Strength = this.Game.Dice.RollAndGetTotalSum(3, 6);
+            this.Constitution = this.Game.Dice.RollAndGetTotalSum(3, 6);
+            this.Dexterity = this.Game.Dice.RollAndGetTotalSum(3, 6);
+            this.Charisma = this.Game.Dice.RollAndGetTotalSum(3, 6);
+            this.Intelligence = this.Game.Dice.RollAndGetTotalSum(3, 6);
+            this.Wisdom = this.Game.Dice.RollAndGetTotalSum(3, 6);
         }
     }
 }

@@ -3,35 +3,50 @@ using System.Linq;
 
 namespace DG.Core.Dice
 {
-    internal static class DGDice
+    public sealed class DGDice
     {
-        internal static int Roll(int size)
+        private readonly Random _random;
+
+        public DGDice()
         {
-            return Random.Shared.Next(1, size + 1);
+            this._random = new();
+        }
+        public DGDice(int seed)
+        {
+            this._random = new(seed);
+        }
+        public DGDice(Random random)
+        {
+            this._random = random;
         }
 
-        internal static int[] Roll(int rolls, int size)
+        public int Roll(int size)
+        {
+            return this._random.Next(1, size + 1);
+        }
+
+        public int[] Roll(int rolls, int size)
         {
             int[] valueOfRolls = new int[rolls];
             for (int i = 0; i < rolls; i++)
             {
-                valueOfRolls[i] = Random.Shared.Next(1, size + 1);
+                valueOfRolls[i] = this._random.Next(1, size + 1);
             }
 
             return valueOfRolls;
         }
 
-        internal static int RollAndGetHighestValue(int rolls, int size)
+        public int RollAndGetHighestValue(int rolls, int size)
         {
             return Roll(rolls, size).Max();
         }
 
-        internal static int RollAndGetLowestValue(int rolls, int size)
+        public int RollAndGetLowestValue(int rolls, int size)
         {
             return Roll(rolls, size).Max();
         }
 
-        internal static int RollAndGetTotalSum(int rolls, int size)
+        public int RollAndGetTotalSum(int rolls, int size)
         {
             return Roll(rolls, size).Sum();
         }

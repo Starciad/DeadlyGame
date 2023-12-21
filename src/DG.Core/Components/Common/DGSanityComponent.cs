@@ -5,9 +5,6 @@
         internal int CurrentSanity { get; private set; }
         internal int MaximumSanity { get; private set; }
 
-        internal bool TemporaryInsanity { get; private set; }
-        internal bool IndefiniteInsanity { get; private set; }
-
         internal void SetCurrentSanity(uint value)
         {
             this.CurrentSanity = (int)value;

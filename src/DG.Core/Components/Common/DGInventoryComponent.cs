@@ -13,14 +13,14 @@ namespace DG.Core.Components.Common
         private readonly List<DGInventorySlot> slots = [];
         private int numberOfSlots;
 
-        internal override void Initialize()
+        public override void Initialize()
         {
             this.numberOfSlots = 20;
         }
 
-        internal override void Update()
+        public override void Update()
         {
-            this.slots.RemoveAll(x => x.IsEmpty);
+            _ = this.slots.RemoveAll(x => x.IsEmpty);
         }
 
         internal bool TryAddItem(DGItem item, uint amount)
@@ -63,7 +63,7 @@ namespace DG.Core.Components.Common
 
     internal class DGInventorySlot
     {
-        internal bool IsEmpty => Amount <= 0;
+        internal bool IsEmpty => this.Amount <= 0;
         internal DGItem Item { get; private set; }
         internal int Amount { get; private set; }
 

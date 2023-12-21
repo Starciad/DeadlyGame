@@ -1,5 +1,7 @@
 ﻿using DG.Core.Builders;
+using DG.Core.Components.Common;
 using DG.Core.Entities.Players;
+using DG.Core.Objects;
 
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace DG.Core.Managers
 {
-    internal sealed class DGPlayerManager
+    internal sealed class DGPlayerManager : DGObject
     {
         internal DGPlayer[] TotalPlayers => this.players;
-        internal DGPlayer[] ActivePlayers => this.players.Where(x => x.IsActive).ToArray();
-        internal DGPlayer[] DisabledPlayers => this.players.Where(x => !x.IsActive).ToArray();
+        internal DGPlayer[] ActivePlayers => this.players.Where(x => x.ComponentContainer.GetComponent<DGHealthComponent>().IsDead).ToArray();
+        internal DGPlayer[] DisabledPlayers => this.players.Where(x => !x.ComponentContainer.GetComponent<DGHealthComponent>().IsDead).ToArray();
 
         internal bool OnlyOneActivePlayer => this.ActivePlayers.Length > 0;
 
@@ -26,8 +28,9 @@ namespace DG.Core.Managers
 
             for (int i = 0; i < length; i++)
             {
-                players[i] = new(playerBuildersArray[i], (uint)i);
-                players[i].Initialize();
+                this.players[i] = new(playerBuildersArray[i], (uint)i);
+                this.players[i].Build(this.Game);
+                this.players[i].Initialize();
             }
 
             await Task.CompletedTask;

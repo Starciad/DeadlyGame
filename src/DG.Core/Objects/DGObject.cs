@@ -2,9 +2,13 @@
 {
     public class DGObject
     {
-        internal bool IsActive { get; set; }
+        protected DGGame Game { get; private set; }
 
-        internal virtual void Initialize() { }
-        internal virtual void Update() { }
+        internal virtual void Build(DGGame game)
+        {
+            this.Game = game;
+        }
+        public virtual void Initialize() { return; }
+        public virtual void Update() { return; }
     }
 }

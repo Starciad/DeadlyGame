@@ -1,5 +1,4 @@
 ﻿using DG.Core.Builders;
-using DG.Core.Components.Common;
 
 namespace DG.Core.Entities.Players
 {
@@ -13,20 +12,19 @@ namespace DG.Core.Entities.Players
             this.Index = index;
 
             // Components
-            AddComponent<DGTransformComponent>();
-            AddComponent<DGGeneralComponent>();
-            AddComponent<DGHealthComponent>();
-            AddComponent<DGSanityComponent>();
-            AddComponent<DGCharacteristicsComponent>();
-            AddComponent<DGAttributesComponent>();
+            // this.ComponentContainer.AddComponent<DGTransformComponent>();
+            // this.ComponentContainer.AddComponent<DGGeneralComponent>();
+            // this.ComponentContainer.AddComponent<DGHealthComponent>();
+            // this.ComponentContainer.AddComponent<DGSanityComponent>();
+            // this.ComponentContainer.AddComponent<DGCharacteristicsComponent>();
         }
 
-        internal override void Initialize()
+        public override void Initialize()
         {
 
         }
 
-        internal override void Update()
+        public override void Update()
         {
 
         }

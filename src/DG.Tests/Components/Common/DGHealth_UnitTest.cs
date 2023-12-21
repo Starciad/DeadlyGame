@@ -1,6 +1,6 @@
 ﻿using DG.Core.Components.Common;
 
-namespace DG.Tests.Components
+namespace DG.Tests.Components.Common
 {
     public sealed class DGHealthComponent_UnitTest
     {
@@ -43,7 +43,6 @@ namespace DG.Tests.Components
 
             Assert.Equal((int)healthDefined, health.CurrentHealth);
         }
-
 
         [Theory]
         [InlineData(10)]

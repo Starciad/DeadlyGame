@@ -1,6 +1,7 @@
 ﻿using DG.Core.Builders;
-using DG.Core.Settings;
+using DG.Core.Dice;
 using DG.Core.Managers;
+using DG.Core.Settings;
 
 using System.Threading.Tasks;
 
@@ -8,8 +9,9 @@ namespace DG.Core
 {
     public sealed class DGGame(DGGameBuilder gameBuilder, DGWorldBuilder worldBuilder)
     {
-        internal static DGPlayerManager PlayerManager { get; private set; }
-        internal static DGWorldManager WorldManager { get; private set; }
+        internal DGPlayerManager PlayerManager => this._playersManager;
+        internal DGWorldManager WorldManager => this._worldManager;
+        internal DGDice Dice { get; } = new();
 
         // Settings
         private readonly DGGameSettings _gameSettings = new(gameBuilder);
@@ -20,19 +22,19 @@ namespace DG.Core
 
         public async Task InitializeAsync()
         {
-            await _worldManager.InitializeAsync(worldBuilder);
-            await _playersManager.InitializeAsync(this._gameSettings.Players);
+            this._worldManager.Build(this);
+            this._playersManager.Build(this);
 
-            PlayerManager = _playersManager;
-            WorldManager = _worldManager;
+            await this._worldManager.InitializeAsync(worldBuilder);
+            await this._playersManager.InitializeAsync(this._gameSettings.Players);
         }
 
         public async Task StartAsync()
         {
-            while (!_playersManager.OnlyOneActivePlayer)
+            while (!this._playersManager.OnlyOneActivePlayer)
             {
-                await _playersManager.UpdateAsync();
-                await _worldManager.UpdateAsync();
+                await this._playersManager.UpdateAsync();
+                await this._worldManager.UpdateAsync();
             }
 
             await Task.CompletedTask;

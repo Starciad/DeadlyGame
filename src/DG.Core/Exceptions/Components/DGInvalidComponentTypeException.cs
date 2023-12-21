@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DG.Core.Exceptions
+namespace DG.Core.Exceptions.Components
 {
-    public class DGInvalidComponentTypeException : Exception
+    public sealed class DGInvalidComponentTypeException : Exception
     {
         public DGInvalidComponentTypeException()
         {
@@ -18,5 +18,4 @@ namespace DG.Core.Exceptions
         {
         }
     }
-
 }
