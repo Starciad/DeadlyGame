@@ -65,7 +65,7 @@ namespace DG.Core.Entities.Players
 
             // Behaviour
             this._behaviour = this.ComponentContainer.AddComponent<DGBehaviourComponent>();
-            this._behaviour.RegisterBehaviour(new DGMovementBehaviour());
+            this._behaviour.RegisterBehaviour(new DGMovementBehavior());
         }
 
         public override void Update()

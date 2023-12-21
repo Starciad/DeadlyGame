@@ -1,5 +1,6 @@
 ﻿using DG.Core.Builders;
 using DG.Core.Components.Common;
+using DG.Core.Entities;
 using DG.Core.Entities.Players;
 using DG.Core.Objects;
 
@@ -42,15 +43,16 @@ namespace DG.Core.Managers
             }
         }
 
-        internal DGPlayer[] GetPlayersNearAnotherPlayer(DGPlayer target)
+
+        internal DGPlayer[] GetNearbyPlayers(DGEntity target)
         {
             return
             [
-                .. GetNearbyPlayersFromALocation(target.ComponentContainer.GetComponent<DGTransformComponent>().Position).Where(x => x != target)
+                .. GetNearbyPlayers(target.ComponentContainer.GetComponent<DGTransformComponent>().Position).Where(x => x != target)
             ];
         }
 
-        internal DGPlayer[] GetNearbyPlayersFromALocation(Vector2 position)
+        internal DGPlayer[] GetNearbyPlayers(Vector2 position)
         {
             return
             [
