@@ -1,7 +1,8 @@
 ﻿namespace DG.Core.Components.Common
 {
-    internal sealed class DGAttributes : DGComponent
+    internal sealed class DGAttributesComponent : DGComponent
     {
+        internal int ProficiencyBonus { get; set; }
         internal int Stunt { get; set; }
         internal int Athletics { get; set; }
         internal int Performance { get; set; }

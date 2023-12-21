@@ -1,6 +1,6 @@
 ﻿namespace DG.Core.Components.Common
 {
-    public sealed class DGHealth : DGComponent
+    public sealed class DGHealthComponent : DGComponent
     {
         public bool IsDead => this.CurrentHealth <= 0;
         public int CurrentHealth { get; private set; }

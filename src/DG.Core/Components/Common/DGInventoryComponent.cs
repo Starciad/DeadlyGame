@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace DG.Core.Components.Common
 {
-    internal sealed class DGInventory : DGComponent
+    internal sealed class DGInventoryComponent : DGComponent
     {
         internal int NumberOfSlots => this.numberOfSlots;
 

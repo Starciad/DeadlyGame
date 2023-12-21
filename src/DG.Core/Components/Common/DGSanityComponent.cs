@@ -1,6 +1,6 @@
 ﻿namespace DG.Core.Components.Common
 {
-    internal sealed class DGSanity : DGComponent
+    internal sealed class DGSanityComponent : DGComponent
     {
         internal int CurrentSanity { get; private set; }
         internal int MaximumSanity { get; private set; }

@@ -13,12 +13,12 @@ namespace DG.Core.Entities.Players
             this.Index = index;
 
             // Components
-            AddComponent<DGTransform>();
-            AddComponent<DGGeneral>();
-            AddComponent<DGHealth>();
-            AddComponent<DGSanity>();
-            AddComponent<DGCharacteristics>();
-            AddComponent<DGAttributes>();
+            AddComponent<DGTransformComponent>();
+            AddComponent<DGGeneralComponent>();
+            AddComponent<DGHealthComponent>();
+            AddComponent<DGSanityComponent>();
+            AddComponent<DGCharacteristicsComponent>();
+            AddComponent<DGAttributesComponent>();
         }
 
         internal override void Initialize()

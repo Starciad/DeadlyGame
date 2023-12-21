@@ -2,7 +2,7 @@
 
 namespace DG.Core.Components.Common
 {
-    internal sealed class DGTransform : DGComponent
+    internal sealed class DGTransformComponent : DGComponent
     {
         internal Vector2 Position { get; private set; }
     }

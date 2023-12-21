@@ -1,6 +1,10 @@
-﻿namespace DG.Core.Components.Common
+﻿using DG.Core.Dice;
+
+using System;
+
+namespace DG.Core.Components.Common
 {
-    internal sealed class DGCharacteristics : DGComponent
+    internal sealed class DGCharacteristicsComponent : DGComponent
     {
         /// <summary>
         /// Gets or sets the strength attribute of the character.
@@ -49,5 +53,15 @@
         /// Wisdom reflects the character's insight, intuition, and judgment. It can influence the character's ability to make sound decisions or interpret situations effectively within the game's narrative.
         /// </remarks>
         internal int Wisdom { get; set; }
+
+        internal void Randomize()
+        {
+            this.Strength = DGDice.RollAndGetTotalSum(3, 6);
+            this.Constitution = DGDice.RollAndGetTotalSum(3, 6);
+            this.Dexterity = DGDice.RollAndGetTotalSum(3, 6);
+            this.Charisma = DGDice.RollAndGetTotalSum(3, 6);
+            this.Intelligence = DGDice.RollAndGetTotalSum(3, 6);
+            this.Wisdom = DGDice.RollAndGetTotalSum(3, 6);
+        }
     }
 }
