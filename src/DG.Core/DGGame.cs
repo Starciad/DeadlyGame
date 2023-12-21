@@ -22,8 +22,8 @@ namespace DG.Core
 
         public async Task InitializeAsync()
         {
-            this._worldManager.Build(this);
-            this._playersManager.Build(this);
+            this._worldManager.SetGameInstance(this);
+            this._playersManager.SetGameInstance(this);
 
             await this._worldManager.InitializeAsync(worldBuilder);
             await this._playersManager.InitializeAsync(this._gameSettings.Players);

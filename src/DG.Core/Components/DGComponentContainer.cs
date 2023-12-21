@@ -1,4 +1,5 @@
-﻿using DG.Core.Exceptions.Components;
+﻿using DG.Core.Entities;
+using DG.Core.Exceptions.Components;
 using DG.Core.Objects;
 
 using System;
@@ -11,6 +12,12 @@ namespace DG.Core.Components
         public int Count => this._components.Count;
 
         private readonly Dictionary<Type, DGComponent> _components = [];
+        private DGEntity _entity;
+
+        public void SetEntityInstance(DGEntity entity)
+        {
+            this._entity = entity;
+        }
 
         public T AddComponent<T>() where T : DGComponent
         {
@@ -53,7 +60,8 @@ namespace DG.Core.Components
             }
 
             DGComponent componentValue = (DGComponent)Activator.CreateInstance(componentType);
-
+            componentValue.SetGameInstance(this.Game);
+            componentValue.SetEntityInstance(this._entity);
             this._components.Add(componentType, componentValue);
             return componentValue;
         }

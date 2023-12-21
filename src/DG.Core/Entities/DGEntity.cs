@@ -3,17 +3,18 @@ using DG.Core.Objects;
 
 namespace DG.Core.Entities
 {
-    internal abstract class DGEntity : DGObject
+    public abstract class DGEntity : DGObject
     {
-        internal string Name { get; set; }
-        internal DGComponentContainer ComponentContainer => this.componentContainer;
+        public string Name { get; set; }
+        public DGComponentContainer ComponentContainer => this.componentContainer;
 
         private readonly DGComponentContainer componentContainer = new();
 
-        internal override void Build(DGGame game)
+        internal override void SetGameInstance(DGGame game)
         {
-            this.componentContainer.Build(game);
-            base.Build(game);
+            this.componentContainer.SetGameInstance(game);
+            this.componentContainer.SetEntityInstance(this);
+            base.SetGameInstance(game);
         }
     }
 }

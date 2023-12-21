@@ -4,7 +4,7 @@
     {
         protected DGGame Game { get; private set; }
 
-        internal virtual void Build(DGGame game)
+        internal virtual void SetGameInstance(DGGame game)
         {
             this.Game = game;
         }

@@ -2,6 +2,6 @@
 {
     internal abstract class DGArmor : DGItem
     {
-
+        public int Defense { get; set; }
     }
 }
