@@ -16,11 +16,11 @@ namespace DG.Core.Behaviour.Common
             {
                 if (personality.PersonalityType == DGPersonalityType.Explorer)
                 {
-                    weight.Add(2f);
+                    weight.Add(3f);
                 }
                 else
                 {
-                    weight.Add(1f);
+                    weight.Add(1.5f);
                 }
 
                 if (personality.CourageLevel == DGCourageLevel.Fearful)
