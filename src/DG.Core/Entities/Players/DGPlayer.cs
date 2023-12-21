@@ -4,6 +4,8 @@ using DG.Core.Components;
 using DG.Core.Components.Common;
 using DG.Core.Utilities;
 
+using System.Reflection.PortableExecutable;
+
 namespace DG.Core.Entities.Players
 {
     internal sealed class DGPlayer : DGEntity
@@ -11,16 +13,7 @@ namespace DG.Core.Entities.Players
         internal int Index { get; private set; }
 
         // Components
-        private DGTransformComponent _transform;
-        private DGInformationsComponent _informations;
-        private DGHealthComponent _health;
-        private DGHungerComponent _hunger;
-        private DGCharacteristicsComponent _characteristics;
-        private DGInventoryComponent _inventory;
-        private DGEquipmentComponent _equipment;
-        private DGCombatInfosComponent _action;
         private DGBehaviourComponent _behaviour;
-        private DGPersonalityComponent _personality;
 
         internal DGPlayer(DGPlayerBuilder builder, int index)
         {
@@ -33,43 +26,49 @@ namespace DG.Core.Entities.Players
             base.Initialize();
 
             // Components
-            this._transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
-            this._informations = this.ComponentContainer.AddComponent<DGInformationsComponent>();
-            this._health = this.ComponentContainer.AddComponent<DGHealthComponent>();
-            this._hunger = this.ComponentContainer.AddComponent<DGHungerComponent>();
-            this._characteristics = this.ComponentContainer.AddComponent<DGCharacteristicsComponent>();
-            this._inventory = this.ComponentContainer.AddComponent<DGInventoryComponent>();
-            this._equipment = this.ComponentContainer.AddComponent<DGEquipmentComponent>();
-            this._action = this.ComponentContainer.AddComponent<DGCombatInfosComponent>();
+            // Transform
+            var transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
+            transform.SetPosition(this.Game.WorldManager.GetRandomPosition());
+
+            // Infos
+            var informations = this.ComponentContainer.AddComponent<DGInformationsComponent>();
+            informations.Randomize();
+
+            // Personality
+            var personality = this.ComponentContainer.AddComponent<DGPersonalityComponent>();
+            personality.Randomize();
+
+            // Characteristics
+            var characteristics = this.ComponentContainer.AddComponent<DGCharacteristicsComponent>();
+            characteristics.Randomize();
+
+            // Health
+            var health = this.ComponentContainer.AddComponent<DGHealthComponent>();
+            health.SetMaximumHealth(10 + DGAttributesUtilities.GetAttributeModifier(characteristics.Constitution));
+            health.SetCurrentHealth(health.MaximumHealth);
+
+            // Hunger
+            var hunger = this.ComponentContainer.AddComponent<DGHungerComponent>();
+            hunger.SetMaximumHunger(100);
+            hunger.SetCurrentHunger(0);
+
+            // Inventory
+            _ = this.ComponentContainer.AddComponent<DGInventoryComponent>();
+
+            // Equipment
+            _ = this.ComponentContainer.AddComponent<DGEquipmentComponent>();
+
+            // Combat Infos
+            var combatInfos = this.ComponentContainer.AddComponent<DGCombatInfosComponent>();
+            combatInfos.SetInitiativeValue(DGAttributesUtilities.GetAttributeModifier(characteristics.Dexterity));
+            combatInfos.SetDisplacementRateValue(9 + this.Game.Random.Range(-2, 3));
+
+            // Relationship
+            this.ComponentContainer.AddComponent<DGRelationshipsComponent>();
+
+            // Behaviour
             this._behaviour = this.ComponentContainer.AddComponent<DGBehaviourComponent>();
-            this._personality = this.ComponentContainer.AddComponent<DGPersonalityComponent>();
-
-            // transform
-            this._transform.SetPosition(this.Game.WorldManager.GetRandomPosition());
-
-            // infos
-            this._informations.Randomize();
-
-            // health
-            this._health.SetMaximumHealth(10 + DGAttributesUtilities.GetAttributeModifier(this._characteristics.Constitution));
-            this._health.SetCurrentHealth(this._health.MaximumHealth);
-
-            // hunger
-            this._hunger.SetMaximumHunger(100);
-            this._hunger.SetCurrentHunger(0);
-
-            // characteristics
-            this._characteristics.Randomize();
-
-            // action
-            this._action.SetInitiativeValue(DGAttributesUtilities.GetAttributeModifier(this._characteristics.Dexterity));
-            this._action.SetDisplacementRateValue(9 + this.Game.Random.Range(-2, 3));
-
-            // behaviour
             this._behaviour.RegisterBehaviour(new DGMovementBehaviour());
-
-            // personality
-            this._personality.Randomize();
         }
 
         public override void Update()

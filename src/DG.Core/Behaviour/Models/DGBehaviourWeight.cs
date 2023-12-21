@@ -11,11 +11,18 @@ namespace DG.Core.Behaviour.Models
         internal void Add(float value)
         {
             this.value += value;
+            Clamp();
         }
 
         internal void Remove(float value)
         {
             this.value -= value;
+            Clamp();
+        }
+
+        private void Clamp()
+        {
+            this.value = Math.Clamp(this.value, 0f, 10f);
         }
     }
 }
