@@ -135,5 +135,86 @@ namespace DG.Tests.Components.Common
             Assert.Empty(inventory.Slots);
         }
         #endregion
+
+        #region GET
+        [Fact]
+        public void TryGetItem_GetAnItemThatHasBeenAddedToTheInventory()
+        {
+            // Arrange
+            DGInventoryComponent inventory = new();
+            inventory.ModifyNumberOfSlots(1);
+            FakeItem_01 item = new();
+
+            // Act
+            bool added = inventory.TryAddItem(item, 1);
+            bool itemObtained = inventory.GetItem<FakeItem_01>() != null;
+
+            // Assert
+            Assert.True(added);
+            Assert.True(itemObtained);
+            Assert.Single(inventory.Slots);
+            Assert.Equal(item.GetType(), inventory.Slots[0].ItemType);
+            Assert.Equal(1, inventory.Slots[0].Amount);
+        }
+        #endregion
+
+        #region HAS ITEM
+        [Fact]
+        public void HasItem_AddItemToInventoryAndCheckIfItExists()
+        {
+            // Arrange
+            DGInventoryComponent inventory = new();
+            inventory.ModifyNumberOfSlots(1);
+            FakeItem_01 item = new();
+
+            // Act
+            bool added = inventory.TryAddItem(item, 1);
+            bool haveTheItem = inventory.HasItem(item);
+
+            // Assert
+            Assert.True(added);
+            Assert.True(haveTheItem);
+            Assert.Single(inventory.Slots);
+            Assert.Equal(item.GetType(), inventory.Slots[0].ItemType);
+            Assert.Equal(1, inventory.Slots[0].Amount);
+        }
+
+        [Fact]
+        public void HasItem_CheckTheExistenceOfAnItemThatIsNotInTheInventory()
+        {
+            // Arrange
+            DGInventoryComponent inventory = new();
+
+            // Act
+            bool notHaveTheItem = !inventory.HasItem<FakeItem_01>();
+
+            // Assert
+            Assert.True(notHaveTheItem);
+            Assert.Empty(inventory.Slots);
+        }
+        #endregion
+
+        #region UTILITIES
+        [Fact]
+        public void ClearInventory_ClearAllItemsPresentInTheInventory()
+        {
+            // Arrange
+            DGInventoryComponent inventory = new();
+            inventory.ModifyNumberOfSlots(2);
+            FakeItem_01 item_01 = new();
+            FakeItem_02 item_02 = new();
+
+            // Act
+            bool addedItem01 = inventory.TryAddItem(item_01, 1);
+            bool addedItem02 = inventory.TryAddItem(item_02, 1);
+
+            inventory.ClearInventory();
+
+            // Assert
+            Assert.True(addedItem01);
+            Assert.True(addedItem02);
+            Assert.Empty(inventory.Slots);
+        }
+        #endregion
     }
 }

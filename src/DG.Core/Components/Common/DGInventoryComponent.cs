@@ -37,10 +37,6 @@ namespace DG.Core.Components.Common
                 this._healthComponent.OnDied += HealthComponent_OnDied;
             }
         }
-        protected override void OnUpdate()
-        {
-            ClearAllEmptySlots();
-        }
 
         // ===== ADD =====
         public void AddItem(DGWorldItem worldItem)
@@ -192,14 +188,9 @@ namespace DG.Core.Components.Common
         }
 
         // ===== UTILITIES =====
-        public void ClearAllEmptySlots()
-        {
-            _ = this.slots.RemoveAll(x => x.IsEmpty);
-        }
         public void ClearInventory()
         {
             slots.Clear();
-            ClearInventory();
         }
         public void DropAllItems()
         {
@@ -207,6 +198,8 @@ namespace DG.Core.Components.Common
             {
                 this.Game.WorldManager.AddWorldItem(DropItem(slot));
             }
+
+            ClearInventory();
         }
         private DGWorldItem DropItem(DGInventorySlot slot)
         {
