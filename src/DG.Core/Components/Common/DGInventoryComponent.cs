@@ -8,6 +8,7 @@ namespace DG.Core.Components.Common
 {
     internal sealed class DGInventoryComponent : DGComponent
     {
+        internal DGInventorySlot[] Slots => this.slots.ToArray();
         internal int NumberOfSlots => this.numberOfSlots;
 
         private readonly List<DGInventorySlot> slots = [];
@@ -45,7 +46,12 @@ namespace DG.Core.Components.Common
 
         internal bool TryRemoveItem(DGItem item, int amount)
         {
-            DGInventorySlot targetSlot = this.slots.Find(x => x.Item == item);
+            return TryRemoveItem(item.GetType(), amount);
+        }
+
+        internal bool TryRemoveItem(Type itemType, int amount)
+        {
+            DGInventorySlot targetSlot = this.slots.Find(x => x.ItemType == itemType);
             if (targetSlot != null)
             {
                 targetSlot.Remove(amount);
@@ -53,6 +59,16 @@ namespace DG.Core.Components.Common
             }
 
             return false;
+        }
+
+        internal bool HasItem(DGItem item)
+        {
+            return HasItem(item.GetType());
+        }
+
+        internal bool HasItem(Type itemType)
+        {
+            return Array.Find(Slots, x => x.ItemType == itemType) != null;
         }
 
         internal void ModifyNumberOfSlots(int value)
@@ -64,6 +80,7 @@ namespace DG.Core.Components.Common
     internal class DGInventorySlot
     {
         internal bool IsEmpty => this.Amount <= 0;
+        internal Type ItemType => this.Item.GetType();
         internal DGItem Item { get; private set; }
         internal int Amount { get; private set; }
 

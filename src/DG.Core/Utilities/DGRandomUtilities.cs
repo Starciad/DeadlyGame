@@ -31,5 +31,10 @@ namespace DG.Core.Utilities
         {
             return this._random.Next((int)minimum, (int)maximum);
         }
+
+        public bool Chance(int chance, int total)
+        {
+            return Range(0, total) < chance;
+        }
     }
 }

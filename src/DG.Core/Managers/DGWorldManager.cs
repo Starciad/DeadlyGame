@@ -1,7 +1,9 @@
 ﻿using DG.Core.Builders;
+using DG.Core.Entities.Natural;
 using DG.Core.Objects;
 
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace DG.Core.Managers
@@ -14,19 +16,43 @@ namespace DG.Core.Managers
 
     internal sealed class DGWorldManager : DGObject
     {
-        public int CurrentDay => this.currentDay;
-        public DGWorldDaylightCycleState CurrentDaylightCycle => this.currentDaylightCycle;
-        public Vector2 Size => this.worldSize;
+        internal int CurrentDay => this.currentDay;
+        internal DGWorldDaylightCycleState CurrentDaylightCycle => this.currentDaylightCycle;
+        internal Vector2 Size => this.worldSize;
 
         private int currentDay;
         private DGWorldDaylightCycleState currentDaylightCycle;
         private Vector2 worldSize;
+
+        // World Resources
+        private readonly List<DGTree> trees = [];
+        private readonly List<DGTerrainStone> stones = [];
+        private readonly List<DGBush> bushes = [];
 
         public void Initialize(DGWorldBuilder builder)
         {
             this.currentDay = 1;
             this.currentDaylightCycle = DGWorldDaylightCycleState.Day;
             this.worldSize = builder.Size;
+
+            // === RESOURCES ===
+            // Trees
+            for (int i = 0; i < builder.Resources.TreeCount; i++)
+            {
+                trees.Add(new());
+            }
+
+            // Stones
+            for (int i = 0; i < builder.Resources.StoneCount; i++)
+            {
+                stones.Add(new());
+            }
+
+            // Bushes
+            for (int i = 0; i < builder.Resources.ShrubCount; i++)
+            {
+                bushes.Add(new());
+            }
         }
 
         public override void Update()

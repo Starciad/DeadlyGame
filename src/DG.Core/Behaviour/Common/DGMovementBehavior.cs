@@ -64,7 +64,6 @@ namespace DG.Core.Behaviour.Common
 
             return weight;
         }
-
         public DGBehaviourActInfos Act(DGEntity entity, DGGame game)
         {
             // === ACT ===

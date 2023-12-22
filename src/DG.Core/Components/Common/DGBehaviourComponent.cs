@@ -1,4 +1,5 @@
 ﻿using DG.Core.Behaviour;
+using DG.Core.Constants;
 using DG.Core.Entities;
 
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace DG.Core.Components.Common
             DGAction[] possibleActions = GetPossibleActions(this.Entity, this.Game);
 
             // Get action with higher weight.
-            DGAction[] bestActions = possibleActions.OrderByDescending(a => a.Weight).Take(5).ToArray();
+            DGAction[] bestActions = possibleActions.OrderByDescending(a => a.Weight).Take(DGBehaviourConstants.MAXIMUM_SELECTION_OF_BEST_BEHAVIORS).ToArray();
             DGAction bestAction = bestActions[this.Game.Random.Range(0, bestActions.Length)];
 
             // Take action.
