@@ -42,6 +42,7 @@ namespace DG.Core.Components.Common
             _ = this.slots.RemoveAll(x => x.IsEmpty);
         }
 
+        // ===== ADD =====
         public void AddItem<T>(int amount) where T : DGItem
         {
             AddItem(typeof(T), amount);
@@ -64,6 +65,7 @@ namespace DG.Core.Components.Common
             _ = TryAddItem(worldItem);
         }
 
+        // ===== REMOVE =====
         public void RemoveItem<T>(int amount) where T : DGItem
         {
             RemoveItem(typeof(T), amount);
@@ -77,6 +79,7 @@ namespace DG.Core.Components.Common
             _ = TryRemoveItem(itemType, amount);
         }
 
+        // ===== GET =====
         public DGInventorySlot GetItem<T>() where T : DGItem
         {
             return GetItem(typeof(T));
@@ -91,6 +94,7 @@ namespace DG.Core.Components.Common
             return slot;
         }
 
+        // ===== TRY ADD =====
         public bool TryAddItem<T>(int amount) where T : DGItem
         {
             return TryAddItem(typeof(T), amount);
@@ -128,6 +132,7 @@ namespace DG.Core.Components.Common
             return TryAddItem(worldItem.Item, worldItem.Amount);
         }
 
+        // ===== TRY REMOVE =====
         public bool TryRemoveItem<T>(int amount) where T : DGItem
         {
             return TryRemoveItem(typeof(T), amount);
@@ -148,6 +153,7 @@ namespace DG.Core.Components.Common
             return false;
         }
 
+        // ===== TRY GET =====
         public bool TryGetItem<T>(out DGInventorySlot slot) where T : DGItem
         {
             return TryGetItem(typeof(T), out slot);
@@ -162,6 +168,7 @@ namespace DG.Core.Components.Common
             return slot != null;
         }
 
+        // ===== HAS ITEM =====
         public bool HasItem<T>() where T : DGItem
         {
             return HasItem(typeof(T));
@@ -175,6 +182,7 @@ namespace DG.Core.Components.Common
             return Array.Find(Slots, x => x.ItemType == itemType) != null;
         }
 
+        // ===== UTILITIES =====
         public void ClearInventory()
         {
             slots.Clear();
@@ -192,6 +200,7 @@ namespace DG.Core.Components.Common
             return new DGWorldItem(slot.Item, slot.Amount, this._transformComponent.Position);
         }
 
+        // ===== SLOTS =====
         public void ModifyNumberOfSlots(int value)
         {
             this.numberOfSlots = value;
