@@ -2,7 +2,7 @@
 
 namespace DG.Tests.Dice
 {
-    public sealed class DGDice_UnitTest
+    public sealed class DGDice_UnitTests
     {
         [Theory]
         [InlineData(6)]

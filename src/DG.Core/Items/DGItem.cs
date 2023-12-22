@@ -2,7 +2,7 @@
 
 namespace DG.Core.Items
 {
-    internal enum DGItemRarity
+    public enum DGItemRarity
     {
         Common,
         Uncommon,
@@ -12,14 +12,14 @@ namespace DG.Core.Items
         Mythic
     }
 
-    internal abstract class DGItem : DGObject
+    public abstract class DGItem : DGObject
     {
-        internal string Name { get; set; }
-        internal string Description { get; set; }
-        internal DGItemRarity Rarity { get; set; }
-        internal bool HasDurability { get; set; }
-        internal int Durability { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DGItemRarity Rarity { get; set; }
+        public bool HasDurability { get; set; }
+        public int Durability { get; set; }
 
-        internal abstract void Build();
+        public abstract void Build();
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace DG.Core.Items.Foods
+﻿namespace DG.Core.Items.Foods.Common
 {
     internal sealed class DGBerry : DGFood
     {

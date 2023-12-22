@@ -3,7 +3,7 @@ using DG.Core.Exceptions.Components;
 
 namespace DG.Tests.Components
 {
-    public sealed class DGComponentContainer_UnitTest
+    public sealed class DGComponentContainer_UnitTests
     {
         private abstract class DGFakeComponent : DGComponent
         {

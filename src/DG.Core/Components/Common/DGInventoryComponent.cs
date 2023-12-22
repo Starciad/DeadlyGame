@@ -1,5 +1,4 @@
 ﻿using DG.Core.Constants;
-using DG.Core.Crafting;
 using DG.Core.Exceptions.Items;
 using DG.Core.Items;
 
@@ -8,10 +7,10 @@ using System.Collections.Generic;
 
 namespace DG.Core.Components.Common
 {
-    internal sealed class DGInventoryComponent : DGComponent
+    public sealed class DGInventoryComponent : DGComponent
     {
-        internal DGInventorySlot[] Slots => this.slots.ToArray();
-        internal int NumberOfSlots => this.numberOfSlots;
+        public DGInventorySlot[] Slots => this.slots.ToArray();
+        public int NumberOfSlots => this.numberOfSlots;
 
         private readonly List<DGInventorySlot> slots = [];
         private int numberOfSlots;
@@ -43,7 +42,69 @@ namespace DG.Core.Components.Common
             _ = this.slots.RemoveAll(x => x.IsEmpty);
         }
 
-        internal bool TryAddItem(DGItem item, int amount)
+        public void AddItem<T>(int amount) where T : DGItem
+        {
+            AddItem(typeof(T), amount);
+        }
+        public void AddItem(DGItem item, int amount)
+        {
+            _ = TryAddItem(item, amount);
+        }
+        public void AddItem(Type itemType, int amount)
+        {
+            if (!itemType.IsSubclassOf(typeof(DGItem)))
+            {
+                throw new DGInvalidItemTypeException($"The type representing the item trying to be added to the inventory does not correspond to a valid {nameof(DGItem)}.");
+            }
+
+            _ = TryAddItem((DGItem)Activator.CreateInstance(itemType), amount);
+        }
+        public void AddItem(DGWorldItem worldItem)
+        {
+            _ = TryAddItem(worldItem);
+        }
+
+        public void RemoveItem<T>(int amount) where T : DGItem
+        {
+            RemoveItem(typeof(T), amount);
+        }
+        public void RemoveItem(DGItem item, int amount)
+        {
+            RemoveItem(item.GetType(), amount);
+        }
+        public void RemoveItem(Type itemType, int amount)
+        {
+            _ = TryRemoveItem(itemType, amount);
+        }
+
+        public DGInventorySlot GetItem<T>() where T : DGItem
+        {
+            return GetItem(typeof(T));
+        }
+        public DGInventorySlot GetItem(DGItem item)
+        {
+            return GetItem(item.GetType());
+        }
+        public DGInventorySlot GetItem(Type itemType)
+        {
+            _ = TryGetItem(itemType, out DGInventorySlot slot);
+            return slot;
+        }
+
+        public bool TryAddItem<T>(int amount) where T : DGItem
+        {
+            return TryAddItem(typeof(T), amount);
+        }
+        public bool TryAddItem(Type itemType, int amount)
+        {
+            if (!itemType.IsSubclassOf(typeof(DGItem)))
+            {
+                throw new DGInvalidItemTypeException($"The type representing the item trying to be added to the inventory does not correspond to a valid {nameof(DGItem)}.");
+            }
+
+            return TryAddItem((DGItem)Activator.CreateInstance(itemType), amount);
+        }
+        public bool TryAddItem(DGItem item, int amount)
         {
             if (this.slots.Count < this.numberOfSlots)
             {
@@ -62,21 +123,21 @@ namespace DG.Core.Components.Common
 
             return false;
         }
-        internal bool TryAddWorldItem(DGWorldItem worldItem)
+        public bool TryAddItem(DGWorldItem worldItem)
         {
             return TryAddItem(worldItem.Item, worldItem.Amount);
         }
-        internal bool TryRemoveItem(DGItem item, int amount)
+
+        public bool TryRemoveItem<T>(int amount) where T : DGItem
+        {
+            return TryRemoveItem(typeof(T), amount);
+        }
+        public bool TryRemoveItem(DGItem item, int amount)
         {
             return TryRemoveItem(item.GetType(), amount);
         }
-        internal bool TryRemoveItem(Type itemType, int amount)
+        public bool TryRemoveItem(Type itemType, int amount)
         {
-            if (!itemType.IsSubclassOf(typeof(DGItem)))
-            {
-                throw new DGInvalidItemTypeException($"The type defined in {nameof(DGInventoryComponent)} is not a {nameof(DGItem)}.");
-            }
-
             DGInventorySlot targetSlot = this.slots.Find(x => x.ItemType == itemType);
             if (targetSlot != null)
             {
@@ -86,20 +147,40 @@ namespace DG.Core.Components.Common
 
             return false;
         }
-        internal bool HasItem(DGItem item)
+
+        public bool TryGetItem<T>(out DGInventorySlot slot) where T : DGItem
+        {
+            return TryGetItem(typeof(T), out slot);
+        }
+        public bool TryGetItem(DGItem item, out DGInventorySlot slot)
+        {
+            return TryGetItem(item.GetType(), out slot);
+        }
+        public bool TryGetItem(Type itemType, out DGInventorySlot slot)
+        {
+            slot = slots.Find(x => x.ItemType == itemType);
+            return slot != null;
+        }
+
+        public bool HasItem<T>() where T : DGItem
+        {
+            return HasItem(typeof(T));
+        }
+        public bool HasItem(DGItem item)
         {
             return HasItem(item.GetType());
         }
-        internal bool HasItem(Type itemType)
+        public bool HasItem(Type itemType)
         {
             return Array.Find(Slots, x => x.ItemType == itemType) != null;
         }
-        internal void ClearInventory()
+
+        public void ClearInventory()
         {
             slots.Clear();
             ClearInventory();
         }
-        internal void DropAllItems()
+        public void DropAllItems()
         {
             foreach (DGInventorySlot slot in this.slots)
             {
@@ -111,7 +192,7 @@ namespace DG.Core.Components.Common
             return new DGWorldItem(slot.Item, slot.Amount, this._transformComponent.Position);
         }
 
-        internal void ModifyNumberOfSlots(int value)
+        public void ModifyNumberOfSlots(int value)
         {
             this.numberOfSlots = value;
         }
@@ -124,18 +205,12 @@ namespace DG.Core.Components.Common
         }
     }
 
-    internal class DGInventorySlot
+    public class DGInventorySlot(DGItem item, int amount)
     {
-        internal bool IsEmpty => this.Amount <= 0;
-        internal Type ItemType => this.Item.GetType();
-        internal DGItem Item { get; private set; }
-        internal int Amount { get; private set; }
-
-        internal DGInventorySlot(DGItem item, int amount)
-        {
-            this.Item = item;
-            this.Amount = amount;
-        }
+        public bool IsEmpty => this.Amount <= 0;
+        public Type ItemType => this.Item.GetType();
+        public DGItem Item { get; private set; } = item;
+        public int Amount { get; private set; } = amount;
 
         internal void Add(int value)
         {

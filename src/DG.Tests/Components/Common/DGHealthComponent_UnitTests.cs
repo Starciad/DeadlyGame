@@ -2,7 +2,7 @@
 
 namespace DG.Tests.Components.Common
 {
-    public sealed class DGHealthComponent_UnitTest
+    public sealed class DGHealthComponent_UnitTests
     {
         [Fact]
         public void IsDead_WhenCurrentHealthIsZero_ReturnsTrue()
