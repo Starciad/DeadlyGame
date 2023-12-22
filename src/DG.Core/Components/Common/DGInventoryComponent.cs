@@ -39,10 +39,14 @@ namespace DG.Core.Components.Common
         }
         protected override void OnUpdate()
         {
-            _ = this.slots.RemoveAll(x => x.IsEmpty);
+            ClearAllEmptySlots();
         }
 
         // ===== ADD =====
+        public void AddItem(DGWorldItem worldItem)
+        {
+            _ = TryAddItem(worldItem);
+        }
         public void AddItem<T>(int amount) where T : DGItem
         {
             AddItem(typeof(T), amount);
@@ -59,10 +63,6 @@ namespace DG.Core.Components.Common
             }
 
             _ = TryAddItem((DGItem)Activator.CreateInstance(itemType), amount);
-        }
-        public void AddItem(DGWorldItem worldItem)
-        {
-            _ = TryAddItem(worldItem);
         }
 
         // ===== REMOVE =====
@@ -95,6 +95,10 @@ namespace DG.Core.Components.Common
         }
 
         // ===== TRY ADD =====
+        public bool TryAddItem(DGWorldItem worldItem)
+        {
+            return TryAddItem(worldItem.Item, worldItem.Amount);
+        }
         public bool TryAddItem<T>(int amount) where T : DGItem
         {
             return TryAddItem(typeof(T), amount);
@@ -110,26 +114,26 @@ namespace DG.Core.Components.Common
         }
         public bool TryAddItem(DGItem item, int amount)
         {
+            // If the corresponding item is already in the inventory, just increase its count and return true.
+            if (TryGetItem(item.GetType(), out DGInventorySlot slot))
+            {
+                // If the item has not extended its limit, increment the count value, but if it has, add a new slot that will contain a new stack of the same item.
+                if (slot.Amount < DGInventoryConstants.MAXIMUM_ITEM_CAPACITY)
+                {
+                    slot.Add(amount);
+                    return true;
+                }
+            }
+
+            // If the new item is not registered in the inventory, check if there is space and, if so, add the new slot with the item information.
             if (this.slots.Count < this.numberOfSlots)
             {
-                DGInventorySlot targetSlot = this.slots.Find(x => x.ItemType == item.GetType());
-                if (targetSlot == null)
-                {
-                    this.slots.Add(new(item, amount));
-                }
-                else
-                {
-                    targetSlot.Add(amount);
-                }
-
+                this.slots.Add(new(item, amount));
                 return true;
             }
 
+            // If there is not enough space in the inventory, return false.
             return false;
-        }
-        public bool TryAddItem(DGWorldItem worldItem)
-        {
-            return TryAddItem(worldItem.Item, worldItem.Amount);
         }
 
         // ===== TRY REMOVE =====
@@ -143,10 +147,15 @@ namespace DG.Core.Components.Common
         }
         public bool TryRemoveItem(Type itemType, int amount)
         {
-            DGInventorySlot targetSlot = this.slots.Find(x => x.ItemType == itemType);
-            if (targetSlot != null)
+            if (TryGetItem(itemType, out DGInventorySlot slot))
             {
-                targetSlot.Remove(amount);
+                slot.Remove(amount);
+
+                if (slot.IsEmpty)
+                {
+                    this.slots.Remove(slot);
+                }
+
                 return true;
             }
 
@@ -183,6 +192,10 @@ namespace DG.Core.Components.Common
         }
 
         // ===== UTILITIES =====
+        public void ClearAllEmptySlots()
+        {
+            _ = this.slots.RemoveAll(x => x.IsEmpty);
+        }
         public void ClearInventory()
         {
             slots.Clear();

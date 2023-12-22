@@ -44,7 +44,7 @@ namespace DG.Core.Behaviour.Common
             DGWorldItem selectedItem = _nearbyItems[0];
 
             game.WorldManager.RemoveWorldItem(selectedItem);
-            inventory.TryAddWorldItem(selectedItem);
+            inventory.TryAddItem(selectedItem);
 
             return infos;
         }
