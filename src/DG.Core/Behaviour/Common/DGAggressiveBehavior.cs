@@ -52,7 +52,7 @@ namespace DG.Core.Behaviour.Common
                     break;
 
                 case DGWorldDaylightCycleState.Night:
-                    weight.Remove(1.5f);
+                    weight.Add(1.5f);
                     break;
 
                 default:
@@ -71,7 +71,7 @@ namespace DG.Core.Behaviour.Common
             // Health
             if (entity.ComponentContainer.TryGetComponent(out DGHealthComponent health))
             {
-                double healthPercentage = Math.Round(DGPercentage.CalculatePercentage(health.CurrentHealth, health.MaximumHealth));
+                double healthPercentage = Math.Round(DGPercentageUtilities.CalculatePercentage(health.CurrentHealth, health.MaximumHealth));
 
                 if (healthPercentage < 50)
                 {
@@ -135,43 +135,60 @@ namespace DG.Core.Behaviour.Common
         {
             var attackerWeapon = attacker.ComponentContainer.GetComponent<DGEquipmentComponent>();
             var attackerCharacteristics = attacker.ComponentContainer.GetComponent<DGCharacteristicsComponent>();
+            var attackerCombat = attacker.ComponentContainer.GetComponent<DGCombatComponent>();
 
             var targetEquipment = target.ComponentContainer.GetComponent<DGEquipmentComponent>();
             var targetHealth = target.ComponentContainer.GetComponent<DGHealthComponent>();
 
             int totalDamage;
             int attackTest;
+            int attributeValue;
 
             if (attackerWeapon.Weapon == null)
             {
                 // Attack with the hand.
-                totalDamage = 1;
-                attackTest = GetAttackTestValue(dice, attackerCharacteristics.Strength);
+                attackTest = DGAttributesUtilities.GetAttributeTestValue(dice, attackerCharacteristics.Strength);
+                attributeValue = attackerCharacteristics.Strength;
             }
             else
             {
                 // Attack with the respective equipped weapon.
-                totalDamage = currentGame.Dice.Roll(attackerWeapon.Weapon.Damage);
-                attackTest = attackerWeapon.Weapon.WeaponType switch
+                switch (attackerWeapon.Weapon.WeaponType)
                 {
-                    DGWeaponType.Melee => GetAttackTestValue(dice, attackerCharacteristics.Strength),
-                    DGWeaponType.Ranged => GetAttackTestValue(dice, attackerCharacteristics.Dexterity),
-                    DGWeaponType.Magic => GetAttackTestValue(dice, attackerCharacteristics.Intelligence),
-                    _ => GetAttackTestValue(dice, attackerCharacteristics.Strength),
-                };
+                    case DGWeaponType.Melee:
+                        attributeValue = attackerCharacteristics.Strength;
+                        attackTest = DGAttributesUtilities.GetAttributeTestValue(dice, attributeValue);
+                        break;
+
+                    case DGWeaponType.Ranged:
+                        attributeValue = attackerCharacteristics.Dexterity;
+                        attackTest = DGAttributesUtilities.GetAttributeTestValue(dice, attributeValue);
+                        break;
+
+                    case DGWeaponType.Magic:
+                        attributeValue = attackerCharacteristics.Intelligence;
+                        attackTest = DGAttributesUtilities.GetAttributeTestValue(dice, attributeValue);
+                        break;
+
+                    default:
+                        attributeValue = attackerCharacteristics.Strength;
+                        attackTest = DGAttributesUtilities.GetAttributeTestValue(dice, attributeValue);
+                        break;
+                }
             }
 
-            if (attackTest > targetEquipment.GetArmoredClass())
+            // Check if it was a critical value
+            totalDamage = attackerCombat.GetFullAttackDamage(DGAttributesUtilities.IsMaxAttributeValueInTest(attributeValue, attackTest));
+
+            // Verify that the current attack roll was greater than or equal to the target's armor class value.
+            if (attackTest >= targetEquipment.GetArmoredClass())
             {
                 targetHealth.Hurt(totalDamage);
                 return AttackOutcome.Successful;
             }
 
+            // If not, the attack is seen as a failure.
             return AttackOutcome.Failed;
-        }
-        private static int GetAttackTestValue(DGDice dice, int value)
-        {
-            return dice.Roll(value) + DGAttributesUtilities.GetAttributeModifier(value);
         }
         private static void ModifyRelationships(DGEntity attacker, DGEntity target)
         {

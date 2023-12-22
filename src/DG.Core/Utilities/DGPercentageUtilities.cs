@@ -2,7 +2,7 @@
 
 namespace DG.Core.Utilities
 {
-    public static class DGPercentage
+    public static class DGPercentageUtilities
     {
         /// <summary>
         /// Calculates the percentage of a value in relation to a total.

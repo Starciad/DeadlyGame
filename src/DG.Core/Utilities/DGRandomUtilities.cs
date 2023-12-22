@@ -2,19 +2,19 @@
 
 namespace DG.Core.Utilities
 {
-    internal sealed class DGRandom
+    internal sealed class DGRandomUtilities
     {
-        private readonly Random _random = new();
+        private readonly Random _random;
 
-        internal DGRandom()
+        internal DGRandomUtilities()
         {
             this._random = new();
         }
-        internal DGRandom(int seed)
+        internal DGRandomUtilities(int seed)
         {
             this._random = new(seed);
         }
-        internal DGRandom(Random random)
+        internal DGRandomUtilities(Random random)
         {
             this._random = random;
         }

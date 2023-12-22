@@ -5,7 +5,6 @@ using DG.Core.Settings;
 using DG.Core.Utilities;
 
 using System;
-using System.Linq;
 
 namespace DG.Core
 {
@@ -13,7 +12,7 @@ namespace DG.Core
     {
         internal DGPlayerManager PlayerManager => this._playersManager;
         internal DGWorldManager WorldManager => this._worldManager;
-        internal DGRandom Random { get; } = new();
+        internal DGRandomUtilities Random { get; } = new();
         internal DGDice Dice { get; } = new();
 
         // Settings
