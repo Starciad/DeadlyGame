@@ -4,6 +4,9 @@ using DG.Core.Managers;
 using DG.Core.Settings;
 using DG.Core.Utilities;
 
+using System;
+using System.Linq;
+
 namespace DG.Core
 {
     public sealed class DGGame(DGGameBuilder gameBuilder, DGWorldBuilder worldBuilder)
@@ -31,11 +34,19 @@ namespace DG.Core
 
         public void Start()
         {
+            int loop = 1;
+
             while (!this._playersManager.OnlyOneActivePlayer)
             {
+                Console.WriteLine($"[ Loop: {loop} || Day ({this._worldManager.CurrentDay}): {this._worldManager.CurrentDaylightCycle} || Players: {this.PlayerManager.ActivePlayers.Length} ]");
+
                 this._playersManager.Update();
                 this._worldManager.Update();
+
+                loop++;
             }
+
+            Console.WriteLine("Finished");
         }
     }
 }

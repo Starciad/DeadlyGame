@@ -1,6 +1,7 @@
 ﻿using DG.Core.Constants;
 using DG.Core.Items.Accessories;
 using DG.Core.Items.Armor;
+using DG.Core.Items.Weapons;
 
 using System.Collections.Generic;
 
@@ -10,6 +11,7 @@ namespace DG.Core.Components.Common
     {
         internal DGArmor[] Armor { get; } = new DGArmor[DGInventoryConstants.MAXIMUM_ARMOR_CAPACITY];
         internal DGAccessory[] Accessories => this.accessories.ToArray();
+        internal DGWeapon Weapon { get; private set; }
 
         private readonly List<DGAccessory> accessories = new(DGInventoryConstants.MAXIMUM_ACCESSORY_CAPACITY);
 
@@ -62,6 +64,19 @@ namespace DG.Core.Components.Common
         internal bool TryUnequipAccessory(DGAccessory accessory)
         {
             return this.accessories.Remove(accessory);
+        }
+
+        // Weapon
+        internal void EquipWeapon(DGWeapon weapon)
+        {
+            this.Weapon = weapon;
+        }
+        internal DGWeapon UnequipWeapon()
+        {
+            DGWeapon target = this.Weapon;
+            this.Weapon = null;
+
+            return target;
         }
     }
 }

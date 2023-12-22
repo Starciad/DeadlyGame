@@ -18,5 +18,7 @@ namespace DG.Core.Items
         internal string Description { get; set; }
         internal DGItemRarity Rarity { get; set; }
         internal int Durability { get; set; }
+
+        internal abstract void Build();
     }
 }

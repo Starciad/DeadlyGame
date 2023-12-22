@@ -33,7 +33,8 @@ namespace DG.Core.Components.Common
             DGAction[] possibleActions = GetPossibleActions(this.Entity, this.Game);
 
             // Get action with higher weight.
-            DGAction bestAction = possibleActions.OrderByDescending(a => a.Weight).FirstOrDefault();
+            DGAction[] bestActions = possibleActions.OrderByDescending(a => a.Weight).Take(5).ToArray();
+            DGAction bestAction = bestActions[this.Game.Random.Range(0, bestActions.Length)];
 
             // Take action.
             ExecuteAction(bestAction, this.Entity, this.Game);

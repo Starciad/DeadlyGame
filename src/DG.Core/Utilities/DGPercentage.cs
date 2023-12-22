@@ -1,7 +1,6 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
-namespace DG.Core.Math
+namespace DG.Core.Utilities
 {
     public static class DGPercentage
     {

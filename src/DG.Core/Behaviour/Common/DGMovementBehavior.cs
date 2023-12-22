@@ -69,7 +69,7 @@ namespace DG.Core.Behaviour.Common
         {
             // === ACT ===
             DGTransformComponent transform = entity.ComponentContainer.GetComponent<DGTransformComponent>();
-            DGCombatInfosComponent combatInfos = entity.ComponentContainer.GetComponent<DGCombatInfosComponent>();
+            DGCombatComponent combatInfos = entity.ComponentContainer.GetComponent<DGCombatComponent>();
 
             int dr = combatInfos.DisplacementRate;
 

@@ -55,9 +55,8 @@ namespace DG.Core.Entities.Players
             // Equipment
             _ = this.ComponentContainer.AddComponent<DGEquipmentComponent>();
 
-            // Combat Infos
-            DGCombatInfosComponent combatInfos = this.ComponentContainer.AddComponent<DGCombatInfosComponent>();
-            combatInfos.SetInitiativeValue(DGAttributesUtilities.GetAttributeModifier(characteristics.Dexterity));
+            // Combat
+            DGCombatComponent combatInfos = this.ComponentContainer.AddComponent<DGCombatComponent>();
             combatInfos.SetDisplacementRateValue(9 + this.Game.Random.Range(-2, 3));
 
             // Relationship
@@ -66,6 +65,7 @@ namespace DG.Core.Entities.Players
             // Behaviour
             this._behaviour = this.ComponentContainer.AddComponent<DGBehaviourComponent>();
             this._behaviour.RegisterBehaviour(new DGMovementBehavior());
+            this._behaviour.RegisterBehaviour(new DGAggressiveBehavior());
         }
 
         public override void Update()
