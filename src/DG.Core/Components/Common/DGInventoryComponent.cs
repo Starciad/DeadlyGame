@@ -14,11 +14,26 @@ namespace DG.Core.Components.Common
         private readonly List<DGInventorySlot> slots = [];
         private int numberOfSlots;
 
+        private DGTransformComponent _transformComponent;
+        private DGHealthComponent _healthComponent;
+
         public override void Initialize()
         {
             this.numberOfSlots = 20;
-        }
 
+            // TRANSFORM (Component)
+            if (this.Entity.ComponentContainer.TryGetComponent(out DGTransformComponent transformComponent))
+            {
+                this._transformComponent = transformComponent;
+            }
+
+            // HEALTH (Component)
+            if (this.Entity.ComponentContainer.TryGetComponent(out DGHealthComponent healthComponent))
+            {
+                this._healthComponent = healthComponent;
+                this._healthComponent.OnDied += HealthComponent_OnDied;
+            }
+        }
         public override void Update()
         {
             _ = this.slots.RemoveAll(x => x.IsEmpty);
@@ -43,12 +58,10 @@ namespace DG.Core.Components.Common
 
             return false;
         }
-
         internal bool TryRemoveItem(DGItem item, int amount)
         {
             return TryRemoveItem(item.GetType(), amount);
         }
-
         internal bool TryRemoveItem(Type itemType, int amount)
         {
             DGInventorySlot targetSlot = this.slots.Find(x => x.ItemType == itemType);
@@ -60,20 +73,40 @@ namespace DG.Core.Components.Common
 
             return false;
         }
-
         internal bool HasItem(DGItem item)
         {
             return HasItem(item.GetType());
         }
-
         internal bool HasItem(Type itemType)
         {
             return Array.Find(Slots, x => x.ItemType == itemType) != null;
+        }
+        internal void ClearInventory()
+        {
+            slots.Clear();
+        }
+        internal void DropAllItems()
+        {
+            foreach (DGInventorySlot slot in this.slots)
+            {
+                this.Game.WorldManager.AddWorldItem(DropItem(slot));
+            }
+        }
+        private DGWorldItem DropItem(DGInventorySlot slot)
+        {
+            return new DGWorldItem(slot.Item, slot.Amount, this._transformComponent.Position);
         }
 
         internal void ModifyNumberOfSlots(int value)
         {
             this.numberOfSlots = value;
+        }
+
+        // ===== EVENTS =====
+        private void HealthComponent_OnDied()
+        {
+            this._healthComponent.OnDied -= HealthComponent_OnDied;
+            DropAllItems();
         }
     }
 
@@ -95,13 +128,11 @@ namespace DG.Core.Components.Common
             this.Amount += value;
             Clamp();
         }
-
         internal void Remove(int value)
         {
             this.Amount -= value;
             Clamp();
         }
-
         private void Clamp()
         {
             this.Amount = Math.Clamp(this.Amount, 0, DGInventoryConstants.MAXIMUM_ITEM_CAPACITY);

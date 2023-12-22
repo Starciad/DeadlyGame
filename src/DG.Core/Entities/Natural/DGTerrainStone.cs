@@ -12,8 +12,6 @@ namespace DG.Core.Entities.Natural
 
         public override void Initialize()
         {
-            base.Initialize();
-
             var transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
             var inventory = this.ComponentContainer.AddComponent<DGInventoryComponent>();
             var health = this.ComponentContainer.AddComponent<DGHealthComponent>();
@@ -22,6 +20,8 @@ namespace DG.Core.Entities.Natural
             health.SetMaximumHealth(this.Game.Random.Range(20, 35));
             health.SetCurrentHealth(health.MaximumHealth);
             inventory.TryAddItem(new DGStone(), this.Game.Random.Range(5, 18));
+
+            base.Initialize();
         }
 
         public override void Update()

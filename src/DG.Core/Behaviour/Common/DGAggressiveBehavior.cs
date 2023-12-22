@@ -119,7 +119,7 @@ namespace DG.Core.Behaviour.Common
 
         private static DGPlayer GetNearbyTarget(DGEntity sourceEntity, DGGame currentGame)
         {
-            foreach (DGPlayer anotherEntity in currentGame.PlayerManager.GetNearbyPlayers(sourceEntity))
+            foreach (DGPlayer anotherEntity in currentGame.PlayerManager.GetNearbyPlayers(sourceEntity.ComponentContainer.GetComponent<DGTransformComponent>().Position))
             {
                 var currentTransform = sourceEntity.ComponentContainer.GetComponent<DGTransformComponent>();
                 var anotherTransform = anotherEntity.ComponentContainer.GetComponent<DGTransformComponent>();

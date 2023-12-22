@@ -20,6 +20,7 @@ namespace DG.Core.Managers
 
         private DGPlayer[] players;
 
+        // System
         public void Initialize(IEnumerable<DGPlayerBuilder> playerBuilders)
         {
             DGPlayerBuilder[] playerBuildersArray = playerBuilders.ToArray();
@@ -34,7 +35,6 @@ namespace DG.Core.Managers
                 this.players[i].Initialize();
             }
         }
-
         public override void Update()
         {
             foreach (DGPlayer player in this.ActivePlayers)
@@ -43,15 +43,7 @@ namespace DG.Core.Managers
             }
         }
 
-
-        internal DGPlayer[] GetNearbyPlayers(DGEntity target)
-        {
-            return
-            [
-                .. GetNearbyPlayers(target.ComponentContainer.GetComponent<DGTransformComponent>().Position).Where(x => x != target)
-            ];
-        }
-
+        // Utilities
         internal DGPlayer[] GetNearbyPlayers(Vector2 position)
         {
             return

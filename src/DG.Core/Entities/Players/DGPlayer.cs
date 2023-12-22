@@ -20,8 +20,6 @@ namespace DG.Core.Entities.Players
 
         public override void Initialize()
         {
-            base.Initialize();
-
             DGTransformComponent transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
             DGInformationsComponent informations = this.ComponentContainer.AddComponent<DGInformationsComponent>();
             DGPersonalityComponent personality = this.ComponentContainer.AddComponent<DGPersonalityComponent>();
@@ -64,6 +62,9 @@ namespace DG.Core.Entities.Players
             this._behaviour.RegisterBehaviour(new DGAggressiveBehavior());
             this._behaviour.RegisterBehaviour(new DGCraftingBehavior());
             this._behaviour.RegisterBehaviour(new DGResourceAcquisitionBehavior());
+            this._behaviour.RegisterBehaviour(new DGItemAcquisitionBehavior());
+
+            base.Initialize();
         }
 
         public override void Update()

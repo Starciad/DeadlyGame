@@ -13,8 +13,6 @@ namespace DG.Core.Entities.Natural
 
         public override void Initialize()
         {
-            base.Initialize();
-
             var transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
             var inventory = this.ComponentContainer.AddComponent<DGInventoryComponent>();
             var health = this.ComponentContainer.AddComponent<DGHealthComponent>();
@@ -28,6 +26,8 @@ namespace DG.Core.Entities.Natural
             {
                 inventory.TryAddItem(new DGApple(), this.Game.Random.Range(2, 4));
             }
+
+            base.Initialize();
         }
 
         public override void Update()
