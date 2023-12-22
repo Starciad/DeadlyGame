@@ -1,5 +1,6 @@
 ﻿using DG.Core.Entities;
 using DG.Core.Exceptions.Components;
+using DG.Core.Items;
 using DG.Core.Objects;
 
 using System;
@@ -51,7 +52,7 @@ namespace DG.Core.Components
         {
             if (!componentType.IsSubclassOf(typeof(DGComponent)))
             {
-                throw new DGInvalidComponentTypeException($"The type '{componentType.Name}' is not a valid DGComponent.");
+                throw new DGInvalidComponentTypeException($"The type '{componentType.Name}' is not a valid {nameof(DGComponent)}.");
             }
 
             if (this._components.ContainsKey(componentType))
@@ -88,7 +89,7 @@ namespace DG.Core.Components
         public bool HasComponent(Type componentType)
         {
             return !componentType.IsSubclassOf(typeof(DGComponent))
-                ? throw new DGInvalidComponentTypeException($"The type '{componentType.Name}' is not a valid DGComponent.")
+                ? throw new DGInvalidComponentTypeException($"The type '{componentType.Name}' is not a valid {nameof(DGComponent)}.")
                 : this._components.ContainsKey(componentType);
         }
         public void RemoveAllComponents()
@@ -96,14 +97,14 @@ namespace DG.Core.Components
             this._components.Clear();
         }
 
-        public override void Initialize()
+        protected override void OnAwake()
         {
             foreach (DGComponent component in this._components.Values)
             {
                 component.Initialize();
             }
         }
-        public override void Update()
+        protected override void OnUpdate()
         {
             foreach (DGComponent component in this._components.Values)
             {

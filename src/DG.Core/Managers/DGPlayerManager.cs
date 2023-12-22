@@ -35,7 +35,7 @@ namespace DG.Core.Managers
                 this.players[i].Initialize();
             }
         }
-        public override void Update()
+        protected override void OnUpdate()
         {
             foreach (DGPlayer player in this.ActivePlayers)
             {

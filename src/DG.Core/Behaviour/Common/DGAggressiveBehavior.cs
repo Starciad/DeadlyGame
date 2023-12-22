@@ -9,6 +9,7 @@ using DG.Core.Managers;
 using DG.Core.Utilities;
 
 using System;
+using System.Linq;
 using System.Numerics;
 
 namespace DG.Core.Behaviour.Common
@@ -119,7 +120,7 @@ namespace DG.Core.Behaviour.Common
 
         private static DGPlayer GetNearbyTarget(DGEntity sourceEntity, DGGame currentGame)
         {
-            foreach (DGPlayer anotherEntity in currentGame.PlayerManager.GetNearbyPlayers(sourceEntity.ComponentContainer.GetComponent<DGTransformComponent>().Position))
+            foreach (DGPlayer anotherEntity in currentGame.PlayerManager.GetNearbyPlayers(sourceEntity.ComponentContainer.GetComponent<DGTransformComponent>().Position).Where(x => x != sourceEntity))
             {
                 var currentTransform = sourceEntity.ComponentContainer.GetComponent<DGTransformComponent>();
                 var anotherTransform = anotherEntity.ComponentContainer.GetComponent<DGTransformComponent>();

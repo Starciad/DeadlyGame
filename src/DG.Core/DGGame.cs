@@ -39,6 +39,11 @@ namespace DG.Core
             {
                 Console.WriteLine($"[ Loop: {loop} || Day ({this._worldManager.CurrentDay}): {this._worldManager.CurrentDaylightCycle} || Players: {this.PlayerManager.ActivePlayers.Length} ]");
 
+                if (this._playersManager.ActivePlayers.Length < 10)
+                {
+                    Console.WriteLine();
+                }
+
                 this._playersManager.Update();
                 this._worldManager.Update();
 

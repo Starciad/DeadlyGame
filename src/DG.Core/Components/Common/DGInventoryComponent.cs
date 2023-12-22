@@ -1,4 +1,6 @@
 ﻿using DG.Core.Constants;
+using DG.Core.Crafting;
+using DG.Core.Exceptions.Items;
 using DG.Core.Items;
 
 using System;
@@ -17,8 +19,10 @@ namespace DG.Core.Components.Common
         private DGTransformComponent _transformComponent;
         private DGHealthComponent _healthComponent;
 
-        public override void Initialize()
+        protected override void OnAwake()
         {
+            base.OnAwake();
+
             this.numberOfSlots = 20;
 
             // TRANSFORM (Component)
@@ -34,7 +38,7 @@ namespace DG.Core.Components.Common
                 this._healthComponent.OnDied += HealthComponent_OnDied;
             }
         }
-        public override void Update()
+        protected override void OnUpdate()
         {
             _ = this.slots.RemoveAll(x => x.IsEmpty);
         }
@@ -43,7 +47,7 @@ namespace DG.Core.Components.Common
         {
             if (this.slots.Count < this.numberOfSlots)
             {
-                DGInventorySlot targetSlot = this.slots.Find(x => x.Item == item);
+                DGInventorySlot targetSlot = this.slots.Find(x => x.ItemType == item.GetType());
                 if (targetSlot == null)
                 {
                     this.slots.Add(new(item, amount));
@@ -58,12 +62,21 @@ namespace DG.Core.Components.Common
 
             return false;
         }
+        internal bool TryAddWorldItem(DGWorldItem worldItem)
+        {
+            return TryAddItem(worldItem.Item, worldItem.Amount);
+        }
         internal bool TryRemoveItem(DGItem item, int amount)
         {
             return TryRemoveItem(item.GetType(), amount);
         }
         internal bool TryRemoveItem(Type itemType, int amount)
         {
+            if (!itemType.IsSubclassOf(typeof(DGItem)))
+            {
+                throw new DGInvalidItemTypeException($"The type defined in {nameof(DGInventoryComponent)} is not a {nameof(DGItem)}.");
+            }
+
             DGInventorySlot targetSlot = this.slots.Find(x => x.ItemType == itemType);
             if (targetSlot != null)
             {
@@ -84,6 +97,7 @@ namespace DG.Core.Components.Common
         internal void ClearInventory()
         {
             slots.Clear();
+            ClearInventory();
         }
         internal void DropAllItems()
         {

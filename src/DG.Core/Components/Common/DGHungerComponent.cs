@@ -6,9 +6,9 @@
         public int CurrentHunger { get; private set; }
         public int MaximumHunger { get; private set; }
 
-        public override void Update()
+        protected override void OnUpdate()
         {
-            base.Update();
+            base.OnUpdate();
 
             if (this.IsHungry && this.Entity.ComponentContainer.TryGetComponent(out DGHealthComponent value))
             {

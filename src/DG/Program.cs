@@ -14,7 +14,13 @@ namespace DG
 
             DGWorldBuilder worldBuilder = new()
             {
-                Size = new(100)
+                Size = new(100),
+                Resources = new()
+                {
+                    TreeCount = 100,
+                    StoneCount = 100,
+                    ShrubCount = 100
+                },
             };
 
             DGGame game = new(gameBuilder, worldBuilder);

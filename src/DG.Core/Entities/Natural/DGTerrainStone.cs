@@ -10,23 +10,33 @@ namespace DG.Core.Entities.Natural
             this.Name = "Pedra";
         }
 
-        public override void Initialize()
+        private DGTransformComponent _transform;
+        private DGInventoryComponent _inventory;
+        private DGHealthComponent _health;
+
+        protected override void OnAwake()
         {
-            var transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
-            var inventory = this.ComponentContainer.AddComponent<DGInventoryComponent>();
-            var health = this.ComponentContainer.AddComponent<DGHealthComponent>();
+            base.OnAwake();
 
-            transform.SetPosition(this.Game.WorldManager.GetRandomPosition());
-            health.SetMaximumHealth(this.Game.Random.Range(20, 35));
-            health.SetCurrentHealth(health.MaximumHealth);
-            inventory.TryAddItem(new DGStone(), this.Game.Random.Range(5, 18));
-
-            base.Initialize();
+            this._transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
+            this._inventory = this.ComponentContainer.AddComponent<DGInventoryComponent>();
+            this._health = this.ComponentContainer.AddComponent<DGHealthComponent>();
         }
 
-        public override void Update()
+        protected override void OnStart()
         {
-            base.Update();
+            base.OnStart();
+
+            // ===== COMPONENTS =====
+            // transform
+            this._transform.SetPosition(this.Game.WorldManager.GetRandomPosition());
+
+            // health
+            this._health.SetMaximumHealth(this.Game.Random.Range(20, 35));
+            this._health.SetCurrentHealth(this._health.MaximumHealth);
+
+            // inventory
+            this._inventory.TryAddItem(new DGStone(), this.Game.Random.Range(5, 18));
         }
     }
 }

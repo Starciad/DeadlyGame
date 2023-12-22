@@ -11,28 +11,38 @@ namespace DG.Core.Entities.Natural
             this.Name = "Árvore";
         }
 
-        public override void Initialize()
-        {
-            var transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
-            var inventory = this.ComponentContainer.AddComponent<DGInventoryComponent>();
-            var health = this.ComponentContainer.AddComponent<DGHealthComponent>();
+        private DGTransformComponent _transform;
+        private DGInventoryComponent _inventory;
+        private DGHealthComponent _health;
 
-            transform.SetPosition(this.Game.WorldManager.GetRandomPosition());
-            health.SetMaximumHealth(this.Game.Random.Range(15, 25));
-            health.SetCurrentHealth(health.MaximumHealth);
-            inventory.TryAddItem(new DGWood(), this.Game.Random.Range(4, 9));
+        protected override void OnAwake()
+        {
+            base.OnAwake();
+
+            this._transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
+            this._inventory = this.ComponentContainer.AddComponent<DGInventoryComponent>();
+            this._health = this.ComponentContainer.AddComponent<DGHealthComponent>();
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            // ===== COMPONENTS =====
+            // transform
+            this._transform.SetPosition(this.Game.WorldManager.GetRandomPosition());
+
+            // health
+            this._health.SetMaximumHealth(this.Game.Random.Range(15, 25));
+            this._health.SetCurrentHealth(this._health.MaximumHealth);
+
+            // inventory
+            this._inventory.TryAddItem(new DGWood(), this.Game.Random.Range(4, 9));
 
             if (this.Game.Random.Chance(50, 100))
             {
-                inventory.TryAddItem(new DGApple(), this.Game.Random.Range(2, 4));
+                this._inventory.TryAddItem(new DGApple(), this.Game.Random.Range(2, 4));
             }
-
-            base.Initialize();
-        }
-
-        public override void Update()
-        {
-            base.Update();
         }
     }
 }

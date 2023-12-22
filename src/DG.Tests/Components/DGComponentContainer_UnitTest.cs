@@ -10,12 +10,12 @@ namespace DG.Tests.Components
             public bool Initialized { get; private set; }
             public bool Updated { get; private set; }
 
-            public override void Initialize()
+            protected override void OnAwake()
             {
                 this.Initialized = true;
             }
 
-            public override void Update()
+            protected override void OnUpdate()
             {
                 this.Updated = true;
             }

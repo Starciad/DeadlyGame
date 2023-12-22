@@ -18,43 +18,57 @@ namespace DG.Core.Entities.Players
             this.Index = index;
         }
 
-        public override void Initialize()
+        private DGTransformComponent _transform;
+        private DGInformationsComponent _informations;
+        private DGPersonalityComponent _personality;
+        private DGCharacteristicsComponent _characteristics;
+        private DGHealthComponent _health;
+        private DGHungerComponent _hunger;
+        private DGCombatComponent _combatInfos;
+
+        protected override void OnAwake()
         {
-            DGTransformComponent transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
-            DGInformationsComponent informations = this.ComponentContainer.AddComponent<DGInformationsComponent>();
-            DGPersonalityComponent personality = this.ComponentContainer.AddComponent<DGPersonalityComponent>();
-            DGCharacteristicsComponent characteristics = this.ComponentContainer.AddComponent<DGCharacteristicsComponent>();
-            DGHealthComponent health = this.ComponentContainer.AddComponent<DGHealthComponent>();
-            DGHungerComponent hunger = this.ComponentContainer.AddComponent<DGHungerComponent>();
-            DGCombatComponent combatInfos = this.ComponentContainer.AddComponent<DGCombatComponent>();
+            base.OnAwake();
+
+            this._transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
+            this._informations = this.ComponentContainer.AddComponent<DGInformationsComponent>();
+            this._personality = this.ComponentContainer.AddComponent<DGPersonalityComponent>();
+            this._characteristics = this.ComponentContainer.AddComponent<DGCharacteristicsComponent>();
+            this._health = this.ComponentContainer.AddComponent<DGHealthComponent>();
+            this._hunger = this.ComponentContainer.AddComponent<DGHungerComponent>();
+            this._combatInfos = this.ComponentContainer.AddComponent<DGCombatComponent>();
 
             _ = this.ComponentContainer.AddComponent<DGInventoryComponent>();
             _ = this.ComponentContainer.AddComponent<DGEquipmentComponent>();
             _ = this.ComponentContainer.AddComponent<DGRelationshipsComponent>();
+        }
+        protected override void OnStart()
+        {
+            base.OnStart();
 
-            // Components
+            // ===== COMPONENTS =====
             // Transform
-            transform.SetPosition(this.Game.WorldManager.GetRandomPosition());
+            this._transform.SetPosition(this.Game.WorldManager.GetRandomPosition());
 
             // Infos
-            informations.Randomize();
+            this._informations.Randomize();
 
             // Personality
-            personality.Randomize();
+            this._personality.Randomize();
 
             // Characteristics
-            characteristics.Randomize();
+            this._characteristics.Randomize();
 
             // Health
-            health.SetMaximumHealth(10 + DGAttributesUtilities.GetAttributeModifier(characteristics.Constitution));
-            health.SetCurrentHealth(health.MaximumHealth);
+            this._health.SetMaximumHealth(10 + DGAttributesUtilities.GetAttributeModifier(this._characteristics.Constitution));
+            this._health.SetCurrentHealth(this._health.MaximumHealth);
 
             // Hunger
-            hunger.SetMaximumHunger(100);
-            hunger.SetCurrentHunger(0);
+            this._hunger.SetMaximumHunger(100);
+            this._hunger.SetCurrentHunger(0);
 
             // Combat
-            combatInfos.SetDisplacementRateValue(9 + this.Game.Random.Range(-2, 3));
+            this._combatInfos.SetDisplacementRateValue(9 + this.Game.Random.Range(-2, 3));
 
             // Behaviour
             this._behaviour = this.ComponentContainer.AddComponent<DGBehaviourComponent>();
@@ -63,13 +77,11 @@ namespace DG.Core.Entities.Players
             this._behaviour.RegisterBehaviour(new DGCraftingBehavior());
             this._behaviour.RegisterBehaviour(new DGResourceAcquisitionBehavior());
             this._behaviour.RegisterBehaviour(new DGItemAcquisitionBehavior());
-
-            base.Initialize();
         }
 
-        public override void Update()
+        protected override void OnUpdate()
         {
-            base.Update();
+            base.OnUpdate();
             this._behaviour.Act();
         }
     }

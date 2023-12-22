@@ -39,10 +39,24 @@ namespace DG.Core.Managers
         // === System ===
         public void Initialize(DGWorldBuilder builder)
         {
+            InitializeWorld(builder);
+            InitializeResources(builder);
+        }
+        protected override void OnUpdate()
+        {
+            UpdateDay();
+            UpdateResources();
+        }
+
+        // === Initialize ===
+        private void InitializeWorld(DGWorldBuilder builder)
+        {
             this.currentDay = 1;
             this.currentDaylightCycle = DGWorldDaylightCycleState.Day;
             this.worldSize = builder.Size;
-
+        }
+        private void InitializeResources(DGWorldBuilder builder)
+        {
             // === RESOURCES ===
             // Trees
             for (int i = 0; i < builder.Resources.TreeCount; i++)
@@ -61,10 +75,12 @@ namespace DG.Core.Managers
             {
                 resourceEntities.Add(new DGBush());
             }
-        }
-        public override void Update()
-        {
-            UpdateDay();
+
+            foreach (DGEntity resourceEntity in resourceEntities)
+            {
+                resourceEntity.SetGameInstance(this.Game);
+                resourceEntity.Initialize();
+            }
         }
 
         // === Updates ===
@@ -83,6 +99,15 @@ namespace DG.Core.Managers
 
                 default:
                     break;
+            }
+        }
+        private void UpdateResources()
+        {
+            resourceEntities.RemoveAll(x => x.ComponentContainer.GetComponent<DGHealthComponent>().IsDead);
+
+            foreach (DGEntity resourceEntity in resourceEntities)
+            {
+                resourceEntity.Update();
             }
         }
 

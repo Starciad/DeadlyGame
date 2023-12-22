@@ -18,15 +18,12 @@ namespace DG.Core.Entities
             this.componentContainer.SetEntityInstance(this);
         }
 
-        public override void Initialize()
+        protected override void OnStart()
         {
-            base.Initialize();
             this.componentContainer.Initialize();
         }
-
-        public override void Update()
+        protected override void OnUpdate()
         {
-            base.Update();
             this.componentContainer.Update();
         }
     }

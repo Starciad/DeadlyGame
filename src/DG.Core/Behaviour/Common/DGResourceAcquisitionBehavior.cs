@@ -14,6 +14,8 @@ namespace DG.Core.Behaviour.Common
     internal sealed class DGResourceAcquisitionBehavior : IDGBehaviour
     {
         private DGEntity[] _nearbyResources;
+
+        // components
         private DGTransformComponent _transform;
 
         public DGBehaviourWeight GetWeight(DGEntity entity, DGGame game)
@@ -21,12 +23,11 @@ namespace DG.Core.Behaviour.Common
             DGBehaviourWeight weight = new();
             this._transform = entity.ComponentContainer.GetComponent<DGTransformComponent>();
 
-            _nearbyResources = game.WorldManager.GetNearbyResources(this._transform.Position).Where(x => Vector2.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, _transform.Position) < DGInteractionsConstants.MAXIMUM_RANGE).ToArray();
+            this._nearbyResources = game.WorldManager.GetNearbyResources(this._transform.Position).Where(x => Vector2.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, _transform.Position) < DGInteractionsConstants.MAXIMUM_RANGE).ToArray();
 
             weight.Add(this._nearbyResources.Length);
             return weight;
         }
-
         public DGBehaviourActInfos Act(DGEntity entity, DGGame game)
         {
             DGBehaviourActInfos infos = new();

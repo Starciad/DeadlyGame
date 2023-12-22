@@ -1,6 +1,6 @@
 ﻿namespace DG.Core.Objects
 {
-    public class DGObject
+    public abstract class DGObject
     {
         protected DGGame Game { get; private set; }
 
@@ -8,7 +8,18 @@
         {
             this.Game = game;
         }
-        public virtual void Initialize() { return; }
-        public virtual void Update() { return; }
+        public void Initialize()
+        {
+            OnAwake();
+            OnStart();
+        }
+        public void Update()
+        {
+            OnUpdate();
+        }
+
+        protected virtual void OnAwake() { }
+        protected virtual void OnStart() { }
+        protected virtual void OnUpdate() { }
     }
 }

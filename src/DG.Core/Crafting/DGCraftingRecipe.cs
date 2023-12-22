@@ -15,7 +15,7 @@ namespace DG.Core.Crafting
         {
             if (!itemType.IsSubclassOf(typeof(DGItem)))
             {
-                throw new DGInvalidItemTypeException($"The type defined in {nameof(DGCraftingRecipe)} is not a DGItem.");
+                throw new DGInvalidItemTypeException($"The type defined in {nameof(DGCraftingRecipe)} is not a {nameof(DGItem)}.");
             }
 
             if (materials.Length < 1)
