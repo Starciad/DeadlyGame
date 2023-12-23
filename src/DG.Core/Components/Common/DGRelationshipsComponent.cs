@@ -8,6 +8,8 @@ namespace DG.Core.Components.Common
 {
     internal sealed class DGRelationshipsComponent : DGComponent
     {
+        internal DGRelationship[] Relationships => this.relationships.Values.ToArray();
+
         private readonly Dictionary<DGEntity, DGRelationship> relationships = [];
 
         internal DGRelationship AddRelationship(DGEntity anotherEntity, float value = 50)

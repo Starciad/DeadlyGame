@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DG.Core.Items.Armor
 {
-    internal enum DGArmorType
+    public enum DGArmorType
     {
         Helmet = 0,
         Breastplate = 1,
@@ -13,7 +14,13 @@ namespace DG.Core.Items.Armor
 
     internal abstract class DGArmor : DGItem
     {
-        [Range(0, 5)] internal float Defense { get; set; }
+        internal float Defense { get; private set; }
         internal DGArmorType ArmorType { get; set; }
+
+        internal void SetDefense(int value)
+        {
+            this.Defense = value;
+            this.Defense = (float)Math.Clamp(this.Defense, 0f, 5f);
+        }
     }
 }

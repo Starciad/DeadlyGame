@@ -222,7 +222,7 @@ namespace DG.Core.Components.Common
 
     public class DGInventorySlot(DGItem item, int amount)
     {
-        public bool IsEmpty => this.Amount <= 0;
+        internal bool IsEmpty => this.Amount <= 0;
         public Type ItemType => this.Item.GetType();
         public DGItem Item { get; private set; } = item;
         public int Amount { get; private set; } = amount;
