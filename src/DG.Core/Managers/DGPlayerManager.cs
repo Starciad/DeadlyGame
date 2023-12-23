@@ -2,15 +2,16 @@
 using DG.Core.Components.Common;
 using DG.Core.Entities;
 using DG.Core.Entities.Players;
-using DG.Core.Objects;
+using DG.Core.Information.Players;
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
 namespace DG.Core.Managers
 {
-    internal sealed class DGPlayerManager : DGObject
+    internal sealed class DGPlayerManager : DGManager
     {
         internal DGPlayer[] TotalPlayers => this.players;
         internal DGPlayer[] ActivePlayers => this.players.Where(x => !x.ComponentContainer.GetComponent<DGHealthComponent>().IsDead).ToArray();
@@ -50,6 +51,28 @@ namespace DG.Core.Managers
             [
                 .. this.players.OrderByDescending(x => Vector2.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, position)),
             ];
+        }
+
+        // Tools
+        internal DGPlayersInfo GetInfo()
+        {
+            return new()
+            {
+                Players = GetPlayersInfo(),
+            };
+
+            // ===== METHODS =====
+            DGPlayerInfo[] GetPlayersInfo()
+            {
+                int length = this.players.Length;
+                DGPlayerInfo[] playersInfo = new DGPlayerInfo[length];
+                for (int i = 0; i < length; i++)
+                {
+                    playersInfo[i] = new(this.players[i]);
+                }
+
+                return playersInfo;
+            }
         }
     }
 }

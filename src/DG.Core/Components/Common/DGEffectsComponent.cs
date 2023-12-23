@@ -3,13 +3,18 @@ using DG.Core.Exceptions.Effects;
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DG.Core.Components.Common
 {
     internal sealed class DGEffectsComponent : DGComponent
     {
+        internal DGEffect[] Effects => this._effects.Values.ToArray();
+
+        // effects
         private readonly Dictionary<Type, DGEffect> _effects = [];
 
+        // components
         private DGHealthComponent _healthComponent;
 
         protected override void OnAwake()

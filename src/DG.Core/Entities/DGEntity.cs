@@ -1,5 +1,4 @@
 ﻿using DG.Core.Components;
-using DG.Core.Components.Common;
 using DG.Core.Objects;
 
 namespace DG.Core.Entities

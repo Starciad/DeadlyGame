@@ -1,11 +1,14 @@
 ﻿using DG.Core;
 using DG.Core.Builders;
 
+using System;
+using System.Threading.Tasks;
+
 namespace DG
 {
     internal static class Program
     {
-        private static void Main()
+        private static async Task Main()
         {
             DGGameBuilder gameBuilder = new()
             {
@@ -25,7 +28,21 @@ namespace DG
 
             DGGame game = new(gameBuilder, worldBuilder);
             game.Initialize();
-            game.Start();
+
+            // ===== Game Routine =====
+
+            game.StartGame();
+            while (game.ShouldUpdateGame())
+            {
+                game.UpdateGame();
+            }
+            game.FinishGame();
+            game.Dispose();
+
+            // ========================
+
+            Console.WriteLine("Finished");
+            await Task.Delay(-1);
         }
 
         private static DGPlayerBuilder[] BuildPlayers(int amount)

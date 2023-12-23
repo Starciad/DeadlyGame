@@ -1,5 +1,6 @@
 ﻿using DG.Core.Constants;
 using DG.Core.Exceptions.Items;
+using DG.Core.Information.World;
 using DG.Core.Items;
 
 using System;
@@ -41,7 +42,7 @@ namespace DG.Core.Components.Common
         }
 
         // ===== ADD =====
-        public void AddItem(DGWorldItem worldItem)
+        public void AddItem(DGWorldItemInfo worldItem)
         {
             _ = TryAddItem(worldItem);
         }
@@ -93,7 +94,7 @@ namespace DG.Core.Components.Common
         }
 
         // ===== TRY ADD =====
-        public bool TryAddItem(DGWorldItem worldItem)
+        public bool TryAddItem(DGWorldItemInfo worldItem)
         {
             return TryAddItem(worldItem.Item, worldItem.Amount);
         }
@@ -203,9 +204,9 @@ namespace DG.Core.Components.Common
 
             ClearInventory();
         }
-        private DGWorldItem DropItem(DGInventorySlot slot)
+        private DGWorldItemInfo DropItem(DGInventorySlot slot)
         {
-            return new DGWorldItem(slot.Item, slot.Amount, this._transformComponent.Position);
+            return new DGWorldItemInfo(slot.Item, slot.Amount, this._transformComponent.Position);
         }
 
         // ===== SLOTS =====

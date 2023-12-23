@@ -1,5 +1,9 @@
 ﻿using DG.Core.Builders;
 using DG.Core.Dice;
+using DG.Core.Information;
+using DG.Core.Information.Players;
+using DG.Core.Information.Round;
+using DG.Core.Information.World;
 using DG.Core.Managers;
 using DG.Core.Settings;
 using DG.Core.Utilities;
@@ -8,12 +12,18 @@ using System;
 
 namespace DG.Core
 {
-    public sealed class DGGame(DGGameBuilder gameBuilder, DGWorldBuilder worldBuilder)
+    public sealed class DGGame(DGGameBuilder gameBuilder, DGWorldBuilder worldBuilder) : IDisposable
     {
+        public bool IsStarted => this._gameStateManager.IsStarted;
+        public bool IsFinished => this._gameStateManager.IsFinished;
+        public bool IsCanceled => this._gameStateManager.IsCanceled;
+        public bool IsDisposed => this.disposedValue;
+
         // Managers
         internal DGPlayerManager PlayerManager => this._playersManager;
         internal DGWorldManager WorldManager => this._worldManager;
         internal DGRoundManager RoundManager => this._roundManager;
+        internal DGGameStateManager GameStateManager => this._gameStateManager;
 
         // Utilities
         internal DGRandomUtilities Random { get; } = new();
@@ -23,10 +33,13 @@ namespace DG.Core
         private readonly DGGameSettings _gameSettings = new(gameBuilder);
 
         // Managers
-        private readonly DGPlayerManager _playersManager = new();
-        private readonly DGWorldManager _worldManager = new();
-        private readonly DGRoundManager _roundManager = new();
+        private DGPlayerManager _playersManager = new();
+        private DGWorldManager _worldManager = new();
+        private DGRoundManager _roundManager = new();
+        private DGGameStateManager _gameStateManager = new();
+        private bool disposedValue;
 
+        // System
         public void Initialize()
         {
             this._worldManager.SetGameInstance(this);
@@ -36,14 +49,17 @@ namespace DG.Core
             this._worldManager.Initialize(worldBuilder);
             this._playersManager.Initialize(this._gameSettings.Players);
         }
-        public void Start()
-        {
-            while (!this._playersManager.OnlyOneActivePlayer)
-            {
 
-            }
+        // Game
+        public void StartGame()
+        {
+            _gameStateManager.Start();
         }
-        public void Update()
+        public bool ShouldUpdateGame()
+        {
+            return !this._playersManager.OnlyOneActivePlayer;
+        }
+        public DGGameInfo UpdateGame()
         {
             // Round starts only when it is a new day.
             if (this._worldManager.CurrentDaylightCycle == DGWorldDaylightCycleState.Day)
@@ -60,6 +76,45 @@ namespace DG.Core
             {
                 this._roundManager.End();
             }
+
+            // Get and configure information
+            return new()
+            {
+                PlayersInfo = this._playersManager.GetInfo(),
+                RoundInfo = this._roundManager.GetInfo(),
+                WorldInfo = this._worldManager.GetInfo(),
+            };
+        }
+        public void FinishGame()
+        {
+            this._gameStateManager.Finish();
+        }
+        public void CancelGame()
+        {
+            this._gameStateManager.Cancel();
+        }
+
+        // Utilities
+        public void GetGameWinner()
+        {
+
+        }
+
+        // Tools
+        public void Dispose()
+        {
+            if (!disposedValue)
+            {
+                this._playersManager = null;
+                this._worldManager = null;
+                this._roundManager = null;
+                this._gameStateManager = null;
+
+                disposedValue = true;
+            }
+
+            GC.Collect();
+            GC.SuppressFinalize(this);
         }
     }
 }

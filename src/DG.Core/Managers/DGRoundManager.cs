@@ -1,8 +1,10 @@
-﻿using DG.Core.Objects;
+﻿using DG.Core.Information.Round;
+
+using System;
 
 namespace DG.Core.Managers
 {
-    internal sealed class DGRoundManager : DGObject
+    internal sealed class DGRoundManager : DGManager
     {
         internal int CurrentRound => this.currentRound;
 
@@ -28,6 +30,14 @@ namespace DG.Core.Managers
         internal void End()
         {
             OnRoundEnded?.Invoke();
+        }
+
+        internal DGRoundInfo GetInfo()
+        {
+            return new()
+            {
+                CurrentRound = this.currentRound,
+            };
         }
     }
 }

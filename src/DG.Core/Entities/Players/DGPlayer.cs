@@ -6,7 +6,7 @@ using DG.Core.Utilities;
 
 namespace DG.Core.Entities.Players
 {
-    internal sealed class DGPlayer : DGEntity
+    public sealed class DGPlayer : DGEntity
     {
         internal int Index { get; private set; }
 
@@ -82,7 +82,6 @@ namespace DG.Core.Entities.Players
             this._behaviour.RegisterBehaviour(new DGItemAcquisitionBehavior());
             this._behaviour.RegisterBehaviour(new DGSelfPreservationBehavior());
         }
-
         protected override void OnUpdate()
         {
             base.OnUpdate();

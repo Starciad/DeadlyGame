@@ -1,8 +1,10 @@
-﻿using System.Numerics;
+﻿using DG.Core.Items;
 
-namespace DG.Core.Items
+using System.Numerics;
+
+namespace DG.Core.Information.World
 {
-    public readonly struct DGWorldItem(DGItem item, int amount, Vector2 position)
+    public readonly struct DGWorldItemInfo(DGItem item, int amount, Vector2 position)
     {
         public readonly DGItem Item => this.item;
         public readonly int Amount => this.amount;

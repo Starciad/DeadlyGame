@@ -2,9 +2,8 @@
 using DG.Core.Components.Common;
 using DG.Core.Entities;
 using DG.Core.Entities.Natural;
-using DG.Core.Entities.Players;
+using DG.Core.Information.World;
 using DG.Core.Items;
-using DG.Core.Objects;
 
 using System;
 using System.Collections.Generic;
@@ -13,13 +12,13 @@ using System.Numerics;
 
 namespace DG.Core.Managers
 {
-    internal enum DGWorldDaylightCycleState
+    public enum DGWorldDaylightCycleState
     {
         Day = 0,
         Night = 1
     }
 
-    internal sealed class DGWorldManager : DGObject
+    internal sealed class DGWorldManager : DGManager
     {
         internal int CurrentDay => this.currentDay;
         internal DGWorldDaylightCycleState CurrentDaylightCycle => this.currentDaylightCycle;
@@ -34,7 +33,7 @@ namespace DG.Core.Managers
 
         // === World Resources ===
         private readonly List<DGEntity> resourceEntities = [];
-        private readonly List<DGWorldItem> worldItems = [];
+        private readonly List<DGWorldItemInfo> worldItems = [];
 
         // === System ===
         public void Initialize(DGWorldBuilder builder)
@@ -119,26 +118,26 @@ namespace DG.Core.Managers
                 .. this.resourceEntities.OrderByDescending(x => Vector2.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, position)),
             ];
         }
-        internal DGWorldItem[] GetNearbyItems(Vector2 position)
+        internal DGWorldItemInfo[] GetNearbyItems(Vector2 position)
         {
             return
             [
                 .. this.worldItems.OrderByDescending(x => Vector2.Distance(x.Position, position)),
             ];
         }
-        internal void AddWorldItem(DGWorldItem worldItem)
+        internal void AddWorldItem(DGWorldItemInfo worldItem)
         {
             this.worldItems.Add(worldItem);
         }
-        internal DGWorldItem GetWorldItem(DGItem item)
+        internal DGWorldItemInfo GetWorldItem(DGItem item)
         {
             return GetWorldItem(item.GetType());
         }
-        internal DGWorldItem GetWorldItem(Type itemType)
+        internal DGWorldItemInfo GetWorldItem(Type itemType)
         {
             return this.worldItems.Find(x => x.Item.GetType() == itemType);
         }
-        internal void RemoveWorldItem(DGWorldItem worldItem)
+        internal void RemoveWorldItem(DGWorldItemInfo worldItem)
         {
             _ = this.worldItems.Remove(worldItem);
         }
@@ -157,6 +156,44 @@ namespace DG.Core.Managers
             float pos_y = this.Game.Random.Range(-this.Size.Y, this.Size.Y + 1);
 
             return new(pos_x, pos_y);
+        }
+
+        internal DGWorldInfo GetInfo()
+        {
+            // Get all the resources in the world.
+
+
+            // Build world information.
+            return new()
+            {
+                CurrentDay = this.currentDay,
+                CurrentDaylightCycle = this.currentDaylightCycle,
+                WorldSize = this.worldSize,
+                ResourceInfo = new()
+                {
+                    Resources = GetAllWorldResources(),
+                    Items = this.worldItems,
+                },
+            };
+
+            // ===== METHODS =====
+            DGWorldResourceInfo[] GetAllWorldResources()
+            {
+                List<DGWorldResourceInfo> resources = [];
+                string[] resourcesNames = this.resourceEntities.Select(x => x.Name).ToArray();
+
+                foreach (string resourceName in resourcesNames.Distinct().ToArray())
+                {
+                    int count = resourcesNames.Count(x => x.Equals(resourceName));
+                    resources.Add(new()
+                    {
+                        Name = resourceName,
+                        Count = count
+                    });
+                }
+
+                return [.. resources];
+            }
         }
     }
 }

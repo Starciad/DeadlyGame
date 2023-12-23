@@ -15,6 +15,7 @@ namespace DG.Core.Effects
         public string Description { get; protected set; }
         public DGEffectType EffectType { get; protected set; }
         public int Durability { get; protected set; }
+        public int RemainingDurability => this._remainingDurability;
         public bool IsFinished => this._remainingDurability == 0;
 
         protected DGGame Game => this._game;
