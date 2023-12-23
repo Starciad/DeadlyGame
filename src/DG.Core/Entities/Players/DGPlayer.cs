@@ -1,6 +1,7 @@
 ﻿using DG.Core.Behaviour.Common;
 using DG.Core.Builders;
 using DG.Core.Components.Common;
+using DG.Core.Effects.Common;
 using DG.Core.Utilities;
 
 namespace DG.Core.Entities.Players
@@ -25,6 +26,7 @@ namespace DG.Core.Entities.Players
         private DGHealthComponent _health;
         private DGHungerComponent _hunger;
         private DGCombatComponent _combatInfos;
+        private DGEffectsComponent _effects;
 
         protected override void OnAwake()
         {
@@ -37,6 +39,7 @@ namespace DG.Core.Entities.Players
             this._health = this.ComponentContainer.AddComponent<DGHealthComponent>();
             this._hunger = this.ComponentContainer.AddComponent<DGHungerComponent>();
             this._combatInfos = this.ComponentContainer.AddComponent<DGCombatComponent>();
+            this._effects = this.ComponentContainer.AddComponent<DGEffectsComponent>();
 
             _ = this.ComponentContainer.AddComponent<DGInventoryComponent>();
             _ = this.ComponentContainer.AddComponent<DGEquipmentComponent>();
@@ -77,11 +80,20 @@ namespace DG.Core.Entities.Players
             this._behaviour.RegisterBehaviour(new DGCraftingBehavior());
             this._behaviour.RegisterBehaviour(new DGResourceAcquisitionBehavior());
             this._behaviour.RegisterBehaviour(new DGItemAcquisitionBehavior());
+            this._behaviour.RegisterBehaviour(new DGSelfPreservationBehavior());
         }
 
         protected override void OnUpdate()
         {
             base.OnUpdate();
+
+            // If the player has paralyzing effects, he will not act.
+            if (this._effects.HasEffect<DGRestEffect>())
+            {
+                return;
+            }
+
+            // If the player does not have the above paralyzing effects, he executes their components.
             this._behaviour.Act();
         }
     }

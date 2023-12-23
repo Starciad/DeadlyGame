@@ -4,11 +4,13 @@ using DG.Core.Items;
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DG.Core.Components.Common
 {
     public sealed class DGInventoryComponent : DGComponent
     {
+        public DGItem[] Items => this.slots.Select(x => x.Item).ToArray();
         public DGInventorySlot[] Slots => this.slots.ToArray();
         public int NumberOfSlots => this.numberOfSlots;
 

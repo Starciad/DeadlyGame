@@ -2,7 +2,7 @@
 {
     internal sealed class DGBerry : DGFood
     {
-        public override void Build()
+        public DGBerry()
         {
             this.Name = "Baga";
             this.Description = "Uma pequena frutinha que trás um pouco de saciedade.";

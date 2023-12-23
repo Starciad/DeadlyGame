@@ -10,8 +10,12 @@ namespace DG.Core
 {
     public sealed class DGGame(DGGameBuilder gameBuilder, DGWorldBuilder worldBuilder)
     {
+        // Managers
         internal DGPlayerManager PlayerManager => this._playersManager;
         internal DGWorldManager WorldManager => this._worldManager;
+        internal DGRoundManager RoundManager => this._roundManager;
+
+        // Utilities
         internal DGRandomUtilities Random { get; } = new();
         internal DGDice Dice { get; } = new();
 
@@ -21,36 +25,41 @@ namespace DG.Core
         // Managers
         private readonly DGPlayerManager _playersManager = new();
         private readonly DGWorldManager _worldManager = new();
+        private readonly DGRoundManager _roundManager = new();
 
         public void Initialize()
         {
             this._worldManager.SetGameInstance(this);
             this._playersManager.SetGameInstance(this);
+            this._roundManager.SetGameInstance(this);
 
             this._worldManager.Initialize(worldBuilder);
             this._playersManager.Initialize(this._gameSettings.Players);
         }
-
         public void Start()
         {
-            int loop = 1;
-
             while (!this._playersManager.OnlyOneActivePlayer)
             {
-                Console.WriteLine($"[ Loop: {loop} || Day ({this._worldManager.CurrentDay}): {this._worldManager.CurrentDaylightCycle} || Players: {this.PlayerManager.ActivePlayers.Length} ]");
 
-                if (this._playersManager.ActivePlayers.Length < 10)
-                {
-                    Console.WriteLine();
-                }
-
-                this._playersManager.Update();
-                this._worldManager.Update();
-
-                loop++;
+            }
+        }
+        public void Update()
+        {
+            // Round starts only when it is a new day.
+            if (this._worldManager.CurrentDaylightCycle == DGWorldDaylightCycleState.Day)
+            {
+                this._roundManager.Begin();
             }
 
-            Console.WriteLine("Finished");
+            // Update of all components.
+            this._playersManager.Update();
+            this._worldManager.Update();
+
+            // Round ends only when it is one night.
+            if (this._worldManager.CurrentDaylightCycle == DGWorldDaylightCycleState.Night)
+            {
+                this._roundManager.End();
+            }
         }
     }
 }

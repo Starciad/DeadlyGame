@@ -2,7 +2,7 @@
 {
     internal sealed class DGStone : DGMaterial
     {
-        public override void Build()
+        public DGStone()
         {
             this.Name = "Pedra";
             this.Description = "Pedra simple usada para fabricação de recursos.";

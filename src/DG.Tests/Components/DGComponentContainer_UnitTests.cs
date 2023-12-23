@@ -29,7 +29,7 @@ namespace DG.Tests.Components
         {
             DGComponentContainer container = new();
 
-            _ = Assert.Throws<DGInvalidComponentTypeException>(() => container.AddComponent(typeof(object)));
+            _ = Assert.Throws<DGInvalidEffectTypeException>(() => container.AddComponent(typeof(object)));
         }
 
         [Fact]
@@ -93,7 +93,7 @@ namespace DG.Tests.Components
         {
             DGComponentContainer container = new();
 
-            _ = Assert.Throws<DGInvalidComponentTypeException>(() => container.HasComponent(typeof(object)));
+            _ = Assert.Throws<DGInvalidEffectTypeException>(() => container.HasComponent(typeof(object)));
         }
 
         [Fact]

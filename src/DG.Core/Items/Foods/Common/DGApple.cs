@@ -2,7 +2,7 @@
 {
     internal sealed class DGApple : DGFood
     {
-        public override void Build()
+        public DGApple()
         {
             this.Name = "Maçã";
             this.Description = "Deliciosa e apetitosa, deixa sua fome estável.";

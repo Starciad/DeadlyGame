@@ -62,8 +62,6 @@ namespace DG.Core.Crafting
             }
 
             DGItem targetItem = (DGItem)Activator.CreateInstance(ItemType);
-            targetItem.Build();
-
             item = targetItem;
             return true;
         }

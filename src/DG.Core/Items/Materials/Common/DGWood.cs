@@ -2,7 +2,7 @@
 {
     internal sealed class DGWood : DGMaterial
     {
-        public override void Build()
+        public DGWood()
         {
             this.Name = "Madeira";
             this.Description = "Tábuas simples de madeira usadas para fabricação de recursos.";

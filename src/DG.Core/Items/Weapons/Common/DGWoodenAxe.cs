@@ -2,7 +2,7 @@
 {
     internal sealed class DGWoodenAxe : DGWeapon
     {
-        public override void Build()
+        public DGWoodenAxe()
         {
             this.Name = "Machado de Madeira";
             this.Description = "Pode ser usado para coletar madeira e como uma arma.";

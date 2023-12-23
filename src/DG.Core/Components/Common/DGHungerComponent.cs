@@ -28,7 +28,7 @@
             this.MaximumHunger = value;
         }
 
-        public void ReduceHunger(int value)
+        public void DecreaseHunger(int value)
         {
             this.CurrentHunger -= value;
             this.CurrentHunger = this.CurrentHunger < 0 ? 0 : this.CurrentHunger;

@@ -19,7 +19,5 @@ namespace DG.Core.Items
         public DGItemRarity Rarity { get; set; }
         public bool HasDurability { get; set; }
         public int Durability { get; set; }
-
-        public abstract void Build();
     }
 }
