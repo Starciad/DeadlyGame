@@ -21,100 +21,124 @@ namespace DG.Core.Information.Players
         public DGEquipmentInfo Equipment { get; set; }
         public DGRelationshipsInfo Relationships { get; set; }
 
-        public DGPlayerInfo(DGPlayer player)
+        internal static DGPlayerInfo Create(DGPlayer player)
         {
-            this.Name = player.Name;
-            this.Index = player.Index;
-
-            GetPlayerTransformComponent(player.ComponentContainer.GetComponent<DGTransformComponent>());
-            GetPlayerInformationsComponent(player.ComponentContainer.GetComponent<DGInformationsComponent>());
-            GetPlayerPersonalityComponent(player.ComponentContainer.GetComponent<DGPersonalityComponent>());
-            GetPlayerCharacteristicsComponent(player.ComponentContainer.GetComponent<DGCharacteristicsComponent>());
-            GetPlayerHealthComponent(player.ComponentContainer.GetComponent<DGHealthComponent>());
-            GetPlayerHungerComponent(player.ComponentContainer.GetComponent<DGHungerComponent>());
-            GetPlayerCombatComponent(player.ComponentContainer.GetComponent<DGCombatComponent>());
-            GetPlayerEffectsComponent(player.ComponentContainer.GetComponent<DGEffectsComponent>());
-            GetPlayerInventoryComponent(player.ComponentContainer.GetComponent<DGInventoryComponent>());
-            GetPlayerEquipmentComponent(player.ComponentContainer.GetComponent<DGEquipmentComponent>());
-            GetPlayerRelationshipsComponent(player.ComponentContainer.GetComponent<DGRelationshipsComponent>());
+            return new()
+            {
+                Name = player.Name,
+                Index = player.Index,
+                Transform = CreatePlayerTransformComponent(player.ComponentContainer.GetComponent<DGTransformComponent>()),
+                Informations = CreatePlayerInformationsComponent(player.ComponentContainer.GetComponent<DGInformationsComponent>()),
+                Personality = CreatePlayerPersonalityComponent(player.ComponentContainer.GetComponent<DGPersonalityComponent>()),
+                Characteristics = CreatePlayerCharacteristicsComponent(player.ComponentContainer.GetComponent<DGCharacteristicsComponent>()),
+                Health = CreatePlayerHealthComponent(player.ComponentContainer.GetComponent<DGHealthComponent>()),
+                Hunger = CreatePlayerHungerComponent(player.ComponentContainer.GetComponent<DGHungerComponent>()),
+                Combat = CreatePlayerCombatComponent(player.ComponentContainer.GetComponent<DGCombatComponent>()),
+                Effects = CreatePlayerEffectsComponent(player.ComponentContainer.GetComponent<DGEffectsComponent>()),
+                Inventory = CreatePlayerInventoryComponent(player.ComponentContainer.GetComponent<DGInventoryComponent>()),
+                Equipment = CreatePlayerEquipmentComponent(player.ComponentContainer.GetComponent<DGEquipmentComponent>()),
+                Relationships = CreatePlayerRelationshipsComponent(player.ComponentContainer.GetComponent<DGRelationshipsComponent>())
+            };
         }
 
-        private void GetPlayerTransformComponent(DGTransformComponent component)
+        private static DGTransformInfo CreatePlayerTransformComponent(DGTransformComponent component)
         {
-            if (component != null)
+            if (component == null)
             {
-                this.Transform = DGTransformInfo.Create(component);
+                return default;
             }
+
+            return DGTransformInfo.Create(component);
         }
-        private void GetPlayerInformationsComponent(DGInformationsComponent component)
+        private static DGInformationsInfo CreatePlayerInformationsComponent(DGInformationsComponent component)
         {
-            if (component != null)
+            if (component == null)
             {
-                this.Informations = DGInformationsInfo.Create(component);
+                return default;
             }
+
+            return DGInformationsInfo.Create(component);
         }
-        private void GetPlayerPersonalityComponent(DGPersonalityComponent component)
+        private static DGPersonalityInfo CreatePlayerPersonalityComponent(DGPersonalityComponent component)
         {
-            if (component != null)
+            if (component == null)
             {
-                this.Personality = DGPersonalityInfo.Create(component);
+                return default;
             }
+
+            return DGPersonalityInfo.Create(component);
         }
-        private void GetPlayerCharacteristicsComponent(DGCharacteristicsComponent component)
+        private static DGCharacteristicsInfo CreatePlayerCharacteristicsComponent(DGCharacteristicsComponent component)
         {
-            if (component != null)
+            if (component == null)
             {
-                this.Characteristics = DGCharacteristicsInfo.Create(component);
+                return default;
             }
+
+            return DGCharacteristicsInfo.Create(component);
         }
-        private void GetPlayerHealthComponent(DGHealthComponent component)
+        private static DGHealthInfo CreatePlayerHealthComponent(DGHealthComponent component)
         {
-            if (component != null)
+            if (component == null)
             {
-                this.Health = DGHealthInfo.Create(component);
+                return default;
             }
+
+            return DGHealthInfo.Create(component);
         }
-        private void GetPlayerHungerComponent(DGHungerComponent component)
+        private static DGHungerInfo CreatePlayerHungerComponent(DGHungerComponent component)
         {
-            if (component != null)
+            if (component == null)
             {
-                this.Hunger = DGHungerInfo.Create(component);
+                return default;
             }
+
+            return DGHungerInfo.Create(component);
         }
-        private void GetPlayerCombatComponent(DGCombatComponent component)
+        private static DGCombatInfo CreatePlayerCombatComponent(DGCombatComponent component)
         {
-            if (component != null)
+            if (component == null)
             {
-                this.Combat = DGCombatInfo.Create(component);
+                return default;
             }
+
+            return DGCombatInfo.Create(component);
         }
-        private void GetPlayerEffectsComponent(DGEffectsComponent component)
+        private static DGEffectsInfo CreatePlayerEffectsComponent(DGEffectsComponent component)
         {
-            if (component != null)
+            if (component == null)
             {
-                this.Effects = DGEffectsInfo.Create(component);
+                return default;
             }
+
+            return DGEffectsInfo.Create(component);
         }
-        private void GetPlayerInventoryComponent(DGInventoryComponent component)
+        private static DGInventoryInfo CreatePlayerInventoryComponent(DGInventoryComponent component)
         {
-            if (component != null)
+            if (component == null)
             {
-                this.Inventory = DGInventoryInfo.Create(component);
+                return default;
             }
+
+            return DGInventoryInfo.Create(component);
         }
-        private void GetPlayerEquipmentComponent(DGEquipmentComponent component)
+        private static DGEquipmentInfo CreatePlayerEquipmentComponent(DGEquipmentComponent component)
         {
-            if (component != null)
+            if (component == null)
             {
-                Equipment = DGEquipmentInfo.Create(component);
+                return default;
             }
+
+            return DGEquipmentInfo.Create(component);
         }
-        private void GetPlayerRelationshipsComponent(DGRelationshipsComponent component)
+        private static DGRelationshipsInfo CreatePlayerRelationshipsComponent(DGRelationshipsComponent component)
         {
-            if (component != null)
+            if (component == null)
             {
-                Relationships = DGRelationshipsInfo.Create(component);
+                return default;
             }
+
+            return DGRelationshipsInfo.Create(component);
         }
     }
 }

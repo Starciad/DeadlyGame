@@ -52,7 +52,7 @@ namespace DG.Core.Managers
         }
 
         // Tools
-        internal DGPlayersInfo GetInfo()
+        internal DGPlayersInfo GetPlayersInfo()
         {
             return new()
             {
@@ -66,11 +66,16 @@ namespace DG.Core.Managers
                 DGPlayerInfo[] playersInfo = new DGPlayerInfo[length];
                 for (int i = 0; i < length; i++)
                 {
-                    playersInfo[i] = new(this.players[i]);
+                    playersInfo[i] = DGPlayerInfo.Create(this.players[i]);
                 }
 
                 return playersInfo;
             }
+        }
+
+        internal void GetPlayerActionInfo()
+        {
+
         }
     }
 }
