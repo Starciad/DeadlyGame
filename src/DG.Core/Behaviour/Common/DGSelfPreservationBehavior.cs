@@ -2,6 +2,7 @@
 using DG.Core.Components.Common;
 using DG.Core.Effects.Common;
 using DG.Core.Entities;
+using DG.Core.Information.Actions;
 using DG.Core.Items;
 using DG.Core.Items.Foods;
 using DG.Core.Utilities;
@@ -56,9 +57,9 @@ namespace DG.Core.Behaviour.Common
             return weight;
         }
 
-        public DGBehaviourActInfos Act(DGEntity entity, DGGame game)
+        public DGPlayerActionInfo Act(DGEntity entity, DGGame game)
         {
-            DGBehaviourActInfos infos = new();
+            DGPlayerActionInfo infos = new();
 
             // If health is less than 50%, start a rest.
             if (this.healthPercentage <= 50)

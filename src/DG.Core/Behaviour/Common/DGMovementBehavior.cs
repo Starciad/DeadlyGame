@@ -1,6 +1,7 @@
 ﻿using DG.Core.Behaviour.Models;
 using DG.Core.Components.Common;
 using DG.Core.Entities;
+using DG.Core.Information.Actions;
 using DG.Core.Managers;
 
 namespace DG.Core.Behaviour.Common
@@ -64,7 +65,7 @@ namespace DG.Core.Behaviour.Common
 
             return weight;
         }
-        public DGBehaviourActInfos Act(DGEntity entity, DGGame game)
+        public DGPlayerActionInfo Act(DGEntity entity, DGGame game)
         {
             // === ACT ===
             DGTransformComponent transform = entity.ComponentContainer.GetComponent<DGTransformComponent>();
@@ -79,7 +80,7 @@ namespace DG.Core.Behaviour.Common
             transform.SetPosition(game.WorldManager.Clamp(transform.Position));
 
             // === INFOS ===
-            DGBehaviourActInfos infos = new();
+            DGPlayerActionInfo infos = new();
             infos.WithTitle(string.Empty);
             infos.WithDescription(string.Empty);
             return infos;

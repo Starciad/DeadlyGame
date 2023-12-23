@@ -4,6 +4,7 @@ using DG.Core.Constants;
 using DG.Core.Dice;
 using DG.Core.Entities;
 using DG.Core.Entities.Players;
+using DG.Core.Information.Actions;
 using DG.Core.Items.Weapons;
 using DG.Core.Managers;
 using DG.Core.Utilities;
@@ -92,9 +93,9 @@ namespace DG.Core.Behaviour.Common
 
             return weight;
         }
-        public DGBehaviourActInfos Act(DGEntity entity, DGGame game)
+        public DGPlayerActionInfo Act(DGEntity entity, DGGame game)
         {
-            DGBehaviourActInfos infos = new();
+            DGPlayerActionInfo infos = new();
 
             // Get Nearby Target
             DGPlayer targetEntity = GetNearbyTarget(entity, game);
@@ -200,9 +201,9 @@ namespace DG.Core.Behaviour.Common
             attackerRelationship.DecreaseRelationshipValue(target, 20);
             targetRelationship.DecreaseRelationshipValue(attacker, 20);
         }
-        private static DGBehaviourActInfos HandleAttackOutcome(AttackOutcome result, DGEntity target)
+        private static DGPlayerActionInfo HandleAttackOutcome(AttackOutcome result, DGEntity target)
         {
-            DGBehaviourActInfos outcomeInfo = new();
+            DGPlayerActionInfo outcomeInfo = new();
             switch (result)
             {
                 case AttackOutcome.Successful:

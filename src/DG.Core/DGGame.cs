@@ -56,7 +56,7 @@ namespace DG.Core
         {
             return !this._playersManager.OnlyOneActivePlayer;
         }
-        public DGGameInfo UpdateGame()
+        public void UpdateGame()
         {
             // Round starts only when it is a new day.
             if (this._worldManager.CurrentDaylightCycle == DGWorldDaylightCycleState.Day)
@@ -73,14 +73,6 @@ namespace DG.Core
             {
                 this._roundManager.End();
             }
-
-            // Get and configure information
-            return new()
-            {
-                PlayersInfo = this._playersManager.GetInfo(),
-                RoundInfo = this._roundManager.GetInfo(),
-                WorldInfo = this._worldManager.GetInfo(),
-            };
         }
         public void FinishGame()
         {
@@ -92,6 +84,16 @@ namespace DG.Core
         }
 
         // Utilities
+        public DGGameInfo GetGameInfo()
+        {
+            return new()
+            {
+                ActionsInfo = this._playersManager.GetPlayersActionsInfo(),
+                PlayersInfo = this._playersManager.GetPlayersInfo(),
+                RoundInfo = this._roundManager.GetInfo(),
+                WorldInfo = this._worldManager.GetInfo(),
+            };
+        }
         public void GetGameWinner()
         {
 

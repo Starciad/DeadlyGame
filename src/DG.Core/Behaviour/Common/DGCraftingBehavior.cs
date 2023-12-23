@@ -3,6 +3,7 @@ using DG.Core.Components.Common;
 using DG.Core.Crafting;
 using DG.Core.Databases;
 using DG.Core.Entities;
+using DG.Core.Information.Actions;
 using DG.Core.Items;
 
 namespace DG.Core.Behaviour.Common
@@ -24,9 +25,9 @@ namespace DG.Core.Behaviour.Common
             return weight;
         }
 
-        public DGBehaviourActInfos Act(DGEntity entity, DGGame game)
+        public DGPlayerActionInfo Act(DGEntity entity, DGGame game)
         {
-            DGBehaviourActInfos infos = new();
+            DGPlayerActionInfo infos = new();
             if (this._newRecipes.Length == 0)
             {
                 infos.WithTitle(string.Empty);

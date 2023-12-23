@@ -2,7 +2,7 @@
 
 namespace DG.Core.Information.Players
 {
-    public struct DGPlayersInfo
+    public struct DGPlayerCollectionInfo
     {
         public IEnumerable<DGPlayerInfo> Players { get; set; }
     }

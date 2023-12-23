@@ -2,6 +2,7 @@
 using DG.Core.Components.Common;
 using DG.Core.Constants;
 using DG.Core.Entities;
+using DG.Core.Information.Actions;
 using DG.Core.Information.World;
 
 using System.Linq;
@@ -30,9 +31,9 @@ namespace DG.Core.Behaviour.Common
             return weight;
         }
 
-        public DGBehaviourActInfos Act(DGEntity entity, DGGame game)
+        public DGPlayerActionInfo Act(DGEntity entity, DGGame game)
         {
-            DGBehaviourActInfos infos = new();
+            DGPlayerActionInfo infos = new();
 
             if (this._nearbyItems.Length == 0)
             {

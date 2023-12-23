@@ -1,6 +1,7 @@
 ﻿using DG.Core.Behaviour;
 using DG.Core.Constants;
 using DG.Core.Entities;
+using DG.Core.Information.Actions;
 
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace DG.Core.Components.Common
             }
         }
 
+        internal DGPlayerActionInfo LastActionInfos { get; private set; }
+
         private readonly List<IDGBehaviour> definedBehaviors = [];
 
         internal void RegisterBehaviour(IDGBehaviour behaviour)
@@ -38,7 +41,7 @@ namespace DG.Core.Components.Common
             DGAction bestAction = bestActions[this.Game.Random.Range(0, bestActions.Length)];
 
             // Take action.
-            ExecuteAction(bestAction, this.Entity, this.Game);
+            this.LastActionInfos = ExecuteAction(bestAction, this.Entity, this.Game);
         }
 
         private DGAction[] GetPossibleActions(DGEntity entity, DGGame game)
@@ -55,9 +58,9 @@ namespace DG.Core.Components.Common
             return actions;
         }
 
-        private static void ExecuteAction(DGAction action, DGEntity entity, DGGame game)
+        private static DGPlayerActionInfo ExecuteAction(DGAction action, DGEntity entity, DGGame game)
         {
-            _ = action.Behaviour.Act(entity, game);
+            return action.Behaviour.Act(entity, game);
         }
     }
 }

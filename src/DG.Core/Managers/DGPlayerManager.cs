@@ -1,6 +1,7 @@
 ﻿using DG.Core.Builders;
 using DG.Core.Components.Common;
 using DG.Core.Entities.Players;
+using DG.Core.Information.Actions;
 using DG.Core.Information.Players;
 
 using System.Collections.Generic;
@@ -52,15 +53,15 @@ namespace DG.Core.Managers
         }
 
         // Tools
-        internal DGPlayersInfo GetPlayersInfo()
+        internal DGPlayerCollectionInfo GetPlayersInfo()
         {
             return new()
             {
-                Players = GetPlayersInfo(),
+                Players = GetInfo(),
             };
 
             // ===== METHODS =====
-            DGPlayerInfo[] GetPlayersInfo()
+            DGPlayerInfo[] GetInfo()
             {
                 int length = this.players.Length;
                 DGPlayerInfo[] playersInfo = new DGPlayerInfo[length];
@@ -72,10 +73,28 @@ namespace DG.Core.Managers
                 return playersInfo;
             }
         }
-
-        internal void GetPlayerActionInfo()
+        internal DGPlayerActionCollectionInfo GetPlayersActionsInfo()
         {
+            List<DGPlayerActionInfo> actionsFound = [];
 
+            foreach (DGPlayer player in this.players)
+            {
+                if (player.ComponentContainer.TryGetComponent(out DGBehaviourComponent component))
+                {
+                    DGPlayerActionInfo actionInfo = component.LastActionInfos;
+                    if (actionInfo.IsEmpty)
+                    {
+                        continue;
+                    }
+
+                    actionsFound.Add(actionInfo);
+                }
+            }
+
+            return new()
+            {
+                Actions = [.. actionsFound],
+            };
         }
     }
 }
