@@ -34,8 +34,9 @@ namespace DG
             game.StartGame();
             while (game.ShouldUpdateGame())
             {
-                game.UpdateGame();
+                _ = game.UpdateGame();
             }
+
             game.FinishGame();
             game.Dispose();
 

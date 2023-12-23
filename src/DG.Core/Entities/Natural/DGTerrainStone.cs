@@ -36,7 +36,7 @@ namespace DG.Core.Entities.Natural
             this._health.SetCurrentHealth(this._health.MaximumHealth);
 
             // inventory
-            this._inventory.TryAddItem(new DGStone(), this.Game.Random.Range(5, 18));
+            _ = this._inventory.TryAddItem(new DGStone(), this.Game.Random.Range(5, 18));
         }
     }
 }

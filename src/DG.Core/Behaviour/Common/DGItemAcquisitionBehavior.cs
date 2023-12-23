@@ -21,7 +21,7 @@ namespace DG.Core.Behaviour.Common
             DGBehaviourWeight weight = new();
             this._transform = entity.ComponentContainer.GetComponent<DGTransformComponent>();
 
-            this._nearbyItems = game.WorldManager.GetNearbyItems(this._transform.Position).Where(x => Vector2.Distance(x.Position, _transform.Position) < DGInteractionsConstants.MAXIMUM_RANGE).ToArray();
+            this._nearbyItems = game.WorldManager.GetNearbyItems(this._transform.Position).Where(x => Vector2.Distance(x.Position, this._transform.Position) < DGInteractionsConstants.MAXIMUM_RANGE).ToArray();
             foreach (DGWorldItemInfo item in this._nearbyItems)
             {
                 weight.Add(item.Amount);
@@ -34,17 +34,17 @@ namespace DG.Core.Behaviour.Common
         {
             DGBehaviourActInfos infos = new();
 
-            if (_nearbyItems.Length == 0)
+            if (this._nearbyItems.Length == 0)
             {
                 return infos;
             }
 
-            var inventory = entity.ComponentContainer.GetComponent<DGInventoryComponent>();
+            DGInventoryComponent inventory = entity.ComponentContainer.GetComponent<DGInventoryComponent>();
 
-            DGWorldItemInfo selectedItem = _nearbyItems[0];
+            DGWorldItemInfo selectedItem = this._nearbyItems[0];
 
             game.WorldManager.RemoveWorldItem(selectedItem);
-            inventory.TryAddItem(selectedItem);
+            _ = inventory.TryAddItem(selectedItem);
 
             return infos;
         }

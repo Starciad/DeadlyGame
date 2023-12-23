@@ -27,7 +27,7 @@ namespace DG.Core.Behaviour.Common
         public DGBehaviourActInfos Act(DGEntity entity, DGGame game)
         {
             DGBehaviourActInfos infos = new();
-            if (_newRecipes.Length == 0)
+            if (this._newRecipes.Length == 0)
             {
                 infos.WithTitle(string.Empty);
                 infos.WithDescription(string.Empty);
@@ -40,7 +40,7 @@ namespace DG.Core.Behaviour.Common
                 DGCraftingRecipe targetRecipe = this._newRecipes[game.Random.Range(0, this._newRecipes.Length)];
                 if (targetRecipe.TryCraft(inventory, out DGItem item))
                 {
-                    inventory.TryAddItem(item, 1);
+                    _ = inventory.TryAddItem(item, 1);
                 }
             }
 

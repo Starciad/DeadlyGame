@@ -1,5 +1,4 @@
 ﻿using DG.Core.Entities;
-using DG.Core.Objects;
 
 namespace DG.Core.Effects
 {
@@ -40,7 +39,7 @@ namespace DG.Core.Effects
         public void Update()
         {
             this._remainingDurability--;
-            this._remainingDurability = (this._remainingDurability < 0 ? 0 : this._remainingDurability);
+            this._remainingDurability = this._remainingDurability < 0 ? 0 : this._remainingDurability;
             OnApplyEffect(this._entity);
         }
 

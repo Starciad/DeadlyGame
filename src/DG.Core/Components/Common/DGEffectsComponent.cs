@@ -81,20 +81,15 @@ namespace DG.Core.Components.Common
             effect.SetEntity(this.Entity);
             effect.SetGame(this.Game);
 
-            _ = _effects.TryAdd(effectType, effect);
+            _ = this._effects.TryAdd(effectType, effect);
         }
         internal void RemoveEffect(Type effectType)
         {
-            _ = _effects.Remove(effectType);
+            _ = this._effects.Remove(effectType);
         }
         internal DGEffect GetEffect(Type effectType)
         {
-            if (this._effects.ContainsKey(effectType))
-            {
-                return this._effects[effectType];
-            }
-
-            return null;
+            return this._effects.ContainsKey(effectType) ? this._effects[effectType] : null;
         }
         internal bool HasEffect(Type effectType)
         {

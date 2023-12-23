@@ -1,9 +1,6 @@
 ﻿using DG.Core.Builders;
 using DG.Core.Dice;
 using DG.Core.Information;
-using DG.Core.Information.Players;
-using DG.Core.Information.Round;
-using DG.Core.Information.World;
 using DG.Core.Managers;
 using DG.Core.Settings;
 using DG.Core.Utilities;
@@ -53,7 +50,7 @@ namespace DG.Core
         // Game
         public void StartGame()
         {
-            _gameStateManager.Start();
+            this._gameStateManager.Start();
         }
         public bool ShouldUpdateGame()
         {
@@ -103,14 +100,14 @@ namespace DG.Core
         // Tools
         public void Dispose()
         {
-            if (!disposedValue)
+            if (!this.disposedValue)
             {
                 this._playersManager = null;
                 this._worldManager = null;
                 this._roundManager = null;
                 this._gameStateManager = null;
 
-                disposedValue = true;
+                this.disposedValue = true;
             }
 
             GC.Collect();

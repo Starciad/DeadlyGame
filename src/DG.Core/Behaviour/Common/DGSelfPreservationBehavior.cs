@@ -81,14 +81,14 @@ namespace DG.Core.Behaviour.Common
                         DGFood randomFood = foods[game.Random.Range(0, foods.Count)];
                         if (!inventoryComponent.HasItem(randomFood))
                         {
-                            foods.Remove(randomFood);
+                            _ = foods.Remove(randomFood);
                             break;
                         }
 
                         this._hunger.DecreaseHunger(randomFood.SatietyFactor);
                         inventoryComponent.RemoveItem(randomFood, 1);
 
-                        foods.Remove(randomFood);
+                        _ = foods.Remove(randomFood);
                     }
                 }
             }

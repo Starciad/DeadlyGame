@@ -1,7 +1,5 @@
 ﻿using DG.Core.Information.Round;
 
-using System;
-
 namespace DG.Core.Managers
 {
     internal sealed class DGRoundManager : DGManager

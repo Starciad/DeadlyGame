@@ -41,7 +41,7 @@ namespace DG.Tests.Components.Common
             DGHealthComponent health = new();
             health.SetCurrentHealth(healthDefined);
 
-            Assert.Equal((int)healthDefined, health.CurrentHealth);
+            Assert.Equal(healthDefined, health.CurrentHealth);
         }
 
         [Theory]
@@ -53,7 +53,7 @@ namespace DG.Tests.Components.Common
             DGHealthComponent health = new();
             health.SetMaximumHealth(healthDefined);
 
-            Assert.Equal((int)healthDefined, health.MaximumHealth);
+            Assert.Equal(healthDefined, health.MaximumHealth);
         }
 
         [Theory]

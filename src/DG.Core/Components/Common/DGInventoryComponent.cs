@@ -104,12 +104,9 @@ namespace DG.Core.Components.Common
         }
         public bool TryAddItem(Type itemType, int amount)
         {
-            if (!itemType.IsSubclassOf(typeof(DGItem)))
-            {
-                throw new DGInvalidItemTypeException($"The type representing the item trying to be added to the inventory does not correspond to a valid {nameof(DGItem)}.");
-            }
-
-            return TryAddItem((DGItem)Activator.CreateInstance(itemType), amount);
+            return !itemType.IsSubclassOf(typeof(DGItem))
+                ? throw new DGInvalidItemTypeException($"The type representing the item trying to be added to the inventory does not correspond to a valid {nameof(DGItem)}.")
+                : TryAddItem((DGItem)Activator.CreateInstance(itemType), amount);
         }
         public bool TryAddItem(DGItem item, int amount)
         {
@@ -152,7 +149,7 @@ namespace DG.Core.Components.Common
 
                 if (slot.IsEmpty)
                 {
-                    this.slots.Remove(slot);
+                    _ = this.slots.Remove(slot);
                 }
 
                 return true;
@@ -172,7 +169,7 @@ namespace DG.Core.Components.Common
         }
         public bool TryGetItem(Type itemType, out DGInventorySlot slot)
         {
-            slot = slots.Find(x => x.ItemType == itemType);
+            slot = this.slots.Find(x => x.ItemType == itemType);
             return slot != null;
         }
 
@@ -187,13 +184,13 @@ namespace DG.Core.Components.Common
         }
         public bool HasItem(Type itemType)
         {
-            return Array.Find(Slots, x => x.ItemType == itemType) != null;
+            return Array.Find(this.Slots, x => x.ItemType == itemType) != null;
         }
 
         // ===== UTILITIES =====
         public void ClearInventory()
         {
-            slots.Clear();
+            this.slots.Clear();
         }
         public void DropAllItems()
         {

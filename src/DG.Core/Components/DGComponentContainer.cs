@@ -1,6 +1,5 @@
 ﻿using DG.Core.Entities;
 using DG.Core.Exceptions.Components;
-using DG.Core.Items;
 using DG.Core.Objects;
 
 using System;

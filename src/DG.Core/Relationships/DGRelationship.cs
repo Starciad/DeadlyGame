@@ -64,20 +64,13 @@ namespace DG.Core.Relationships
 
         internal DGRelationshipLevelType GetRelationshipLevelType()
         {
-            if (this.relationshipValue <= -80)
-            {
-                return DGRelationshipLevelType.VeryLow;
-            }
-            else if (this.relationshipValue <= -50)
-            {
-                return DGRelationshipLevelType.Low;
-            }
-            else
-            {
-                return this.relationshipValue <= 50
-                    ? DGRelationshipLevelType.Neutral
-                    : this.relationshipValue <= 80 ? DGRelationshipLevelType.High : DGRelationshipLevelType.VeryHigh;
-            }
+            return this.relationshipValue <= -80
+                ? DGRelationshipLevelType.VeryLow
+                : this.relationshipValue <= -50
+                    ? DGRelationshipLevelType.Low
+                    : this.relationshipValue <= 50
+                                    ? DGRelationshipLevelType.Neutral
+                                    : this.relationshipValue <= 80 ? DGRelationshipLevelType.High : DGRelationshipLevelType.VeryHigh;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace DG.Core.Crafting
 
         internal bool CanCraft(DGInventoryComponent inventoryComponent)
         {
-            foreach (DGCraftingMaterial requiredMaterial in RequiredMaterials)
+            foreach (DGCraftingMaterial requiredMaterial in this.RequiredMaterials)
             {
                 DGInventorySlot slot = Array.Find(inventoryComponent.Slots, x => x.ItemType == requiredMaterial.ItemType);
 
@@ -56,12 +56,12 @@ namespace DG.Core.Crafting
                 return false;
             }
 
-            foreach (DGCraftingMaterial requiredMaterial in RequiredMaterials)
+            foreach (DGCraftingMaterial requiredMaterial in this.RequiredMaterials)
             {
-                inventoryComponent.TryRemoveItem(requiredMaterial.ItemType, requiredMaterial.Count);
+                _ = inventoryComponent.TryRemoveItem(requiredMaterial.ItemType, requiredMaterial.Count);
             }
 
-            DGItem targetItem = (DGItem)Activator.CreateInstance(ItemType);
+            DGItem targetItem = (DGItem)Activator.CreateInstance(this.ItemType);
             item = targetItem;
             return true;
         }

@@ -60,22 +60,22 @@ namespace DG.Core.Managers
             // Trees
             for (int i = 0; i < builder.Resources.TreeCount; i++)
             {
-                resourceEntities.Add(new DGTree());
+                this.resourceEntities.Add(new DGTree());
             }
 
             // Stones
             for (int i = 0; i < builder.Resources.StoneCount; i++)
             {
-                resourceEntities.Add(new DGTerrainStone());
+                this.resourceEntities.Add(new DGTerrainStone());
             }
 
             // Bushes
             for (int i = 0; i < builder.Resources.ShrubCount; i++)
             {
-                resourceEntities.Add(new DGBush());
+                this.resourceEntities.Add(new DGBush());
             }
 
-            foreach (DGEntity resourceEntity in resourceEntities)
+            foreach (DGEntity resourceEntity in this.resourceEntities)
             {
                 resourceEntity.SetGameInstance(this.Game);
                 resourceEntity.Initialize();
@@ -102,9 +102,9 @@ namespace DG.Core.Managers
         }
         private void UpdateResources()
         {
-            resourceEntities.RemoveAll(x => x.ComponentContainer.GetComponent<DGHealthComponent>().IsDead);
+            _ = this.resourceEntities.RemoveAll(x => x.ComponentContainer.GetComponent<DGHealthComponent>().IsDead);
 
-            foreach (DGEntity resourceEntity in resourceEntities)
+            foreach (DGEntity resourceEntity in this.resourceEntities)
             {
                 resourceEntity.Update();
             }
@@ -161,7 +161,6 @@ namespace DG.Core.Managers
         internal DGWorldInfo GetInfo()
         {
             // Get all the resources in the world.
-
 
             // Build world information.
             return new()

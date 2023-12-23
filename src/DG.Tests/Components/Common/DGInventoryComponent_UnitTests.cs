@@ -29,7 +29,7 @@ namespace DG.Tests.Components.Common
 
             // Assert
             Assert.True(added);
-            Assert.Single(inventory.Slots);
+            _ = Assert.Single(inventory.Slots);
             Assert.Equal(item.GetType(), inventory.Slots[0].ItemType);
             Assert.Equal(1, inventory.Slots[0].Amount);
         }
@@ -44,12 +44,12 @@ namespace DG.Tests.Components.Common
             FakeItem_02 item2 = new();
 
             // Act
-            inventory.TryAddItem(item1, 1);
+            _ = inventory.TryAddItem(item1, 1);
             bool added = inventory.TryAddItem(item2, 1);
 
             // Assert
             Assert.False(added);
-            Assert.Single(inventory.Slots);
+            _ = Assert.Single(inventory.Slots);
             Assert.Equal(item1.GetType(), inventory.Slots[0].ItemType);
             Assert.Equal(1, inventory.Slots[0].Amount);
         }
@@ -70,7 +70,7 @@ namespace DG.Tests.Components.Common
             // Assert
             Assert.True(item1Added);
             Assert.True(item2Added);
-            Assert.Single(inventory.Slots);
+            _ = Assert.Single(inventory.Slots);
             Assert.Equal(item_01.GetType(), inventory.Slots[0].ItemType);
             Assert.Equal(2, inventory.Slots[0].Amount);
         }
@@ -105,14 +105,14 @@ namespace DG.Tests.Components.Common
             DGInventoryComponent inventory = new();
             inventory.ModifyNumberOfSlots(1);
             FakeItem_01 item = new();
-            inventory.TryAddItem(item, 2);
+            _ = inventory.TryAddItem(item, 2);
 
             // Act
             bool removed = inventory.TryRemoveItem(item, 1);
 
             // Assert
             Assert.True(removed);
-            Assert.Single(inventory.Slots);
+            _ = Assert.Single(inventory.Slots);
             Assert.Equal(item.GetType(), inventory.Slots[0].ItemType);
             Assert.Equal(1, inventory.Slots[0].Amount);
         }
@@ -125,7 +125,7 @@ namespace DG.Tests.Components.Common
             inventory.ModifyNumberOfSlots(1);
 
             FakeItem_01 item = new();
-            inventory.TryAddItem(item, 1);
+            _ = inventory.TryAddItem(item, 1);
 
             // Act
             bool removed = inventory.TryRemoveItem(item, 1);
@@ -152,7 +152,7 @@ namespace DG.Tests.Components.Common
             // Assert
             Assert.True(added);
             Assert.True(itemObtained);
-            Assert.Single(inventory.Slots);
+            _ = Assert.Single(inventory.Slots);
             Assert.Equal(item.GetType(), inventory.Slots[0].ItemType);
             Assert.Equal(1, inventory.Slots[0].Amount);
         }
@@ -174,7 +174,7 @@ namespace DG.Tests.Components.Common
             // Assert
             Assert.True(added);
             Assert.True(haveTheItem);
-            Assert.Single(inventory.Slots);
+            _ = Assert.Single(inventory.Slots);
             Assert.Equal(item.GetType(), inventory.Slots[0].ItemType);
             Assert.Equal(1, inventory.Slots[0].Amount);
         }

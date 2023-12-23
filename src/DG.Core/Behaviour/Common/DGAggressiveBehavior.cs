@@ -122,24 +122,25 @@ namespace DG.Core.Behaviour.Common
         {
             foreach (DGPlayer anotherEntity in currentGame.PlayerManager.GetNearbyPlayers(sourceEntity.ComponentContainer.GetComponent<DGTransformComponent>().Position).Where(x => x != sourceEntity))
             {
-                var currentTransform = sourceEntity.ComponentContainer.GetComponent<DGTransformComponent>();
-                var anotherTransform = anotherEntity.ComponentContainer.GetComponent<DGTransformComponent>();
+                DGTransformComponent currentTransform = sourceEntity.ComponentContainer.GetComponent<DGTransformComponent>();
+                DGTransformComponent anotherTransform = anotherEntity.ComponentContainer.GetComponent<DGTransformComponent>();
 
                 if (Vector2.Distance(currentTransform.Position, anotherTransform.Position) <= DGInteractionsConstants.MAXIMUM_RANGE)
                 {
                     return anotherEntity;
                 }
             }
+
             return null;
         }
         private static AttackOutcome AttemptAttack(DGDice dice, DGEntity attacker, DGEntity target, DGGame currentGame)
         {
-            var attackerWeapon = attacker.ComponentContainer.GetComponent<DGEquipmentComponent>();
-            var attackerCharacteristics = attacker.ComponentContainer.GetComponent<DGCharacteristicsComponent>();
-            var attackerCombat = attacker.ComponentContainer.GetComponent<DGCombatComponent>();
+            DGEquipmentComponent attackerWeapon = attacker.ComponentContainer.GetComponent<DGEquipmentComponent>();
+            DGCharacteristicsComponent attackerCharacteristics = attacker.ComponentContainer.GetComponent<DGCharacteristicsComponent>();
+            DGCombatComponent attackerCombat = attacker.ComponentContainer.GetComponent<DGCombatComponent>();
 
-            var targetEquipment = target.ComponentContainer.GetComponent<DGEquipmentComponent>();
-            var targetHealth = target.ComponentContainer.GetComponent<DGHealthComponent>();
+            DGEquipmentComponent targetEquipment = target.ComponentContainer.GetComponent<DGEquipmentComponent>();
+            DGHealthComponent targetHealth = target.ComponentContainer.GetComponent<DGHealthComponent>();
 
             int totalDamage;
             int attackTest;
@@ -193,8 +194,8 @@ namespace DG.Core.Behaviour.Common
         }
         private static void ModifyRelationships(DGEntity attacker, DGEntity target)
         {
-            var attackerRelationship = attacker.ComponentContainer.GetComponent<DGRelationshipsComponent>();
-            var targetRelationship = target.ComponentContainer.GetComponent<DGRelationshipsComponent>();
+            DGRelationshipsComponent attackerRelationship = attacker.ComponentContainer.GetComponent<DGRelationshipsComponent>();
+            DGRelationshipsComponent targetRelationship = target.ComponentContainer.GetComponent<DGRelationshipsComponent>();
 
             attackerRelationship.DecreaseRelationshipValue(target, 20);
             targetRelationship.DecreaseRelationshipValue(attacker, 20);

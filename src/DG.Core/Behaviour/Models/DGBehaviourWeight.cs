@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DG.Core.Behaviour.Models
+﻿namespace DG.Core.Behaviour.Models
 {
     internal struct DGBehaviourWeight
     {

@@ -13,12 +13,7 @@ namespace DG.Core.Utilities
         /// <exception cref="ArgumentException" />
         public static double CalculatePercentage(double value, double total)
         {
-            if (total == 0)
-            {
-                throw new ArgumentException("Total cannot be zero.");
-            }
-
-            return (value / total) * 100;
+            return total == 0 ? throw new ArgumentException("Total cannot be zero.") : value / total * 100;
         }
 
         /// <summary>
@@ -30,17 +25,11 @@ namespace DG.Core.Utilities
         /// <exception cref="ArgumentException" />
         public static double CalculateValueFromPercentage(double percentage, double total)
         {
-            if (total == 0)
-            {
-                throw new ArgumentException("Total cannot be zero.");
-            }
-
-            if (percentage < 0 || percentage > 100)
-            {
-                throw new ArgumentException("The percentage value must be between 0 and 100.");
-            }
-
-            return (percentage / 100) * total;
+            return total == 0
+                ? throw new ArgumentException("Total cannot be zero.")
+                : percentage < 0 || percentage > 100
+                ? throw new ArgumentException("The percentage value must be between 0 and 100.")
+                : percentage / 100 * total;
         }
     }
 }

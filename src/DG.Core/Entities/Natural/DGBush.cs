@@ -37,8 +37,8 @@ namespace DG.Core.Entities.Natural
             this._health.SetCurrentHealth(this._health.MaximumHealth);
 
             // inventory
-            this._inventory.TryAddItem(new DGWood(), this.Game.Random.Range(1, 3));
-            this._inventory.TryAddItem(new DGBerry(), this.Game.Random.Range(2, 4));
+            _ = this._inventory.TryAddItem(new DGWood(), this.Game.Random.Range(1, 3));
+            _ = this._inventory.TryAddItem(new DGBerry(), this.Game.Random.Range(2, 4));
         }
     }
 }

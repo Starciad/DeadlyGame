@@ -37,11 +37,11 @@ namespace DG.Core.Entities.Natural
             this._health.SetCurrentHealth(this._health.MaximumHealth);
 
             // inventory
-            this._inventory.TryAddItem(new DGWood(), this.Game.Random.Range(4, 9));
+            _ = this._inventory.TryAddItem(new DGWood(), this.Game.Random.Range(4, 9));
 
             if (this.Game.Random.Chance(50, 100))
             {
-                this._inventory.TryAddItem(new DGApple(), this.Game.Random.Range(2, 4));
+                _ = this._inventory.TryAddItem(new DGApple(), this.Game.Random.Range(2, 4));
             }
         }
     }
