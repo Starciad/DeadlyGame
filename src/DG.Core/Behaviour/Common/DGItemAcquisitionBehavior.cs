@@ -12,17 +12,39 @@ namespace DG.Core.Behaviour.Common
 {
     internal sealed class DGItemAcquisitionBehavior : IDGBehaviour
     {
+        // System
+        private DGGame _game;
+
+        // Infos
         private DGWorldItem[] _nearbyItems;
 
-        // components
-        private DGTransformComponent _transform;
+        // Components
+        private DGTransformComponent _transformComponent;
+        private DGInventoryComponent _inventoryComponent;
 
-        public DGBehaviourWeight GetWeight(DGEntity entity, DGGame game)
+        public bool CanAct(DGEntity entity, DGGame game)
+        {
+            this._game = game;
+
+            if (!entity.ComponentContainer.TryGetComponent(out this._transformComponent) ||
+                !entity.ComponentContainer.TryGetComponent(out this._inventoryComponent))
+            {
+                return false;
+            }
+
+            this._nearbyItems = game.WorldManager.GetNearbyItems(this._transformComponent.Position).Where(x => Vector2.Distance(x.Position, this._transformComponent.Position) < DGInteractionsConstants.MAXIMUM_RANGE).ToArray();
+
+            if (_nearbyItems == null || _nearbyItems.Length == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        public DGBehaviourWeight GetWeight()
         {
             DGBehaviourWeight weight = new();
-            this._transform = entity.ComponentContainer.GetComponent<DGTransformComponent>();
 
-            this._nearbyItems = game.WorldManager.GetNearbyItems(this._transform.Position).Where(x => Vector2.Distance(x.Position, this._transform.Position) < DGInteractionsConstants.MAXIMUM_RANGE).ToArray();
             foreach (DGWorldItem item in this._nearbyItems)
             {
                 weight.Add(item.Amount);
@@ -30,23 +52,18 @@ namespace DG.Core.Behaviour.Common
 
             return weight;
         }
-
-        public DGPlayerActionInfo Act(DGEntity entity, DGGame game)
+        public DGPlayerActionInfo Act()
         {
-            DGPlayerActionInfo infos = new();
-
-            if (this._nearbyItems.Length == 0)
+            foreach (DGWorldItem worldItem in this._nearbyItems)
             {
-                return infos;
+                this._game.WorldManager.RemoveWorldItem(worldItem);
+                if (!this._inventoryComponent.TryAddItem(worldItem))
+                {
+                    break;
+                }
             }
 
-            DGInventoryComponent inventory = entity.ComponentContainer.GetComponent<DGInventoryComponent>();
-
-            DGWorldItem selectedItem = this._nearbyItems[0];
-
-            game.WorldManager.RemoveWorldItem(selectedItem);
-            _ = inventory.TryAddItem(selectedItem);
-
+            DGPlayerActionInfo infos = new();
             return infos;
         }
     }

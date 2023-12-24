@@ -10,7 +10,7 @@ namespace DG.Core.Components.Common
 {
     internal sealed class DGBehaviourComponent : DGComponent
     {
-        private sealed class DGAction
+        private struct DGAction
         {
             internal IDGBehaviour Behaviour { get; private set; }
             internal float Weight { get; private set; }
@@ -34,33 +34,33 @@ namespace DG.Core.Components.Common
         internal void Act()
         {
             // Get all behaviors with their respective weights.
-            DGAction[] possibleActions = GetPossibleActions(this.Entity, this.Game);
+            DGAction[] possibleActions = GetPossibleActions();
 
             // Get action with higher weight.
-            DGAction[] bestActions = possibleActions.OrderByDescending(a => a.Weight).Take(DGBehaviourConstants.MAXIMUM_SELECTION_OF_BEST_BEHAVIORS).ToArray();
+            DGAction[] bestActions = possibleActions.Take(DGBehaviourConstants.MAXIMUM_SELECTION_OF_BEST_BEHAVIORS).ToArray();
             DGAction bestAction = bestActions[this.Game.Random.Range(0, bestActions.Length)];
 
             // Take action.
-            this.LastActionInfos = ExecuteAction(bestAction, this.Entity, this.Game);
+            this.LastActionInfos = ExecuteAction(bestAction);
         }
 
-        private DGAction[] GetPossibleActions(DGEntity entity, DGGame game)
+        private DGAction[] GetPossibleActions()
         {
-            int count = this.definedBehaviors.Count;
-
-            DGAction[] actions = new DGAction[count];
-            for (int i = 0; i < count; i++)
+            List<DGAction> actions = [];
+            foreach (IDGBehaviour behaviour in this.definedBehaviors)
             {
-                IDGBehaviour behaviour = this.definedBehaviors[i];
-                actions[i] = new(behaviour, behaviour.GetWeight(entity, game).Value);
+                if (behaviour.CanAct(this.Entity, this.Game))
+                {
+                    actions.Add(new(behaviour, behaviour.GetWeight().Value));
+                }
             }
 
-            return actions;
+            return [.. actions.OrderByDescending(a => a.Weight)];
         }
 
-        private static DGPlayerActionInfo ExecuteAction(DGAction action, DGEntity entity, DGGame game)
+        private static DGPlayerActionInfo ExecuteAction(DGAction action)
         {
-            return action.Behaviour.Act(entity, game);
+            return action.Behaviour.Act();
         }
     }
 }

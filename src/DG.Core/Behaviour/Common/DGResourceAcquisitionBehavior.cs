@@ -13,33 +13,49 @@ namespace DG.Core.Behaviour.Common
     {
         private DGEntity[] _nearbyResources;
 
-        // components
-        private DGTransformComponent _transform;
+        // Components
+        private DGTransformComponent _transformComponent;
+        private DGCombatComponent _combatComponent;
 
-        public DGBehaviourWeight GetWeight(DGEntity entity, DGGame game)
+        private DGHealthComponent _resourceHealthComponent;
+
+        public bool CanAct(DGEntity entity, DGGame game)
+        {
+            // Components
+            if (!entity.ComponentContainer.TryGetComponent(out this._transformComponent))
+            {
+                return false;
+            }
+
+            if (!entity.ComponentContainer.TryGetComponent(out this._combatComponent))
+            {
+                return false;
+            }
+
+            // Infos
+            this._nearbyResources = game.WorldManager.GetNearbyResources(this._transformComponent.Position).Where(x => Vector2.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, this._transformComponent.Position) < DGInteractionsConstants.MAXIMUM_RANGE).ToArray();
+            if (this._nearbyResources == null || _nearbyResources.Length == 0)
+            {
+                return false;
+            }
+
+            if (this._nearbyResources[0].ComponentContainer.TryGetComponent(out this._resourceHealthComponent))
+            {
+                return false;
+            }
+
+            return true;
+        }
+        public DGBehaviourWeight GetWeight()
         {
             DGBehaviourWeight weight = new();
-            this._transform = entity.ComponentContainer.GetComponent<DGTransformComponent>();
-
-            this._nearbyResources = game.WorldManager.GetNearbyResources(this._transform.Position).Where(x => Vector2.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, this._transform.Position) < DGInteractionsConstants.MAXIMUM_RANGE).ToArray();
-
             weight.Add(this._nearbyResources.Length);
             return weight;
         }
-        public DGPlayerActionInfo Act(DGEntity entity, DGGame game)
+        public DGPlayerActionInfo Act()
         {
             DGPlayerActionInfo infos = new();
-
-            if (this._nearbyResources.Length == 0)
-            {
-                return infos;
-            }
-
-            DGCombatComponent attackerCombat = entity.ComponentContainer.GetComponent<DGCombatComponent>();
-            DGHealthComponent resourceHealth = this._nearbyResources[0].ComponentContainer.GetComponent<DGHealthComponent>();
-
-            resourceHealth.Hurt(attackerCombat.GetFullAttackDamage(false));
-
+            this._resourceHealthComponent.Hurt(this._combatComponent.GetFullAttackDamage(false));
             return infos;
         }
     }

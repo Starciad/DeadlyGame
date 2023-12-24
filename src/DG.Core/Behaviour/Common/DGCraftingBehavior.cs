@@ -10,43 +10,50 @@ namespace DG.Core.Behaviour.Common
 {
     internal sealed class DGCraftingBehavior : IDGBehaviour
     {
+        // System
+        private DGGame _game;
+
+        // Infos
         private DGCraftingRecipe[] _newRecipes;
 
-        public DGBehaviourWeight GetWeight(DGEntity entity, DGGame game)
+        // Components
+        private DGInventoryComponent _inventoryComponent;
+
+        public bool CanAct(DGEntity entity, DGGame game)
+        {
+            this._game = game;
+
+            if (!entity.ComponentContainer.TryGetComponent(out this._inventoryComponent))
+            {
+                return false;
+            }
+
+            this._newRecipes = DGCraftingDatabase.GetOnlyNewCraftableItems(this._inventoryComponent);
+
+            if (this._newRecipes == null || this._newRecipes.Length == 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        public DGBehaviourWeight GetWeight()
         {
             DGBehaviourWeight weight = new();
-
-            if (entity.ComponentContainer.TryGetComponent(out DGInventoryComponent inventory))
-            {
-                this._newRecipes = DGCraftingDatabase.GetOnlyNewCraftableItems(inventory);
-                weight.Add(this._newRecipes.Length);
-            }
-
+            weight.Add(this._newRecipes.Length);
             return weight;
         }
-
-        public DGPlayerActionInfo Act(DGEntity entity, DGGame game)
+        public DGPlayerActionInfo Act()
         {
-            DGPlayerActionInfo infos = new();
-            if (this._newRecipes.Length == 0)
-            {
-                infos.WithTitle(string.Empty);
-                infos.WithDescription(string.Empty);
-                return infos;
-            }
-
             // === ACT ===
-            if (entity.ComponentContainer.TryGetComponent(out DGInventoryComponent inventory))
+            DGCraftingRecipe targetRecipe = this._newRecipes[this._game.Random.Range(0, this._newRecipes.Length)];
+            if (targetRecipe.TryCraft(this._inventoryComponent, out DGItem item))
             {
-                DGCraftingRecipe targetRecipe = this._newRecipes[game.Random.Range(0, this._newRecipes.Length)];
-                if (targetRecipe.TryCraft(inventory, out DGItem item))
-                {
-                    _ = inventory.TryAddItem(item, 1);
-                }
+                this._inventoryComponent.AddItem(item, 1);
             }
 
             // === INFOS ===
-
+            DGPlayerActionInfo infos = new();
             infos.WithTitle(string.Empty);
             infos.WithDescription(string.Empty);
             return infos;

@@ -1,5 +1,6 @@
 ﻿using DG.Core;
 using DG.Core.Builders;
+using DG.Core.Information;
 
 using System;
 
@@ -18,7 +19,16 @@ namespace DG
             // ======== Game Routine ======== //
 
             game.StartGame();
-            game.UpdateGame();
+
+            while (game.ShouldUpdateGame())
+            {
+                game.UpdateGame();
+
+                DGGameInfo gameInfo = game.GetGameInfo();
+                Console.Clear();
+                Console.WriteLine($"Rodada: {gameInfo.RoundInfo.CurrentRound} || Dia: {gameInfo.WorldInfo.CurrentDay} ({gameInfo.WorldInfo.CurrentDaylightCycle})");
+                Console.WriteLine($"Jogadores: {gameInfo.PlayersInfo.ActivePlayers.Length}\n");
+            }
 
             game.FinishGame();
             game.Dispose();

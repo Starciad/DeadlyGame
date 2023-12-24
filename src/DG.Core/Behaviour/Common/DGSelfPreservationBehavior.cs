@@ -14,20 +14,39 @@ namespace DG.Core.Behaviour.Common
 {
     internal sealed class DGSelfPreservationBehavior : IDGBehaviour
     {
-        private DGHealthComponent _health;
-        private DGHungerComponent _hunger;
+        // System
+        private DGEntity _entity;
+        private DGGame _game;
 
+        // Infos
         private int healthPercentage;
 
-        public DGBehaviourWeight GetWeight(DGEntity entity, DGGame game)
+        // Components
+        private DGHealthComponent _healthComponent;
+        private DGHungerComponent _hungerComponent;
+        private DGEffectsComponent _effectsComponent;
+        private DGInventoryComponent _inventoryComponent;
+
+        public bool CanAct(DGEntity entity, DGGame game)
+        {
+            this._entity = entity;
+            this._game = game;
+
+            this._healthComponent = entity.ComponentContainer.GetComponent<DGHealthComponent>();
+            this._hungerComponent = entity.ComponentContainer.GetComponent<DGHungerComponent>();
+            this._effectsComponent = entity.ComponentContainer.GetComponent<DGEffectsComponent>();
+            this._inventoryComponent = entity.ComponentContainer.GetComponent<DGInventoryComponent>();
+
+            return true;
+        }
+        public DGBehaviourWeight GetWeight()
         {
             DGBehaviourWeight weight = new();
 
-            if (entity.ComponentContainer.TryGetComponent(out DGHealthComponent health))
+            // HEALTH
+            if (this._healthComponent != null)
             {
-                this._health = health;
-
-                this.healthPercentage = (int)Math.Round(DGPercentageUtilities.CalculatePercentage(this._health.CurrentHealth, this._health.MaximumHealth));
+                this.healthPercentage = (int)Math.Round(DGPercentageUtilities.CalculatePercentage(this._healthComponent.CurrentHealth, this._healthComponent.MaximumHealth));
                 if (this.healthPercentage <= 50)
                 {
                     weight.Add(5f);
@@ -44,53 +63,46 @@ namespace DG.Core.Behaviour.Common
                 }
             }
 
-            if (entity.ComponentContainer.TryGetComponent(out DGHungerComponent hunger))
+            // HUNGER
+            if (this._hungerComponent != null && this._hungerComponent.IsHungry)
             {
-                this._hunger = hunger;
-
-                if (this._hunger.IsHungry)
-                {
-                    weight.Add(10f);
-                }
+                weight.Add(10f);
             }
 
             return weight;
         }
-
-        public DGPlayerActionInfo Act(DGEntity entity, DGGame game)
+        public DGPlayerActionInfo Act()
         {
             DGPlayerActionInfo infos = new();
 
             // If health is less than 50%, start a rest.
-            if (this.healthPercentage <= 50)
+            if (this._effectsComponent != null)
             {
-                if (entity.ComponentContainer.TryGetComponent(out DGEffectsComponent effectsComponent))
+                if (this.healthPercentage <= 50)
                 {
-                    effectsComponent.AddEffect<DGRestEffect>();
+                    this._effectsComponent.AddEffect<DGRestEffect>();
                 }
             }
 
             // If I'm hungry, I'll eat some food from the inventory.
-            if (this._hunger != null && this._hunger.IsHungry)
+            if (this._hungerComponent != null &&
+                this._inventoryComponent != null)
             {
-                if (entity.ComponentContainer.TryGetComponent(out DGInventoryComponent inventoryComponent))
+                List<DGFood> foods = GetFoodFromInventory(this._inventoryComponent);
+
+                while (foods.Count > 0 && this._hungerComponent.CurrentHunger > 0)
                 {
-                    List<DGFood> foods = GetFoodFromInventory(inventoryComponent);
-
-                    while (foods.Count > 0 && this._hunger.CurrentHunger > 0)
+                    DGFood randomFood = foods[this._game.Random.Range(0, foods.Count)];
+                    if (!this._inventoryComponent.HasItem(randomFood))
                     {
-                        DGFood randomFood = foods[game.Random.Range(0, foods.Count)];
-                        if (!inventoryComponent.HasItem(randomFood))
-                        {
-                            _ = foods.Remove(randomFood);
-                            break;
-                        }
-
-                        this._hunger.DecreaseHunger(randomFood.SatietyFactor);
-                        inventoryComponent.RemoveItem(randomFood, 1);
-
                         _ = foods.Remove(randomFood);
+                        break;
                     }
+
+                    this._hungerComponent.DecreaseHunger(randomFood.SatietyFactor);
+                    this._inventoryComponent.RemoveItem(randomFood, 1);
+
+                    _ = foods.Remove(randomFood);
                 }
             }
 

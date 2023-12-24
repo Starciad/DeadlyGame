@@ -6,7 +6,8 @@ namespace DG.Core.Behaviour
 {
     internal interface IDGBehaviour
     {
-        DGBehaviourWeight GetWeight(DGEntity entity, DGGame game);
-        DGPlayerActionInfo Act(DGEntity entity, DGGame game);
+        bool CanAct(DGEntity entity, DGGame game);
+        DGBehaviourWeight GetWeight();
+        DGPlayerActionInfo Act();
     }
 }

@@ -4,18 +4,48 @@ using DG.Core.Entities;
 using DG.Core.Information.Actions;
 using DG.Core.Managers;
 
+using System.Collections.Generic;
+
 namespace DG.Core.Behaviour.Common
 {
     internal sealed class DGMovementBehavior : IDGBehaviour
     {
-        public DGBehaviourWeight GetWeight(DGEntity entity, DGGame game)
+        // System
+        private DGGame _game;
+
+        // Components
+        private DGTransformComponent _transformComponent;
+        private DGPersonalityComponent _personalityComponent;
+        private DGHungerComponent _hungerComponent;
+        private DGCombatComponent _combatComponent;
+
+        public bool CanAct(DGEntity entity, DGGame game)
+        {
+            this._game = game;
+
+            if (!entity.ComponentContainer.TryGetComponent(out this._transformComponent))
+            {
+                return false;
+            }
+
+            if (!entity.ComponentContainer.TryGetComponent(out this._combatComponent))
+            {
+                return false;
+            }
+
+            this._personalityComponent = entity.ComponentContainer.GetComponent<DGPersonalityComponent>();
+            this._hungerComponent = entity.ComponentContainer.GetComponent<DGHungerComponent>();
+
+            return true;
+        }
+        public DGBehaviourWeight GetWeight()
         {
             DGBehaviourWeight weight = new();
 
             // Personality
-            if (entity.ComponentContainer.TryGetComponent(out DGPersonalityComponent personality))
+            if (this._personalityComponent != null)
             {
-                if (personality.PersonalityType == DGPersonalityType.Explorer)
+                if (this._personalityComponent.PersonalityType == DGPersonalityType.Explorer)
                 {
                     weight.Add(3f);
                 }
@@ -24,7 +54,7 @@ namespace DG.Core.Behaviour.Common
                     weight.Add(1.5f);
                 }
 
-                if (personality.CourageLevel == DGCourageLevel.Fearful)
+                if (this._personalityComponent.CourageLevel == DGCourageLevel.Fearful)
                 {
                     weight.Remove(1.5f);
                 }
@@ -35,16 +65,16 @@ namespace DG.Core.Behaviour.Common
             }
 
             // Hunger
-            if (entity.ComponentContainer.TryGetComponent(out DGHungerComponent hunger))
+            if (this._hungerComponent != null)
             {
-                if (hunger.IsHungry)
+                if (this._hungerComponent.IsHungry)
                 {
                     weight.Add(2f);
                 }
             }
 
             // Day Time
-            switch (game.WorldManager.CurrentDaylightCycle)
+            switch (this._game.WorldManager.CurrentDaylightCycle)
             {
                 case DGWorldDaylightCycleState.Day:
                     weight.Add(2f);
@@ -65,19 +95,16 @@ namespace DG.Core.Behaviour.Common
 
             return weight;
         }
-        public DGPlayerActionInfo Act(DGEntity entity, DGGame game)
+        public DGPlayerActionInfo Act()
         {
             // === ACT ===
-            DGTransformComponent transform = entity.ComponentContainer.GetComponent<DGTransformComponent>();
-            DGCombatComponent combatInfos = entity.ComponentContainer.GetComponent<DGCombatComponent>();
+            int dr = this._combatComponent.DisplacementRate;
 
-            int dr = combatInfos.DisplacementRate;
+            float move_x = this._game.Random.Range(-dr, dr);
+            float move_y = this._game.Random.Range(-dr, dr);
 
-            float move_x = game.Random.Range(-dr, dr);
-            float move_y = game.Random.Range(-dr, dr);
-
-            transform.Move(new(move_x, move_y));
-            transform.SetPosition(game.WorldManager.Clamp(transform.Position));
+            this._transformComponent.Move(new(move_x, move_y));
+            this._transformComponent.SetPosition(this._game.WorldManager.Clamp(this._transformComponent.Position));
 
             // === INFOS ===
             DGPlayerActionInfo infos = new();

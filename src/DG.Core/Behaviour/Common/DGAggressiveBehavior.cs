@@ -1,7 +1,6 @@
 ﻿using DG.Core.Behaviour.Models;
 using DG.Core.Components.Common;
 using DG.Core.Constants;
-using DG.Core.Dice;
 using DG.Core.Entities;
 using DG.Core.Entities.Players;
 using DG.Core.Information.Actions;
@@ -10,6 +9,7 @@ using DG.Core.Managers;
 using DG.Core.Utilities;
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
@@ -23,14 +23,77 @@ namespace DG.Core.Behaviour.Common
             Failed
         }
 
-        public DGBehaviourWeight GetWeight(DGEntity entity, DGGame game)
+        // System
+        private DGEntity _entity;
+        private DGGame _game;
+
+        // Infos
+        private DGPlayer _targetEntity;
+
+        // Components
+        private DGTransformComponent _transformComponent;
+        private DGPersonalityComponent _personalityComponent;
+        private DGHealthComponent _healthComponent;
+        private DGHungerComponent _hungerComponent;
+        private DGEquipmentComponent _equipmentComponent;
+        private DGCharacteristicsComponent _characteristicsComponent;
+        private DGCombatComponent _combatComponent;
+        private DGRelationshipsComponent _relationshipsComponent;
+
+        private DGTransformComponent _targetEntityTransform;
+        private DGEquipmentComponent _targetEquipmentComponent;
+        private DGHealthComponent _targetEntityHealth;
+        private DGRelationshipsComponent _targetRelationshipsComponent;
+
+        public bool CanAct(DGEntity entity, DGGame game)
+        {
+            this._entity = entity;
+            this._game = game;
+
+            List<bool> componentChecker = [];
+            componentChecker.Add(entity.ComponentContainer.TryGetComponent(out this._transformComponent));
+            componentChecker.Add(entity.ComponentContainer.TryGetComponent(out this._personalityComponent));
+            componentChecker.Add(entity.ComponentContainer.TryGetComponent(out this._healthComponent));
+            componentChecker.Add(entity.ComponentContainer.TryGetComponent(out this._hungerComponent));
+            componentChecker.Add(entity.ComponentContainer.TryGetComponent(out this._equipmentComponent));
+            componentChecker.Add(entity.ComponentContainer.TryGetComponent(out this._characteristicsComponent));
+            componentChecker.Add(entity.ComponentContainer.TryGetComponent(out this._combatComponent));
+            componentChecker.Add(entity.ComponentContainer.TryGetComponent(out this._relationshipsComponent));
+
+            // Check if any component above is null.
+            if (componentChecker.Any(x => !x))
+            {
+                return false;
+            }
+
+            // Get a target entity.
+            this._targetEntity = GetNearbyTarget();
+            if (this._targetEntity == null)
+            {
+                return false;
+            }
+
+            componentChecker.Clear();
+            componentChecker.Add(this._targetEntity.ComponentContainer.TryGetComponent(out this._targetEquipmentComponent));
+            componentChecker.Add(this._targetEntity.ComponentContainer.TryGetComponent(out this._targetEntityHealth));
+            componentChecker.Add(this._targetEntity.ComponentContainer.TryGetComponent(out this._targetRelationshipsComponent));
+
+            // Check if any of the target entity components above are null.
+            if (componentChecker.Any(x => !x))
+            {
+                return false;
+            }
+
+            return true;
+        }
+        public DGBehaviourWeight GetWeight()
         {
             DGBehaviourWeight weight = new();
 
             // Personality
-            if (entity.ComponentContainer.TryGetComponent(out DGPersonalityComponent personality))
+            if (this._personalityComponent != null)
             {
-                switch (personality.PersonalityType)
+                switch (this._personalityComponent.PersonalityType)
                 {
                     case DGPersonalityType.Aggressive:
                         weight.Add(2.5f);
@@ -47,7 +110,7 @@ namespace DG.Core.Behaviour.Common
             }
 
             // Day Time
-            switch (game.WorldManager.CurrentDaylightCycle)
+            switch (this._game.WorldManager.CurrentDaylightCycle)
             {
                 case DGWorldDaylightCycleState.Day:
                     weight.Add(0.5f);
@@ -62,18 +125,18 @@ namespace DG.Core.Behaviour.Common
             }
 
             // Hunger
-            if (entity.ComponentContainer.TryGetComponent(out DGHungerComponent hunger))
+            if (this._hungerComponent != null)
             {
-                if (hunger.IsHungry)
+                if (this._hungerComponent.IsHungry)
                 {
                     weight.Add(2.5f);
                 }
             }
 
             // Health
-            if (entity.ComponentContainer.TryGetComponent(out DGHealthComponent health))
+            if (this._healthComponent != null)
             {
-                double healthPercentage = Math.Round(DGPercentageUtilities.CalculatePercentage(health.CurrentHealth, health.MaximumHealth));
+                double healthPercentage = Math.Round(DGPercentageUtilities.CalculatePercentage(this._healthComponent.CurrentHealth, this._healthComponent.MaximumHealth));
 
                 if (healthPercentage < 50)
                 {
@@ -93,126 +156,104 @@ namespace DG.Core.Behaviour.Common
 
             return weight;
         }
-        public DGPlayerActionInfo Act(DGEntity entity, DGGame game)
+        public DGPlayerActionInfo Act()
         {
-            DGPlayerActionInfo infos = new();
-
-            // Get Nearby Target
-            DGPlayer targetEntity = GetNearbyTarget(entity, game);
-            if (targetEntity == null)
-            {
-                infos.WithTitle("No Target Found");
-                infos.WithDescription("No nearby targets found to attack.");
-                return infos;
-            }
-
             // Attack Calculation
-            AttackOutcome attackResult = AttemptAttack(game.Dice, entity, targetEntity);
+            AttackOutcome attackResult = AttemptAttack();
 
             // Modify Relationships
-            ModifyRelationships(entity, targetEntity);
+            ModifyRelationships();
 
             // Handle Attack Outcome
-            infos = HandleAttackOutcome(attackResult, targetEntity);
+            DGPlayerActionInfo infos = HandleAttackOutcome(attackResult);
 
             // Return Behaviour Act Infos
             return infos;
         }
 
-        private static DGPlayer GetNearbyTarget(DGEntity sourceEntity, DGGame currentGame)
+        private DGPlayer GetNearbyTarget()
         {
-            foreach (DGPlayer anotherEntity in currentGame.PlayerManager.GetNearbyPlayers(sourceEntity.ComponentContainer.GetComponent<DGTransformComponent>().Position).Where(x => x != sourceEntity))
+            foreach (DGPlayer entity in this._game.PlayerManager.GetNearbyPlayers(this._transformComponent.Position).Where(x => x != this._entity))
             {
-                DGTransformComponent currentTransform = sourceEntity.ComponentContainer.GetComponent<DGTransformComponent>();
-                DGTransformComponent anotherTransform = anotherEntity.ComponentContainer.GetComponent<DGTransformComponent>();
+                this._targetEntityTransform = entity.ComponentContainer.GetComponent<DGTransformComponent>();
 
-                if (Vector2.Distance(currentTransform.Position, anotherTransform.Position) <= DGInteractionsConstants.MAXIMUM_RANGE)
+                if (Vector2.Distance(this._transformComponent.Position, this._targetEntityTransform.Position) <= DGInteractionsConstants.MAXIMUM_RANGE)
                 {
-                    return anotherEntity;
+                    return entity;
                 }
             }
 
             return null;
         }
-        private static AttackOutcome AttemptAttack(DGDice dice, DGEntity attacker, DGEntity target)
+        private AttackOutcome AttemptAttack()
         {
-            DGEquipmentComponent attackerWeapon = attacker.ComponentContainer.GetComponent<DGEquipmentComponent>();
-            DGCharacteristicsComponent attackerCharacteristics = attacker.ComponentContainer.GetComponent<DGCharacteristicsComponent>();
-            DGCombatComponent attackerCombat = attacker.ComponentContainer.GetComponent<DGCombatComponent>();
-
-            DGEquipmentComponent targetEquipment = target.ComponentContainer.GetComponent<DGEquipmentComponent>();
-            DGHealthComponent targetHealth = target.ComponentContainer.GetComponent<DGHealthComponent>();
-
             int totalDamage;
             int attackTest;
             int attributeValue;
 
-            if (attackerWeapon.Weapon == null)
+            if (this._equipmentComponent.Weapon == null)
             {
                 // Attack with the hand.
-                attackTest = DGAttributesUtilities.GetAttributeTestValue(dice, attackerCharacteristics.Strength);
-                attributeValue = attackerCharacteristics.Strength;
+                attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, this._characteristicsComponent.Strength);
+                attributeValue = this._characteristicsComponent.Strength;
             }
             else
             {
                 // Attack with the respective equipped weapon.
-                switch (attackerWeapon.Weapon.WeaponType)
+                switch (this._equipmentComponent.Weapon.WeaponType)
                 {
                     case DGWeaponType.Melee:
-                        attributeValue = attackerCharacteristics.Strength;
-                        attackTest = DGAttributesUtilities.GetAttributeTestValue(dice, attributeValue);
+                        attributeValue = this._characteristicsComponent.Strength;
+                        attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, attributeValue);
                         break;
 
                     case DGWeaponType.Ranged:
-                        attributeValue = attackerCharacteristics.Dexterity;
-                        attackTest = DGAttributesUtilities.GetAttributeTestValue(dice, attributeValue);
+                        attributeValue = this._characteristicsComponent.Dexterity;
+                        attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, attributeValue);
                         break;
 
                     case DGWeaponType.Magic:
-                        attributeValue = attackerCharacteristics.Intelligence;
-                        attackTest = DGAttributesUtilities.GetAttributeTestValue(dice, attributeValue);
+                        attributeValue = this._characteristicsComponent.Intelligence;
+                        attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, attributeValue);
                         break;
 
                     default:
-                        attributeValue = attackerCharacteristics.Strength;
-                        attackTest = DGAttributesUtilities.GetAttributeTestValue(dice, attributeValue);
+                        attributeValue = this._characteristicsComponent.Strength;
+                        attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, attributeValue);
                         break;
                 }
             }
 
             // Check if it was a critical value
-            totalDamage = attackerCombat.GetFullAttackDamage(DGAttributesUtilities.IsMaxAttributeValueInTest(attributeValue, attackTest));
+            totalDamage = this._combatComponent.GetFullAttackDamage(DGAttributesUtilities.IsMaxAttributeValueInTest(attributeValue, attackTest));
 
             // Verify that the current attack roll was greater than or equal to the target's armor class value.
-            if (attackTest >= targetEquipment.GetArmoredClass())
+            if (attackTest >= this._targetEquipmentComponent.GetArmoredClass())
             {
-                targetHealth.Hurt(totalDamage);
+                this._targetEntityHealth.Hurt(totalDamage);
                 return AttackOutcome.Successful;
             }
 
             // If not, the attack is seen as a failure.
             return AttackOutcome.Failed;
         }
-        private static void ModifyRelationships(DGEntity attacker, DGEntity target)
+        private void ModifyRelationships()
         {
-            DGRelationshipsComponent attackerRelationship = attacker.ComponentContainer.GetComponent<DGRelationshipsComponent>();
-            DGRelationshipsComponent targetRelationship = target.ComponentContainer.GetComponent<DGRelationshipsComponent>();
-
-            attackerRelationship.DecreaseRelationshipValue(target, 20);
-            targetRelationship.DecreaseRelationshipValue(attacker, 20);
+            this._relationshipsComponent.DecreaseRelationshipValue(this._targetEntity, 20);
+            this._targetRelationshipsComponent.DecreaseRelationshipValue(this._entity, 20);
         }
-        private static DGPlayerActionInfo HandleAttackOutcome(AttackOutcome result, DGEntity target)
+        private DGPlayerActionInfo HandleAttackOutcome(AttackOutcome result)
         {
             DGPlayerActionInfo outcomeInfo = new();
             switch (result)
             {
                 case AttackOutcome.Successful:
                     outcomeInfo.WithTitle("Attack Successful");
-                    outcomeInfo.WithDescription($"Dealt damage to {target.Name}.");
+                    outcomeInfo.WithDescription($"Dealt damage to {this._targetEntity.Name}.");
                     break;
                 case AttackOutcome.Failed:
                     outcomeInfo.WithTitle("Attack Failed");
-                    outcomeInfo.WithDescription($"Missed the attack on {target.Name}.");
+                    outcomeInfo.WithDescription($"Missed the attack on {this._targetEntity.Name}.");
                     break;
             }
 
