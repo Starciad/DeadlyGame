@@ -107,7 +107,7 @@ namespace DG.Core.Behaviour.Common
             }
 
             // Attack Calculation
-            AttackOutcome attackResult = AttemptAttack(game.Dice, entity, targetEntity, game);
+            AttackOutcome attackResult = AttemptAttack(game.Dice, entity, targetEntity);
 
             // Modify Relationships
             ModifyRelationships(entity, targetEntity);
@@ -134,7 +134,7 @@ namespace DG.Core.Behaviour.Common
 
             return null;
         }
-        private static AttackOutcome AttemptAttack(DGDice dice, DGEntity attacker, DGEntity target, DGGame currentGame)
+        private static AttackOutcome AttemptAttack(DGDice dice, DGEntity attacker, DGEntity target)
         {
             DGEquipmentComponent attackerWeapon = attacker.ComponentContainer.GetComponent<DGEquipmentComponent>();
             DGCharacteristicsComponent attackerCharacteristics = attacker.ComponentContainer.GetComponent<DGCharacteristicsComponent>();

@@ -2,7 +2,7 @@
 
 namespace DG.Core.Utilities
 {
-    public static class DGPercentageUtilities
+    internal static class DGPercentageUtilities
     {
         /// <summary>
         /// Calculates the percentage of a value in relation to a total.
@@ -11,7 +11,7 @@ namespace DG.Core.Utilities
         /// <param name="total">Total against which the percentage will be calculated.</param>
         /// <returns>The calculated percentage.</returns>
         /// <exception cref="ArgumentException" />
-        public static double CalculatePercentage(double value, double total)
+        internal static double CalculatePercentage(double value, double total)
         {
             return total == 0 ? throw new ArgumentException("Total cannot be zero.") : value / total * 100;
         }
@@ -23,7 +23,7 @@ namespace DG.Core.Utilities
         /// <param name="total">Total on which the percentage will be calculated.</param>
         /// <returns>The value corresponding to the percentage.</returns>
         /// <exception cref="ArgumentException" />
-        public static double CalculateValueFromPercentage(double percentage, double total)
+        internal static double CalculateValueFromPercentage(double percentage, double total)
         {
             return total == 0
                 ? throw new ArgumentException("Total cannot be zero.")

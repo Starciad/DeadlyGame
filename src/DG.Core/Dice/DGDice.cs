@@ -3,29 +3,29 @@ using System.Linq;
 
 namespace DG.Core.Dice
 {
-    public sealed class DGDice
+    internal sealed class DGDice
     {
         private readonly Random _random;
 
-        public DGDice()
+        internal DGDice()
         {
             this._random = new();
         }
-        public DGDice(int seed)
+        internal DGDice(int seed)
         {
             this._random = new(seed);
         }
-        public DGDice(Random random)
+        internal DGDice(Random random)
         {
             this._random = random;
         }
 
-        public int Roll(int size)
+        internal int Roll(int size)
         {
             return this._random.Next(1, size + 1);
         }
 
-        public int[] Roll(int rolls, int size)
+        internal int[] Roll(int rolls, int size)
         {
             int[] valueOfRolls = new int[rolls];
             for (int i = 0; i < rolls; i++)
@@ -36,17 +36,17 @@ namespace DG.Core.Dice
             return valueOfRolls;
         }
 
-        public int RollAndGetHighestValue(int rolls, int size)
+        internal int RollAndGetHighestValue(int rolls, int size)
         {
             return Roll(rolls, size).Max();
         }
 
-        public int RollAndGetLowestValue(int rolls, int size)
+        internal int RollAndGetLowestValue(int rolls, int size)
         {
             return Roll(rolls, size).Max();
         }
 
-        public int RollAndGetTotalSum(int rolls, int size)
+        internal int RollAndGetTotalSum(int rolls, int size)
         {
             return Roll(rolls, size).Sum();
         }

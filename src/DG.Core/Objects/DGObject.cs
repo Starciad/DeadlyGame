@@ -1,6 +1,6 @@
 ﻿namespace DG.Core.Objects
 {
-    public abstract class DGObject
+    internal abstract class DGObject
     {
         protected DGGame Game { get; private set; }
 
@@ -8,12 +8,13 @@
         {
             this.Game = game;
         }
-        public void Initialize()
+
+        internal void Initialize()
         {
             OnAwake();
             OnStart();
         }
-        public void Update()
+        internal void Update()
         {
             OnUpdate();
         }

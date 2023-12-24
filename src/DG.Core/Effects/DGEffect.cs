@@ -8,14 +8,14 @@ namespace DG.Core.Effects
         Negative
     }
 
-    public abstract class DGEffect
+    internal abstract class DGEffect
     {
-        public string Name { get; protected set; }
-        public string Description { get; protected set; }
-        public DGEffectType EffectType { get; protected set; }
-        public int Durability { get; protected set; }
-        public int RemainingDurability => this._remainingDurability;
-        public bool IsFinished => this._remainingDurability == 0;
+        internal string Name { get; set; }
+        internal string Description { get; set; }
+        internal DGEffectType EffectType { get; set; }
+        internal int Durability { get; set; }
+        internal int RemainingDurability => this._remainingDurability;
+        internal bool IsFinished => this._remainingDurability == 0;
 
         protected DGGame Game => this._game;
 
@@ -23,20 +23,20 @@ namespace DG.Core.Effects
         private DGGame _game;
         private int _remainingDurability;
 
-        public DGEffect()
+        internal DGEffect()
         {
             Build();
             this._remainingDurability = this.Durability;
         }
-        public void SetEntity(DGEntity entity)
+        internal void SetEntity(DGEntity entity)
         {
             this._entity = entity;
         }
-        public void SetGame(DGGame game)
+        internal void SetGame(DGGame game)
         {
             this._game = game;
         }
-        public void Update()
+        internal void Update()
         {
             this._remainingDurability--;
             this._remainingDurability = this._remainingDurability < 0 ? 0 : this._remainingDurability;

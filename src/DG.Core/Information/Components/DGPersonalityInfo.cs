@@ -1,7 +1,5 @@
 ﻿using DG.Core.Components.Common;
 
-using System.ComponentModel;
-
 namespace DG.Core.Information.Components
 {
     public struct DGPersonalityInfo

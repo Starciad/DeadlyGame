@@ -2,9 +2,9 @@
 {
     internal class DGHungerComponent : DGComponent
     {
-        public bool IsHungry => this.CurrentHunger == this.MaximumHunger;
-        public int CurrentHunger { get; private set; }
-        public int MaximumHunger { get; private set; }
+        internal bool IsHungry => this.CurrentHunger == this.MaximumHunger;
+        internal int CurrentHunger { get; private set; }
+        internal int MaximumHunger { get; private set; }
 
         protected override void OnUpdate()
         {
@@ -18,23 +18,23 @@
             IncreaseHunger(1);
         }
 
-        public void SetCurrentHunger(int value)
+        internal void SetCurrentHunger(int value)
         {
             this.CurrentHunger = value;
         }
 
-        public void SetMaximumHunger(int value)
+        internal void SetMaximumHunger(int value)
         {
             this.MaximumHunger = value;
         }
 
-        public void DecreaseHunger(int value)
+        internal void DecreaseHunger(int value)
         {
             this.CurrentHunger -= value;
             this.CurrentHunger = this.CurrentHunger < 0 ? 0 : this.CurrentHunger;
         }
 
-        public void IncreaseHunger(int value)
+        internal void IncreaseHunger(int value)
         {
             this.CurrentHunger += value;
             this.CurrentHunger = this.CurrentHunger > this.CurrentHunger ? this.MaximumHunger : this.CurrentHunger;

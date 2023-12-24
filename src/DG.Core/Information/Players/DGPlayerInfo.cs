@@ -43,102 +43,47 @@ namespace DG.Core.Information.Players
 
         private static DGTransformInfo CreatePlayerTransformComponent(DGTransformComponent component)
         {
-            if (component == null)
-            {
-                return default;
-            }
-
-            return DGTransformInfo.Create(component);
+            return component == null ? default : DGTransformInfo.Create(component);
         }
         private static DGInformationsInfo CreatePlayerInformationsComponent(DGInformationsComponent component)
         {
-            if (component == null)
-            {
-                return default;
-            }
-
-            return DGInformationsInfo.Create(component);
+            return component == null ? default : DGInformationsInfo.Create(component);
         }
         private static DGPersonalityInfo CreatePlayerPersonalityComponent(DGPersonalityComponent component)
         {
-            if (component == null)
-            {
-                return default;
-            }
-
-            return DGPersonalityInfo.Create(component);
+            return component == null ? default : DGPersonalityInfo.Create(component);
         }
         private static DGCharacteristicsInfo CreatePlayerCharacteristicsComponent(DGCharacteristicsComponent component)
         {
-            if (component == null)
-            {
-                return default;
-            }
-
-            return DGCharacteristicsInfo.Create(component);
+            return component == null ? default : DGCharacteristicsInfo.Create(component);
         }
         private static DGHealthInfo CreatePlayerHealthComponent(DGHealthComponent component)
         {
-            if (component == null)
-            {
-                return default;
-            }
-
-            return DGHealthInfo.Create(component);
+            return component == null ? default : DGHealthInfo.Create(component);
         }
         private static DGHungerInfo CreatePlayerHungerComponent(DGHungerComponent component)
         {
-            if (component == null)
-            {
-                return default;
-            }
-
-            return DGHungerInfo.Create(component);
+            return component == null ? default : DGHungerInfo.Create(component);
         }
         private static DGCombatInfo CreatePlayerCombatComponent(DGCombatComponent component)
         {
-            if (component == null)
-            {
-                return default;
-            }
-
-            return DGCombatInfo.Create(component);
+            return component == null ? default : DGCombatInfo.Create(component);
         }
         private static DGEffectsInfo CreatePlayerEffectsComponent(DGEffectsComponent component)
         {
-            if (component == null)
-            {
-                return default;
-            }
-
-            return DGEffectsInfo.Create(component);
+            return component == null ? default : DGEffectsInfo.Create(component);
         }
         private static DGInventoryInfo CreatePlayerInventoryComponent(DGInventoryComponent component)
         {
-            if (component == null)
-            {
-                return default;
-            }
-
-            return DGInventoryInfo.Create(component);
+            return component == null ? default : DGInventoryInfo.Create(component);
         }
         private static DGEquipmentInfo CreatePlayerEquipmentComponent(DGEquipmentComponent component)
         {
-            if (component == null)
-            {
-                return default;
-            }
-
-            return DGEquipmentInfo.Create(component);
+            return component == null ? default : DGEquipmentInfo.Create(component);
         }
         private static DGRelationshipsInfo CreatePlayerRelationshipsComponent(DGRelationshipsComponent component)
         {
-            if (component == null)
-            {
-                return default;
-            }
-
-            return DGRelationshipsInfo.Create(component);
+            return component == null ? default : DGRelationshipsInfo.Create(component);
         }
     }
 }

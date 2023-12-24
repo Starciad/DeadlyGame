@@ -2,16 +2,16 @@
 
 namespace DG.Core.Components.Common
 {
-    public sealed class DGTransformComponent : DGComponent
+    internal sealed class DGTransformComponent : DGComponent
     {
-        public Vector2 Position { get; private set; }
+        internal Vector2 Position { get; private set; }
 
-        public void SetPosition(Vector2 position)
+        internal void SetPosition(Vector2 position)
         {
             this.Position = position;
         }
 
-        public void Move(Vector2 value)
+        internal void Move(Vector2 value)
         {
             this.Position += value;
         }

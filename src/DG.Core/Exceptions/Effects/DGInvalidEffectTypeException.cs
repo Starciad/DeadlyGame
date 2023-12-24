@@ -2,18 +2,18 @@
 
 namespace DG.Core.Exceptions.Effects
 {
-    public sealed class DGInvalidEffectTypeException : Exception
+    internal sealed class DGInvalidEffectTypeException : Exception
     {
-        public DGInvalidEffectTypeException()
+        internal DGInvalidEffectTypeException()
         {
         }
 
-        public DGInvalidEffectTypeException(string message)
+        internal DGInvalidEffectTypeException(string message)
             : base(message)
         {
         }
 
-        public DGInvalidEffectTypeException(string message, Exception innerException)
+        internal DGInvalidEffectTypeException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

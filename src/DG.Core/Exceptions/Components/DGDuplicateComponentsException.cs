@@ -2,18 +2,18 @@
 
 namespace DG.Core.Exceptions.Components
 {
-    public sealed class DGDuplicateComponentsException : Exception
+    internal sealed class DGDuplicateComponentsException : Exception
     {
-        public DGDuplicateComponentsException()
+        internal DGDuplicateComponentsException()
         {
         }
 
-        public DGDuplicateComponentsException(string message)
+        internal DGDuplicateComponentsException(string message)
             : base(message)
         {
         }
 
-        public DGDuplicateComponentsException(string message, Exception innerException)
+        internal DGDuplicateComponentsException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

@@ -12,12 +12,12 @@ namespace DG.Core.Items
         Mythic
     }
 
-    public abstract class DGItem : DGObject
+    internal abstract class DGItem : DGObject
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public DGItemRarity Rarity { get; set; }
-        public bool HasDurability { get; set; }
-        public int Durability { get; set; }
+        internal string Name { get; set; }
+        internal string Description { get; set; }
+        internal DGItemRarity Rarity { get; set; }
+        internal bool HasDurability { get; set; }
+        internal int Durability { get; set; }
     }
 }

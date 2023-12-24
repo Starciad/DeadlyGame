@@ -3,10 +3,10 @@ using DG.Core.Objects;
 
 namespace DG.Core.Entities
 {
-    public abstract class DGEntity : DGObject
+    internal abstract class DGEntity : DGObject
     {
-        public string Name { get; set; }
-        public DGComponentContainer ComponentContainer => this.componentContainer;
+        internal string Name { get; set; }
+        internal DGComponentContainer ComponentContainer => this.componentContainer;
 
         private readonly DGComponentContainer componentContainer = new();
 

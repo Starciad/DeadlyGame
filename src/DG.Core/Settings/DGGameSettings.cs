@@ -1,7 +1,5 @@
 ﻿using DG.Core.Builders;
 
-using System.Linq;
-
 namespace DG.Core.Settings
 {
     internal struct DGGameSettings
@@ -10,7 +8,7 @@ namespace DG.Core.Settings
 
         internal DGGameSettings(DGGameBuilder builder)
         {
-            this.Players = builder.Players.ToArray();
+            this.Players = [.. builder.Players];
         }
     }
 }

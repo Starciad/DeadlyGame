@@ -1,17 +1,24 @@
-﻿using DG.Core.Items;
+﻿using DG.Core.Information.Items;
+using DG.Core.Items;
 
 using System.Numerics;
 
 namespace DG.Core.Information.World
 {
-    public readonly struct DGWorldItemInfo(DGItem item, int amount, Vector2 position)
+    public struct DGWorldItemInfo
     {
-        public readonly DGItem Item => this.item;
-        public readonly int Amount => this.amount;
-        public readonly Vector2 Position => this.position;
+        public DGItemInfo Item { get; set; }
+        public int Amount { get; set; }
+        public Vector2 Position { get; set; }
 
-        private readonly DGItem item = item;
-        private readonly int amount = amount;
-        private readonly Vector2 position = position;
+        internal static DGWorldItemInfo Create(DGWorldItem item)
+        {
+            return new()
+            {
+                Item = DGItemInfo.Create(item.Item),
+                Amount = item.Amount,
+                Position = item.Position
+            };
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DG.Core.Components;
 using DG.Core.Exceptions.Components;
+using DG.Core.Exceptions.Effects;
 
 namespace DG.Tests.Components
 {

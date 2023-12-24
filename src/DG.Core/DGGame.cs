@@ -1,6 +1,7 @@
 ﻿using DG.Core.Builders;
 using DG.Core.Dice;
 using DG.Core.Information;
+using DG.Core.Information.Players;
 using DG.Core.Managers;
 using DG.Core.Settings;
 using DG.Core.Utilities;
@@ -94,9 +95,9 @@ namespace DG.Core
                 WorldInfo = this._worldManager.GetInfo(),
             };
         }
-        public void GetGameWinner()
+        public DGPlayerInfo GetGameWinner()
         {
-
+            return DGPlayerInfo.Create(this._playersManager.ActivePlayers[0]);
         }
 
         // Tools

@@ -2,18 +2,18 @@
 
 namespace DG.Core.Exceptions.Items
 {
-    public sealed class DGInvalidItemTypeException : Exception
+    internal sealed class DGInvalidItemTypeException : Exception
     {
-        public DGInvalidItemTypeException()
+        internal DGInvalidItemTypeException()
         {
         }
 
-        public DGInvalidItemTypeException(string message)
+        internal DGInvalidItemTypeException(string message)
             : base(message)
         {
         }
 
-        public DGInvalidItemTypeException(string message, Exception innerException)
+        internal DGInvalidItemTypeException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

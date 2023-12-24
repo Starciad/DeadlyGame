@@ -2,18 +2,18 @@
 
 namespace DG.Core.Exceptions.Components
 {
-    public sealed class DGInvalidComponentTypeException : Exception
+    internal sealed class DGInvalidComponentTypeException : Exception
     {
-        public DGInvalidComponentTypeException()
+        internal DGInvalidComponentTypeException()
         {
         }
 
-        public DGInvalidComponentTypeException(string message)
+        internal DGInvalidComponentTypeException(string message)
             : base(message)
         {
         }
 
-        public DGInvalidComponentTypeException(string message, Exception innerException)
+        internal DGInvalidComponentTypeException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

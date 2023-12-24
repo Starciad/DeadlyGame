@@ -1,7 +1,7 @@
 ﻿namespace DG.Core.Constants
 {
-    public static class DGInteractionsConstants
+    internal static class DGInteractionsConstants
     {
-        public const float MAXIMUM_RANGE = 4f;
+        internal const float MAXIMUM_RANGE = 4f;
     }
 }

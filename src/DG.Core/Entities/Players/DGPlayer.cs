@@ -6,7 +6,7 @@ using DG.Core.Utilities;
 
 namespace DG.Core.Entities.Players
 {
-    public sealed class DGPlayer : DGEntity
+    internal sealed class DGPlayer : DGEntity
     {
         internal int Index { get; private set; }
 

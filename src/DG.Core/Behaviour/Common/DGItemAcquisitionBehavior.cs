@@ -3,7 +3,7 @@ using DG.Core.Components.Common;
 using DG.Core.Constants;
 using DG.Core.Entities;
 using DG.Core.Information.Actions;
-using DG.Core.Information.World;
+using DG.Core.Items;
 
 using System.Linq;
 using System.Numerics;
@@ -12,7 +12,7 @@ namespace DG.Core.Behaviour.Common
 {
     internal sealed class DGItemAcquisitionBehavior : IDGBehaviour
     {
-        private DGWorldItemInfo[] _nearbyItems;
+        private DGWorldItem[] _nearbyItems;
 
         // components
         private DGTransformComponent _transform;
@@ -23,7 +23,7 @@ namespace DG.Core.Behaviour.Common
             this._transform = entity.ComponentContainer.GetComponent<DGTransformComponent>();
 
             this._nearbyItems = game.WorldManager.GetNearbyItems(this._transform.Position).Where(x => Vector2.Distance(x.Position, this._transform.Position) < DGInteractionsConstants.MAXIMUM_RANGE).ToArray();
-            foreach (DGWorldItemInfo item in this._nearbyItems)
+            foreach (DGWorldItem item in this._nearbyItems)
             {
                 weight.Add(item.Amount);
             }
@@ -42,7 +42,7 @@ namespace DG.Core.Behaviour.Common
 
             DGInventoryComponent inventory = entity.ComponentContainer.GetComponent<DGInventoryComponent>();
 
-            DGWorldItemInfo selectedItem = this._nearbyItems[0];
+            DGWorldItem selectedItem = this._nearbyItems[0];
 
             game.WorldManager.RemoveWorldItem(selectedItem);
             _ = inventory.TryAddItem(selectedItem);

@@ -2,48 +2,39 @@
 using DG.Core.Builders;
 
 using System;
-using System.Threading.Tasks;
 
 namespace DG
 {
     internal static class Program
     {
-        private static async Task Main()
+        private static void Main()
         {
-            DGGameBuilder gameBuilder = new()
-            {
-                Players = BuildPlayers(100)
-            };
-
-            DGWorldBuilder worldBuilder = new()
-            {
-                Size = new(100),
-                Resources = new()
-                {
-                    TreeCount = 100,
-                    StoneCount = 100,
-                    ShrubCount = 100
-                },
-            };
+            DGGameBuilder gameBuilder = BuildGame();
+            DGWorldBuilder worldBuilder = BuildWorld();
 
             DGGame game = new(gameBuilder, worldBuilder);
             game.Initialize();
 
-            // ===== Game Routine =====
+            // ======== Game Routine ======== //
 
             game.StartGame();
-            while (game.ShouldUpdateGame())
-            {
-                _ = game.UpdateGame();
-            }
+            game.UpdateGame();
 
             game.FinishGame();
             game.Dispose();
 
-            // ========================
+            // ============================== //
 
             Console.WriteLine("Finished");
-            await Task.Delay(-1);
+        }
+
+        // ===== GAME ===== //
+        private static DGGameBuilder BuildGame()
+        {
+            return new()
+            {
+                Players = BuildPlayers(100)
+            };
         }
 
         private static DGPlayerBuilder[] BuildPlayers(int amount)
@@ -60,5 +51,21 @@ namespace DG
 
             return players;
         }
+
+        // ===== WORLD ===== //
+        private static DGWorldBuilder BuildWorld()
+        {
+            return new()
+            {
+                Size = new(100),
+                Resources = new()
+                {
+                    TreeCount = 100,
+                    StoneCount = 100,
+                    ShrubCount = 100
+                },
+            };
+        }
+
     }
 }

@@ -6,14 +6,8 @@ namespace DG.Tests.Components.Common
 {
     public sealed class DGInventoryComponent_UnitTests
     {
-        private class FakeItem_01 : DGItem
-        {
-            public override void Build() { }
-        }
-        private class FakeItem_02 : DGItem
-        {
-            public override void Build() { }
-        }
+        private class FakeItem_01 : DGItem { }
+        private class FakeItem_02 : DGItem { }
 
         #region ADD
         [Fact]

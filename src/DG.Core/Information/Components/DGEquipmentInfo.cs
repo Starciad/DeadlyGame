@@ -23,11 +23,21 @@ namespace DG.Core.Information.Components
 
             for (int i = 0; i < armorLength; i++)
             {
+                if (armor[i] == null)
+                {
+                    continue;
+                }
+
                 armorInfo[i] = DGArmorInfo.Create(armor[i]);
             }
 
             for (int i = 0; i < accessoriesLength; i++)
             {
+                if (accessories[i] == null)
+                {
+                    continue;
+                }
+
                 accessoriesInfo[i] = DGAccessoryInfo.Create(accessories[i]);
             }
 

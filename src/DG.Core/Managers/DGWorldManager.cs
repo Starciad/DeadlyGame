@@ -33,10 +33,10 @@ namespace DG.Core.Managers
 
         // === World Resources ===
         private readonly List<DGEntity> resourceEntities = [];
-        private readonly List<DGWorldItemInfo> worldItems = [];
+        private readonly List<DGWorldItem> worldItems = [];
 
         // === System ===
-        public void Initialize(DGWorldBuilder builder)
+        internal void Initialize(DGWorldBuilder builder)
         {
             InitializeWorld(builder);
             InitializeResources(builder);
@@ -118,26 +118,26 @@ namespace DG.Core.Managers
                 .. this.resourceEntities.OrderByDescending(x => Vector2.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, position)),
             ];
         }
-        internal DGWorldItemInfo[] GetNearbyItems(Vector2 position)
+        internal DGWorldItem[] GetNearbyItems(Vector2 position)
         {
             return
             [
                 .. this.worldItems.OrderByDescending(x => Vector2.Distance(x.Position, position)),
             ];
         }
-        internal void AddWorldItem(DGWorldItemInfo worldItem)
+        internal void AddWorldItem(DGWorldItem worldItem)
         {
             this.worldItems.Add(worldItem);
         }
-        internal DGWorldItemInfo GetWorldItem(DGItem item)
+        internal DGWorldItem GetWorldItem(DGItem item)
         {
             return GetWorldItem(item.GetType());
         }
-        internal DGWorldItemInfo GetWorldItem(Type itemType)
+        internal DGWorldItem GetWorldItem(Type itemType)
         {
             return this.worldItems.Find(x => x.Item.GetType() == itemType);
         }
-        internal void RemoveWorldItem(DGWorldItemInfo worldItem)
+        internal void RemoveWorldItem(DGWorldItem worldItem)
         {
             _ = this.worldItems.Remove(worldItem);
         }
@@ -160,8 +160,6 @@ namespace DG.Core.Managers
 
         internal DGWorldInfo GetInfo()
         {
-            // Get all the resources in the world.
-
             // Build world information.
             return new()
             {
@@ -171,7 +169,7 @@ namespace DG.Core.Managers
                 ResourceInfo = new()
                 {
                     Resources = GetAllWorldResources(),
-                    Items = this.worldItems,
+                    Items = GetAllWorldItems(),
                 },
             };
 
@@ -192,6 +190,18 @@ namespace DG.Core.Managers
                 }
 
                 return [.. resources];
+            }
+
+            DGWorldItemInfo[] GetAllWorldItems()
+            {
+                List<DGWorldItemInfo> worldItemsInfo = [];
+
+                foreach (DGWorldItem worldItem in this.worldItems)
+                {
+                    worldItemsInfo.Add(DGWorldItemInfo.Create(worldItem));
+                }
+
+                return [.. worldItemsInfo];
             }
         }
     }

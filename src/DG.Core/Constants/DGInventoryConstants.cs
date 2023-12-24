@@ -1,9 +1,9 @@
 ﻿namespace DG.Core.Constants
 {
-    public static class DGInventoryConstants
+    internal static class DGInventoryConstants
     {
-        public const int MAXIMUM_ITEM_CAPACITY = 9999;
-        public const int MAXIMUM_ACCESSORY_CAPACITY = 8;
-        public const int MAXIMUM_ARMOR_CAPACITY = 5;
+        internal const int MAXIMUM_ITEM_CAPACITY = 9999;
+        internal const int MAXIMUM_ACCESSORY_CAPACITY = 8;
+        internal const int MAXIMUM_ARMOR_CAPACITY = 5;
     }
 }
