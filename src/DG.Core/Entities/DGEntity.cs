@@ -6,6 +6,7 @@ namespace DG.Core.Entities
     internal abstract class DGEntity : DGObject
     {
         internal string Name { get; set; }
+        internal int Id { get; set; }
         internal DGComponentContainer ComponentContainer => this.componentContainer;
 
         private readonly DGComponentContainer componentContainer = new();

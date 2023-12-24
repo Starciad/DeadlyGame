@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
-
-namespace DG.Core.Information.World
+﻿namespace DG.Core.Information.World
 {
     public struct DGWorldResourcesInfo
     {
-        public IEnumerable<DGWorldResourceInfo> Resources { get; set; }
-        public IEnumerable<DGWorldItemInfo> Items { get; set; }
+        public DGWorldResourceInfo[] Resources { get; set; }
+        public DGWorldItemInfo[] Items { get; set; }
+
+        public DGWorldResourcesInfo()
+        {
+            this.Resources = [];
+            this.Items = [];
+        }
     }
 }

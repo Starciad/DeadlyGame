@@ -10,6 +10,12 @@ namespace DG.Core.Information.Components
         public DGArmorInfo[] Armor { get; set; }
         public DGAccessoryInfo[] Accessories { get; set; }
 
+        public DGEquipmentInfo()
+        {
+            this.Armor = [];
+            this.Accessories = [];
+        }
+
         internal static DGEquipmentInfo Create(DGEquipmentComponent component)
         {
             DGArmor[] armor = component.Armor;

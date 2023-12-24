@@ -4,8 +4,6 @@ using DG.Core.Entities;
 using DG.Core.Information.Actions;
 using DG.Core.Managers;
 
-using System.Collections.Generic;
-
 namespace DG.Core.Behaviour.Common
 {
     internal sealed class DGMovementBehavior : IDGBehaviour

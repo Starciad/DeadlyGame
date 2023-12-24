@@ -10,6 +10,15 @@ namespace DG.Core.Information.Items
         public bool HasDurability { get; set; }
         public int Durability { get; set; }
 
+        public DGItemInfo()
+        {
+            this.Name = string.Empty;
+            this.Description = string.Empty;
+            this.Rarity = DGItemRarity.None;
+            this.HasDurability = false;
+            this.Durability = 0;
+        }
+
         internal static DGItemInfo Create(DGItem item)
         {
             return new()

@@ -34,17 +34,8 @@ namespace DG.Core.Behaviour.Common
 
             // Infos
             this._nearbyResources = game.WorldManager.GetNearbyResources(this._transformComponent.Position).Where(x => Vector2.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, this._transformComponent.Position) < DGInteractionsConstants.MAXIMUM_RANGE).ToArray();
-            if (this._nearbyResources == null || _nearbyResources.Length == 0)
-            {
-                return false;
-            }
-
-            if (this._nearbyResources[0].ComponentContainer.TryGetComponent(out this._resourceHealthComponent))
-            {
-                return false;
-            }
-
-            return true;
+            return this._nearbyResources != null && this._nearbyResources.Length != 0
+&& !this._nearbyResources[0].ComponentContainer.TryGetComponent(out this._resourceHealthComponent);
         }
         public DGBehaviourWeight GetWeight()
         {

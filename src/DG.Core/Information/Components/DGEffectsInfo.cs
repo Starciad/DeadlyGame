@@ -7,6 +7,11 @@ namespace DG.Core.Information.Components
     {
         public DGEffectInfo[] Effects { get; set; }
 
+        public DGEffectsInfo()
+        {
+            this.Effects = [];
+        }
+
         internal static DGEffectsInfo Create(DGEffectsComponent component)
         {
             DGEffect[] effects = component.Effects;
@@ -34,6 +39,16 @@ namespace DG.Core.Information.Components
         public int Durability { get; set; }
         public int RemainingDurability { get; set; }
         public bool IsFinished { get; set; }
+
+        public DGEffectInfo()
+        {
+            this.Name = string.Empty;
+            this.Description = string.Empty;
+            this.EffectType = DGEffectType.None;
+            this.Durability = 0;
+            this.RemainingDurability = 0;
+            this.IsFinished = false;
+        }
 
         internal static DGEffectInfo Create(DGEffect effect)
         {

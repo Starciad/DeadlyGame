@@ -7,7 +7,7 @@ namespace DG.Core.Information.Players
     public struct DGPlayerInfo
     {
         public string Name { get; set; }
-        public int Index { get; set; }
+        public int Id { get; set; }
 
         public DGTransformInfo Transform { get; set; }
         public DGInformationsInfo Informations { get; set; }
@@ -21,12 +21,29 @@ namespace DG.Core.Information.Players
         public DGEquipmentInfo Equipment { get; set; }
         public DGRelationshipsInfo Relationships { get; set; }
 
+        public DGPlayerInfo()
+        {
+            this.Name = string.Empty;
+            this.Id = 0;
+            this.Transform = new();
+            this.Informations = new();
+            this.Personality = new();
+            this.Characteristics = new();
+            this.Health = new();
+            this.Hunger = new();
+            this.Combat = new();
+            this.Effects = new();
+            this.Inventory = new();
+            this.Equipment = new();
+            this.Relationships = new();
+        }
+
         internal static DGPlayerInfo Create(DGPlayer player)
         {
             return new()
             {
                 Name = player.Name,
-                Index = player.Index,
+                Id = player.Id,
                 Transform = CreatePlayerTransformComponent(player.ComponentContainer.GetComponent<DGTransformComponent>()),
                 Informations = CreatePlayerInformationsComponent(player.ComponentContainer.GetComponent<DGInformationsComponent>()),
                 Personality = CreatePlayerPersonalityComponent(player.ComponentContainer.GetComponent<DGPersonalityComponent>()),

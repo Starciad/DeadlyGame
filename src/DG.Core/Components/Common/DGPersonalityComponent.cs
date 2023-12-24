@@ -2,6 +2,7 @@
 {
     public enum DGPersonalityType
     {
+        None = -1,
         Aggressive = 0,
         Cautious = 1,
         Impulsive = 2,
@@ -10,6 +11,7 @@
     }
     public enum DGCourageLevel
     {
+        None = -1,
         Fearless = 0,
         Brave = 1,
         Cautious = 2,

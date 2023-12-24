@@ -79,12 +79,7 @@ namespace DG.Core.Behaviour.Common
             componentChecker.Add(this._targetEntity.ComponentContainer.TryGetComponent(out this._targetRelationshipsComponent));
 
             // Check if any of the target entity components above are null.
-            if (componentChecker.Any(x => !x))
-            {
-                return false;
-            }
-
-            return true;
+            return !componentChecker.Any(x => !x);
         }
         public DGBehaviourWeight GetWeight()
         {

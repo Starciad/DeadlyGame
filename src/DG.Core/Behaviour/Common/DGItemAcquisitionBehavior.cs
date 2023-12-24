@@ -34,12 +34,7 @@ namespace DG.Core.Behaviour.Common
 
             this._nearbyItems = game.WorldManager.GetNearbyItems(this._transformComponent.Position).Where(x => Vector2.Distance(x.Position, this._transformComponent.Position) < DGInteractionsConstants.MAXIMUM_RANGE).ToArray();
 
-            if (_nearbyItems == null || _nearbyItems.Length == 0)
-            {
-                return false;
-            }
-
-            return true;
+            return this._nearbyItems != null && this._nearbyItems.Length != 0;
         }
         public DGBehaviourWeight GetWeight()
         {

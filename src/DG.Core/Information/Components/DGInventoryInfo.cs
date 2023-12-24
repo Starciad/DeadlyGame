@@ -7,6 +7,11 @@ namespace DG.Core.Information.Components
     {
         public DGInventorySlotInfo[] Slots { get; set; }
 
+        public DGInventoryInfo()
+        {
+            this.Slots = [];
+        }
+
         internal static DGInventoryInfo Create(DGInventoryComponent component)
         {
             DGInventorySlot[] inventorySlots = component.Slots;
@@ -29,6 +34,12 @@ namespace DG.Core.Information.Components
     {
         public DGItemInfo Item { get; set; }
         public int Amount { get; set; }
+
+        public DGInventorySlotInfo()
+        {
+            this.Item = new();
+            this.Amount = 0;
+        }
 
         internal static DGInventorySlotInfo Create(DGInventorySlot slot)
         {

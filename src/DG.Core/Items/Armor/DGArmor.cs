@@ -4,6 +4,7 @@ namespace DG.Core.Items.Armor
 {
     public enum DGArmorType
     {
+        None = -1,
         Helmet = 0,
         Breastplate = 1,
         Pants = 2,

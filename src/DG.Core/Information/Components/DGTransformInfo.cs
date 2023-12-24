@@ -8,6 +8,11 @@ namespace DG.Core.Information.Components
     {
         public Vector2 Position { get; set; }
 
+        public DGTransformInfo()
+        {
+            this.Position = Vector2.Zero;
+        }
+
         internal static DGTransformInfo Create(DGTransformComponent component)
         {
             return new()

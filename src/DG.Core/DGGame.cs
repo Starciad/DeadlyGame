@@ -59,21 +59,10 @@ namespace DG.Core
         }
         public void UpdateGame()
         {
-            // Round starts only when it is a new day.
-            if (this._worldManager.CurrentDaylightCycle == DGWorldDaylightCycleState.Day)
-            {
-                this._roundManager.Begin();
-            }
-
             // Update of all components.
+            this._roundManager.Begin();
             this._playersManager.Update();
             this._worldManager.Update();
-
-            // Round ends only when it is one night.
-            if (this._worldManager.CurrentDaylightCycle == DGWorldDaylightCycleState.Night)
-            {
-                this._roundManager.End();
-            }
         }
         public void FinishGame()
         {

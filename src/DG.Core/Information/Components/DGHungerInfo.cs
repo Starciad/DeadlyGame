@@ -8,6 +8,13 @@ namespace DG.Core.Information.Components
         public int CurrentHunger { get; set; }
         public int MaximumHunger { get; set; }
 
+        public DGHungerInfo()
+        {
+            this.IsHungry = false;
+            this.CurrentHunger = 0;
+            this.MaximumHunger = 0;
+        }
+
         internal static DGHungerInfo Create(DGHungerComponent component)
         {
             return new()

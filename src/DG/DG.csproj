@@ -6,8 +6,9 @@
 		<Nullable>disable</Nullable>
 		<PublishAot>true</PublishAot>
 		<InvariantGlobalization>true</InvariantGlobalization>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\DG.Core\DG.Core.csproj" />
+		<ProjectReference Include="..\DG.Core\DG.Core.csproj" />
 	</ItemGroup>
 </Project>

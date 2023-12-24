@@ -30,12 +30,7 @@ namespace DG.Core.Behaviour.Common
 
             this._newRecipes = DGCraftingDatabase.GetOnlyNewCraftableItems(this._inventoryComponent);
 
-            if (this._newRecipes == null || this._newRecipes.Length == 0)
-            {
-                return false;
-            }
-
-            return true;
+            return this._newRecipes != null && this._newRecipes.Length != 0;
         }
         public DGBehaviourWeight GetWeight()
         {

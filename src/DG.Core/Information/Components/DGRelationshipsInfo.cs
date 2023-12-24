@@ -7,6 +7,11 @@ namespace DG.Core.Information.Components
     {
         public DGRelationshipInfo[] Relationships { get; set; }
 
+        public DGRelationshipsInfo()
+        {
+            this.Relationships = [];
+        }
+
         internal static DGRelationshipsInfo Create(DGRelationshipsComponent component)
         {
             DGRelationship[] relationships = component.Relationships;
@@ -18,8 +23,8 @@ namespace DG.Core.Information.Components
                 relationshipsInfo[i] = new()
                 {
                     RelationshipValue = relationships[i].RelationshipValue,
-                    CurrentEntityName = relationships[i].CurrentEntity.Name,
-                    AnotherEntityName = relationships[i].AnotherEntity.Name,
+                    CurrentEntityId = relationships[i].CurrentEntity.Id,
+                    AnotherEntityId = relationships[i].AnotherEntity.Id
                 };
             }
 
@@ -33,7 +38,14 @@ namespace DG.Core.Information.Components
     public struct DGRelationshipInfo
     {
         public float RelationshipValue { get; set; }
-        public string CurrentEntityName { get; set; }
-        public string AnotherEntityName { get; set; }
+        public int CurrentEntityId { get; set; }
+        public int AnotherEntityId { get; set; }
+
+        public DGRelationshipInfo()
+        {
+            this.RelationshipValue = 0;
+            this.CurrentEntityId = 0;
+            this.AnotherEntityId = 0;
+        }
     }
 }

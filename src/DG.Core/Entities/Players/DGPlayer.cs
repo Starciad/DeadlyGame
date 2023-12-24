@@ -8,15 +8,13 @@ namespace DG.Core.Entities.Players
 {
     internal sealed class DGPlayer : DGEntity
     {
-        internal int Index { get; private set; }
-
         // Components
         private DGBehaviourComponent _behaviour;
 
-        internal DGPlayer(DGPlayerBuilder builder, int index)
+        internal DGPlayer(DGPlayerBuilder builder, int id)
         {
             this.Name = builder.Name;
-            this.Index = index;
+            this.Id = id;
         }
 
         private DGTransformComponent _transform;

@@ -11,6 +11,16 @@ namespace DG.Core.Information.Components
         public int Intelligence { get; set; }
         public int Wisdom { get; set; }
 
+        public DGCharacteristicsInfo()
+        {
+            this.Strength = 0;
+            this.Constitution = 0;
+            this.Dexterity = 0;
+            this.Charisma = 0;
+            this.Intelligence = 0;
+            this.Wisdom = 0;
+        }
+
         internal static DGCharacteristicsInfo Create(DGCharacteristicsComponent component)
         {
             return new()

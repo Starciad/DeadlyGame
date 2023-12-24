@@ -4,8 +4,9 @@ namespace DG.Core.Effects
 {
     public enum DGEffectType
     {
-        Positive,
-        Negative
+        None = -1,
+        Positive = 0,
+        Negative = 1
     }
 
     internal abstract class DGEffect
