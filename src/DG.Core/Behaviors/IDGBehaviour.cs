@@ -1,8 +1,8 @@
-﻿using DG.Core.Behaviour.Models;
+﻿using DG.Core.Behaviors.Models;
 using DG.Core.Entities;
 using DG.Core.Information.Actions;
 
-namespace DG.Core.Behaviour
+namespace DG.Core.Behaviors
 {
     internal interface IDGBehaviour
     {

@@ -6,14 +6,14 @@ using System.Linq;
 
 namespace DG.Core.Databases
 {
-    internal static partial class DGCraftingDatabase
+    internal partial class DGCraftingDatabase
     {
-        internal static DGCraftingRecipe[] GetOnlyNewCraftableItems(DGInventoryComponent inventoryComponent)
+        internal DGCraftingRecipe[] GetOnlyNewCraftableItems(DGInventoryComponent inventoryComponent)
         {
             return [.. GetCraftableItems(inventoryComponent).Where(x => !inventoryComponent.HasItem(x.ItemType))];
         }
 
-        internal static DGCraftingRecipe[] GetCraftableItems(DGInventoryComponent inventoryComponent)
+        internal DGCraftingRecipe[] GetCraftableItems(DGInventoryComponent inventoryComponent)
         {
             List<DGCraftingRecipe> selectedRecipes = [];
 

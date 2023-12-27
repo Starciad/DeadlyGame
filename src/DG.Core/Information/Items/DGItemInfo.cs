@@ -24,7 +24,6 @@ namespace DG.Core.Information.Items
             return new()
             {
                 Name = item.Name,
-                Description = item.Description,
                 Rarity = item.Rarity,
                 HasDurability = item.HasDurability,
                 Durability = item.Durability

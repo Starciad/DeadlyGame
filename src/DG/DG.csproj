@@ -4,9 +4,8 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>disable</Nullable>
-		<PublishAot>true</PublishAot>
-		<InvariantGlobalization>true</InvariantGlobalization>
-		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<PublishAot>false</PublishAot>
+		<InvariantGlobalization>false</InvariantGlobalization>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\DG.Core\DG.Core.csproj" />

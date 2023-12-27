@@ -4,9 +4,9 @@ using DG.Core.Items.Weapons.Common;
 
 namespace DG.Core.Databases
 {
-    internal static partial class DGCraftingDatabase
+    internal partial class DGCraftingDatabase
     {
-        private static readonly DGCraftingRecipe[] recipes =
+        private readonly DGCraftingRecipe[] recipes =
         [
             // Wooden Axe
             new DGCraftingRecipe(typeof(DGWoodenAxe), [

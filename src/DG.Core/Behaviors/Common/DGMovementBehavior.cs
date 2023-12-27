@@ -1,10 +1,12 @@
-﻿using DG.Core.Behaviour.Models;
+﻿using DG.Core.Behaviors.Models;
 using DG.Core.Components.Common;
 using DG.Core.Entities;
 using DG.Core.Information.Actions;
 using DG.Core.Managers;
 
-namespace DG.Core.Behaviour.Common
+using System.Drawing;
+
+namespace DG.Core.Behaviors.Common
 {
     internal sealed class DGMovementBehavior : IDGBehaviour
     {
@@ -106,8 +108,12 @@ namespace DG.Core.Behaviour.Common
 
             // === INFOS ===
             DGPlayerActionInfo infos = new();
-            infos.WithTitle(string.Empty);
-            infos.WithDescription(string.Empty);
+            //infos.WithName(DGStringsConstants.Item_Acquisition_Name);
+            //infos.WithTitle(DGStringsConstants.Item_Acquisition_Title);
+            //infos.WithDescription(itemsObtainedString.ToString());
+            //infos.WithPriorityLevel(4);
+            //infos.WithAuthor(this._entity.Id);
+            //infos.WithColor(Color.LightYellow);
             return infos;
         }
     }

@@ -1,11 +1,12 @@
-﻿namespace DG.Core.Items.Materials.Common
+﻿using DG.Core.Localization;
+
+namespace DG.Core.Items.Materials.Common
 {
     internal sealed class DGStone : DGMaterial
     {
         public DGStone()
         {
-            this.Name = "Pedra";
-            this.Description = "Pedra simple usada para fabricação de recursos.";
+            this.Name = DGLocalization.Read("Items", "Material_Stone");
             this.Rarity = DGItemRarity.Common;
             this.HasDurability = false;
         }

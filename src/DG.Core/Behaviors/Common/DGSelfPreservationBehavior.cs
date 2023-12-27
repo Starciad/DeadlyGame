@@ -1,4 +1,5 @@
-﻿using DG.Core.Behaviour.Models;
+﻿using DG.Core.Behaviors;
+using DG.Core.Behaviors.Models;
 using DG.Core.Components.Common;
 using DG.Core.Effects.Common;
 using DG.Core.Entities;
@@ -10,7 +11,7 @@ using DG.Core.Utilities;
 using System;
 using System.Collections.Generic;
 
-namespace DG.Core.Behaviour.Common
+namespace DG.Core.Behaviors.Common
 {
     internal sealed class DGSelfPreservationBehavior : IDGBehaviour
     {

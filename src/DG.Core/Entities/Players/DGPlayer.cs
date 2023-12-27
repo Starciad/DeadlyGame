@@ -1,4 +1,4 @@
-﻿using DG.Core.Behaviour.Common;
+﻿using DG.Core.Behaviors.Common;
 using DG.Core.Builders;
 using DG.Core.Components.Common;
 using DG.Core.Effects.Common;

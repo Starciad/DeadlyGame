@@ -1,4 +1,5 @@
-﻿using DG.Core.Behaviour.Models;
+﻿using DG.Core.Behaviors;
+using DG.Core.Behaviors.Models;
 using DG.Core.Components.Common;
 using DG.Core.Constants;
 using DG.Core.Entities;
@@ -7,7 +8,7 @@ using DG.Core.Information.Actions;
 using System.Linq;
 using System.Numerics;
 
-namespace DG.Core.Behaviour.Common
+namespace DG.Core.Behaviors.Common
 {
     internal sealed class DGResourceAcquisitionBehavior : IDGBehaviour
     {

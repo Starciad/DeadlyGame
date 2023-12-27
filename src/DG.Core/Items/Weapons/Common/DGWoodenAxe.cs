@@ -1,11 +1,12 @@
-﻿namespace DG.Core.Items.Weapons.Common
+﻿using DG.Core.Localization;
+
+namespace DG.Core.Items.Weapons.Common
 {
     internal sealed class DGWoodenAxe : DGWeapon
     {
         public DGWoodenAxe()
         {
-            this.Name = "Machado de Madeira";
-            this.Description = "Pode ser usado para coletar madeira e como uma arma.";
+            this.Name = DGLocalization.Read("Items", "Weapon_WoodenAxe");
             this.Rarity = DGItemRarity.Common;
             this.HasDurability = true;
             this.Durability = 20;

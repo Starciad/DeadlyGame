@@ -1,16 +1,21 @@
-﻿using DG.Core.Behaviour.Models;
+﻿using DG.Core.Behaviors;
+using DG.Core.Behaviors.Models;
 using DG.Core.Components.Common;
 using DG.Core.Crafting;
 using DG.Core.Databases;
 using DG.Core.Entities;
 using DG.Core.Information.Actions;
 using DG.Core.Items;
+using DG.Core.Localization;
 
-namespace DG.Core.Behaviour.Common
+using System.Drawing;
+
+namespace DG.Core.Behaviors.Common
 {
     internal sealed class DGCraftingBehavior : IDGBehaviour
     {
         // System
+        private DGEntity _entity;
         private DGGame _game;
 
         // Infos
@@ -19,8 +24,12 @@ namespace DG.Core.Behaviour.Common
         // Components
         private DGInventoryComponent _inventoryComponent;
 
+        // Consts
+        private const string S_CRAFTING_BEHAVIOR = "Crafting_Behavior";
+
         public bool CanAct(DGEntity entity, DGGame game)
         {
+            this._entity = entity;
             this._game = game;
 
             if (!entity.ComponentContainer.TryGetComponent(out this._inventoryComponent))
@@ -28,7 +37,7 @@ namespace DG.Core.Behaviour.Common
                 return false;
             }
 
-            this._newRecipes = DGCraftingDatabase.GetOnlyNewCraftableItems(this._inventoryComponent);
+            this._newRecipes = game.CraftingDatabase.GetOnlyNewCraftableItems(this._inventoryComponent);
 
             return this._newRecipes != null && this._newRecipes.Length != 0;
         }
@@ -49,8 +58,12 @@ namespace DG.Core.Behaviour.Common
 
             // === INFOS ===
             DGPlayerActionInfo infos = new();
-            infos.WithTitle(string.Empty);
-            infos.WithDescription(string.Empty);
+            infos.WithName(DGLocalization.Read(S_CRAFTING_BEHAVIOR, "Name"));
+            infos.WithTitle(DGLocalization.Read(S_CRAFTING_BEHAVIOR, "Title"));
+            infos.WithDescription(string.Format(DGLocalization.Read(S_CRAFTING_BEHAVIOR, "Description"), this._entity.Name, 1, item.Name));
+            infos.WithPriorityLevel(5);
+            infos.WithAuthor(this._entity.Id);
+            infos.WithColor(Color.BurlyWood);
             return infos;
         }
     }

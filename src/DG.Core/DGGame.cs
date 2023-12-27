@@ -1,7 +1,9 @@
 ﻿using DG.Core.Builders;
+using DG.Core.Databases;
 using DG.Core.Dice;
 using DG.Core.Information;
 using DG.Core.Information.Players;
+using DG.Core.Localization;
 using DG.Core.Managers;
 using DG.Core.Settings;
 using DG.Core.Utilities;
@@ -17,6 +19,9 @@ namespace DG.Core
         public bool IsCanceled => this._gameStateManager.IsCanceled;
         public bool IsDisposed => this.disposedValue;
 
+        // Databases
+        internal DGCraftingDatabase CraftingDatabase => this._craftingDatabase;
+
         // Managers
         internal DGPlayerManager PlayerManager => this._playersManager;
         internal DGWorldManager WorldManager => this._worldManager;
@@ -30,6 +35,9 @@ namespace DG.Core
         // Settings
         private readonly DGGameSettings _gameSettings = new(gameBuilder);
 
+        // Database
+        private readonly DGCraftingDatabase _craftingDatabase = new();
+
         // Managers
         private DGPlayerManager _playersManager = new();
         private DGWorldManager _worldManager = new();
@@ -40,6 +48,8 @@ namespace DG.Core
         // System
         public void Initialize()
         {
+            DGLocalization.Initialize(gameBuilder.LocalizationFilename);
+
             this._worldManager.SetGameInstance(this);
             this._playersManager.SetGameInstance(this);
             this._roundManager.SetGameInstance(this);
@@ -74,15 +84,31 @@ namespace DG.Core
         }
 
         // Utilities
-        public DGGameInfo GetGameInfo()
+        public DGGameInfo GetGameInfo(bool includeActions = true, bool includePlayers = true, bool includeRound = true, bool includeWorld = true)
         {
-            return new()
+            DGGameInfo gameInfo = new();
+
+            if (includeActions)
             {
-                ActionsInfo = this._playersManager.GetPlayersActionsInfo(),
-                PlayersInfo = this._playersManager.GetPlayersInfo(),
-                RoundInfo = this._roundManager.GetInfo(),
-                WorldInfo = this._worldManager.GetInfo(),
-            };
+                gameInfo.ActionsInfo = this._playersManager.GetPlayersActionsInfo();
+            }
+
+            if (includePlayers)
+            {
+                gameInfo.PlayersInfo = this._playersManager.GetPlayersInfo();
+            }
+
+            if (includeRound)
+            {
+                gameInfo.RoundInfo = this._roundManager.GetInfo();
+            }
+
+            if (includeWorld)
+            {
+                gameInfo.WorldInfo = this._worldManager.GetInfo();
+            }
+
+            return gameInfo;
         }
         public DGPlayerInfo GetGameWinner()
         {

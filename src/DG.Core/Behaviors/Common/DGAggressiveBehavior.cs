@@ -1,19 +1,21 @@
-﻿using DG.Core.Behaviour.Models;
+﻿using DG.Core.Behaviors.Models;
 using DG.Core.Components.Common;
 using DG.Core.Constants;
 using DG.Core.Entities;
 using DG.Core.Entities.Players;
 using DG.Core.Information.Actions;
 using DG.Core.Items.Weapons;
+using DG.Core.Localization;
 using DG.Core.Managers;
 using DG.Core.Utilities;
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Numerics;
 
-namespace DG.Core.Behaviour.Common
+namespace DG.Core.Behaviors.Common
 {
     internal sealed class DGAggressiveBehavior : IDGBehaviour
     {
@@ -29,6 +31,12 @@ namespace DG.Core.Behaviour.Common
 
         // Infos
         private DGPlayer _targetEntity;
+        private DGWeapon _weaponUsed;
+        private int _totalDamage;
+        private int _attackTest;
+        private int _attributeValue;
+        private bool _isCriticalAttack;
+        private AttackOutcome _attackResult;
 
         // Components
         private DGTransformComponent _transformComponent;
@@ -44,6 +52,9 @@ namespace DG.Core.Behaviour.Common
         private DGEquipmentComponent _targetEquipmentComponent;
         private DGHealthComponent _targetEntityHealth;
         private DGRelationshipsComponent _targetRelationshipsComponent;
+
+        // Consts
+        private const string S_AGGRESSIVE_BEHAVIOR = "Aggressive_Behavior";
 
         public bool CanAct(DGEntity entity, DGGame game)
         {
@@ -154,15 +165,49 @@ namespace DG.Core.Behaviour.Common
         public DGPlayerActionInfo Act()
         {
             // Attack Calculation
-            AttackOutcome attackResult = AttemptAttack();
+            this._attackResult = AttemptAttack();
 
             // Modify Relationships
             ModifyRelationships();
 
-            // Handle Attack Outcome
-            DGPlayerActionInfo infos = HandleAttackOutcome(attackResult);
-
             // Return Behaviour Act Infos
+            DGPlayerActionInfo infos = new();
+
+            string entityName = this._entity.Name;
+            string opponentsName = this._targetEntity.Name;
+            string weaponName = this._weaponUsed == null ? DGLocalization.Read("Items", "Weapon_Hand") : this._weaponUsed.Name;
+
+            infos.WithName(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Name"));
+            if (this._targetEntityHealth.IsDead)
+            {
+                // Death Message
+                infos.WithTitle(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Killed_Title"), entityName, opponentsName));
+                infos.WithDescription(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Killed_Description"), entityName, opponentsName, this._totalDamage, weaponName));
+                infos.WithPriorityLevel(10);
+                infos.WithColor(Color.DarkRed);
+            }
+            else
+            {
+                // Hurt Message
+                if (this._attackResult == AttackOutcome.Successful)
+                {
+                    infos.WithTitle(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Success_Title"), entityName, opponentsName));
+                    infos.WithDescription(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Success_Description") + (this._isCriticalAttack ? ' ' + DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_IsCritical") : string.Empty), entityName, this._totalDamage, weaponName, opponentsName));
+                    infos.WithColor(Color.Red);
+                }
+                else
+                {
+                    infos.WithTitle(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Failed_Title"), entityName, opponentsName));
+                    infos.WithDescription(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Failed_Description"), entityName, this._totalDamage, opponentsName));
+                    infos.WithColor(Color.OrangeRed);
+                }
+
+                infos.WithPriorityLevel(8);
+            }
+
+            infos.WithAuthor(this._entity.Id);
+            infos.WithInvolved(this._targetEntity.Id);
+
             return infos;
         }
 
@@ -182,50 +227,48 @@ namespace DG.Core.Behaviour.Common
         }
         private AttackOutcome AttemptAttack()
         {
-            int totalDamage;
-            int attackTest;
-            int attributeValue;
-
-            if (this._equipmentComponent.Weapon == null)
+            this._weaponUsed = this._equipmentComponent.Weapon;
+            if (this._weaponUsed == null)
             {
                 // Attack with the hand.
-                attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, this._characteristicsComponent.Strength);
-                attributeValue = this._characteristicsComponent.Strength;
+                this._attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, this._characteristicsComponent.Strength);
+                this._attributeValue = this._characteristicsComponent.Strength;
             }
             else
             {
                 // Attack with the respective equipped weapon.
-                switch (this._equipmentComponent.Weapon.WeaponType)
+                switch (this._weaponUsed.WeaponType)
                 {
                     case DGWeaponType.Melee:
-                        attributeValue = this._characteristicsComponent.Strength;
-                        attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, attributeValue);
+                        this._attributeValue = this._characteristicsComponent.Strength;
+                        this._attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, this._attributeValue);
                         break;
 
                     case DGWeaponType.Ranged:
-                        attributeValue = this._characteristicsComponent.Dexterity;
-                        attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, attributeValue);
+                        this._attributeValue = this._characteristicsComponent.Dexterity;
+                        this._attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, this._attributeValue);
                         break;
 
                     case DGWeaponType.Magic:
-                        attributeValue = this._characteristicsComponent.Intelligence;
-                        attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, attributeValue);
+                        this._attributeValue = this._characteristicsComponent.Intelligence;
+                        this._attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, this._attributeValue);
                         break;
 
                     default:
-                        attributeValue = this._characteristicsComponent.Strength;
-                        attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, attributeValue);
+                        this._attributeValue = this._characteristicsComponent.Strength;
+                        this._attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, this._attributeValue);
                         break;
                 }
             }
 
             // Check if it was a critical value
-            totalDamage = this._combatComponent.GetFullAttackDamage(DGAttributesUtilities.IsMaxAttributeValueInTest(attributeValue, attackTest));
+            _isCriticalAttack = DGAttributesUtilities.IsMaxAttributeValueInTest(this._attributeValue, this._attackTest);
+            this._totalDamage = this._combatComponent.GetFullAttackDamage(_isCriticalAttack);
 
             // Verify that the current attack roll was greater than or equal to the target's armor class value.
-            if (attackTest >= this._targetEquipmentComponent.GetArmoredClass())
+            if (this._attackTest >= this._targetEquipmentComponent.GetArmoredClass())
             {
-                this._targetEntityHealth.Hurt(totalDamage);
+                this._targetEntityHealth.Hurt(this._totalDamage);
                 return AttackOutcome.Successful;
             }
 
@@ -236,23 +279,6 @@ namespace DG.Core.Behaviour.Common
         {
             this._relationshipsComponent.DecreaseRelationshipValue(this._targetEntity, 20);
             this._targetRelationshipsComponent.DecreaseRelationshipValue(this._entity, 20);
-        }
-        private DGPlayerActionInfo HandleAttackOutcome(AttackOutcome result)
-        {
-            DGPlayerActionInfo outcomeInfo = new();
-            switch (result)
-            {
-                case AttackOutcome.Successful:
-                    outcomeInfo.WithTitle("Attack Successful");
-                    outcomeInfo.WithDescription($"Dealt damage to {this._targetEntity.Name}.");
-                    break;
-                case AttackOutcome.Failed:
-                    outcomeInfo.WithTitle("Attack Failed");
-                    outcomeInfo.WithDescription($"Missed the attack on {this._targetEntity.Name}.");
-                    break;
-            }
-
-            return outcomeInfo;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using DG.Core.Behaviour;
+﻿using DG.Core.Behaviors;
 using DG.Core.Constants;
 using DG.Core.Information.Actions;
 

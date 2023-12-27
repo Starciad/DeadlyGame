@@ -3,6 +3,8 @@ using DG.Core.Builders;
 using DG.Core.Information;
 
 using System;
+using System.IO;
+using System.Text.Json;
 
 namespace DG
 {
@@ -19,21 +21,33 @@ namespace DG
             // ======== Game Routine ======== //
 
             game.StartGame();
+            DGGameInfo gameInfo = default;
 
             while (game.ShouldUpdateGame())
             {
                 game.UpdateGame();
+                gameInfo = game.GetGameInfo();
 
-                DGGameInfo gameInfo = game.GetGameInfo();
                 Console.Clear();
-                Console.WriteLine($"Rodada: {gameInfo.RoundInfo.CurrentRound} || Dia: {gameInfo.WorldInfo.CurrentDay} ({gameInfo.WorldInfo.CurrentDaylightCycle})");
-                Console.WriteLine($"Jogadores: {gameInfo.PlayersInfo.ActivePlayers.Length}\n");
+                Console.WriteLine(gameInfo.PlayersInfo.ActivePlayers.Length);
+                if (gameInfo.PlayersInfo.ActivePlayers.Length <= 50)
+                {
+                    break;
+                }
             }
 
             game.FinishGame();
             game.Dispose();
 
             // ============================== //
+
+            Console.WriteLine("START");
+            StreamWriter sw = new(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Ex", "DGGameInfo.json"));
+
+            string result = JsonSerializer.Serialize(gameInfo, JsonSerializerOptions.Default);
+
+            sw.Write(result);
+            sw.Close();
 
             Console.WriteLine("Finished");
         }
