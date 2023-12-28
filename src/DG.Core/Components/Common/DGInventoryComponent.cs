@@ -60,7 +60,7 @@ namespace DG.Core.Components.Common
                 throw new DGInvalidItemTypeException($"The type representing the item trying to be added to the inventory does not correspond to a valid {nameof(DGItem)}.");
             }
 
-            _ = TryAddItem((DGItem)Activator.CreateInstance(itemType), amount);
+            _ = TryAddItem(this.Game.ItemDatabase.GetItem(itemType), amount);
         }
 
         // ===== REMOVE =====
@@ -105,7 +105,7 @@ namespace DG.Core.Components.Common
         {
             return !itemType.IsSubclassOf(typeof(DGItem))
                 ? throw new DGInvalidItemTypeException($"The type representing the item trying to be added to the inventory does not correspond to a valid {nameof(DGItem)}.")
-                : TryAddItem((DGItem)Activator.CreateInstance(itemType), amount);
+                : TryAddItem(this.Game.ItemDatabase.GetItem(itemType), amount);
         }
         internal bool TryAddItem(DGItem item, int amount)
         {

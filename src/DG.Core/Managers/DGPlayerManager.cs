@@ -77,7 +77,7 @@ namespace DG.Core.Managers
         {
             List<DGPlayerActionInfo> actionsFound = [];
 
-            foreach (DGPlayer player in this.players)
+            foreach (DGPlayer player in this.ActivePlayers)
             {
                 if (player.ComponentContainer.TryGetComponent(out DGBehaviourComponent component))
                 {

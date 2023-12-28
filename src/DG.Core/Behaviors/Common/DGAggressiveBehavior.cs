@@ -19,12 +19,6 @@ namespace DG.Core.Behaviors.Common
 {
     internal sealed class DGAggressiveBehavior : IDGBehaviour
     {
-        internal enum AttackOutcome
-        {
-            Successful,
-            Failed
-        }
-
         // System
         private DGEntity _entity;
         private DGGame _game;
@@ -36,7 +30,6 @@ namespace DG.Core.Behaviors.Common
         private int _attackTest;
         private int _attributeValue;
         private bool _isCriticalAttack;
-        private AttackOutcome _attackResult;
 
         // Components
         private DGTransformComponent _transformComponent;
@@ -165,7 +158,7 @@ namespace DG.Core.Behaviors.Common
         public DGPlayerActionInfo Act()
         {
             // Attack Calculation
-            this._attackResult = AttemptAttack();
+            AttemptAttack();
 
             // Modify Relationships
             ModifyRelationships();
@@ -188,20 +181,9 @@ namespace DG.Core.Behaviors.Common
             }
             else
             {
-                // Hurt Message
-                if (this._attackResult == AttackOutcome.Successful)
-                {
-                    infos.WithTitle(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Success_Title"), entityName, opponentsName));
-                    infos.WithDescription(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Success_Description") + (this._isCriticalAttack ? ' ' + DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_IsCritical") : string.Empty), entityName, this._totalDamage, weaponName, opponentsName));
-                    infos.WithColor(Color.Red);
-                }
-                else
-                {
-                    infos.WithTitle(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Failed_Title"), entityName, opponentsName));
-                    infos.WithDescription(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Failed_Description"), entityName, this._totalDamage, opponentsName));
-                    infos.WithColor(Color.OrangeRed);
-                }
-
+                infos.WithTitle(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Success_Title"), entityName, opponentsName));
+                infos.WithDescription(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Success_Description") + (this._isCriticalAttack ? ' ' + DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_IsCritical") : string.Empty), entityName, this._totalDamage, weaponName, opponentsName));
+                infos.WithColor(Color.Red);
                 infos.WithPriorityLevel(8);
             }
 
@@ -225,7 +207,7 @@ namespace DG.Core.Behaviors.Common
 
             return null;
         }
-        private AttackOutcome AttemptAttack()
+        private void AttemptAttack()
         {
             this._weaponUsed = this._equipmentComponent.Weapon;
             if (this._weaponUsed == null)
@@ -265,15 +247,7 @@ namespace DG.Core.Behaviors.Common
             _isCriticalAttack = DGAttributesUtilities.IsMaxAttributeValueInTest(this._attributeValue, this._attackTest);
             this._totalDamage = this._combatComponent.GetFullAttackDamage(_isCriticalAttack);
 
-            // Verify that the current attack roll was greater than or equal to the target's armor class value.
-            if (this._attackTest >= this._targetEquipmentComponent.GetArmoredClass())
-            {
-                this._targetEntityHealth.Hurt(this._totalDamage);
-                return AttackOutcome.Successful;
-            }
-
-            // If not, the attack is seen as a failure.
-            return AttackOutcome.Failed;
+            this._targetEntityHealth.Hurt(this._totalDamage);
         }
         private void ModifyRelationships()
         {

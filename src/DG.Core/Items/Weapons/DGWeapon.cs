@@ -1,10 +1,11 @@
 ﻿namespace DG.Core.Items.Weapons
 {
-    internal enum DGWeaponType
+    public enum DGWeaponType
     {
-        Melee,
-        Ranged,
-        Magic
+        None = -1,
+        Melee = 0,
+        Ranged = 1,
+        Magic = 2
     }
 
     internal abstract class DGWeapon : DGItem

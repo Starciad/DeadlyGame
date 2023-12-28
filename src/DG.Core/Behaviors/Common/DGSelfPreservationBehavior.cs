@@ -1,15 +1,17 @@
-﻿using DG.Core.Behaviors;
-using DG.Core.Behaviors.Models;
+﻿using DG.Core.Behaviors.Models;
 using DG.Core.Components.Common;
 using DG.Core.Effects.Common;
 using DG.Core.Entities;
 using DG.Core.Information.Actions;
 using DG.Core.Items;
 using DG.Core.Items.Foods;
+using DG.Core.Localization;
 using DG.Core.Utilities;
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Text;
 
 namespace DG.Core.Behaviors.Common
 {
@@ -21,12 +23,16 @@ namespace DG.Core.Behaviors.Common
 
         // Infos
         private int healthPercentage;
+        private readonly StringBuilder descriptionStringBuilder = new();
 
         // Components
         private DGHealthComponent _healthComponent;
         private DGHungerComponent _hungerComponent;
         private DGEffectsComponent _effectsComponent;
         private DGInventoryComponent _inventoryComponent;
+
+        // Consts
+        private const string S_SELF_PRESERVATION_BEHAVIOR = "Self_Preservation";
 
         public bool CanAct(DGEntity entity, DGGame game)
         {
@@ -74,7 +80,9 @@ namespace DG.Core.Behaviors.Common
         }
         public DGPlayerActionInfo Act()
         {
-            DGPlayerActionInfo infos = new();
+            this.descriptionStringBuilder.Clear();
+            this.descriptionStringBuilder.AppendFormat(DGLocalization.Read(S_SELF_PRESERVATION_BEHAVIOR, "Description_Intro"), this._entity.Name);
+            this.descriptionStringBuilder.Append(' ');
 
             // If health is less than 50%, start a rest.
             if (this._effectsComponent != null)
@@ -82,6 +90,9 @@ namespace DG.Core.Behaviors.Common
                 if (this.healthPercentage <= 50)
                 {
                     this._effectsComponent.AddEffect<DGRestEffect>();
+
+                    this.descriptionStringBuilder.AppendFormat(DGLocalization.Read(S_SELF_PRESERVATION_BEHAVIOR, "Description_Health"));
+                    this.descriptionStringBuilder.Append(' ');
                 }
             }
 
@@ -89,8 +100,10 @@ namespace DG.Core.Behaviors.Common
             if (this._hungerComponent != null &&
                 this._inventoryComponent != null)
             {
+                this.descriptionStringBuilder.Append(DGLocalization.Read(S_SELF_PRESERVATION_BEHAVIOR, "Description_Hunger"));
                 List<DGFood> foods = GetFoodFromInventory(this._inventoryComponent);
 
+                // Feeding loop until you are satiated or the food runs out.
                 while (foods.Count > 0 && this._hungerComponent.CurrentHunger > 0)
                 {
                     DGFood randomFood = foods[this._game.Random.Range(0, foods.Count)];
@@ -107,6 +120,13 @@ namespace DG.Core.Behaviors.Common
                 }
             }
 
+            DGPlayerActionInfo infos = new();
+            infos.WithName(DGLocalization.Read(S_SELF_PRESERVATION_BEHAVIOR, "Name"));
+            infos.WithTitle(string.Format(DGLocalization.Read(S_SELF_PRESERVATION_BEHAVIOR, "Title"), this._entity.Name));
+            infos.WithDescription(this.descriptionStringBuilder.ToString());
+            infos.WithPriorityLevel(5);
+            infos.WithAuthor(this._entity.Id);
+            infos.WithColor(Color.MediumPurple);
             return infos;
         }
 

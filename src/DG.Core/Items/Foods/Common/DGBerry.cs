@@ -1,7 +1,9 @@
-﻿using DG.Core.Localization;
+﻿using DG.Core.Items.Attributes;
+using DG.Core.Localization;
 
 namespace DG.Core.Items.Foods.Common
 {
+    [DGItemRegisterAttribute]
     internal sealed class DGBerry : DGFood
     {
         public DGBerry()

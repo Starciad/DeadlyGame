@@ -11,7 +11,9 @@ namespace DG.Core.Crafting
         internal Type ItemType { get; private set; }
         internal DGCraftingMaterial[] RequiredMaterials { get; private set; }
 
-        internal DGCraftingRecipe(Type itemType, DGCraftingMaterial[] materials)
+        private readonly DGGame _game;
+
+        internal DGCraftingRecipe(DGGame game, Type itemType, DGCraftingMaterial[] materials)
         {
             if (!itemType.IsSubclassOf(typeof(DGItem)))
             {
@@ -23,6 +25,7 @@ namespace DG.Core.Crafting
                 throw new ArgumentOutOfRangeException(nameof(materials), "A recipe must have at least one required material.");
             }
 
+            this._game = game;
             this.ItemType = itemType;
             this.RequiredMaterials = materials;
         }
@@ -61,7 +64,7 @@ namespace DG.Core.Crafting
                 _ = inventoryComponent.TryRemoveItem(requiredMaterial.ItemType, requiredMaterial.Count);
             }
 
-            DGItem targetItem = (DGItem)Activator.CreateInstance(this.ItemType);
+            DGItem targetItem = this._game.ItemDatabase.GetItem(this.ItemType);
             item = targetItem;
             return true;
         }

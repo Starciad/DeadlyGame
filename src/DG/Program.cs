@@ -20,20 +20,17 @@ namespace DG
 
             // ======== Game Routine ======== //
 
+            Console.WriteLine("START");
             game.StartGame();
-            DGGameInfo gameInfo = default;
 
             while (game.ShouldUpdateGame())
             {
                 game.UpdateGame();
-                gameInfo = game.GetGameInfo();
+                DGGameInfo info = game.GetGameInfo();
 
                 Console.Clear();
-                Console.WriteLine(gameInfo.PlayersInfo.ActivePlayers.Length);
-                if (gameInfo.PlayersInfo.ActivePlayers.Length <= 50)
-                {
-                    break;
-                }
+                Console.WriteLine($"[ Round: {info.RoundInfo.CurrentRound} || Day: {info.WorldInfo.CurrentDay} ({info.WorldInfo.CurrentDaylightCycle}) ]");
+                Console.WriteLine($"Players: {info.PlayersInfo.ActivePlayers.Length}/{info.PlayersInfo.Players.Length};");
             }
 
             game.FinishGame();
@@ -41,13 +38,11 @@ namespace DG
 
             // ============================== //
 
-            Console.WriteLine("START");
-            StreamWriter sw = new(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Ex", "DGGameInfo.json"));
-
-            string result = JsonSerializer.Serialize(gameInfo, JsonSerializerOptions.Default);
-
-            sw.Write(result);
-            sw.Close();
+            //Console.WriteLine("START");
+            //using StreamWriter sw = new(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Ex", "DGGameInfo.json"));
+            //string result = JsonSerializer.Serialize(gameInfo, JsonSerializerOptions.Default);
+            //sw.Write(result);
+            //sw.Close();
 
             Console.WriteLine("Finished");
         }
@@ -81,7 +76,7 @@ namespace DG
         {
             return new()
             {
-                Size = new(100),
+                Size = new(80),
                 Resources = new()
                 {
                     TreeCount = 100,

@@ -45,13 +45,14 @@ namespace DG.Core.Components.Common
 
         private DGAction[] GetPossibleActions()
         {
-            List<DGAction> actions = [];
-            foreach (IDGBehaviour behaviour in this.definedBehaviors)
+            IDGBehaviour[] behaviours = this.definedBehaviors.Where(x => x.CanAct(this.Entity, this.Game)).ToArray();
+            int behavioursLength = behaviours.Length;
+
+            DGAction[] actions = new DGAction[behavioursLength];
+            for (int i = 0; i < behavioursLength; i++)
             {
-                if (behaviour.CanAct(this.Entity, this.Game))
-                {
-                    actions.Add(new(behaviour, behaviour.GetWeight().Value));
-                }
+                IDGBehaviour behaviour = behaviours[i];
+                actions[i] = new(behaviour, behaviour.GetWeight().Value);
             }
 
             return [.. actions.OrderByDescending(a => a.Weight)];

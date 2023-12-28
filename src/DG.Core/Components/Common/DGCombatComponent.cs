@@ -16,7 +16,7 @@
             // Apply base weapon damage
             if (this.Entity.ComponentContainer.TryGetComponent(out DGEquipmentComponent value))
             {
-                attackValue = value.Weapon == null ? 1 : this.Game.Dice.Roll(value.Weapon.Damage);
+                attackValue = value.Weapon == null ? 2 : this.Game.Dice.Roll(value.Weapon.Damage);
             }
 
             // Apply Buff Modifiers

@@ -1,5 +1,7 @@
 ﻿using DG.Core.Builders;
 using DG.Core.Databases;
+using DG.Core.Databases.Crafting;
+using DG.Core.Databases.Items;
 using DG.Core.Dice;
 using DG.Core.Information;
 using DG.Core.Information.Players;
@@ -21,6 +23,7 @@ namespace DG.Core
 
         // Databases
         internal DGCraftingDatabase CraftingDatabase => this._craftingDatabase;
+        internal DGItemDatabase ItemDatabase => this._itemDatabase;
 
         // Managers
         internal DGPlayerManager PlayerManager => this._playersManager;
@@ -37,6 +40,7 @@ namespace DG.Core
 
         // Database
         private readonly DGCraftingDatabase _craftingDatabase = new();
+        private readonly DGItemDatabase _itemDatabase = new();
 
         // Managers
         private DGPlayerManager _playersManager = new();
@@ -50,9 +54,14 @@ namespace DG.Core
         {
             DGLocalization.Initialize(gameBuilder.LocalizationFilename);
 
+            this._itemDatabase.SetGameInstance(this);
+            this._craftingDatabase.SetGameInstance(this);
             this._worldManager.SetGameInstance(this);
             this._playersManager.SetGameInstance(this);
             this._roundManager.SetGameInstance(this);
+
+            this._itemDatabase.Initialize();
+            this._craftingDatabase.Initialize();
 
             this._worldManager.Initialize(worldBuilder);
             this._playersManager.Initialize(this._gameSettings.Players);

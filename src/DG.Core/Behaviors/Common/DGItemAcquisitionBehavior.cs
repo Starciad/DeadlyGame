@@ -28,7 +28,7 @@ namespace DG.Core.Behaviors.Common
         private DGInventoryComponent _inventoryComponent;
 
         // Consts
-        private const string S_ITEM_ACQUISITION = "Item_Acquisition_Behavior";
+        private const string S_ITEM_ACQUISITION_BEHAVIOUR = "Item_Acquisition_Behavior";
 
         public bool CanAct(DGEntity entity, DGGame game)
         {
@@ -81,13 +81,13 @@ namespace DG.Core.Behaviors.Common
             {
                 DGWorldItem itemObtained = distinctItemsObtained[i];
                 int count = itemsObtained.Count(x => x.Item.Name == itemObtained.Item.Name);
-                itemsObtainedString.AppendFormat(DGLocalization.Read(S_ITEM_ACQUISITION, "New_Item") + (i < distinctItemsObtainedCount ? ", " : string.Empty), count, itemObtained.Item.Name);
+                itemsObtainedString.AppendFormat(DGLocalization.Read(S_ITEM_ACQUISITION_BEHAVIOUR, "New_Item") + (i < distinctItemsObtainedCount ? ", " : string.Empty), count, itemObtained.Item.Name);
             }
 
-            DGLocalization.Read(S_ITEM_ACQUISITION, "Description");
+            DGLocalization.Read(S_ITEM_ACQUISITION_BEHAVIOUR, "Description");
             DGPlayerActionInfo infos = new();
-            infos.WithName(DGLocalization.Read(S_ITEM_ACQUISITION, "Name"));
-            infos.WithTitle(DGLocalization.Read(S_ITEM_ACQUISITION, "Title"));
+            infos.WithName(DGLocalization.Read(S_ITEM_ACQUISITION_BEHAVIOUR, "Name"));
+            infos.WithTitle(DGLocalization.Read(S_ITEM_ACQUISITION_BEHAVIOUR, "Title"));
             infos.WithDescription(itemsObtainedString.ToString());
             infos.WithPriorityLevel(4);
             infos.WithAuthor(this._entity.Id);

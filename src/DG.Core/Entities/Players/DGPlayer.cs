@@ -79,6 +79,7 @@ namespace DG.Core.Entities.Players
             this._behaviour.RegisterBehaviour(new DGResourceAcquisitionBehavior());
             this._behaviour.RegisterBehaviour(new DGItemAcquisitionBehavior());
             this._behaviour.RegisterBehaviour(new DGSelfPreservationBehavior());
+            this._behaviour.RegisterBehaviour(new DGEquipmentBehavior());
         }
         protected override void OnUpdate()
         {

@@ -2,15 +2,18 @@
 using DG.Core.Components.Common;
 using DG.Core.Entities;
 using DG.Core.Information.Actions;
+using DG.Core.Localization;
 using DG.Core.Managers;
 
 using System.Drawing;
+using System.Numerics;
 
 namespace DG.Core.Behaviors.Common
 {
     internal sealed class DGMovementBehavior : IDGBehaviour
     {
         // System
+        private DGEntity _entity;
         private DGGame _game;
 
         // Components
@@ -19,8 +22,12 @@ namespace DG.Core.Behaviors.Common
         private DGHungerComponent _hungerComponent;
         private DGCombatComponent _combatComponent;
 
+        // Consts
+        private const string S_MOVEMENT_BEHAVIOR = "Movement_Behavior";
+
         public bool CanAct(DGEntity entity, DGGame game)
         {
+            this._entity = entity;
             this._game = game;
 
             if (!entity.ComponentContainer.TryGetComponent(out this._transformComponent))
@@ -97,6 +104,8 @@ namespace DG.Core.Behaviors.Common
         }
         public DGPlayerActionInfo Act()
         {
+            Vector2 oldPos = this._transformComponent.Position;
+
             // === ACT ===
             int dr = this._combatComponent.DisplacementRate;
 
@@ -106,14 +115,16 @@ namespace DG.Core.Behaviors.Common
             this._transformComponent.Move(new(move_x, move_y));
             this._transformComponent.SetPosition(this._game.WorldManager.Clamp(this._transformComponent.Position));
 
+            Vector2 newPos = this._transformComponent.Position;
+
             // === INFOS ===
             DGPlayerActionInfo infos = new();
-            //infos.WithName(DGStringsConstants.Item_Acquisition_Name);
-            //infos.WithTitle(DGStringsConstants.Item_Acquisition_Title);
-            //infos.WithDescription(itemsObtainedString.ToString());
-            //infos.WithPriorityLevel(4);
-            //infos.WithAuthor(this._entity.Id);
-            //infos.WithColor(Color.LightYellow);
+            infos.WithName(DGLocalization.Read(S_MOVEMENT_BEHAVIOR, "Name"));
+            infos.WithTitle(string.Format(DGLocalization.Read(S_MOVEMENT_BEHAVIOR, "Title"), this._entity.Name));
+            infos.WithDescription(string.Format(DGLocalization.Read(S_MOVEMENT_BEHAVIOR, "Description"), this._entity.Name, oldPos.X, oldPos.Y, newPos.X, newPos.Y));
+            infos.WithPriorityLevel(4);
+            infos.WithAuthor(this._entity.Id);
+            infos.WithColor(Color.LightCyan);
             return infos;
         }
     }
