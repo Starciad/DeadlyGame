@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 
 namespace DG.Core.Information.Utils
 {
@@ -17,6 +18,11 @@ namespace DG.Core.Information.Utils
         {
             this.X = vector2.X;
             this.Y = vector2.Y;
+        }
+
+        public readonly Vector2 ToVector2()
+        {
+            return new(this.X, this.Y);
         }
     }
 }
