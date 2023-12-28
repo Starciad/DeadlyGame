@@ -1,4 +1,5 @@
 ﻿using DG.Core.Information.Items;
+using DG.Core.Information.Utils;
 using DG.Core.Items;
 
 using System.Numerics;
@@ -9,13 +10,13 @@ namespace DG.Core.Information.World
     {
         public DGItemInfo Item { get; set; }
         public int Amount { get; set; }
-        public Vector2 Position { get; set; }
+        public DGVector2 Position { get; set; }
 
         public DGWorldItemInfo()
         {
             this.Item = new();
             this.Amount = 0;
-            this.Position = Vector2.Zero;
+            this.Position = new();
         }
 
         internal static DGWorldItemInfo Create(DGWorldItem item)
@@ -24,7 +25,7 @@ namespace DG.Core.Information.World
             {
                 Item = DGItemInfo.Create(item.Item),
                 Amount = item.Amount,
-                Position = item.Position
+                Position = new(item.Position)
             };
         }
     }

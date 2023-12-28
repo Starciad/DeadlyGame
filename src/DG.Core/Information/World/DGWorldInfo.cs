@@ -1,4 +1,5 @@
-﻿using DG.Core.Managers;
+﻿using DG.Core.Information.Utils;
+using DG.Core.Managers;
 
 using System.Numerics;
 
@@ -8,14 +9,14 @@ namespace DG.Core.Information.World
     {
         public int CurrentDay { get; set; }
         public DGWorldDaylightCycleState CurrentDaylightCycle { get; set; }
-        public Vector2 WorldSize { get; set; }
+        public DGVector2 WorldSize { get; set; }
         public DGWorldResourcesInfo ResourceInfo { get; set; }
 
         public DGWorldInfo()
         {
             this.CurrentDay = 1;
             this.CurrentDaylightCycle = DGWorldDaylightCycleState.Day;
-            this.WorldSize = Vector2.Zero;
+            this.WorldSize = new();
             this.ResourceInfo = new();
         }
     }

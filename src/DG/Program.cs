@@ -1,10 +1,10 @@
 ﻿using DG.Core;
 using DG.Core.Builders;
 using DG.Core.Information;
+using DG.Tools;
 
 using System;
 using System.IO;
-using System.Text.Json;
 
 namespace DG
 {
@@ -21,28 +21,34 @@ namespace DG
             // ======== Game Routine ======== //
 
             Console.WriteLine("START");
+
             game.StartGame();
+            DGGameInfo info = new();
 
             while (game.ShouldUpdateGame())
             {
                 game.UpdateGame();
-                DGGameInfo info = game.GetGameInfo();
+                info = game.GetGameInfo();
 
                 Console.Clear();
                 Console.WriteLine($"[ Round: {info.RoundInfo.CurrentRound} || Day: {info.WorldInfo.CurrentDay} ({info.WorldInfo.CurrentDaylightCycle}) ]");
                 Console.WriteLine($"Players: {info.PlayersInfo.ActivePlayers.Length}/{info.PlayersInfo.Players.Length};");
+
+                if (info.PlayersInfo.ActivePlayers.Length < 50)
+                {
+                    break;
+                }
             }
 
             game.FinishGame();
             game.Dispose();
 
             // ============================== //
+            Console.WriteLine("START (Serializer)");
 
-            //Console.WriteLine("START");
-            //using StreamWriter sw = new(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Ex", "DGGameInfo.json"));
-            //string result = JsonSerializer.Serialize(gameInfo, JsonSerializerOptions.Default);
-            //sw.Write(result);
-            //sw.Close();
+            string filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Ex", "DGGameInfo.json");
+            DGJsonSerializer serializer = new(info);
+            serializer.Serialize(filename);
 
             Console.WriteLine("Finished");
         }
@@ -56,6 +62,7 @@ namespace DG
             };
         }
 
+        // ===== PLAYERS ===== //
         private static DGPlayerBuilder[] BuildPlayers(int amount)
         {
             DGPlayerBuilder[] players = new DGPlayerBuilder[amount];

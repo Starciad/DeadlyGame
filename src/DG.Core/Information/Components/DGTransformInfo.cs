@@ -1,23 +1,22 @@
 ﻿using DG.Core.Components.Common;
-
-using System.Numerics;
+using DG.Core.Information.Utils;
 
 namespace DG.Core.Information.Components
 {
     public struct DGTransformInfo
     {
-        public Vector2 Position { get; set; }
+        public DGVector2 Position { get; set; }
 
         public DGTransformInfo()
         {
-            this.Position = Vector2.Zero;
+            this.Position = new();
         }
 
         internal static DGTransformInfo Create(DGTransformComponent component)
         {
             return new()
             {
-                Position = component.Position
+                Position = new(component.Position)
             };
         }
     }

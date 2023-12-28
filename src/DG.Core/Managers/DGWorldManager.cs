@@ -165,7 +165,7 @@ namespace DG.Core.Managers
             {
                 CurrentDay = this.currentDay,
                 CurrentDaylightCycle = this.currentDaylightCycle,
-                WorldSize = this.worldSize,
+                WorldSize = new(this.worldSize),
                 ResourceInfo = new()
                 {
                     Resources = GetAllWorldResources(),
