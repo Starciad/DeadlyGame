@@ -1,6 +1,8 @@
-﻿namespace DeadlyGame.Core.Items.Materials.Common
+﻿using DeadlyGame.Core.Items.Templates.Materials;
+using DeadlyGame.Core.Localization;
+
+namespace DeadlyGame.Core.Items.Common.Materials
 {
-    [DGItemRegister]
     internal sealed class DGWood : DGMaterial
     {
         public DGWood()

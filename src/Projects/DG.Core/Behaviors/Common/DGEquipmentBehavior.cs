@@ -1,4 +1,10 @@
-﻿using System.Linq;
+﻿using DeadlyGame.Core.Behaviors.Models;
+using DeadlyGame.Core.Components.Common;
+using DeadlyGame.Core.Entities;
+using DeadlyGame.Core.Information.Actions;
+using DeadlyGame.Core.Items.Templates.Weapons;
+
+using System.Linq;
 
 namespace DeadlyGame.Core.Behaviors.Common
 {

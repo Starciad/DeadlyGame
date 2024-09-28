@@ -1,6 +1,8 @@
-﻿namespace DeadlyGame.Core.Items.Foods.Common
+﻿using DeadlyGame.Core.Items.Templates.Foods;
+using DeadlyGame.Core.Localization;
+
+namespace DeadlyGame.Core.Items.Common.Foods
 {
-    [DGItemRegister]
     internal sealed class DGBerry : DGFood
     {
         public DGBerry()

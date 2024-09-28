@@ -1,4 +1,14 @@
-﻿using DG.Core.Databases.Crafting;
+﻿using DeadlyGame.Core.Builders;
+using DeadlyGame.Core.Databases.Items;
+using DeadlyGame.Core.Dice;
+using DeadlyGame.Core.Information;
+using DeadlyGame.Core.Information.Players;
+using DeadlyGame.Core.Localization;
+using DeadlyGame.Core.Managers;
+using DeadlyGame.Core.Settings;
+using DeadlyGame.Core.Utilities;
+
+using DG.Core.Databases.Crafting;
 
 using System;
 

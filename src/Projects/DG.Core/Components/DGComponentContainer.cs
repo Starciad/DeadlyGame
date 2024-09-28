@@ -1,4 +1,8 @@
-﻿using System;
+﻿using DeadlyGame.Core.Entities;
+using DeadlyGame.Core.Exceptions.Components;
+using DeadlyGame.Core.Objects;
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 

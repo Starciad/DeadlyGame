@@ -1,4 +1,6 @@
-﻿namespace DeadlyGame.Core.Settings
+﻿using DeadlyGame.Core.Builders;
+
+namespace DeadlyGame.Core.Settings
 {
     internal struct DGGameSettings
     {

@@ -1,17 +1,11 @@
-﻿using System;
+﻿using DeadlyGame.Core.Entities;
+using DeadlyGame.Core.Enums;
+
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace DeadlyGame.Core.Relationships
 {
-    internal enum DGRelationshipLevelType
-    {
-        VeryLow,
-        Low,
-        Neutral,
-        High,
-        VeryHigh
-    }
-
     internal sealed class DGRelationship
     {
         internal float RelationshipValue => this.relationshipValue;

@@ -1,4 +1,6 @@
-﻿namespace DeadlyGame.Core.Items
+﻿using DeadlyGame.Core.Objects;
+
+namespace DeadlyGame.Core.Items
 {
     public enum DGItemRarity
     {

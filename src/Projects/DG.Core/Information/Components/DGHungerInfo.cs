@@ -1,4 +1,6 @@
-﻿namespace DeadlyGame.Core.Information.Components
+﻿using DeadlyGame.Core.Components.Common;
+
+namespace DeadlyGame.Core.Information.Components
 {
     public struct DGHungerInfo
     {

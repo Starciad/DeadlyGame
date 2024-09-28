@@ -1,32 +1,18 @@
-﻿using System;
+﻿using DeadlyGame.Core.Items;
+using DeadlyGame.Core.Objects;
+
+using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace DeadlyGame.Core.Databases.Items
 {
-    internal sealed class DGItemDatabase : DGObject
+    internal sealed partial class DGItemDatabase : DGObject
     {
         private readonly Dictionary<Type, DGItem> _items = [];
 
-        [RequiresUnreferencedCode("Calls System.Reflection.Assembly.GetTypes()")]
         protected override void OnAwake()
         {
-            Type[] types = typeof(DGItemDatabase).Assembly.GetTypes();
-            int length = types.Length;
-
-            _ = [];
-            for (int i = 0; i < length; i++)
-            {
-                Type type = types[i];
-                DGItemRegisterAttribute itemRegisterAttribute = type.GetCustomAttribute<DGItemRegisterAttribute>();
-                if (itemRegisterAttribute == null)
-                {
-                    continue;
-                }
-
-                this._items.Add(type, (DGItem)Activator.CreateInstance(type));
-            }
+            RegisterItems();
         }
 
         internal T GetItem<T>() where T : DGItem

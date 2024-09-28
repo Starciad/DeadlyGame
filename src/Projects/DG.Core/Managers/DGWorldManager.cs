@@ -1,16 +1,18 @@
-﻿using System;
+﻿using DeadlyGame.Core.Builders;
+using DeadlyGame.Core.Components.Common;
+using DeadlyGame.Core.Entities;
+using DeadlyGame.Core.Entities.Natural;
+using DeadlyGame.Core.Enums;
+using DeadlyGame.Core.Information.World;
+using DeadlyGame.Core.Items;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
 namespace DeadlyGame.Core.Managers
 {
-    public enum DGWorldDaylightCycleState
-    {
-        Day = 0,
-        Night = 1
-    }
-
     internal sealed class DGWorldManager : DGManager
     {
         internal int CurrentDay => this.currentDay;

@@ -1,4 +1,10 @@
-﻿namespace DeadlyGame.Core.Entities.Players
+﻿using DeadlyGame.Core.Behaviors.Common;
+using DeadlyGame.Core.Builders;
+using DeadlyGame.Core.Components.Common;
+using DeadlyGame.Core.Effects.Common;
+using DeadlyGame.Core.Utilities;
+
+namespace DeadlyGame.Core.Entities.Players
 {
     internal sealed class DGPlayer : DGEntity
     {

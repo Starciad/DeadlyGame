@@ -1,4 +1,8 @@
-﻿namespace DG.Core.Databases.Crafting
+﻿using DeadlyGame.Core.Crafting;
+using DeadlyGame.Core.Items.Common.Materials;
+using DeadlyGame.Core.Items.Common.Weapons;
+
+namespace DG.Core.Databases.Crafting
 {
     internal partial class DGCraftingDatabase
     {

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using DeadlyGame.Core.Constants;
+using DeadlyGame.Core.Exceptions.Items;
+using DeadlyGame.Core.Items;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +11,7 @@ namespace DeadlyGame.Core.Components.Common
     internal sealed class DGInventoryComponent : DGComponent
     {
         internal DGItem[] Items => this.slots.Select(x => x.Item).ToArray();
-        internal DGInventorySlot[] Slots => this.slots.ToArray();
+        internal DGInventorySlot[] Slots => [.. this.slots];
         internal int NumberOfSlots => this.numberOfSlots;
 
         private readonly List<DGInventorySlot> slots = [];

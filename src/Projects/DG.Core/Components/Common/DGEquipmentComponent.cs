@@ -1,4 +1,6 @@
-﻿namespace DeadlyGame.Core.Components.Common
+﻿using DeadlyGame.Core.Items.Templates.Weapons;
+
+namespace DeadlyGame.Core.Components.Common
 {
     internal sealed class DGEquipmentComponent : DGComponent
     {

@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using DeadlyGame.Core.Entities;
+using DeadlyGame.Core.Enums;
+using DeadlyGame.Core.Relationships;
+
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DeadlyGame.Core.Components.Common

@@ -1,4 +1,15 @@
-﻿using System;
+﻿using DeadlyGame.Core.Behaviors.Models;
+using DeadlyGame.Core.Components.Common;
+using DeadlyGame.Core.Constants;
+using DeadlyGame.Core.Entities;
+using DeadlyGame.Core.Entities.Players;
+using DeadlyGame.Core.Information.Actions;
+using DeadlyGame.Core.Items.Templates.Weapons;
+using DeadlyGame.Core.Localization;
+using DeadlyGame.Core.Managers;
+using DeadlyGame.Core.Utilities;
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;

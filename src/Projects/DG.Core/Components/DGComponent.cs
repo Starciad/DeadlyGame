@@ -1,4 +1,7 @@
-﻿namespace DeadlyGame.Core.Components
+﻿using DeadlyGame.Core.Entities;
+using DeadlyGame.Core.Objects;
+
+namespace DeadlyGame.Core.Components
 {
     internal class DGComponent : DGObject
     {

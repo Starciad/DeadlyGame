@@ -1,4 +1,7 @@
-﻿namespace DeadlyGame.Core.Entities.Natural
+﻿using DeadlyGame.Core.Components.Common;
+using DeadlyGame.Core.Items.Materials.Common;
+
+namespace DeadlyGame.Core.Entities.Natural
 {
     internal sealed class DGTerrainStone : DGEntity
     {

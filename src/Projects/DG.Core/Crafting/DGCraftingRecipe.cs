@@ -1,4 +1,8 @@
-﻿using System;
+﻿using DeadlyGame.Core.Components.Common;
+using DeadlyGame.Core.Exceptions.Items;
+using DeadlyGame.Core.Items;
+
+using System;
 
 namespace DeadlyGame.Core.Crafting
 {

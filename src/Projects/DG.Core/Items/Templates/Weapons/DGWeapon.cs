@@ -1,4 +1,4 @@
-﻿namespace DeadlyGame.Core.Items.Weapons
+﻿namespace DeadlyGame.Core.Items.Templates.Weapons
 {
     public enum DGWeaponType
     {

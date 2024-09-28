@@ -1,4 +1,8 @@
-﻿namespace DeadlyGame.Core.Behaviors
+﻿using DeadlyGame.Core.Behaviors.Models;
+using DeadlyGame.Core.Entities;
+using DeadlyGame.Core.Information.Actions;
+
+namespace DeadlyGame.Core.Behaviors
 {
     internal interface IDGBehaviour
     {

@@ -1,4 +1,7 @@
-﻿namespace DeadlyGame.Core.Information.World
+﻿using DeadlyGame.Core.Enums;
+using DeadlyGame.Core.Information.Utils;
+
+namespace DeadlyGame.Core.Information.World
 {
     public struct DGWorldInfo
     {

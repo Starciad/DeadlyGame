@@ -1,4 +1,7 @@
-﻿namespace DeadlyGame.Core.Information.Components
+﻿using DeadlyGame.Core.Components.Common;
+using DeadlyGame.Core.Effects;
+
+namespace DeadlyGame.Core.Information.Components
 {
     public struct DGEffectsInfo
     {

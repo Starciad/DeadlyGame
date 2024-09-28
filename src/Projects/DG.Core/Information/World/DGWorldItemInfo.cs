@@ -1,4 +1,8 @@
-﻿namespace DeadlyGame.Core.Information.World
+﻿using DeadlyGame.Core.Information.Items;
+using DeadlyGame.Core.Information.Utils;
+using DeadlyGame.Core.Items;
+
+namespace DeadlyGame.Core.Information.World
 {
     public struct DGWorldItemInfo
     {

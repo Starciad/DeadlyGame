@@ -1,6 +1,8 @@
-﻿namespace DeadlyGame.Core.Items.Weapons.Common
+﻿using DeadlyGame.Core.Items.Templates.Weapons;
+using DeadlyGame.Core.Localization;
+
+namespace DeadlyGame.Core.Items.Common.Weapons
 {
-    [DGItemRegister]
     internal sealed class DGStoneAxe : DGWeapon
     {
         public DGStoneAxe()

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DeadlyGame.Core.Effects;
+using DeadlyGame.Core.Exceptions.Effects;
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -7,7 +10,7 @@ namespace DeadlyGame.Core.Components.Common
 {
     internal sealed class DGEffectsComponent : DGComponent
     {
-        internal DGEffect[] Effects => this._effects.Values.ToArray();
+        internal DGEffect[] Effects => [.. this._effects.Values];
 
         // effects
         private readonly Dictionary<Type, DGEffect> _effects = [];
@@ -87,7 +90,7 @@ namespace DeadlyGame.Core.Components.Common
         }
         internal DGEffect GetEffect(Type effectType)
         {
-            return this._effects.ContainsKey(effectType) ? this._effects[effectType] : null;
+            return this._effects.TryGetValue(effectType, out DGEffect value) ? value : null;
         }
         internal bool HasEffect(Type effectType)
         {

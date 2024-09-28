@@ -1,4 +1,14 @@
-﻿using System;
+﻿using DeadlyGame.Core.Behaviors.Models;
+using DeadlyGame.Core.Components.Common;
+using DeadlyGame.Core.Effects.Common;
+using DeadlyGame.Core.Entities;
+using DeadlyGame.Core.Information.Actions;
+using DeadlyGame.Core.Items;
+using DeadlyGame.Core.Items.Templates.Foods;
+using DeadlyGame.Core.Localization;
+using DeadlyGame.Core.Utilities;
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;

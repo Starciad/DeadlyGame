@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DeadlyGame.Core.Dice;
+
+using System;
 
 namespace DeadlyGame.Core.Utilities
 {

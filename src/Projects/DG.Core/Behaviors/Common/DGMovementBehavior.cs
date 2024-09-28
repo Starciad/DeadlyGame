@@ -1,4 +1,11 @@
-﻿using System.Drawing;
+﻿using DeadlyGame.Core.Behaviors.Models;
+using DeadlyGame.Core.Components.Common;
+using DeadlyGame.Core.Entities;
+using DeadlyGame.Core.Information.Actions;
+using DeadlyGame.Core.Localization;
+using DeadlyGame.Core.Managers;
+
+using System.Drawing;
 using System.Numerics;
 
 namespace DeadlyGame.Core.Behaviors.Common

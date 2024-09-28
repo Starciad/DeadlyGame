@@ -1,4 +1,6 @@
-﻿namespace DeadlyGame.Core.Information.Items
+﻿using DeadlyGame.Core.Items.Templates.Weapons;
+
+namespace DeadlyGame.Core.Information.Items
 {
     public struct DGWeaponInfo
     {
