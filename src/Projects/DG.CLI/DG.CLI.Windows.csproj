@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../../Targets/Windows/General.targets"></Import>
+	<Import Project="../../Targets/Windows/Information.targets"></Import>
+	<Import Project="../../Targets/Windows/Compilation.targets"></Import>
+
+	<PropertyGroup Label="Header">
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Label="General">
+		<AssemblyName>DeadlyGame.CLI</AssemblyName>
+		<RootNamespace>DeadlyGame.CLI</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup Label="Files">
+		<None Include="..\..\..\LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="..\..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	
+	<ItemGroup Label="Project References">
+		<ProjectReference Include="..\DG.Assets\DG.Assets.Windows.csproj" />
+		<ProjectReference Include="..\DG.Core\DG.Core.Windows.csproj" />
+	</ItemGroup>
+</Project>

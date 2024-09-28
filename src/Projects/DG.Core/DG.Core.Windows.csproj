@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../../Targets/Windows/General.targets"></Import>
+	<Import Project="../../Targets/Windows/Information.targets"></Import>
+	<Import Project="../../Targets/Windows/Compilation.targets"></Import>
+
+	<PropertyGroup Label="Header">
+		<OutputType>Library</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Label="General">
+		<AssemblyName>DeadlyGame.Core</AssemblyName>
+		<RootNamespace>DeadlyGame.Core</RootNamespace>
+		<DebugType>embedded</DebugType>
+		<Trimming>full</Trimming>
+	</PropertyGroup>
+
+	<ItemGroup Label="Files">
+		<None Include="..\..\..\LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="..\..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+</Project>
