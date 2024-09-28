@@ -2,18 +2,18 @@
 
 namespace DeadlyGame.Core.Exceptions.Effects
 {
-    internal sealed class DGInvalidEffectTypeException : Exception
+    public sealed class DGInvalidEffectTypeException : Exception
     {
-        internal DGInvalidEffectTypeException()
+        public DGInvalidEffectTypeException()
         {
         }
 
-        internal DGInvalidEffectTypeException(string message)
+        public DGInvalidEffectTypeException(string message)
             : base(message)
         {
         }
 
-        internal DGInvalidEffectTypeException(string message, Exception innerException)
+        public DGInvalidEffectTypeException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

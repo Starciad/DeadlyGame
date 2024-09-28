@@ -17,7 +17,7 @@ using System.Text;
 
 namespace DeadlyGame.Core.GameContent.Behaviors
 {
-    internal sealed class DGSelfPreservationBehavior : IDGBehaviour
+    public sealed class DGSelfPreservationBehavior : IDGBehaviour
     {
         // System
         private DGEntity _entity;

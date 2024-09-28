@@ -11,7 +11,7 @@ using DeadlyGame.Core.Models.Infos.Actions;
 
 namespace DeadlyGame.Core.GameContent.Behaviors
 {
-    internal sealed class DGMovementBehavior : IDGBehaviour
+    public sealed class DGMovementBehavior : IDGBehaviour
     {
         // System
         private DGEntity _entity;

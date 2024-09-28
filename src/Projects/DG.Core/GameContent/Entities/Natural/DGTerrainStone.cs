@@ -4,9 +4,9 @@ using DeadlyGame.Core.GameContent.Items.Materials;
 
 namespace DeadlyGame.Core.GameContent.Entities.Natural
 {
-    internal sealed class DGTerrainStone : DGEntity
+    public sealed class DGTerrainStone : DGEntity
     {
-        internal DGTerrainStone()
+        public DGTerrainStone()
         {
             this.Name = "Pedra";
         }

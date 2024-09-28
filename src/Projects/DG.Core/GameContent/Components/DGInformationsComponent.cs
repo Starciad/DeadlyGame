@@ -2,11 +2,11 @@
 
 namespace DeadlyGame.Core.GameContent.Components
 {
-    internal sealed class DGInformationsComponent : DGComponent
+    public sealed class DGInformationsComponent : DGComponent
     {
-        internal byte Age { get; private set; }
+        public byte Age { get; private set; }
 
-        internal void Randomize()
+        public void Randomize()
         {
             this.Age = (byte)this.Game.Random.Range(20, 60);
         }

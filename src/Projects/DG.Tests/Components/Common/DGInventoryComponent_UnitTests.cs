@@ -1,4 +1,8 @@
-﻿namespace DeadlyGame.Tests.Components.Common
+﻿using DeadlyGame.Core.Constants;
+using DeadlyGame.Core.GameContent.Components;
+using DeadlyGame.Core.Items;
+
+namespace DeadlyGame.Tests.Components.Common
 {
     public sealed class DGInventoryComponent_UnitTests
     {

@@ -4,17 +4,17 @@
     {
         protected DGGame Game { get; private set; }
 
-        internal virtual void SetGameInstance(DGGame game)
+        public virtual void SetGameInstance(DGGame game)
         {
             this.Game = game;
         }
 
-        internal void Initialize()
+        public void Initialize()
         {
             OnAwake();
             OnStart();
         }
-        internal void Update()
+        public void Update()
         {
             OnUpdate();
         }

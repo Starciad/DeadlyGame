@@ -2,18 +2,18 @@
 
 namespace DeadlyGame.Core.Exceptions.Components
 {
-    internal sealed class DGDuplicateComponentsException : Exception
+    public sealed class DGDuplicateComponentsException : Exception
     {
-        internal DGDuplicateComponentsException()
+        public DGDuplicateComponentsException()
         {
         }
 
-        internal DGDuplicateComponentsException(string message)
+        public DGDuplicateComponentsException(string message)
             : base(message)
         {
         }
 
-        internal DGDuplicateComponentsException(string message, Exception innerException)
+        public DGDuplicateComponentsException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

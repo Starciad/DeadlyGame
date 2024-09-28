@@ -1,10 +1,11 @@
 ﻿using DeadlyGame.Core.Enums.Items;
+using DeadlyGame.Core.Enums.Items.Weapons;
 using DeadlyGame.Core.Items.Templates.Weapons;
 using DeadlyGame.Core.Localization;
 
 namespace DeadlyGame.Core.GameContent.Items.Weapons
 {
-    internal sealed class DGWoodenAxe : DGWeapon
+    public sealed class DGWoodenAxe : DGWeapon
     {
         public DGWoodenAxe()
         {

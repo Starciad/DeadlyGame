@@ -5,7 +5,7 @@ using DeadlyGame.Core.Objects;
 
 namespace DeadlyGame.Core.Databases.Items
 {
-    internal sealed partial class DGItemDatabase : DGObject
+    public sealed partial class DGItemDatabase : DGObject
     {
         private void RegisterItems()
         {

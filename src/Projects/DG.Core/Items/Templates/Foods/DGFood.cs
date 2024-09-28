@@ -1,7 +1,7 @@
 ﻿namespace DeadlyGame.Core.Items.Templates.Foods
 {
-    internal abstract class DGFood : DGItem
+    public abstract class DGFood : DGItem
     {
-        internal int SatietyFactor { get; set; }
+        public int SatietyFactor { get; set; }
     }
 }

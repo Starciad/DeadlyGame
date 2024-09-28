@@ -1,7 +1,7 @@
 ﻿namespace DeadlyGame.Core.Constants
 {
-    internal static class DGBehaviourConstants
+    public static class DGBehaviourConstants
     {
-        internal const int MAXIMUM_SELECTION_OF_BEST_BEHAVIORS = 3;
+        public const int MAXIMUM_SELECTION_OF_BEST_BEHAVIORS = 3;
     }
 }

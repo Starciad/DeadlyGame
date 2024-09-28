@@ -5,9 +5,9 @@ using DeadlyGame.Core.GameContent.Items.Materials;
 
 namespace DeadlyGame.Core.GameContent.Entities.Natural
 {
-    internal sealed class DGTree : DGEntity
+    public sealed class DGTree : DGEntity
     {
-        internal DGTree()
+        public DGTree()
         {
             this.Name = "Árvore";
         }

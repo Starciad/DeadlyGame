@@ -12,7 +12,7 @@ using System.Drawing;
 
 namespace DeadlyGame.Core.GameContent.Behaviors
 {
-    internal sealed class DGCraftingBehavior : IDGBehaviour
+    public sealed class DGCraftingBehavior : IDGBehaviour
     {
         // System
         private DGEntity _entity;

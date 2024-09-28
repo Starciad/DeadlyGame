@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace DeadlyGame.Core.Databases.Crafting
 {
-    internal partial class DGCraftingDatabase : DGObject
+    public partial class DGCraftingDatabase : DGObject
     {
         protected override void OnAwake()
         {
@@ -15,12 +15,12 @@ namespace DeadlyGame.Core.Databases.Crafting
             InitializeRecipes();
         }
 
-        internal DGCraftingRecipe[] GetOnlyNewCraftableItems(DGInventoryComponent inventoryComponent)
+        public DGCraftingRecipe[] GetOnlyNewCraftableItems(DGInventoryComponent inventoryComponent)
         {
             return [.. GetCraftableItems(inventoryComponent).Where(x => !inventoryComponent.HasItem(x.ItemType))];
         }
 
-        internal DGCraftingRecipe[] GetCraftableItems(DGInventoryComponent inventoryComponent)
+        public DGCraftingRecipe[] GetCraftableItems(DGInventoryComponent inventoryComponent)
         {
             List<DGCraftingRecipe> selectedRecipes = [];
 

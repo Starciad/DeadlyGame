@@ -1,17 +1,17 @@
 ﻿namespace DeadlyGame.Core.Behaviors.Models
 {
-    internal struct DGBehaviourWeight
+    public struct DGBehaviourWeight
     {
-        internal readonly float Value => this.value;
+        public readonly float Value => this.value;
 
         private float value;
 
-        internal void Add(float value)
+        public void Add(float value)
         {
             this.value += value;
         }
 
-        internal void Remove(float value)
+        public void Remove(float value)
         {
             this.value -= value;
         }

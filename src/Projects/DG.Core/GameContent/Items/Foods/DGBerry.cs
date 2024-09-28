@@ -4,7 +4,7 @@ using DeadlyGame.Core.Localization;
 
 namespace DeadlyGame.Core.GameContent.Items.Foods
 {
-    internal sealed class DGBerry : DGFood
+    public sealed class DGBerry : DGFood
     {
         public DGBerry()
         {

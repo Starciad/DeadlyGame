@@ -2,9 +2,9 @@ using System;
 
 namespace DeadlyGame.Core.Serializers.Ini
 {
-    internal static class DGIniSerializer
+    public static class DGIniSerializer
     {
-        internal static DGIni Deserialize(string text)
+        public static DGIni Deserialize(string text)
         {
             DGIni iniInfos = new();
 

@@ -2,18 +2,18 @@
 
 namespace DeadlyGame.Core.Exceptions.Components
 {
-    internal sealed class DGInvalidComponentTypeException : Exception
+    public sealed class DGInvalidComponentTypeException : Exception
     {
-        internal DGInvalidComponentTypeException()
+        public DGInvalidComponentTypeException()
         {
         }
 
-        internal DGInvalidComponentTypeException(string message)
+        public DGInvalidComponentTypeException(string message)
             : base(message)
         {
         }
 
-        internal DGInvalidComponentTypeException(string message, Exception innerException)
+        public DGInvalidComponentTypeException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

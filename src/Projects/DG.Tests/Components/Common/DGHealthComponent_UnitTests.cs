@@ -1,4 +1,6 @@
-﻿namespace DeadlyGame.Tests.Components.Common
+﻿using DeadlyGame.Core.GameContent.Components;
+
+namespace DeadlyGame.Tests.Components.Common
 {
     public sealed class DGHealthComponent_UnitTests
     {

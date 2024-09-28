@@ -16,7 +16,7 @@ using System.Text;
 
 namespace DeadlyGame.Core.GameContent.Behaviors
 {
-    internal sealed class DGItemAcquisitionBehavior : IDGBehaviour
+    public sealed class DGItemAcquisitionBehavior : IDGBehaviour
     {
         // System
         private DGEntity _entity;

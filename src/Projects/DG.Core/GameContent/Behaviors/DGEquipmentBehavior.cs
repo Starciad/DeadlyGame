@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace DeadlyGame.Core.GameContent.Behaviors
 {
-    internal sealed class DGEquipmentBehavior : IDGBehaviour
+    public sealed class DGEquipmentBehavior : IDGBehaviour
     {
         private DGInventoryComponent inventoryComponent;
         private DGEquipmentComponent equipmentComponent;

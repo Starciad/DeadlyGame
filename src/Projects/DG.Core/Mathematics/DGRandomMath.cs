@@ -2,32 +2,32 @@
 
 namespace DeadlyGame.Core.Mathematics
 {
-    internal sealed class DGRandomMath
+    public sealed class DGRandomMath
     {
         private readonly Random _random;
 
-        internal DGRandomMath()
+        public DGRandomMath()
         {
             this._random = new();
         }
-        internal DGRandomMath(int seed)
+        public DGRandomMath(int seed)
         {
             this._random = new(seed);
         }
-        internal DGRandomMath(Random random)
+        public DGRandomMath(Random random)
         {
             this._random = random;
         }
 
-        internal byte Range(byte minimum, byte maximum)
+        public byte Range(byte minimum, byte maximum)
         {
             return (byte)this._random.Next(minimum, maximum);
         }
-        internal int Range(int minimum, int maximum)
+        public int Range(int minimum, int maximum)
         {
             return this._random.Next(minimum, maximum);
         }
-        internal int Range(float minimum, float maximum)
+        public int Range(float minimum, float maximum)
         {
             return this._random.Next((int)minimum, (int)maximum);
         }

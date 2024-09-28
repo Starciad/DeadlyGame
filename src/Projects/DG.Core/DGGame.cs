@@ -20,8 +20,8 @@ namespace DeadlyGame.Core
         public bool IsDisposed => this.disposedValue;
 
         // Databases
-        internal DGCraftingDatabase CraftingDatabase => this._craftingDatabase;
-        internal DGItemDatabase ItemDatabase => this._itemDatabase;
+        public DGCraftingDatabase CraftingDatabase => this._craftingDatabase;
+        public DGItemDatabase ItemDatabase => this._itemDatabase;
 
         // Managers
         public DGPlayerManager PlayerManager => this._playersManager;
@@ -30,8 +30,8 @@ namespace DeadlyGame.Core
         public DGGameStateManager GameStateManager => this._gameStateManager;
 
         // Utilities
-        internal DGRandomMath Random { get; } = new();
-        internal DGDice Dice { get; } = new();
+        public DGRandomMath Random { get; } = new();
+        public DGDice Dice { get; } = new();
 
         // Settings
         private readonly DGGameSettings _gameSettings = new(gameBuilder);

@@ -2,6 +2,7 @@
 using DeadlyGame.Core.Behaviors.Models;
 using DeadlyGame.Core.Constants;
 using DeadlyGame.Core.Entities;
+using DeadlyGame.Core.Enums.Items.Weapons;
 using DeadlyGame.Core.Enums.Personalities;
 using DeadlyGame.Core.Enums.World;
 using DeadlyGame.Core.GameContent.Components;
@@ -19,7 +20,7 @@ using System.Linq;
 
 namespace DeadlyGame.Core.GameContent.Behaviors
 {
-    internal sealed class DGAggressiveBehavior : IDGBehaviour
+    public sealed class DGAggressiveBehavior : IDGBehaviour
     {
         // System
         private DGEntity _entity;

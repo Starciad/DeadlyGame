@@ -4,7 +4,7 @@ using DeadlyGame.Core.Localization;
 
 namespace DeadlyGame.Core.GameContent.Items.Materials
 {
-    internal sealed class DGWood : DGMaterial
+    public sealed class DGWood : DGMaterial
     {
         public DGWood()
         {

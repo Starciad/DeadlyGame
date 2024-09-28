@@ -6,14 +6,14 @@ using System;
 
 namespace DeadlyGame.Core.Crafting
 {
-    internal sealed class DGCraftingRecipe
+    public sealed class DGCraftingRecipe
     {
-        internal Type ItemType { get; private set; }
-        internal DGCraftingMaterial[] RequiredMaterials { get; private set; }
+        public Type ItemType { get; private set; }
+        public DGCraftingMaterial[] RequiredMaterials { get; private set; }
 
         private readonly DGGame _game;
 
-        internal DGCraftingRecipe(DGGame game, Type itemType, DGCraftingMaterial[] materials)
+        public DGCraftingRecipe(DGGame game, Type itemType, DGCraftingMaterial[] materials)
         {
             if (!itemType.IsSubclassOf(typeof(DGItem)))
             {
@@ -30,7 +30,7 @@ namespace DeadlyGame.Core.Crafting
             this.RequiredMaterials = materials;
         }
 
-        internal bool CanCraft(DGInventoryComponent inventoryComponent)
+        public bool CanCraft(DGInventoryComponent inventoryComponent)
         {
             foreach (DGCraftingMaterial requiredMaterial in this.RequiredMaterials)
             {
@@ -50,7 +50,7 @@ namespace DeadlyGame.Core.Crafting
             return true;
         }
 
-        internal bool TryCraft(DGInventoryComponent inventoryComponent, out DGItem item)
+        public bool TryCraft(DGInventoryComponent inventoryComponent, out DGItem item)
         {
             item = default;
 
@@ -70,12 +70,12 @@ namespace DeadlyGame.Core.Crafting
         }
     }
 
-    internal struct DGCraftingMaterial
+    public struct DGCraftingMaterial
     {
-        internal Type ItemType { get; private set; }
-        internal int Count { get; private set; }
+        public Type ItemType { get; private set; }
+        public int Count { get; private set; }
 
-        internal DGCraftingMaterial(Type itemType, int count)
+        public DGCraftingMaterial(Type itemType, int count)
         {
             if (!itemType.IsSubclassOf(typeof(DGItem)))
             {

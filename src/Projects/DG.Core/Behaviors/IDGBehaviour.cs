@@ -4,7 +4,7 @@ using DeadlyGame.Core.Models.Infos.Actions;
 
 namespace DeadlyGame.Core.Behaviors
 {
-    internal interface IDGBehaviour
+    public interface IDGBehaviour
     {
         bool CanAct(DGEntity entity, DGGame game);
         DGBehaviourWeight GetWeight();

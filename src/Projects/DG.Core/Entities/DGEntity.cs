@@ -5,13 +5,13 @@ namespace DeadlyGame.Core.Entities
 {
     public abstract class DGEntity : DGObject
     {
-        internal string Name { get; set; }
-        internal int Id { get; set; }
-        internal DGComponentContainer ComponentContainer => this.componentContainer;
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public DGComponentContainer ComponentContainer => this.componentContainer;
 
         private readonly DGComponentContainer componentContainer = new();
 
-        internal override void SetGameInstance(DGGame game)
+        public override void SetGameInstance(DGGame game)
         {
             base.SetGameInstance(game);
             this.componentContainer.SetGameInstance(game);

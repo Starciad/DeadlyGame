@@ -16,7 +16,7 @@ namespace DeadlyGame.Core.Managers
         public DGPlayer[] LivingPlayers => [.. this.players.Where(x => !x.ComponentContainer.GetComponent<DGHealthComponent>().IsDead)];
         public DGPlayer[] DeadPlayers => [.. this.players.Where(x => x.ComponentContainer.GetComponent<DGHealthComponent>().IsDead)];
 
-        internal bool OnlyOnePlayerAlive => this.LivingPlayers.Length == 1;
+        public bool OnlyOnePlayerAlive => this.LivingPlayers.Length == 1;
 
         private DGPlayer[] players;
 
@@ -44,7 +44,7 @@ namespace DeadlyGame.Core.Managers
         }
 
         // Utilities
-        internal DGPlayer[] GetNearbyPlayers(DGPoint position)
+        public DGPlayer[] GetNearbyPlayers(DGPoint position)
         {
             return
             [

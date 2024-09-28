@@ -8,27 +8,27 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace DeadlyGame.Core.Components
 {
-    internal sealed class DGComponentContainer : DGObject
+    public sealed class DGComponentContainer : DGObject
     {
-        internal int Count => this._components.Count;
+        public int Count => this._components.Count;
 
         private readonly Dictionary<Type, DGComponent> _components = [];
         private DGEntity _entity;
 
-        internal void SetEntityInstance(DGEntity entity)
+        public void SetEntityInstance(DGEntity entity)
         {
             this._entity = entity;
         }
 
-        internal T AddComponent<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>() where T : DGComponent
+        public T AddComponent<T>() where T : DGComponent
         {
             return (T)AddComponent(typeof(T));
         }
-        internal T GetComponent<T>() where T : DGComponent
+        public T GetComponent<T>() where T : DGComponent
         {
             return (T)GetComponent(typeof(T));
         }
-        internal bool TryGetComponent<T>(out T value) where T : DGComponent
+        public bool TryGetComponent<T>(out T value) where T : DGComponent
         {
             if (TryGetComponent(typeof(T), out DGComponent component))
             {
@@ -39,16 +39,16 @@ namespace DeadlyGame.Core.Components
             value = null;
             return false;
         }
-        internal bool TryRemoveComponent<T>() where T : DGComponent
+        public bool TryRemoveComponent<T>() where T : DGComponent
         {
             return TryRemoveComponent(typeof(T));
         }
-        internal bool HasComponent<T>() where T : DGComponent
+        public bool HasComponent<T>() where T : DGComponent
         {
             return HasComponent(typeof(T));
         }
 
-        internal DGComponent AddComponent([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type componentType)
+        public DGComponent AddComponent(Type componentType)
         {
             if (!componentType.IsSubclassOf(typeof(DGComponent)))
             {
@@ -66,11 +66,11 @@ namespace DeadlyGame.Core.Components
             this._components.Add(componentType, componentValue);
             return componentValue;
         }
-        internal DGComponent GetComponent(Type componentType)
+        public DGComponent GetComponent(Type componentType)
         {
             return this._components.TryGetValue(componentType, out DGComponent value) ? value : null;
         }
-        internal bool TryGetComponent(Type componentType, out DGComponent value)
+        public bool TryGetComponent(Type componentType, out DGComponent value)
         {
             DGComponent result = GetComponent(componentType);
             if (result != null)
@@ -82,17 +82,17 @@ namespace DeadlyGame.Core.Components
             value = null;
             return false;
         }
-        internal bool TryRemoveComponent(Type componentType)
+        public bool TryRemoveComponent(Type componentType)
         {
             return this._components.Remove(componentType);
         }
-        internal bool HasComponent(Type componentType)
+        public bool HasComponent(Type componentType)
         {
             return !componentType.IsSubclassOf(typeof(DGComponent))
                 ? throw new DGInvalidComponentTypeException($"The type '{componentType.Name}' is not a valid {nameof(DGComponent)}.")
                 : this._components.ContainsKey(componentType);
         }
-        internal void RemoveAllComponents()
+        public void RemoveAllComponents()
         {
             this._components.Clear();
         }

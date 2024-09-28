@@ -4,7 +4,7 @@ using DeadlyGame.Core.Localization;
 
 namespace DeadlyGame.Core.GameContent.Items.Materials
 {
-    internal sealed class DGStone : DGMaterial
+    public sealed class DGStone : DGMaterial
     {
         public DGStone()
         {

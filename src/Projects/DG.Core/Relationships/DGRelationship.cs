@@ -6,24 +6,24 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DeadlyGame.Core.Relationships
 {
-    internal sealed class DGRelationship
+    public sealed class DGRelationship
     {
-        internal float RelationshipValue => this.relationshipValue;
-        internal DGEntity CurrentEntity => this.currentEntity;
-        internal DGEntity AnotherEntity => this.anotherEntity;
+        public float RelationshipValue => this.relationshipValue;
+        public DGEntity CurrentEntity => this.currentEntity;
+        public DGEntity AnotherEntity => this.anotherEntity;
 
         [Range(-100, 100)] private float relationshipValue;
         private readonly DGEntity currentEntity;
         private readonly DGEntity anotherEntity;
 
-        internal DGRelationship(DGEntity current, DGEntity another)
+        public DGRelationship(DGEntity current, DGEntity another)
         {
             this.currentEntity = current;
             this.anotherEntity = another;
             this.relationshipValue = 50;
         }
 
-        internal DGRelationship(DGEntity current, DGEntity another, float relationshipValue)
+        public DGRelationship(DGEntity current, DGEntity another, float relationshipValue)
         {
             this.currentEntity = current;
             this.anotherEntity = another;
@@ -31,19 +31,19 @@ namespace DeadlyGame.Core.Relationships
             Clamp();
         }
 
-        internal void SetRelationshipValue(float value)
+        public void SetRelationshipValue(float value)
         {
             this.relationshipValue = value;
             Clamp();
         }
 
-        internal void IncreaseRelationshipValue(float value)
+        public void IncreaseRelationshipValue(float value)
         {
             this.relationshipValue += value;
             Clamp();
         }
 
-        internal void DecreaseRelationshipValue(float value)
+        public void DecreaseRelationshipValue(float value)
         {
             this.relationshipValue -= value;
             Clamp();
@@ -54,7 +54,7 @@ namespace DeadlyGame.Core.Relationships
             this.relationshipValue = Math.Clamp(this.relationshipValue, -100, 100);
         }
 
-        internal DGRelationshipLevelType GetRelationshipLevelType()
+        public DGRelationshipLevelType GetRelationshipLevelType()
         {
             return this.relationshipValue <= -80
                 ? DGRelationshipLevelType.VeryLow

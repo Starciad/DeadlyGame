@@ -30,7 +30,7 @@ namespace DeadlyGame.Core.Managers
         private readonly List<DGWorldItem> worldItems = [];
 
         // === System ===
-        internal void Initialize(DGWorldBuilder builder)
+        public void Initialize(DGWorldBuilder builder)
         {
             InitializeWorld(builder);
             InitializeResources(builder);
@@ -105,46 +105,46 @@ namespace DeadlyGame.Core.Managers
         }
 
         // === Utilities ===
-        internal DGEntity[] GetNearbyResources(DGPoint position)
+        public DGEntity[] GetNearbyResources(DGPoint position)
         {
             return
             [
                 .. this.resourceEntities.OrderByDescending(x => DGPoint.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, position)),
             ];
         }
-        internal DGWorldItem[] GetNearbyItems(DGPoint position)
+        public DGWorldItem[] GetNearbyItems(DGPoint position)
         {
             return
             [
                 .. this.worldItems.OrderByDescending(x => DGPoint.Distance(x.Position, position)),
             ];
         }
-        internal void AddWorldItem(DGWorldItem worldItem)
+        public void AddWorldItem(DGWorldItem worldItem)
         {
             this.worldItems.Add(worldItem);
         }
-        internal DGWorldItem GetWorldItem(DGItem item)
+        public DGWorldItem GetWorldItem(DGItem item)
         {
             return GetWorldItem(item.GetType());
         }
-        internal DGWorldItem GetWorldItem(Type itemType)
+        public DGWorldItem GetWorldItem(Type itemType)
         {
             return this.worldItems.Find(x => x.Item.GetType() == itemType);
         }
-        internal void RemoveWorldItem(DGWorldItem worldItem)
+        public void RemoveWorldItem(DGWorldItem worldItem)
         {
             _ = this.worldItems.Remove(worldItem);
         }
 
         // === Tools ===
-        internal DGPoint Clamp(DGPoint position)
+        public DGPoint Clamp(DGPoint position)
         {
             int pos_x = Math.Clamp(position.X, -this.Size.X, this.Size.X);
             int pos_y = Math.Clamp(position.Y, -this.Size.Y, this.Size.Y);
 
             return new(pos_x, pos_y);
         }
-        internal DGPoint GetRandomPosition()
+        public DGPoint GetRandomPosition()
         {
             int pos_x = this.Game.Random.Range(-this.Size.X, this.Size.X + 1);
             int pos_y = this.Game.Random.Range(-this.Size.Y, this.Size.Y + 1);

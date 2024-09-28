@@ -3,14 +3,14 @@ using DeadlyGame.Core.Enums.Effects;
 
 namespace DeadlyGame.Core.Effects
 {
-    internal abstract class DGEffect
+    public abstract class DGEffect
     {
-        internal string Name { get; set; }
-        internal string Description { get; set; }
-        internal DGEffectType EffectType { get; set; }
-        internal int Durability { get; set; }
-        internal int RemainingDurability => this._remainingDurability;
-        internal bool IsFinished => this._remainingDurability == 0;
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DGEffectType EffectType { get; set; }
+        public int Durability { get; set; }
+        public int RemainingDurability => this._remainingDurability;
+        public bool IsFinished => this._remainingDurability == 0;
 
         protected DGGame Game => this._game;
 
@@ -18,20 +18,20 @@ namespace DeadlyGame.Core.Effects
         private DGGame _game;
         private int _remainingDurability;
 
-        internal DGEffect()
+        public DGEffect()
         {
             Build();
             this._remainingDurability = this.Durability;
         }
-        internal void SetEntity(DGEntity entity)
+        public void SetEntity(DGEntity entity)
         {
             this._entity = entity;
         }
-        internal void SetGame(DGGame game)
+        public void SetGame(DGGame game)
         {
             this._game = game;
         }
-        internal void Update()
+        public void Update()
         {
             this._remainingDurability--;
             this._remainingDurability = this._remainingDurability < 0 ? 0 : this._remainingDurability;

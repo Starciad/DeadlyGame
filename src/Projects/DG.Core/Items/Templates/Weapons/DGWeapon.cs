@@ -1,16 +1,10 @@
-﻿namespace DeadlyGame.Core.Items.Templates.Weapons
-{
-    public enum DGWeaponType
-    {
-        None = -1,
-        Melee = 0,
-        Ranged = 1,
-        Magic = 2
-    }
+﻿using DeadlyGame.Core.Enums.Items.Weapons;
 
-    internal abstract class DGWeapon : DGItem
+namespace DeadlyGame.Core.Items.Templates.Weapons
+{
+    public abstract class DGWeapon : DGItem
     {
-        internal DGWeaponType WeaponType { get; set; }
-        internal int Damage { get; set; }
+        public DGWeaponType WeaponType { get; set; }
+        public int Damage { get; set; }
     }
 }

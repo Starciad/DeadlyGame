@@ -6,17 +6,17 @@ using System.Text;
 
 namespace DeadlyGame.Core.Localization
 {
-    internal static partial class DGLocalization
+    public static partial class DGLocalization
     {
-        internal static string DefinedLanguage => definedLanguage;
-        internal static string DefinedLanguageRegion => definedLanguageRegion;
+        public static string DefinedLanguage => definedLanguage;
+        public static string DefinedLanguageRegion => definedLanguageRegion;
 
         private static string definedLanguage;
         private static string definedLanguageRegion;
 
         private static DGIni lSystem;
 
-        internal static void Initialize(string language, string region)
+        public static void Initialize(string language, string region)
         {
             // =============================== //
             // DEFINE
@@ -34,12 +34,12 @@ namespace DeadlyGame.Core.Localization
             lSystem = DGIniSerializer.Deserialize(File.ReadAllText(langSystemFile, Encoding.UTF8));
         }
 
-        internal static string GetNameOfCurrentDefinedLanguage()
+        public static string GetNameOfCurrentDefinedLanguage()
         {
             return string.Concat(definedLanguage, '-', definedLanguageRegion);
         }
 
-        internal static string Read(string v1, string v2)
+        public static string Read(string v1, string v2)
         {
             return string.Empty;
         }

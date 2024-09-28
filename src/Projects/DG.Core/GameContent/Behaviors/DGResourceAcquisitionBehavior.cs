@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace DeadlyGame.Core.GameContent.Behaviors
 {
-    internal sealed class DGResourceAcquisitionBehavior : IDGBehaviour
+    public sealed class DGResourceAcquisitionBehavior : IDGBehaviour
     {
         private DGEntity[] _nearbyResources;
 

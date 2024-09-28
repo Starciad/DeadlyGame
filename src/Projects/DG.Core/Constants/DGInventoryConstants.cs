@@ -1,7 +1,7 @@
 ﻿namespace DeadlyGame.Core.Constants
 {
-    internal static class DGInventoryConstants
+    public static class DGInventoryConstants
     {
-        internal const int MAXIMUM_ITEM_CAPACITY = 9999;
+        public const int MAXIMUM_ITEM_CAPACITY = 9999;
     }
 }

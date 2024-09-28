@@ -2,11 +2,11 @@
 
 namespace DeadlyGame.Core.Settings
 {
-    internal struct DGGameSettings
+    public struct DGGameSettings
     {
-        internal DGPlayerBuilder[] Players { get; private set; }
+        public DGPlayerBuilder[] Players { get; private set; }
 
-        internal DGGameSettings(DGGameBuilder builder)
+        public DGGameSettings(DGGameBuilder builder)
         {
             this.Players = [.. builder.Players];
         }

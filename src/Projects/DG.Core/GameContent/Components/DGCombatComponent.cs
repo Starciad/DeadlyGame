@@ -2,16 +2,16 @@
 
 namespace DeadlyGame.Core.GameContent.Components
 {
-    internal sealed class DGCombatComponent : DGComponent
+    public sealed class DGCombatComponent : DGComponent
     {
-        internal int DisplacementRate { get; private set; }
+        public int DisplacementRate { get; private set; }
 
-        internal void SetDisplacementRateValue(int value)
+        public void SetDisplacementRateValue(int value)
         {
             this.DisplacementRate = value;
         }
 
-        internal int GetFullAttackDamage(bool isCritical)
+        public int GetFullAttackDamage(bool isCritical)
         {
             int attackValue = 0;
 

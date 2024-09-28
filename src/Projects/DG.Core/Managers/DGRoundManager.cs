@@ -6,24 +6,24 @@
 
         private int currentRound;
 
-        internal event RoundStartedEventHandler OnRoundStarted;
-        internal event RoundEndedEventHandler OnRoundEnded;
+        public event RoundStartedEventHandler OnRoundStarted;
+        public event RoundEndedEventHandler OnRoundEnded;
 
-        internal delegate void RoundStartedEventHandler();
-        internal delegate void RoundEndedEventHandler();
+        public delegate void RoundStartedEventHandler();
+        public delegate void RoundEndedEventHandler();
 
         protected override void OnAwake()
         {
             this.currentRound = 0;
         }
 
-        internal void Begin()
+        public void Begin()
         {
             this.currentRound++;
             OnRoundStarted?.Invoke();
         }
 
-        internal void End()
+        public void End()
         {
             OnRoundEnded?.Invoke();
         }

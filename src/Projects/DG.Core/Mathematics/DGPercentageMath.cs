@@ -2,7 +2,7 @@
 
 namespace DeadlyGame.Core.Mathematics
 {
-    internal static class DGPercentageMath
+    public static class DGPercentageMath
     {
         /// <summary>
         /// Calculates the percentage of a value in relation to a total.
@@ -11,7 +11,7 @@ namespace DeadlyGame.Core.Mathematics
         /// <param name="total">Total against which the percentage will be calculated.</param>
         /// <returns>The calculated percentage.</returns>
         /// <exception cref="ArgumentException" />
-        internal static double CalculatePercentage(double value, double total)
+        public static double CalculatePercentage(double value, double total)
         {
             return total == 0 ? throw new ArgumentException("Total cannot be zero.") : value / total * 100;
         }
@@ -23,7 +23,7 @@ namespace DeadlyGame.Core.Mathematics
         /// <param name="total">Total on which the percentage will be calculated.</param>
         /// <returns>The value corresponding to the percentage.</returns>
         /// <exception cref="ArgumentException" />
-        internal static double CalculateValueFromPercentage(double percentage, double total)
+        public static double CalculateValueFromPercentage(double percentage, double total)
         {
             return total == 0
                 ? throw new ArgumentException("Total cannot be zero.")

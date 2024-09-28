@@ -12,7 +12,7 @@ namespace DeadlyGame.Core.GameContent.Entities.Players
         // Components
         private DGBehaviourComponent _behaviour;
 
-        internal DGPlayer(DGPlayerBuilder builder, int id)
+        public DGPlayer(DGPlayerBuilder builder, int id)
         {
             this.Name = builder.Name;
             this.Id = id;

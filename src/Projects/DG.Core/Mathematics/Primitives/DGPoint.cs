@@ -12,7 +12,7 @@ namespace DeadlyGame.Core.Mathematics.Primitives
         public int X;
         public int Y;
 
-        internal readonly string DebugDisplayString => string.Concat(
+        public readonly string DebugDisplayString => string.Concat(
                     this.X.ToString(), "  ",
                     this.Y.ToString()
                 );
@@ -97,7 +97,7 @@ namespace DeadlyGame.Core.Mathematics.Primitives
             y = this.Y;
         }
 
-        internal static double Distance(DGPoint point1, DGPoint point2)
+        public static double Distance(DGPoint point1, DGPoint point2)
         {
             return Math.Round(Math.Sqrt(Math.Pow(point2.X - point1.X, 2) + Math.Pow(point2.Y - point1.Y, 2)));
         }

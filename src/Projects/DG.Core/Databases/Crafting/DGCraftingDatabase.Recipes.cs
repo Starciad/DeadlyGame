@@ -4,7 +4,7 @@ using DeadlyGame.Core.GameContent.Items.Weapons;
 
 namespace DeadlyGame.Core.Databases.Crafting
 {
-    internal partial class DGCraftingDatabase
+    public partial class DGCraftingDatabase
     {
         private DGCraftingRecipe[] recipes;
 

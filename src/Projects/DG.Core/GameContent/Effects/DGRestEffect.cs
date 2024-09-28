@@ -5,7 +5,7 @@ using DeadlyGame.Core.GameContent.Components;
 
 namespace DeadlyGame.Core.GameContent.Effects
 {
-    internal class DGRestEffect : DGEffect
+    public class DGRestEffect : DGEffect
     {
         protected override void Build()
         {

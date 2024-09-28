@@ -2,26 +2,27 @@
 
 namespace DeadlyGame.Core.GameContent.Components
 {
-    internal sealed class DGHealthComponent : DGComponent
+    public sealed class DGHealthComponent : DGComponent
     {
-        internal bool IsDead => this.CurrentHealth <= 0;
-        internal int CurrentHealth { get; private set; }
-        internal int MaximumHealth { get; private set; }
+        public bool IsDead => this.CurrentHealth <= 0;
+        public int CurrentHealth { get; private set; }
+        public int MaximumHealth { get; private set; }
 
-        internal delegate void DiedEventHandler();
-        internal event DiedEventHandler OnDied;
+        public event DiedEventHandler OnDied;
 
-        internal void SetCurrentHealth(int value)
+        public delegate void DiedEventHandler();
+
+        public void SetCurrentHealth(int value)
         {
             this.CurrentHealth = value;
         }
 
-        internal void SetMaximumHealth(int value)
+        public void SetMaximumHealth(int value)
         {
             this.MaximumHealth = value;
         }
 
-        internal void Hurt(int value)
+        public void Hurt(int value)
         {
             this.CurrentHealth -= value;
             this.CurrentHealth = this.CurrentHealth < 0 ? 0 : this.CurrentHealth;
@@ -33,7 +34,7 @@ namespace DeadlyGame.Core.GameContent.Components
             }
         }
 
-        internal void Heal(int value)
+        public void Heal(int value)
         {
             this.CurrentHealth += value;
             this.CurrentHealth = this.CurrentHealth > this.MaximumHealth ? this.MaximumHealth : this.CurrentHealth;

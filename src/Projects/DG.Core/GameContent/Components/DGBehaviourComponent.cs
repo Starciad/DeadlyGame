@@ -8,30 +8,30 @@ using System.Linq;
 
 namespace DeadlyGame.Core.GameContent.Components
 {
-    internal sealed class DGBehaviourComponent : DGComponent
+    public sealed class DGBehaviourComponent : DGComponent
     {
         private struct DGAction
         {
-            internal IDGBehaviour Behaviour { get; private set; }
-            internal float Weight { get; private set; }
+            public IDGBehaviour Behaviour { get; private set; }
+            public float Weight { get; private set; }
 
-            internal DGAction(IDGBehaviour behaviour, float weight)
+            public DGAction(IDGBehaviour behaviour, float weight)
             {
                 this.Behaviour = behaviour;
                 this.Weight = weight;
             }
         }
 
-        internal DGPlayerActionInfo LastActionInfos { get; private set; }
+        public DGPlayerActionInfo LastActionInfos { get; private set; }
 
         private readonly List<IDGBehaviour> definedBehaviors = [];
 
-        internal void RegisterBehaviour(IDGBehaviour behaviour)
+        public void RegisterBehaviour(IDGBehaviour behaviour)
         {
             this.definedBehaviors.Add(behaviour);
         }
 
-        internal void Act()
+        public void Act()
         {
             // Get all behaviors with their respective weights.
             DGAction[] possibleActions = GetPossibleActions();

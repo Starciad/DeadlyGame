@@ -8,9 +8,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace DeadlyGame.Core.GameContent.Components
 {
-    internal sealed class DGEffectsComponent : DGComponent
+    public sealed class DGEffectsComponent : DGComponent
     {
-        internal DGEffect[] Effects => [.. this._effects.Values];
+        public DGEffect[] Effects => [.. this._effects.Values];
 
         // effects
         private readonly Dictionary<Type, DGEffect> _effects = [];
@@ -53,24 +53,24 @@ namespace DeadlyGame.Core.GameContent.Components
             }
         }
 
-        internal void AddEffect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>() where T : DGEffect
+        public void AddEffect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>() where T : DGEffect
         {
             AddEffect(typeof(T));
         }
-        internal void RemoveEffect<T>() where T : DGEffect
+        public void RemoveEffect<T>() where T : DGEffect
         {
             RemoveEffect(typeof(T));
         }
-        internal DGEffect GetEffect<T>() where T : DGEffect
+        public DGEffect GetEffect<T>() where T : DGEffect
         {
             return GetEffect(typeof(T));
         }
-        internal bool HasEffect<T>() where T : DGEffect
+        public bool HasEffect<T>() where T : DGEffect
         {
             return HasEffect(typeof(T));
         }
 
-        internal void AddEffect([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type effectType)
+        public void AddEffect([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type effectType)
         {
             if (!effectType.IsSubclassOf(typeof(DGEffect)))
             {
@@ -84,15 +84,15 @@ namespace DeadlyGame.Core.GameContent.Components
 
             _ = this._effects.TryAdd(effectType, effect);
         }
-        internal void RemoveEffect(Type effectType)
+        public void RemoveEffect(Type effectType)
         {
             _ = this._effects.Remove(effectType);
         }
-        internal DGEffect GetEffect(Type effectType)
+        public DGEffect GetEffect(Type effectType)
         {
             return this._effects.TryGetValue(effectType, out DGEffect value) ? value : null;
         }
-        internal bool HasEffect(Type effectType)
+        public bool HasEffect(Type effectType)
         {
             return this._effects.ContainsKey(effectType);
         }

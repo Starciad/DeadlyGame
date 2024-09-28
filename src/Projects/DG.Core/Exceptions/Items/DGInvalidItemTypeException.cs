@@ -2,18 +2,18 @@
 
 namespace DeadlyGame.Core.Exceptions.Items
 {
-    internal sealed class DGInvalidItemTypeException : Exception
+    public sealed class DGInvalidItemTypeException : Exception
     {
-        internal DGInvalidItemTypeException()
+        public DGInvalidItemTypeException()
         {
         }
 
-        internal DGInvalidItemTypeException(string message)
+        public DGInvalidItemTypeException(string message)
             : base(message)
         {
         }
 
-        internal DGInvalidItemTypeException(string message, Exception innerException)
+        public DGInvalidItemTypeException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

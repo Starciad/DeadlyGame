@@ -3,11 +3,11 @@ using DeadlyGame.Core.Objects;
 
 namespace DeadlyGame.Core.Components
 {
-    internal class DGComponent : DGObject
+    public class DGComponent : DGObject
     {
         protected DGEntity Entity { get; private set; }
 
-        internal void SetEntityInstance(DGEntity entity)
+        public void SetEntityInstance(DGEntity entity)
         {
             this.Entity = entity;
         }

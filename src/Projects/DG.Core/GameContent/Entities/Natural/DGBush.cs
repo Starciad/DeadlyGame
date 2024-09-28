@@ -5,9 +5,9 @@ using DeadlyGame.Core.GameContent.Items.Materials;
 
 namespace DeadlyGame.Core.GameContent.Entities.Natural
 {
-    internal sealed class DGBush : DGEntity
+    public sealed class DGBush : DGEntity
     {
-        internal DGBush()
+        public DGBush()
         {
             this.Name = "Arbusto";
         }

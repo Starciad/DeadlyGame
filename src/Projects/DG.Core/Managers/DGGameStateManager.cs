@@ -2,35 +2,35 @@
 {
     public sealed class DGGameStateManager : DGManager
     {
-        internal delegate void GameStartedEventHandler();
-        internal delegate void GameFinishedEventHandler();
-        internal delegate void GameCanceledEventHandler();
+        public delegate void GameStartedEventHandler();
+        public delegate void GameFinishedEventHandler();
+        public delegate void GameCanceledEventHandler();
 
-        internal event GameStartedEventHandler OnGameStarted;
-        internal event GameFinishedEventHandler OnGameFinished;
-        internal event GameCanceledEventHandler OnGameCanceled;
+        public event GameStartedEventHandler OnGameStarted;
+        public event GameFinishedEventHandler OnGameFinished;
+        public event GameCanceledEventHandler OnGameCanceled;
 
-        internal bool IsStarted => this.isStarted;
-        internal bool IsFinished => this.isFinished;
-        internal bool IsCanceled => this.isCanceled;
+        public bool IsStarted => this.isStarted;
+        public bool IsFinished => this.isFinished;
+        public bool IsCanceled => this.isCanceled;
 
         private bool isStarted;
         private bool isFinished;
         private bool isCanceled;
 
-        internal void Start()
+        public void Start()
         {
             this.OnGameStarted?.Invoke();
             this.isStarted = true;
         }
 
-        internal void Finish()
+        public void Finish()
         {
             this.OnGameFinished?.Invoke();
             this.isFinished = true;
         }
 
-        internal void Cancel()
+        public void Cancel()
         {
             this.OnGameCanceled?.Invoke();
             this.isCanceled = true;

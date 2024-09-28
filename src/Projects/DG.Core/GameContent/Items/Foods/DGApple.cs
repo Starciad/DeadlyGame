@@ -4,7 +4,7 @@ using DeadlyGame.Core.Localization;
 
 namespace DeadlyGame.Core.GameContent.Items.Foods
 {
-    internal sealed class DGApple : DGFood
+    public sealed class DGApple : DGFood
     {
         public DGApple()
         {

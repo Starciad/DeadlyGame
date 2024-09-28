@@ -9,11 +9,11 @@ using System.Linq;
 
 namespace DeadlyGame.Core.GameContent.Components
 {
-    internal sealed class DGInventoryComponent : DGComponent
+    public sealed class DGInventoryComponent : DGComponent
     {
-        internal DGItem[] Items => this.slots.Select(x => x.Item).ToArray();
-        internal DGInventorySlot[] Slots => [.. this.slots];
-        internal int NumberOfSlots => this.numberOfSlots;
+        public DGItem[] Items => this.slots.Select(x => x.Item).ToArray();
+        public DGInventorySlot[] Slots => [.. this.slots];
+        public int NumberOfSlots => this.numberOfSlots;
 
         private readonly List<DGInventorySlot> slots = [];
         private int numberOfSlots;
@@ -42,19 +42,19 @@ namespace DeadlyGame.Core.GameContent.Components
         }
 
         // ===== ADD =====
-        internal void AddItem(DGWorldItem worldItem)
+        public void AddItem(DGWorldItem worldItem)
         {
             _ = TryAddItem(worldItem);
         }
-        internal void AddItem<T>(int amount) where T : DGItem
+        public void AddItem<T>(int amount) where T : DGItem
         {
             AddItem(typeof(T), amount);
         }
-        internal void AddItem(DGItem item, int amount)
+        public void AddItem(DGItem item, int amount)
         {
             _ = TryAddItem(item, amount);
         }
-        internal void AddItem(Type itemType, int amount)
+        public void AddItem(Type itemType, int amount)
         {
             if (!itemType.IsSubclassOf(typeof(DGItem)))
             {
@@ -65,50 +65,50 @@ namespace DeadlyGame.Core.GameContent.Components
         }
 
         // ===== REMOVE =====
-        internal void RemoveItem<T>(int amount) where T : DGItem
+        public void RemoveItem<T>(int amount) where T : DGItem
         {
             RemoveItem(typeof(T), amount);
         }
-        internal void RemoveItem(DGItem item, int amount)
+        public void RemoveItem(DGItem item, int amount)
         {
             RemoveItem(item.GetType(), amount);
         }
-        internal void RemoveItem(Type itemType, int amount)
+        public void RemoveItem(Type itemType, int amount)
         {
             _ = TryRemoveItem(itemType, amount);
         }
 
         // ===== GET =====
-        internal DGInventorySlot GetItem<T>() where T : DGItem
+        public DGInventorySlot GetItem<T>() where T : DGItem
         {
             return GetItem(typeof(T));
         }
-        internal DGInventorySlot GetItem(DGItem item)
+        public DGInventorySlot GetItem(DGItem item)
         {
             return GetItem(item.GetType());
         }
-        internal DGInventorySlot GetItem(Type itemType)
+        public DGInventorySlot GetItem(Type itemType)
         {
             _ = TryGetItem(itemType, out DGInventorySlot slot);
             return slot;
         }
 
         // ===== TRY ADD =====
-        internal bool TryAddItem(DGWorldItem worldItem)
+        public bool TryAddItem(DGWorldItem worldItem)
         {
             return TryAddItem(worldItem.Item, worldItem.Amount);
         }
-        internal bool TryAddItem<T>(int amount) where T : DGItem
+        public bool TryAddItem<T>(int amount) where T : DGItem
         {
             return TryAddItem(typeof(T), amount);
         }
-        internal bool TryAddItem(Type itemType, int amount)
+        public bool TryAddItem(Type itemType, int amount)
         {
             return !itemType.IsSubclassOf(typeof(DGItem))
                 ? throw new DGInvalidItemTypeException($"The type representing the item trying to be added to the inventory does not correspond to a valid {nameof(DGItem)}.")
                 : TryAddItem(this.Game.ItemDatabase.GetItem(itemType), amount);
         }
-        internal bool TryAddItem(DGItem item, int amount)
+        public bool TryAddItem(DGItem item, int amount)
         {
             // If the corresponding item is already in the inventory, just increase its count and return true.
             if (TryGetItem(item.GetType(), out DGInventorySlot slot))
@@ -133,15 +133,15 @@ namespace DeadlyGame.Core.GameContent.Components
         }
 
         // ===== TRY REMOVE =====
-        internal bool TryRemoveItem<T>(int amount) where T : DGItem
+        public bool TryRemoveItem<T>(int amount) where T : DGItem
         {
             return TryRemoveItem(typeof(T), amount);
         }
-        internal bool TryRemoveItem(DGItem item, int amount)
+        public bool TryRemoveItem(DGItem item, int amount)
         {
             return TryRemoveItem(item.GetType(), amount);
         }
-        internal bool TryRemoveItem(Type itemType, int amount)
+        public bool TryRemoveItem(Type itemType, int amount)
         {
             if (TryGetItem(itemType, out DGInventorySlot slot))
             {
@@ -159,40 +159,40 @@ namespace DeadlyGame.Core.GameContent.Components
         }
 
         // ===== TRY GET =====
-        internal bool TryGetItem<T>(out DGInventorySlot slot) where T : DGItem
+        public bool TryGetItem<T>(out DGInventorySlot slot) where T : DGItem
         {
             return TryGetItem(typeof(T), out slot);
         }
-        internal bool TryGetItem(DGItem item, out DGInventorySlot slot)
+        public bool TryGetItem(DGItem item, out DGInventorySlot slot)
         {
             return TryGetItem(item.GetType(), out slot);
         }
-        internal bool TryGetItem(Type itemType, out DGInventorySlot slot)
+        public bool TryGetItem(Type itemType, out DGInventorySlot slot)
         {
             slot = this.slots.Find(x => x.ItemType == itemType);
             return slot != null;
         }
 
         // ===== HAS ITEM =====
-        internal bool HasItem<T>() where T : DGItem
+        public bool HasItem<T>() where T : DGItem
         {
             return HasItem(typeof(T));
         }
-        internal bool HasItem(DGItem item)
+        public bool HasItem(DGItem item)
         {
             return HasItem(item.GetType());
         }
-        internal bool HasItem(Type itemType)
+        public bool HasItem(Type itemType)
         {
             return Array.Find(this.Slots, x => x.ItemType == itemType) != null;
         }
 
         // ===== UTILITIES =====
-        internal void ClearInventory()
+        public void ClearInventory()
         {
             this.slots.Clear();
         }
-        internal void DropAllItems()
+        public void DropAllItems()
         {
             foreach (DGInventorySlot slot in this.slots)
             {
@@ -207,7 +207,7 @@ namespace DeadlyGame.Core.GameContent.Components
         }
 
         // ===== SLOTS =====
-        internal void ModifyNumberOfSlots(int value)
+        public void ModifyNumberOfSlots(int value)
         {
             this.numberOfSlots = value;
         }
@@ -220,19 +220,19 @@ namespace DeadlyGame.Core.GameContent.Components
         }
     }
 
-    internal class DGInventorySlot(DGItem item, int amount)
+    public class DGInventorySlot(DGItem item, int amount)
     {
-        internal bool IsEmpty => this.Amount <= 0;
-        internal Type ItemType => this.Item.GetType();
-        internal DGItem Item { get; private set; } = item;
-        internal int Amount { get; private set; } = amount;
+        public bool IsEmpty => this.Amount <= 0;
+        public Type ItemType => this.Item.GetType();
+        public DGItem Item { get; private set; } = item;
+        public int Amount { get; private set; } = amount;
 
-        internal void Add(int value)
+        public void Add(int value)
         {
             this.Amount += value;
             Clamp();
         }
-        internal void Remove(int value)
+        public void Remove(int value)
         {
             this.Amount -= value;
             Clamp();

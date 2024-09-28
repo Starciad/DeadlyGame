@@ -1,6 +1,6 @@
 ﻿namespace DeadlyGame.Core.Enums.Relationships
 {
-    internal enum DGRelationshipLevelType
+    public enum DGRelationshipLevelType
     {
         VeryLow,
         Low,
