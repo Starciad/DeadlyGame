@@ -1,5 +1,4 @@
-﻿using DeadlyGame.Core;
-using DeadlyGame.Core.Behaviors;
+﻿using DeadlyGame.Core.Behaviors;
 using DeadlyGame.Core.Behaviors.Models;
 using DeadlyGame.Core.Entities;
 using DeadlyGame.Core.Enums.Personalities;

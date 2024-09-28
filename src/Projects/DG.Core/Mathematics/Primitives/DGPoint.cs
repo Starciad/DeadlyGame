@@ -1,7 +1,6 @@
-﻿using System.Diagnostics;
-using System.Numerics;
+﻿using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using System;
 
 namespace DeadlyGame.Core.Mathematics.Primitives
 {
@@ -13,16 +12,10 @@ namespace DeadlyGame.Core.Mathematics.Primitives
         public int X;
         public int Y;
 
-        internal readonly string DebugDisplayString
-        {
-            get
-            {
-                return string.Concat(
+        internal readonly string DebugDisplayString => string.Concat(
                     this.X.ToString(), "  ",
                     this.Y.ToString()
                 );
-            }
-        }
 
         public DGPoint(int x, int y)
         {
@@ -79,7 +72,7 @@ namespace DeadlyGame.Core.Mathematics.Primitives
 
         public readonly bool Equals(DGPoint other)
         {
-            return X == other.X && Y == other.Y;
+            return this.X == other.X && this.Y == other.Y;
         }
 
         public override readonly int GetHashCode()
@@ -89,19 +82,19 @@ namespace DeadlyGame.Core.Mathematics.Primitives
 
         public override readonly string ToString()
         {
-            return "{X:" + X + " Y:" + Y + "}";
+            return "{X:" + this.X + " Y:" + this.Y + "}";
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public readonly DGPoint ToVector2()
         {
-            return new DGPoint(X, Y);
+            return new DGPoint(this.X, this.Y);
         }
 
         public readonly void Deconstruct(out int x, out int y)
         {
-            x = X;
-            y = Y;
+            x = this.X;
+            y = this.Y;
         }
 
         internal static double Distance(DGPoint point1, DGPoint point2)

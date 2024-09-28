@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace DeadlyGame.Core.Builders
+﻿namespace DeadlyGame.Core.Builders
 {
     public struct DGGameBuilder
     {

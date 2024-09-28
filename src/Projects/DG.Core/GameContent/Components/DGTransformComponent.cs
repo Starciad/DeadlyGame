@@ -1,8 +1,6 @@
 ﻿using DeadlyGame.Core.Components;
 using DeadlyGame.Core.Mathematics.Primitives;
 
-using System.Numerics;
-
 namespace DeadlyGame.Core.GameContent.Components
 {
     internal sealed class DGTransformComponent : DGComponent

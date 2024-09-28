@@ -1,5 +1,4 @@
-﻿using DeadlyGame.Core;
-using DeadlyGame.Core.Behaviors;
+﻿using DeadlyGame.Core.Behaviors;
 using DeadlyGame.Core.Behaviors.Models;
 using DeadlyGame.Core.Constants;
 using DeadlyGame.Core.Entities;
@@ -12,7 +11,6 @@ using DeadlyGame.Core.Models.Infos.Actions;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Numerics;
 using System.Text;
 
 namespace DeadlyGame.Core.GameContent.Behaviors
