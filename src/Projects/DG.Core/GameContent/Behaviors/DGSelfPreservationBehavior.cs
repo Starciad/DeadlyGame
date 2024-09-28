@@ -1,10 +1,11 @@
 ﻿using DeadlyGame.Core.Behaviors;
 using DeadlyGame.Core.Behaviors.Models;
+using DeadlyGame.Core.Constants;
 using DeadlyGame.Core.Entities;
 using DeadlyGame.Core.GameContent.Components;
 using DeadlyGame.Core.GameContent.Effects;
 using DeadlyGame.Core.Items;
-using DeadlyGame.Core.Items.Templates.Foods;
+using DeadlyGame.Core.Items.Types;
 using DeadlyGame.Core.Localization;
 using DeadlyGame.Core.Mathematics;
 using DeadlyGame.Core.Models;
@@ -32,9 +33,6 @@ namespace DeadlyGame.Core.GameContent.Behaviors
         private DGHungerComponent _hungerComponent;
         private DGEffectsComponent _effectsComponent;
         private DGInventoryComponent _inventoryComponent;
-
-        // Consts
-        private const string S_SELF_PRESERVATION_BEHAVIOR = "Self_Preservation";
 
         public bool CanAct(DGEntity entity, DGGame game)
         {
@@ -83,7 +81,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
         public DGPlayerActionInfo Act()
         {
             _ = this.descriptionStringBuilder.Clear();
-            _ = this.descriptionStringBuilder.AppendFormat(DGLocalization.Read(S_SELF_PRESERVATION_BEHAVIOR, "Description_Intro"), this._entity.Name);
+            _ = this.descriptionStringBuilder.AppendFormat(DGLocalization.Read(DGBehaviourConstants.S_SELF_PRESERVATION_BEHAVIOR, "Description_Intro"), this._entity.Name);
             _ = this.descriptionStringBuilder.Append(' ');
 
             // If health is less than 50%, start a rest.
@@ -93,7 +91,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
                 {
                     this._effectsComponent.AddEffect<DGRestEffect>();
 
-                    _ = this.descriptionStringBuilder.AppendFormat(DGLocalization.Read(S_SELF_PRESERVATION_BEHAVIOR, "Description_Health"));
+                    _ = this.descriptionStringBuilder.AppendFormat(DGLocalization.Read(DGBehaviourConstants.S_SELF_PRESERVATION_BEHAVIOR, "Description_Health"));
                     _ = this.descriptionStringBuilder.Append(' ');
                 }
             }
@@ -102,7 +100,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             if (this._hungerComponent != null &&
                 this._inventoryComponent != null)
             {
-                _ = this.descriptionStringBuilder.Append(DGLocalization.Read(S_SELF_PRESERVATION_BEHAVIOR, "Description_Hunger"));
+                _ = this.descriptionStringBuilder.Append(DGLocalization.Read(DGBehaviourConstants.S_SELF_PRESERVATION_BEHAVIOR, "Description_Hunger"));
                 List<DGFood> foods = GetFoodFromInventory(this._inventoryComponent);
 
                 // Feeding loop until you are satiated or the food runs out.
@@ -123,8 +121,8 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             }
 
             DGPlayerActionInfo infos = new();
-            infos.WithName(DGLocalization.Read(S_SELF_PRESERVATION_BEHAVIOR, "Name"));
-            infos.WithTitle(string.Format(DGLocalization.Read(S_SELF_PRESERVATION_BEHAVIOR, "Title"), this._entity.Name));
+            infos.WithName(DGLocalization.Read(DGBehaviourConstants.S_SELF_PRESERVATION_BEHAVIOR, "Name"));
+            infos.WithTitle(string.Format(DGLocalization.Read(DGBehaviourConstants.S_SELF_PRESERVATION_BEHAVIOR, "Title"), this._entity.Name));
             infos.WithDescription(this.descriptionStringBuilder.ToString());
             infos.WithPriorityLevel(5);
             infos.WithAuthor(this._entity.Id);

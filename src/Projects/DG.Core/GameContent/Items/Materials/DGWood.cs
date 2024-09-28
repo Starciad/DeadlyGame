@@ -1,5 +1,5 @@
 ﻿using DeadlyGame.Core.Enums.Items;
-using DeadlyGame.Core.Items.Templates.Materials;
+using DeadlyGame.Core.Items.Types;
 using DeadlyGame.Core.Localization;
 
 namespace DeadlyGame.Core.GameContent.Items.Materials

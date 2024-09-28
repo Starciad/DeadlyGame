@@ -4,13 +4,14 @@ using DeadlyGame.Core.Enums.World;
 using DeadlyGame.Core.GameContent.Components;
 using DeadlyGame.Core.GameContent.Entities.Natural;
 using DeadlyGame.Core.Items;
+using DeadlyGame.Core.Managers;
 using DeadlyGame.Core.Mathematics.Primitives;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DeadlyGame.Core.Managers
+namespace DeadlyGame.Core.GameContent.Managers
 {
     public sealed class DGWorldManager : DGManager
     {

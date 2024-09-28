@@ -8,7 +8,6 @@ using DeadlyGame.Core.Mathematics.Primitives;
 using DeadlyGame.Core.Models;
 using DeadlyGame.Core.Models.Infos.Actions;
 
-using System.Drawing;
 using System.Linq;
 
 namespace DeadlyGame.Core.GameContent.Behaviors
@@ -30,7 +29,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
         private DGEntity _resourceEntity;
 
         // Consts
-        private const string S_RESOURCE_ACQUISITION = "Resource_Acquisition";
+        
 
         public bool CanAct(DGEntity entity, DGGame game)
         {
@@ -65,9 +64,9 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             this._resourceHealthComponent.Hurt(totalDamage);
 
             DGPlayerActionInfo infos = new();
-            infos.WithName(DGLocalization.Read(S_RESOURCE_ACQUISITION, "Name"));
-            infos.WithTitle(string.Format(DGLocalization.Read(S_RESOURCE_ACQUISITION, "Title"), this._entity.Name));
-            infos.WithDescription(string.Format(DGLocalization.Read(S_RESOURCE_ACQUISITION, "Description"), this._entity.Name, totalDamage, this._resourceEntity.Name));
+            infos.WithName(DGLocalization.Read(DGBehaviourConstants.S_RESOURCE_ACQUISITION, "Name"));
+            infos.WithTitle(string.Format(DGLocalization.Read(DGBehaviourConstants.S_RESOURCE_ACQUISITION, "Title"), this._entity.Name));
+            infos.WithDescription(string.Format(DGLocalization.Read(DGBehaviourConstants.S_RESOURCE_ACQUISITION, "Description"), this._entity.Name, totalDamage, this._resourceEntity.Name));
             infos.WithPriorityLevel(5);
             infos.WithAuthor(this._entity.Id);
             infos.WithColor(DGColor.SandyBrown);

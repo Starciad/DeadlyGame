@@ -2,7 +2,7 @@
 using DeadlyGame.Core.Behaviors.Models;
 using DeadlyGame.Core.Entities;
 using DeadlyGame.Core.GameContent.Components;
-using DeadlyGame.Core.Items.Templates.Weapons;
+using DeadlyGame.Core.Items.Types;
 using DeadlyGame.Core.Models.Infos.Actions;
 
 using System.Linq;

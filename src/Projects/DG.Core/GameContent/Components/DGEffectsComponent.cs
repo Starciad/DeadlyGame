@@ -17,7 +17,7 @@ namespace DeadlyGame.Core.GameContent.Components
         private readonly Dictionary<Type, DGEffect> _effects = [];
 
         // components
-        private DGHealthComponent _healthComponent;
+        private readonly DGHealthComponent _healthComponent;
 
         public DGEffectsComponent(DGGame game, DGEntity entity) : base(game, entity)
         {

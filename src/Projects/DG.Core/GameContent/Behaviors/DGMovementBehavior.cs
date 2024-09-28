@@ -1,5 +1,6 @@
 ﻿using DeadlyGame.Core.Behaviors;
 using DeadlyGame.Core.Behaviors.Models;
+using DeadlyGame.Core.Constants;
 using DeadlyGame.Core.Entities;
 using DeadlyGame.Core.Enums.Personalities;
 using DeadlyGame.Core.Enums.World;
@@ -22,9 +23,6 @@ namespace DeadlyGame.Core.GameContent.Behaviors
         private DGPersonalityComponent _personalityComponent;
         private DGHungerComponent _hungerComponent;
         private DGCombatComponent _combatComponent;
-
-        // Consts
-        private const string S_MOVEMENT_BEHAVIOR = "Movement_Behavior";
 
         public bool CanAct(DGEntity entity, DGGame game)
         {
@@ -120,9 +118,9 @@ namespace DeadlyGame.Core.GameContent.Behaviors
 
             // === INFOS ===
             DGPlayerActionInfo infos = new();
-            infos.WithName(DGLocalization.Read(S_MOVEMENT_BEHAVIOR, "Name"));
-            infos.WithTitle(string.Format(DGLocalization.Read(S_MOVEMENT_BEHAVIOR, "Title"), this._entity.Name));
-            infos.WithDescription(string.Format(DGLocalization.Read(S_MOVEMENT_BEHAVIOR, "Description"), this._entity.Name, oldPos.X, oldPos.Y, newPos.X, newPos.Y));
+            infos.WithName(DGLocalization.Read(DGBehaviourConstants.S_MOVEMENT_BEHAVIOR, "Name"));
+            infos.WithTitle(string.Format(DGLocalization.Read(DGBehaviourConstants.S_MOVEMENT_BEHAVIOR, "Title"), this._entity.Name));
+            infos.WithDescription(string.Format(DGLocalization.Read(DGBehaviourConstants.S_MOVEMENT_BEHAVIOR, "Description"), this._entity.Name, oldPos.X, oldPos.Y, newPos.X, newPos.Y));
             infos.WithPriorityLevel(4);
             infos.WithAuthor(this._entity.Id);
             infos.WithColor(DGColor.LightCyan);

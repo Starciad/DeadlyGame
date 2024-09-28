@@ -1,6 +1,6 @@
 ﻿using DeadlyGame.Core.Builders;
 
-namespace DeadlyGame.Core.Settings
+namespace DeadlyGame.Core.Game.Settings
 {
     public struct DGGameSettings
     {

@@ -11,16 +11,10 @@ namespace DeadlyGame.Core.GameContent.Components
 {
     public sealed class DGBehaviourComponent : DGComponent
     {
-        private struct DGAction
+        private struct DGAction(IDGBehaviour behaviour, float weight)
         {
-            public IDGBehaviour Behaviour { get; private set; }
-            public float Weight { get; private set; }
-
-            public DGAction(IDGBehaviour behaviour, float weight)
-            {
-                this.Behaviour = behaviour;
-                this.Weight = weight;
-            }
+            public IDGBehaviour Behaviour { get; private set; } = behaviour;
+            public float Weight { get; private set; } = weight;
         }
 
         public DGPlayerActionInfo LastActionInfos { get; private set; }

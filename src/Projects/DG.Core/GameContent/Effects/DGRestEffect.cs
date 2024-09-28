@@ -7,7 +7,7 @@ namespace DeadlyGame.Core.GameContent.Effects
 {
     public class DGRestEffect : DGEffect
     {
-        protected override void Build()
+        public DGRestEffect() : base()
         {
             this.Name = "Descanço";
             this.Description = "Você sente suas energias retornando gradualmente.";

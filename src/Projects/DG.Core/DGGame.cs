@@ -1,11 +1,11 @@
 ﻿using DeadlyGame.Core.Builders;
 using DeadlyGame.Core.Databases.Crafting;
 using DeadlyGame.Core.Dice;
+using DeadlyGame.Core.Game.Settings;
 using DeadlyGame.Core.GameContent.Entities.Players;
+using DeadlyGame.Core.GameContent.Managers;
 using DeadlyGame.Core.Localization;
-using DeadlyGame.Core.Managers;
 using DeadlyGame.Core.Mathematics;
-using DeadlyGame.Core.Settings;
 
 using System;
 

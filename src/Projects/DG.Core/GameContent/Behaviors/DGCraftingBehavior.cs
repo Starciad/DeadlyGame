@@ -1,5 +1,6 @@
 ﻿using DeadlyGame.Core.Behaviors;
 using DeadlyGame.Core.Behaviors.Models;
+using DeadlyGame.Core.Constants;
 using DeadlyGame.Core.Crafting;
 using DeadlyGame.Core.Entities;
 using DeadlyGame.Core.GameContent.Components;
@@ -21,9 +22,6 @@ namespace DeadlyGame.Core.GameContent.Behaviors
 
         // Components
         private DGInventoryComponent _inventoryComponent;
-
-        // Consts
-        private const string S_CRAFTING_BEHAVIOR = "Crafting_Behavior";
 
         public bool CanAct(DGEntity entity, DGGame game)
         {
@@ -56,9 +54,9 @@ namespace DeadlyGame.Core.GameContent.Behaviors
 
             // === INFOS ===
             DGPlayerActionInfo infos = new();
-            infos.WithName(DGLocalization.Read(S_CRAFTING_BEHAVIOR, "Name"));
-            infos.WithTitle(DGLocalization.Read(S_CRAFTING_BEHAVIOR, "Title"));
-            infos.WithDescription(string.Format(DGLocalization.Read(S_CRAFTING_BEHAVIOR, "Description"), this._entity.Name, 1, item.Name));
+            infos.WithName(DGLocalization.Read(DGBehaviourConstants.S_CRAFTING_BEHAVIOR, "Name"));
+            infos.WithTitle(DGLocalization.Read(DGBehaviourConstants.S_CRAFTING_BEHAVIOR, "Title"));
+            infos.WithDescription(string.Format(DGLocalization.Read(DGBehaviourConstants.S_CRAFTING_BEHAVIOR, "Description"), this._entity.Name, 1, item.Name));
             infos.WithPriorityLevel(5);
             infos.WithAuthor(this._entity.Id);
             infos.WithColor(DGColor.BurlyWood);

@@ -1,6 +1,6 @@
 ﻿using DeadlyGame.Core.Components;
 using DeadlyGame.Core.Entities;
-using DeadlyGame.Core.Items.Templates.Weapons;
+using DeadlyGame.Core.Items.Types;
 
 namespace DeadlyGame.Core.GameContent.Components
 {

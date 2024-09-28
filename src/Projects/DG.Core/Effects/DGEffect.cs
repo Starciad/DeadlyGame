@@ -20,7 +20,6 @@ namespace DeadlyGame.Core.Effects
 
         public DGEffect()
         {
-            Build();
             this._remainingDurability = this.Durability;
         }
         public void SetEntity(DGEntity entity)
@@ -38,7 +37,6 @@ namespace DeadlyGame.Core.Effects
             OnApplyEffect(this._entity);
         }
 
-        protected abstract void Build();
         protected abstract void OnApplyEffect(DGEntity entity);
     }
 }

@@ -29,9 +29,6 @@ namespace DeadlyGame.Core.GameContent.Behaviors
         private DGTransformComponent _transformComponent;
         private DGInventoryComponent _inventoryComponent;
 
-        // Consts
-        private const string S_ITEM_ACQUISITION_BEHAVIOUR = "Item_Acquisition_Behavior";
-
         public bool CanAct(DGEntity entity, DGGame game)
         {
             this._entity = entity;
@@ -83,13 +80,13 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             {
                 DGWorldItem itemObtained = distinctItemsObtained[i];
                 int count = itemsObtained.Count(x => x.Item.Name == itemObtained.Item.Name);
-                _ = itemsObtainedString.AppendFormat(DGLocalization.Read(S_ITEM_ACQUISITION_BEHAVIOUR, "New_Item") + (i < distinctItemsObtainedCount ? ", " : string.Empty), count, itemObtained.Item.Name);
+                _ = itemsObtainedString.AppendFormat(DGLocalization.Read(DGBehaviourConstants.S_ITEM_ACQUISITION_BEHAVIOUR, "New_Item") + (i < distinctItemsObtainedCount ? ", " : string.Empty), count, itemObtained.Item.Name);
             }
 
-            _ = DGLocalization.Read(S_ITEM_ACQUISITION_BEHAVIOUR, "Description");
+            _ = DGLocalization.Read(DGBehaviourConstants.S_ITEM_ACQUISITION_BEHAVIOUR, "Description");
             DGPlayerActionInfo infos = new();
-            infos.WithName(DGLocalization.Read(S_ITEM_ACQUISITION_BEHAVIOUR, "Name"));
-            infos.WithTitle(DGLocalization.Read(S_ITEM_ACQUISITION_BEHAVIOUR, "Title"));
+            infos.WithName(DGLocalization.Read(DGBehaviourConstants.S_ITEM_ACQUISITION_BEHAVIOUR, "Name"));
+            infos.WithTitle(DGLocalization.Read(DGBehaviourConstants.S_ITEM_ACQUISITION_BEHAVIOUR, "Title"));
             infos.WithDescription(itemsObtainedString.ToString());
             infos.WithPriorityLevel(4);
             infos.WithAuthor(this._entity.Id);

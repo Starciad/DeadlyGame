@@ -1,6 +1,6 @@
 ﻿using DeadlyGame.Core.Enums.Items.Weapons;
 
-namespace DeadlyGame.Core.Items.Templates.Weapons
+namespace DeadlyGame.Core.Items.Types
 {
     public abstract class DGWeapon : DGItem
     {

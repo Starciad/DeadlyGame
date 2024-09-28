@@ -7,7 +7,7 @@ using DeadlyGame.Core.Enums.Personalities;
 using DeadlyGame.Core.Enums.World;
 using DeadlyGame.Core.GameContent.Components;
 using DeadlyGame.Core.GameContent.Entities.Players;
-using DeadlyGame.Core.Items.Templates.Weapons;
+using DeadlyGame.Core.Items.Types;
 using DeadlyGame.Core.Localization;
 using DeadlyGame.Core.Mathematics;
 using DeadlyGame.Core.Mathematics.Primitives;
@@ -47,9 +47,6 @@ namespace DeadlyGame.Core.GameContent.Behaviors
         private DGTransformComponent _targetEntityTransform;
         private DGHealthComponent _targetEntityHealth;
         private DGRelationshipsComponent _targetRelationshipsComponent;
-
-        // Consts
-        private const string S_AGGRESSIVE_BEHAVIOR = "Aggressive_Behavior";
 
         public bool CanAct(DGEntity entity, DGGame game)
         {
@@ -170,19 +167,19 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             string opponentsName = this._targetEntity.Name;
             string weaponName = this._weaponUsed == null ? DGLocalization.Read("Items", "Weapon_Hand") : this._weaponUsed.Name;
 
-            infos.WithName(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Name"));
+            infos.WithName(DGLocalization.Read(DGBehaviourConstants.S_AGGRESSIVE_BEHAVIOR, "Name"));
             if (this._targetEntityHealth.IsDead)
             {
                 // Death Message
-                infos.WithTitle(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Killed_Title"), entityName, opponentsName));
-                infos.WithDescription(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Killed_Description"), entityName, opponentsName, this._totalDamage, weaponName));
+                infos.WithTitle(string.Format(DGLocalization.Read(DGBehaviourConstants.S_AGGRESSIVE_BEHAVIOR, "Attack_Killed_Title"), entityName, opponentsName));
+                infos.WithDescription(string.Format(DGLocalization.Read(DGBehaviourConstants.S_AGGRESSIVE_BEHAVIOR, "Attack_Killed_Description"), entityName, opponentsName, this._totalDamage, weaponName));
                 infos.WithPriorityLevel(10);
                 infos.WithColor(DGColor.DarkRed);
             }
             else
             {
-                infos.WithTitle(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Success_Title"), entityName, opponentsName));
-                infos.WithDescription(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Success_Description") + (this._isCriticalAttack ? ' ' + DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_IsCritical") : string.Empty), entityName, this._totalDamage, weaponName, opponentsName));
+                infos.WithTitle(string.Format(DGLocalization.Read(DGBehaviourConstants.S_AGGRESSIVE_BEHAVIOR, "Attack_Success_Title"), entityName, opponentsName));
+                infos.WithDescription(string.Format(DGLocalization.Read(DGBehaviourConstants.S_AGGRESSIVE_BEHAVIOR, "Attack_Success_Description") + (this._isCriticalAttack ? ' ' + DGLocalization.Read(DGBehaviourConstants.S_AGGRESSIVE_BEHAVIOR, "Attack_IsCritical") : string.Empty), entityName, this._totalDamage, weaponName, opponentsName));
                 infos.WithColor(DGColor.Red);
                 infos.WithPriorityLevel(8);
             }

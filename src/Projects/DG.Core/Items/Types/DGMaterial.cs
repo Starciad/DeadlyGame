@@ -1,4 +1,4 @@
-﻿namespace DeadlyGame.Core.Items.Templates.Materials
+﻿namespace DeadlyGame.Core.Items.Types
 {
     public abstract class DGMaterial : DGItem
     {

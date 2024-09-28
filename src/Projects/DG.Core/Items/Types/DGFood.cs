@@ -1,4 +1,4 @@
-﻿namespace DeadlyGame.Core.Items.Templates.Foods
+﻿namespace DeadlyGame.Core.Items.Types
 {
     public abstract class DGFood : DGItem
     {

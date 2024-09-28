@@ -1,4 +1,6 @@
-﻿namespace DeadlyGame.Core.Managers
+﻿using DeadlyGame.Core.Managers;
+
+namespace DeadlyGame.Core.GameContent.Managers
 {
     public sealed class DGGameStateManager : DGManager
     {
