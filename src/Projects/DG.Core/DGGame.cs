@@ -1,7 +1,6 @@
 ﻿using DeadlyGame.Core.Builders;
 using DeadlyGame.Core.Databases.Items;
 using DeadlyGame.Core.Dice;
-using DeadlyGame.Core.Entities.Players;
 using DeadlyGame.Core.Localization;
 using DeadlyGame.Core.Managers;
 using DeadlyGame.Core.Mathematics;
@@ -9,6 +8,7 @@ using DeadlyGame.Core.Settings;
 using DeadlyGame.Core.Databases.Crafting;
 
 using System;
+using DeadlyGame.Core.GameContent.Entities.Players;
 
 namespace DeadlyGame.Core
 {

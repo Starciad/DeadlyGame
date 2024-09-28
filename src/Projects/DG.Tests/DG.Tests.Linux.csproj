@@ -1,10 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
+	<PropertyGroup Label="Header">
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 		<IsPackable>false</IsPackable>
 		<IsTestProject>true</IsTestProject>
+	</PropertyGroup>
+
+	<PropertyGroup Label="General">
+		<AssemblyName>DeadlyGame.Tests</AssemblyName>
+		<RootNamespace>DeadlyGame.Tests</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -21,6 +26,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\DG.Core\DG.Core.csproj" />
+		<ProjectReference Include="..\DG.Core\DG.Core.Linux.csproj" />
 	</ItemGroup>
 </Project>

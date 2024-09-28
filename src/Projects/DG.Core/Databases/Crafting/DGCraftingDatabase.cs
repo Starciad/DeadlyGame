@@ -1,5 +1,5 @@
-﻿using DeadlyGame.Core.Components.Common;
-using DeadlyGame.Core.Crafting;
+﻿using DeadlyGame.Core.Crafting;
+using DeadlyGame.Core.GameContent.Components;
 using DeadlyGame.Core.Objects;
 
 using System.Collections.Generic;

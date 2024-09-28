@@ -1,6 +1,6 @@
-﻿using DeadlyGame.Core.Items.Common.Foods;
-using DeadlyGame.Core.Items.Common.Materials;
-using DeadlyGame.Core.Items.Common.Weapons;
+﻿using DeadlyGame.Core.GameContent.Items.Foods;
+using DeadlyGame.Core.GameContent.Items.Materials;
+using DeadlyGame.Core.GameContent.Items.Weapons;
 using DeadlyGame.Core.Objects;
 
 namespace DeadlyGame.Core.Databases.Items

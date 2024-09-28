@@ -1,6 +1,6 @@
 ﻿using DeadlyGame.Core.Crafting;
-using DeadlyGame.Core.Items.Common.Materials;
-using DeadlyGame.Core.Items.Common.Weapons;
+using DeadlyGame.Core.GameContent.Items.Materials;
+using DeadlyGame.Core.GameContent.Items.Weapons;
 
 namespace DeadlyGame.Core.Databases.Crafting
 {

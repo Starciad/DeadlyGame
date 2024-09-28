@@ -3,21 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DG.CLI.Windows", "DG.CLI\DG.CLI.Windows.csproj", "{000C1E8E-B0AB-44D9-B14D-8AAB79D1AC5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DG.CLI.Windows", "DG.CLI\DG.CLI.Windows.csproj", "{000C1E8E-B0AB-44D9-B14D-8AAB79D1AC5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DG.Core.Windows", "DG.Core\DG.Core.Windows.csproj", "{E26C7990-2D77-44A6-9B02-6D50ED7C5437}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DG.Core.Windows", "DG.Core\DG.Core.Windows.csproj", "{E26C7990-2D77-44A6-9B02-6D50ED7C5437}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DG.Tests.Windows", "DG.Tests\DG.Tests.Windows.csproj", "{181E6434-3A1D-429B-AC80-4CF99A7E4313}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DG.Tests.Windows", "DG.Tests\DG.Tests.Windows.csproj", "{181E6434-3A1D-429B-AC80-4CF99A7E4313}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DG.Assets", "DG.Assets\DG.Assets.csproj", "{D6EBF9B0-AE20-4328-B7FB-77B1E150AAF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DG.Assets.Windows", "DG.GameContent\DG.Assets.Windows.csproj", "{B1C29FB7-12EF-45FB-B115-0ECC3F37E1D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{000C1E8E-B0AB-44D9-B14D-8AAB79D1AC5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -32,9 +29,12 @@ Global
 		{181E6434-3A1D-429B-AC80-4CF99A7E4313}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{181E6434-3A1D-429B-AC80-4CF99A7E4313}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{181E6434-3A1D-429B-AC80-4CF99A7E4313}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D6EBF9B0-AE20-4328-B7FB-77B1E150AAF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D6EBF9B0-AE20-4328-B7FB-77B1E150AAF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D6EBF9B0-AE20-4328-B7FB-77B1E150AAF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D6EBF9B0-AE20-4328-B7FB-77B1E150AAF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1C29FB7-12EF-45FB-B115-0ECC3F37E1D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1C29FB7-12EF-45FB-B115-0ECC3F37E1D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1C29FB7-12EF-45FB-B115-0ECC3F37E1D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1C29FB7-12EF-45FB-B115-0ECC3F37E1D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

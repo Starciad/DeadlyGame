@@ -4,15 +4,17 @@
 	<Import Project="../../Targets/Windows/Compilation.targets"></Import>
 
 	<PropertyGroup Label="Header">
-		<OutputType>Exe</OutputType>
+		<OutputType>Library</OutputType>
 		<TargetFramework>net8.0-windows</TargetFramework>
 	</PropertyGroup>
 
 	<PropertyGroup Label="General">
-		<AssemblyName>DeadlyGame.CLI</AssemblyName>
-		<RootNamespace>DeadlyGame.CLI</RootNamespace>
+		<AssemblyName>DeadlyGame.GameContent</AssemblyName>
+		<RootNamespace>DeadlyGame.GameContent</RootNamespace>
+		<DebugType>embedded</DebugType>
+		<Trimming>full</Trimming>
 	</PropertyGroup>
-
+	
 	<ItemGroup Label="Files">
 		<None Include="..\..\..\LICENSE.txt">
 			<Pack>True</Pack>
@@ -24,10 +26,17 @@
 			<PackagePath>\</PackagePath>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<Content Include="assets\**">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
-	
-	<ItemGroup Label="Project References">
-		<ProjectReference Include="..\DG.GameContent\DG.Assets.Windows.csproj" />
-		<ProjectReference Include="..\DG.Core\DG.Core.Windows.csproj" />
+
+	<ItemGroup>
+	  <Folder Include="assets\localization\en-US\" />
+	  <Folder Include="assets\localization\template\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\DG.Core\DG.Core.Windows.csproj" />
 	</ItemGroup>
 </Project>

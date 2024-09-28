@@ -1,8 +1,8 @@
 ﻿using DeadlyGame.Core.Builders;
-using DeadlyGame.Core.Components.Common;
 using DeadlyGame.Core.Entities;
-using DeadlyGame.Core.Entities.Natural;
 using DeadlyGame.Core.Enums.World;
+using DeadlyGame.Core.GameContent.Components;
+using DeadlyGame.Core.GameContent.Entities.Natural;
 using DeadlyGame.Core.Items;
 using DeadlyGame.Core.Mathematics.Primitives;
 

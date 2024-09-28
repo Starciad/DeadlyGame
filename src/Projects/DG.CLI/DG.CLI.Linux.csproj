@@ -1,13 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
+	<Import Project="../../Targets/Linux/General.targets"></Import>
+	<Import Project="../../Targets/Linux/Information.targets"></Import>
+	<Import Project="../../Targets/Linux/Compilation.targets"></Import>
+
+	<PropertyGroup Label="Header">
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net8.0</TargetFramework>
-		<ImplicitUsings>disable</ImplicitUsings>
-		<Nullable>disable</Nullable>
-		<PublishAot>false</PublishAot>
-		<InvariantGlobalization>false</InvariantGlobalization>
 	</PropertyGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\DG.Core\DG.Core.csproj" />
+
+	<PropertyGroup Label="General">
+		<AssemblyName>DeadlyGame.CLI</AssemblyName>
+		<RootNamespace>DeadlyGame.CLI</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup Label="Files">
+		<None Include="..\..\..\LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="..\..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	
+	<ItemGroup Label="Project References">
+		<ProjectReference Include="..\DG.GameContent\DG.GameContent.Linux.csproj" />
+		<ProjectReference Include="..\DG.Core\DG.Core.Linux.csproj" />
 	</ItemGroup>
 </Project>

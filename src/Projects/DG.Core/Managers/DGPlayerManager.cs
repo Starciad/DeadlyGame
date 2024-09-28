@@ -1,6 +1,6 @@
 ﻿using DeadlyGame.Core.Builders;
-using DeadlyGame.Core.Components.Common;
-using DeadlyGame.Core.Entities.Players;
+using DeadlyGame.Core.GameContent.Components;
+using DeadlyGame.Core.GameContent.Entities.Players;
 using DeadlyGame.Core.Mathematics.Primitives;
 
 using System.Collections.Generic;
