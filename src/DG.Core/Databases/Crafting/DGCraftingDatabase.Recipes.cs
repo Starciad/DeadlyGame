@@ -10,7 +10,7 @@ namespace DG.Core.Databases.Crafting
 
         private void InitializeRecipes()
         {
-            recipes =
+            this.recipes =
             [
                 // Wooden Axe
                 new DGCraftingRecipe(this.Game, typeof(DGWoodenAxe), [

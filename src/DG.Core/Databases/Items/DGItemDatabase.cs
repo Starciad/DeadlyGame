@@ -17,11 +17,11 @@ namespace DG.Core.Databases.Items
             Type[] types = typeof(DGItemDatabase).Assembly.GetTypes();
             int length = types.Length;
 
-            List<DGItem> items = [];
+            _ = [];
             for (int i = 0; i < length; i++)
             {
                 Type type = types[i];
-                var itemRegisterAttribute = type.GetCustomAttribute<DGItemRegisterAttribute>();
+                DGItemRegisterAttribute itemRegisterAttribute = type.GetCustomAttribute<DGItemRegisterAttribute>();
                 if (itemRegisterAttribute == null)
                 {
                     continue;
@@ -51,12 +51,7 @@ namespace DG.Core.Databases.Items
 
         internal bool TryGetItem(Type itemType, out DGItem item)
         {
-            if (this._items.TryGetValue(itemType, out item))
-            {
-                return true;
-            }
-
-            return false;
+            return this._items.TryGetValue(itemType, out item);
         }
     }
 }

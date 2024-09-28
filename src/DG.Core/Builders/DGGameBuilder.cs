@@ -9,8 +9,8 @@ namespace DG.Core.Builders
 
         public DGGameBuilder()
         {
-            Players = [];
-            LocalizationFilename = Path.Combine(Directory.GetCurrentDirectory(), "Localization", "Localization.ini");
+            this.Players = [];
+            this.LocalizationFilename = Path.Combine(Directory.GetCurrentDirectory(), "Localization", "Localization.ini");
         }
     }
 }

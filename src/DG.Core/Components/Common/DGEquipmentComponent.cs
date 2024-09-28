@@ -1,5 +1,4 @@
-﻿using DG.Core.Constants;
-using DG.Core.Items.Weapons;
+﻿using DG.Core.Items.Weapons;
 
 namespace DG.Core.Components.Common
 {

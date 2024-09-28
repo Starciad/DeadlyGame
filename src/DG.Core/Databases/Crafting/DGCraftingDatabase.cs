@@ -24,7 +24,7 @@ namespace DG.Core.Databases.Crafting
         {
             List<DGCraftingRecipe> selectedRecipes = [];
 
-            foreach (DGCraftingRecipe recipe in recipes)
+            foreach (DGCraftingRecipe recipe in this.recipes)
             {
                 if (recipe.CanCraft(inventoryComponent))
                 {

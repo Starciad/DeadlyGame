@@ -1,8 +1,6 @@
 ﻿using DG.Core.Information.Utils;
 using DG.Core.Managers;
 
-using System.Numerics;
-
 namespace DG.Core.Information.World
 {
     public struct DGWorldInfo

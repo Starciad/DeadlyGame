@@ -1,5 +1,4 @@
-﻿using DG.Core.Behaviors;
-using DG.Core.Behaviors.Models;
+﻿using DG.Core.Behaviors.Models;
 using DG.Core.Components.Common;
 using DG.Core.Constants;
 using DG.Core.Entities;

@@ -244,8 +244,8 @@ namespace DG.Core.Behaviors.Common
             }
 
             // Check if it was a critical value
-            _isCriticalAttack = DGAttributesUtilities.IsMaxAttributeValueInTest(this._attributeValue, this._attackTest);
-            this._totalDamage = this._combatComponent.GetFullAttackDamage(_isCriticalAttack);
+            this._isCriticalAttack = DGAttributesUtilities.IsMaxAttributeValueInTest(this._attributeValue, this._attackTest);
+            this._totalDamage = this._combatComponent.GetFullAttackDamage(this._isCriticalAttack);
 
             this._targetEntityHealth.Hurt(this._totalDamage);
         }

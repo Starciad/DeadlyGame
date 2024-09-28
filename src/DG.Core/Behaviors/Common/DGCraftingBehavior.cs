@@ -1,8 +1,6 @@
-﻿using DG.Core.Behaviors;
-using DG.Core.Behaviors.Models;
+﻿using DG.Core.Behaviors.Models;
 using DG.Core.Components.Common;
 using DG.Core.Crafting;
-using DG.Core.Databases;
 using DG.Core.Entities;
 using DG.Core.Information.Actions;
 using DG.Core.Items;

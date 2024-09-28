@@ -2,8 +2,6 @@
 using DG.Core.Information.Utils;
 using DG.Core.Items;
 
-using System.Numerics;
-
 namespace DG.Core.Information.World
 {
     public struct DGWorldItemInfo
