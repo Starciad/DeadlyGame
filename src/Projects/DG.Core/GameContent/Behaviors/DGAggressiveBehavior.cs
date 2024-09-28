@@ -10,11 +10,11 @@ using DeadlyGame.Core.Items.Templates.Weapons;
 using DeadlyGame.Core.Localization;
 using DeadlyGame.Core.Mathematics;
 using DeadlyGame.Core.Mathematics.Primitives;
+using DeadlyGame.Core.Models;
 using DeadlyGame.Core.Models.Infos.Actions;
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 
 namespace DeadlyGame.Core.GameContent.Behaviors
@@ -176,13 +176,13 @@ namespace DeadlyGame.Core.GameContent.Behaviors
                 infos.WithTitle(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Killed_Title"), entityName, opponentsName));
                 infos.WithDescription(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Killed_Description"), entityName, opponentsName, this._totalDamage, weaponName));
                 infos.WithPriorityLevel(10);
-                infos.WithColor(Color.DarkRed);
+                infos.WithColor(DGColor.DarkRed);
             }
             else
             {
                 infos.WithTitle(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Success_Title"), entityName, opponentsName));
                 infos.WithDescription(string.Format(DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_Success_Description") + (this._isCriticalAttack ? ' ' + DGLocalization.Read(S_AGGRESSIVE_BEHAVIOR, "Attack_IsCritical") : string.Empty), entityName, this._totalDamage, weaponName, opponentsName));
-                infos.WithColor(Color.Red);
+                infos.WithColor(DGColor.Red);
                 infos.WithPriorityLevel(8);
             }
 

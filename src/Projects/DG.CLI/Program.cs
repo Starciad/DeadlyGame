@@ -2,6 +2,7 @@
 using DeadlyGame.Core.Builders;
 
 using System;
+using System.Threading;
 
 namespace DeadlyGame.CLI
 {
@@ -28,6 +29,8 @@ namespace DeadlyGame.CLI
                 Console.Clear();
                 Console.WriteLine($"[ Round: {game.RoundManager.CurrentRound} || Day: {game.WorldManager.CurrentDay} ({game.WorldManager.CurrentDaylightCycle}) ]");
                 Console.WriteLine($"Players: {game.PlayerManager.LivingPlayers.Length}/{game.PlayerManager.TotalPlayerCount};");
+
+                Thread.Sleep(TimeSpan.FromMilliseconds(25));
             }
 
             game.FinishGame();

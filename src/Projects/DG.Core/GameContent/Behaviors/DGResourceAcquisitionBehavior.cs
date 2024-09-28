@@ -5,6 +5,7 @@ using DeadlyGame.Core.Entities;
 using DeadlyGame.Core.GameContent.Components;
 using DeadlyGame.Core.Localization;
 using DeadlyGame.Core.Mathematics.Primitives;
+using DeadlyGame.Core.Models;
 using DeadlyGame.Core.Models.Infos.Actions;
 
 using System.Drawing;
@@ -69,7 +70,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             infos.WithDescription(string.Format(DGLocalization.Read(S_RESOURCE_ACQUISITION, "Description"), this._entity.Name, totalDamage, this._resourceEntity.Name));
             infos.WithPriorityLevel(5);
             infos.WithAuthor(this._entity.Id);
-            infos.WithColor(Color.SandyBrown);
+            infos.WithColor(DGColor.SandyBrown);
             return infos;
         }
     }

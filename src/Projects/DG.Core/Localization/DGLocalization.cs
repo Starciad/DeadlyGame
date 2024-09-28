@@ -41,7 +41,7 @@ namespace DeadlyGame.Core.Localization
 
         internal static string Read(string v1, string v2)
         {
-            throw new NotImplementedException();
+            return string.Empty;
         }
     }
 }

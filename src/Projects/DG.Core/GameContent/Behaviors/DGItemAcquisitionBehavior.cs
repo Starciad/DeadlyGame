@@ -6,6 +6,7 @@ using DeadlyGame.Core.GameContent.Components;
 using DeadlyGame.Core.Items;
 using DeadlyGame.Core.Localization;
 using DeadlyGame.Core.Mathematics.Primitives;
+using DeadlyGame.Core.Models;
 using DeadlyGame.Core.Models.Infos.Actions;
 
 using System.Collections.Generic;
@@ -92,7 +93,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             infos.WithDescription(itemsObtainedString.ToString());
             infos.WithPriorityLevel(4);
             infos.WithAuthor(this._entity.Id);
-            infos.WithColor(Color.LightYellow);
+            infos.WithColor(DGColor.LightYellow);
             return infos;
         }
     }

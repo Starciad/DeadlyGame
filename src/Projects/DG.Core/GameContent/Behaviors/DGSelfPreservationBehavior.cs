@@ -7,6 +7,7 @@ using DeadlyGame.Core.Items;
 using DeadlyGame.Core.Items.Templates.Foods;
 using DeadlyGame.Core.Localization;
 using DeadlyGame.Core.Mathematics;
+using DeadlyGame.Core.Models;
 using DeadlyGame.Core.Models.Infos.Actions;
 
 using System;
@@ -127,7 +128,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             infos.WithDescription(this.descriptionStringBuilder.ToString());
             infos.WithPriorityLevel(5);
             infos.WithAuthor(this._entity.Id);
-            infos.WithColor(Color.MediumPurple);
+            infos.WithColor(DGColor.MediumPurple);
             return infos;
         }
 

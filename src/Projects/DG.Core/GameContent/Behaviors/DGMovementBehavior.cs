@@ -6,9 +6,8 @@ using DeadlyGame.Core.Enums.World;
 using DeadlyGame.Core.GameContent.Components;
 using DeadlyGame.Core.Localization;
 using DeadlyGame.Core.Mathematics.Primitives;
+using DeadlyGame.Core.Models;
 using DeadlyGame.Core.Models.Infos.Actions;
-
-using System.Drawing;
 
 namespace DeadlyGame.Core.GameContent.Behaviors
 {
@@ -126,7 +125,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             infos.WithDescription(string.Format(DGLocalization.Read(S_MOVEMENT_BEHAVIOR, "Description"), this._entity.Name, oldPos.X, oldPos.Y, newPos.X, newPos.Y));
             infos.WithPriorityLevel(4);
             infos.WithAuthor(this._entity.Id);
-            infos.WithColor(Color.LightCyan);
+            infos.WithColor(DGColor.LightCyan);
             return infos;
         }
     }

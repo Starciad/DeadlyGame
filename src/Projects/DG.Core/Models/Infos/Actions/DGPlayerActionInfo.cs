@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 
 namespace DeadlyGame.Core.Models.Infos.Actions
 {
@@ -13,7 +12,7 @@ namespace DeadlyGame.Core.Models.Infos.Actions
         public readonly int PriorityLevel => this._priorityLevel;
         public readonly int AuthorId => this._authorId;
         public readonly int[] InvolvedIds => this._involvedIds;
-        public readonly Color Color => this._color;
+        public readonly DGColor DGColor => this._color;
 
         private string _name;
         private string _title;
@@ -21,7 +20,7 @@ namespace DeadlyGame.Core.Models.Infos.Actions
         private int _priorityLevel;
         private int _authorId;
         private int[] _involvedIds;
-        private Color _color;
+        private DGColor _color;
 
         public DGPlayerActionInfo()
         {
@@ -31,7 +30,7 @@ namespace DeadlyGame.Core.Models.Infos.Actions
             this._priorityLevel = -1;
             this._authorId = -1;
             this._involvedIds = [];
-            this._color = Color.White;
+            this._color = DGColor.White;
         }
 
         public void WithName(string name)
@@ -58,7 +57,7 @@ namespace DeadlyGame.Core.Models.Infos.Actions
         {
             this._involvedIds = ids;
         }
-        public void WithColor(Color color)
+        public void WithColor(DGColor color)
         {
             this._color = color;
         }
