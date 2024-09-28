@@ -1,11 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../../Targets/Windows/General.targets"></Import>
+	<Import Project="../../Targets/Windows/Information.targets"></Import>
+	<Import Project="../../Targets/Windows/Compilation.targets"></Import>
+
 	<PropertyGroup Label="Header">
-		<TargetFramework>net8.0</TargetFramework>
+		<OutputType>Library</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
 	</PropertyGroup>
 
 	<PropertyGroup Label="General">
-		<AssemblyName>DeadlyGame</AssemblyName>
-		<RootNamespace>DeadlyGame.CLI</RootNamespace>
+		<AssemblyName>DeadlyGame.Assets</AssemblyName>
+		<RootNamespace>DeadlyGame.Assets</RootNamespace>
+		<DebugType>embedded</DebugType>
+		<Trimming>full</Trimming>
 	</PropertyGroup>
 	
 	<ItemGroup Label="Files">

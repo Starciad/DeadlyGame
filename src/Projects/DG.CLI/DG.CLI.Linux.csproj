@@ -27,7 +27,8 @@
 	</ItemGroup>
 	
 	<ItemGroup Label="Project References">
-		<ProjectReference Include="..\DG.GameContent\DG.GameContent.Linux.csproj" />
+		<ProjectReference Include="..\DG.Assets\DG.Assets.Linux.csproj" />
+		<ProjectReference Include="..\DG.GameContent\DG.Assets.Linux.csproj" />
 		<ProjectReference Include="..\DG.Core\DG.Core.Linux.csproj" />
 	</ItemGroup>
 </Project>

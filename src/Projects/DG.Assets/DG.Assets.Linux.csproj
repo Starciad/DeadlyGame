@@ -4,8 +4,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup Label="General">
-		<AssemblyName>DeadlyGame</AssemblyName>
-		<RootNamespace>DeadlyGame.CLI</RootNamespace>
+		<AssemblyName>DeadlyGame.Assets</AssemblyName>
+		<RootNamespace>DeadlyGame.Assets</RootNamespace>
 	</PropertyGroup>
 	
 	<ItemGroup Label="Files">

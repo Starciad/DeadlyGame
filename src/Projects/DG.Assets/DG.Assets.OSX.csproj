@@ -1,18 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../../Targets/Windows/General.targets"></Import>
-	<Import Project="../../Targets/Windows/Information.targets"></Import>
-	<Import Project="../../Targets/Windows/Compilation.targets"></Import>
-
 	<PropertyGroup Label="Header">
-		<OutputType>Library</OutputType>
-		<TargetFramework>net8.0-windows</TargetFramework>
+		<TargetFramework>net8.0-macos</TargetFramework>
 	</PropertyGroup>
 
 	<PropertyGroup Label="General">
-		<AssemblyName>DeadlyGame.GameContent</AssemblyName>
-		<RootNamespace>DeadlyGame.GameContent</RootNamespace>
-		<DebugType>embedded</DebugType>
-		<Trimming>full</Trimming>
+		<AssemblyName>DeadlyGame.Assets</AssemblyName>
+		<RootNamespace>DeadlyGame.Assets</RootNamespace>
 	</PropertyGroup>
 	
 	<ItemGroup Label="Files">
@@ -34,9 +27,5 @@
 	<ItemGroup>
 	  <Folder Include="assets\localization\en-US\" />
 	  <Folder Include="assets\localization\template\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\DG.Core\DG.Core.Windows.csproj" />
 	</ItemGroup>
 </Project>
