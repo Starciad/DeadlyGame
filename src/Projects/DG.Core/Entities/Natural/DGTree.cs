@@ -1,6 +1,6 @@
 ﻿using DeadlyGame.Core.Components.Common;
-using DeadlyGame.Core.Items.Foods.Common;
-using DeadlyGame.Core.Items.Materials.Common;
+using DeadlyGame.Core.Items.Common.Foods;
+using DeadlyGame.Core.Items.Common.Materials;
 
 namespace DeadlyGame.Core.Entities.Natural
 {

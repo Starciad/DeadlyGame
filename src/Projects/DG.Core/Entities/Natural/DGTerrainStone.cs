@@ -1,5 +1,5 @@
 ﻿using DeadlyGame.Core.Components.Common;
-using DeadlyGame.Core.Items.Materials.Common;
+using DeadlyGame.Core.Items.Common.Materials;
 
 namespace DeadlyGame.Core.Entities.Natural
 {
