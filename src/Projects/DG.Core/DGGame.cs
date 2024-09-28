@@ -1,17 +1,8 @@
-﻿using DG.Core.Builders;
-using DG.Core.Databases.Crafting;
-using DG.Core.Databases.Items;
-using DG.Core.Dice;
-using DG.Core.Information;
-using DG.Core.Information.Players;
-using DG.Core.Localization;
-using DG.Core.Managers;
-using DG.Core.Settings;
-using DG.Core.Utilities;
+﻿using DG.Core.Databases.Crafting;
 
 using System;
 
-namespace DG.Core
+namespace DeadlyGame.Core
 {
     public sealed class DGGame(DGGameBuilder gameBuilder, DGWorldBuilder worldBuilder) : IDisposable
     {

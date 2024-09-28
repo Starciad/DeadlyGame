@@ -1,19 +1,9 @@
-﻿using DG.Core.Behaviors.Models;
-using DG.Core.Components.Common;
-using DG.Core.Effects.Common;
-using DG.Core.Entities;
-using DG.Core.Information.Actions;
-using DG.Core.Items;
-using DG.Core.Items.Foods;
-using DG.Core.Localization;
-using DG.Core.Utilities;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace DG.Core.Behaviors.Common
+namespace DeadlyGame.Core.Behaviors.Common
 {
     internal sealed class DGSelfPreservationBehavior : IDGBehaviour
     {

@@ -1,11 +1,8 @@
-﻿using DG.Core.Entities;
-using DG.Core.Exceptions.Components;
-using DG.Core.Objects;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
-namespace DG.Core.Components
+namespace DeadlyGame.Core.Components
 {
     internal sealed class DGComponentContainer : DGObject
     {
@@ -19,7 +16,7 @@ namespace DG.Core.Components
             this._entity = entity;
         }
 
-        internal T AddComponent<T>() where T : DGComponent
+        internal T AddComponent<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>() where T : DGComponent
         {
             return (T)AddComponent(typeof(T));
         }
@@ -47,7 +44,7 @@ namespace DG.Core.Components
             return HasComponent(typeof(T));
         }
 
-        internal DGComponent AddComponent(Type componentType)
+        internal DGComponent AddComponent([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type componentType)
         {
             if (!componentType.IsSubclassOf(typeof(DGComponent)))
             {

@@ -1,7 +1,4 @@
-﻿using DG.Core.Components.Common;
-using DG.Core.Entities;
-
-namespace DG.Core.Effects.Common
+﻿namespace DeadlyGame.Core.Effects.Common
 {
     internal class DGRestEffect : DGEffect
     {

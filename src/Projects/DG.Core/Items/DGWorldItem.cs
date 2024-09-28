@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace DG.Core.Items
+namespace DeadlyGame.Core.Items
 {
     internal readonly struct DGWorldItem(DGItem item, int amount, Vector2 position)
     {

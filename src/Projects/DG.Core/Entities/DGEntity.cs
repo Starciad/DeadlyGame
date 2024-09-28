@@ -1,7 +1,4 @@
-﻿using DG.Core.Components;
-using DG.Core.Objects;
-
-namespace DG.Core.Entities
+﻿namespace DeadlyGame.Core.Entities
 {
     internal abstract class DGEntity : DGObject
     {

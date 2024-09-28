@@ -1,11 +1,9 @@
-﻿using DG.Core.Effects;
-using DG.Core.Exceptions.Effects;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace DG.Core.Components.Common
+namespace DeadlyGame.Core.Components.Common
 {
     internal sealed class DGEffectsComponent : DGComponent
     {
@@ -52,7 +50,7 @@ namespace DG.Core.Components.Common
             }
         }
 
-        internal void AddEffect<T>() where T : DGEffect
+        internal void AddEffect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>() where T : DGEffect
         {
             AddEffect(typeof(T));
         }
@@ -69,7 +67,7 @@ namespace DG.Core.Components.Common
             return HasEffect(typeof(T));
         }
 
-        internal void AddEffect(Type effectType)
+        internal void AddEffect([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type effectType)
         {
             if (!effectType.IsSubclassOf(typeof(DGEffect)))
             {

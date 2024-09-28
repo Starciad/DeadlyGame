@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace DG.Core.Components.Common
+namespace DeadlyGame.Core.Components.Common
 {
     internal sealed class DGTransformComponent : DGComponent
     {

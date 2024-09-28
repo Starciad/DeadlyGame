@@ -1,6 +1,4 @@
-﻿using DG.Core.Objects;
-
-namespace DG.Core.Managers
+﻿namespace DeadlyGame.Core.Managers
 {
     internal abstract class DGManager : DGObject
     {

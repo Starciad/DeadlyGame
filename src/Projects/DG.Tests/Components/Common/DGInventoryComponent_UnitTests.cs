@@ -1,8 +1,4 @@
-﻿using DG.Core.Components.Common;
-using DG.Core.Constants;
-using DG.Core.Items;
-
-namespace DG.Tests.Components.Common
+﻿namespace DeadlyGame.Tests.Components.Common
 {
     public sealed class DGInventoryComponent_UnitTests
     {

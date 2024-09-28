@@ -1,8 +1,4 @@
-﻿using DG.Core.Components.Common;
-using DG.Core.Crafting;
-using DG.Core.Objects;
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace DG.Core.Databases.Crafting

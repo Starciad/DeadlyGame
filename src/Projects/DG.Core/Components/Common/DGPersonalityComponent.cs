@@ -1,4 +1,4 @@
-﻿namespace DG.Core.Components.Common
+﻿namespace DeadlyGame.Core.Components.Common
 {
     public enum DGPersonalityType
     {

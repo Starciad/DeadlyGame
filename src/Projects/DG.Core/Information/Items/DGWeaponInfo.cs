@@ -1,6 +1,4 @@
-﻿using DG.Core.Items.Weapons;
-
-namespace DG.Core.Information.Items
+﻿namespace DeadlyGame.Core.Information.Items
 {
     public struct DGWeaponInfo
     {

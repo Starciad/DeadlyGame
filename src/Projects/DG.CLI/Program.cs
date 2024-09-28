@@ -1,12 +1,7 @@
-﻿using DG.Core;
-using DG.Core.Builders;
-using DG.Core.Information;
-using DG.Tools;
-
-using System;
+﻿using System;
 using System.IO;
 
-namespace DG
+namespace DeadlyGame.CLI
 {
     internal static class Program
     {

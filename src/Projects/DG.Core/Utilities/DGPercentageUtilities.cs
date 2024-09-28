@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DG.Core.Utilities
+namespace DeadlyGame.Core.Utilities
 {
     internal static class DGPercentageUtilities
     {

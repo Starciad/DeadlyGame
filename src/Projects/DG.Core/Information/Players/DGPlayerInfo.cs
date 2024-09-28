@@ -1,8 +1,4 @@
-﻿using DG.Core.Components.Common;
-using DG.Core.Entities.Players;
-using DG.Core.Information.Components;
-
-namespace DG.Core.Information.Players
+﻿namespace DeadlyGame.Core.Information.Players
 {
     public struct DGPlayerInfo
     {

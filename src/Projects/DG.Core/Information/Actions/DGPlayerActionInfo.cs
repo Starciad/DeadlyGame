@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace DG.Core.Information.Actions
+namespace DeadlyGame.Core.Information.Actions
 {
     public struct DGPlayerActionInfo
     {

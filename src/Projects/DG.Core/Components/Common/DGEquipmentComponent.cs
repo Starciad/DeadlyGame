@@ -1,6 +1,4 @@
-﻿using DG.Core.Items.Weapons;
-
-namespace DG.Core.Components.Common
+﻿namespace DeadlyGame.Core.Components.Common
 {
     internal sealed class DGEquipmentComponent : DGComponent
     {

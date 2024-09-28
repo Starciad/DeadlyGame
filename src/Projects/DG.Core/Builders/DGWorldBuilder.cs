@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace DG.Core.Builders
+namespace DeadlyGame.Core.Builders
 {
     public struct DGWorldBuilder
     {

@@ -1,14 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
+	<Import Project="../../Targets/Windows/General.targets"></Import>
+	<Import Project="../../Targets/Windows/Information.targets"></Import>
+	<Import Project="../../Targets/Windows/Compilation.targets"></Import>
+
+	<PropertyGroup Label="Header">
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net8.0-windows</TargetFramework>
-		<ImplicitUsings>disable</ImplicitUsings>
-		<Nullable>disable</Nullable>
-		<PublishAot>false</PublishAot>
-		<InvariantGlobalization>false</InvariantGlobalization>
 	</PropertyGroup>
 
-	<ItemGroup>
+	<PropertyGroup Label="General">
+		<AssemblyName>DeadlyGame</AssemblyName>
+		<RootNamespace>DeadlyGame.CLI</RootNamespace>
+	</PropertyGroup>
+
+	<PropertyGroup Label="Complication">
+		<DebugType>embedded</DebugType>
+		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+	</PropertyGroup>
+
+	<ItemGroup Label="Files">
+		<None Include="..\..\..\LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Include="..\..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<Content Include="Palettes\**">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	
+	<ItemGroup Label="Project References">
 		<ProjectReference Include="..\DG.Core\DG.Core.Windows.csproj" />
 	</ItemGroup>
 </Project>

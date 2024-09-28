@@ -1,10 +1,7 @@
-﻿using DG.Core.Entities;
-using DG.Core.Relationships;
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace DG.Core.Components.Common
+namespace DeadlyGame.Core.Components.Common
 {
     internal sealed class DGRelationshipsComponent : DGComponent
     {

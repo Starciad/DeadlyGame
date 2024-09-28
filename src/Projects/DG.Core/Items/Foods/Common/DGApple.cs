@@ -1,9 +1,6 @@
-﻿using DG.Core.Items.Attributes;
-using DG.Core.Localization;
-
-namespace DG.Core.Items.Foods.Common
+﻿namespace DeadlyGame.Core.Items.Foods.Common
 {
-    [DGItemRegisterAttribute]
+    [DGItemRegister]
     internal sealed class DGApple : DGFood
     {
         public DGApple()

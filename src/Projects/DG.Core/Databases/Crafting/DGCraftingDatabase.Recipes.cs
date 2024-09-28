@@ -1,8 +1,4 @@
-﻿using DG.Core.Crafting;
-using DG.Core.Items.Materials.Common;
-using DG.Core.Items.Weapons.Common;
-
-namespace DG.Core.Databases.Crafting
+﻿namespace DG.Core.Databases.Crafting
 {
     internal partial class DGCraftingDatabase
     {

@@ -1,4 +1,4 @@
-﻿namespace DG.Core.Managers
+﻿namespace DeadlyGame.Core.Managers
 {
     internal sealed class DGGameStateManager : DGManager
     {

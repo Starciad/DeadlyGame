@@ -1,16 +1,9 @@
-﻿using DG.Core.Builders;
-using DG.Core.Components.Common;
-using DG.Core.Entities;
-using DG.Core.Entities.Natural;
-using DG.Core.Information.World;
-using DG.Core.Items;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
-namespace DG.Core.Managers
+namespace DeadlyGame.Core.Managers
 {
     public enum DGWorldDaylightCycleState
     {

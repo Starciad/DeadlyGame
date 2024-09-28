@@ -1,9 +1,6 @@
-﻿using DG.Core.Items.Attributes;
-using DG.Core.Localization;
-
-namespace DG.Core.Items.Weapons.Common
+﻿namespace DeadlyGame.Core.Items.Weapons.Common
 {
-    [DGItemRegisterAttribute]
+    [DGItemRegister]
     internal sealed class DGWoodenAxe : DGWeapon
     {
         public DGWoodenAxe()

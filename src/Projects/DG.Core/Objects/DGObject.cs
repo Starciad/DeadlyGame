@@ -1,4 +1,4 @@
-﻿namespace DG.Core.Objects
+﻿namespace DeadlyGame.Core.Objects
 {
     internal abstract class DGObject
     {

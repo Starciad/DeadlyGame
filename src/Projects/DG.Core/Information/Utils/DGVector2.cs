@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace DG.Core.Information.Utils
+namespace DeadlyGame.Core.Information.Utils
 {
     public struct DGVector2
     {

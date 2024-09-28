@@ -1,4 +1,4 @@
-﻿namespace DG.Core.Constants
+﻿namespace DeadlyGame.Core.Constants
 {
     internal static class DGInteractionsConstants
     {

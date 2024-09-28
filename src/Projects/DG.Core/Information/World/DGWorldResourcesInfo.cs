@@ -1,4 +1,4 @@
-﻿namespace DG.Core.Information.World
+﻿namespace DeadlyGame.Core.Information.World
 {
     public struct DGWorldResourcesInfo
     {

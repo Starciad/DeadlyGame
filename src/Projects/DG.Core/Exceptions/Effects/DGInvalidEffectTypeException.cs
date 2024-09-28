@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DG.Core.Exceptions.Effects
+namespace DeadlyGame.Core.Exceptions.Effects
 {
     internal sealed class DGInvalidEffectTypeException : Exception
     {

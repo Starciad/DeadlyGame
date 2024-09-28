@@ -1,14 +1,8 @@
-﻿using DG.Core.Builders;
-using DG.Core.Components.Common;
-using DG.Core.Entities.Players;
-using DG.Core.Information.Actions;
-using DG.Core.Information.Players;
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
-namespace DG.Core.Managers
+namespace DeadlyGame.Core.Managers
 {
     internal sealed class DGPlayerManager : DGManager
     {

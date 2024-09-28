@@ -1,12 +1,8 @@
-﻿using DG.Core.Constants;
-using DG.Core.Exceptions.Items;
-using DG.Core.Items;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DG.Core.Components.Common
+namespace DeadlyGame.Core.Components.Common
 {
     internal sealed class DGInventoryComponent : DGComponent
     {

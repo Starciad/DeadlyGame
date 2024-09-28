@@ -1,8 +1,6 @@
-﻿using DG.Core.Dice;
+﻿using System;
 
-using System;
-
-namespace DG.Core.Utilities
+namespace DeadlyGame.Core.Utilities
 {
     internal static class DGAttributesUtilities
     {
@@ -18,7 +16,7 @@ namespace DG.Core.Utilities
 
         internal static bool IsMaxAttributeValueInTest(int attributeValue, int currentValue)
         {
-            return (currentValue + GetAttributeModifier(attributeValue)) == attributeValue;
+            return currentValue + GetAttributeModifier(attributeValue) == attributeValue;
         }
     }
 }

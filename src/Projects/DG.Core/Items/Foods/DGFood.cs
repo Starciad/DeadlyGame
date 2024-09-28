@@ -1,4 +1,4 @@
-﻿namespace DG.Core.Items.Foods
+﻿namespace DeadlyGame.Core.Items.Foods
 {
     internal abstract class DGFood : DGItem
     {

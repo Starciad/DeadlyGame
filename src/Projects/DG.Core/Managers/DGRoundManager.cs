@@ -1,6 +1,4 @@
-﻿using DG.Core.Information.Round;
-
-namespace DG.Core.Managers
+﻿namespace DeadlyGame.Core.Managers
 {
     internal sealed class DGRoundManager : DGManager
     {

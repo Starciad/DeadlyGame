@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DG.Core.Items.Attributes
+namespace DeadlyGame.Core.Items.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     internal class DGItemRegisterAttribute : Attribute { }

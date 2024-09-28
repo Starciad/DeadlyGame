@@ -1,8 +1,4 @@
-﻿using DG.Core.Components.Common;
-using DG.Core.Items.Foods.Common;
-using DG.Core.Items.Materials.Common;
-
-namespace DG.Core.Entities.Natural
+﻿namespace DeadlyGame.Core.Entities.Natural
 {
     internal sealed class DGTree : DGEntity
     {

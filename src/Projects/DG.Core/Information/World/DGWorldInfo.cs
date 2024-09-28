@@ -1,7 +1,4 @@
-﻿using DG.Core.Information.Utils;
-using DG.Core.Managers;
-
-namespace DG.Core.Information.World
+﻿namespace DeadlyGame.Core.Information.World
 {
     public struct DGWorldInfo
     {

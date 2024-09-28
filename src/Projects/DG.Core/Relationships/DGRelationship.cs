@@ -1,9 +1,7 @@
-﻿using DG.Core.Entities;
-
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DG.Core.Relationships
+namespace DeadlyGame.Core.Relationships
 {
     internal enum DGRelationshipLevelType
     {

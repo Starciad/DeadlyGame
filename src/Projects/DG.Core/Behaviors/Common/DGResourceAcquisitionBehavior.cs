@@ -1,15 +1,8 @@
-﻿using DG.Core.Behaviors.Models;
-using DG.Core.Components.Common;
-using DG.Core.Constants;
-using DG.Core.Entities;
-using DG.Core.Information.Actions;
-using DG.Core.Localization;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Linq;
 using System.Numerics;
 
-namespace DG.Core.Behaviors.Common
+namespace DeadlyGame.Core.Behaviors.Common
 {
     internal sealed class DGResourceAcquisitionBehavior : IDGBehaviour
     {

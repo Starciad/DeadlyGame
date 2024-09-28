@@ -1,17 +1,15 @@
-﻿using DG.Core.Items;
-using DG.Core.Items.Attributes;
-using DG.Core.Objects;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace DG.Core.Databases.Items
+namespace DeadlyGame.Core.Databases.Items
 {
     internal sealed class DGItemDatabase : DGObject
     {
         private readonly Dictionary<Type, DGItem> _items = [];
 
+        [RequiresUnreferencedCode("Calls System.Reflection.Assembly.GetTypes()")]
         protected override void OnAwake()
         {
             Type[] types = typeof(DGItemDatabase).Assembly.GetTypes();

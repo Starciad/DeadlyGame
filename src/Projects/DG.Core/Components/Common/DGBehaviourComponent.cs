@@ -1,11 +1,7 @@
-﻿using DG.Core.Behaviors;
-using DG.Core.Constants;
-using DG.Core.Information.Actions;
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace DG.Core.Components.Common
+namespace DeadlyGame.Core.Components.Common
 {
     internal sealed class DGBehaviourComponent : DGComponent
     {

@@ -1,6 +1,4 @@
-﻿using DG.Core.Dice;
-
-namespace DG.Tests.Dice
+﻿namespace DeadlyGame.Tests.Dice
 {
     public sealed class DGDice_UnitTests
     {

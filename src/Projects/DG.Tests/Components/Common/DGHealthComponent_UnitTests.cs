@@ -1,6 +1,4 @@
-﻿using DG.Core.Components.Common;
-
-namespace DG.Tests.Components.Common
+﻿namespace DeadlyGame.Tests.Components.Common
 {
     public sealed class DGHealthComponent_UnitTests
     {

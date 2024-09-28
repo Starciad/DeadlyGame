@@ -1,4 +1,4 @@
-﻿namespace DG.Core.Behaviors.Models
+﻿namespace DeadlyGame.Core.Behaviors.Models
 {
     internal struct DGBehaviourWeight
     {

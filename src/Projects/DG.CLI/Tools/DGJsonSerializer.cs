@@ -1,9 +1,8 @@
-﻿using DG.Core.Information;
-
+﻿using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text.Json;
 
-namespace DG.Tools
+namespace DeadlyGame.CLI.Tools
 {
     internal sealed class DGJsonSerializer
     {
@@ -14,6 +13,7 @@ namespace DG.Tools
             this._gameInfo = gameInfo;
         }
 
+        [RequiresUnreferencedCode("Calls System.Text.Json.JsonSerializer.Serialize<TValue>(TValue, JsonSerializerOptions)")]
         internal void Serialize(string filename)
         {
             using StreamWriter sw = new(filename);

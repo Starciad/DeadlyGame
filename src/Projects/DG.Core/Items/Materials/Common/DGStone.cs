@@ -1,9 +1,6 @@
-﻿using DG.Core.Items.Attributes;
-using DG.Core.Localization;
-
-namespace DG.Core.Items.Materials.Common
+﻿namespace DeadlyGame.Core.Items.Materials.Common
 {
-    [DGItemRegisterAttribute]
+    [DGItemRegister]
     internal sealed class DGStone : DGMaterial
     {
         public DGStone()

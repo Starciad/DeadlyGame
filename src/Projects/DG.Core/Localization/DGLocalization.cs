@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace DG.Core.Localization
+namespace DeadlyGame.Core.Localization
 {
     internal static class DGLocalization
     {

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace DG.Core.Information.Players
+namespace DeadlyGame.Core.Information.Players
 {
     public struct DGPlayerCollectionInfo
     {

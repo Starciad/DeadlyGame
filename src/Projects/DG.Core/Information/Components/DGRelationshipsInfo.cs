@@ -1,7 +1,4 @@
-﻿using DG.Core.Components.Common;
-using DG.Core.Relationships;
-
-namespace DG.Core.Information.Components
+﻿namespace DeadlyGame.Core.Information.Components
 {
     public struct DGRelationshipsInfo
     {

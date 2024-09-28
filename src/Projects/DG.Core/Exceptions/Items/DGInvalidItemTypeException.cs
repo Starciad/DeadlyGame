@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DG.Core.Exceptions.Items
+namespace DeadlyGame.Core.Exceptions.Items
 {
     internal sealed class DGInvalidItemTypeException : Exception
     {

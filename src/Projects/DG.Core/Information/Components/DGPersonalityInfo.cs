@@ -1,6 +1,4 @@
-﻿using DG.Core.Components.Common;
-
-namespace DG.Core.Information.Components
+﻿namespace DeadlyGame.Core.Information.Components
 {
     public struct DGPersonalityInfo
     {

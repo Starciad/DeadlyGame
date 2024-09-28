@@ -1,12 +1,6 @@
-﻿using DG.Core.Behaviors.Models;
-using DG.Core.Components.Common;
-using DG.Core.Entities;
-using DG.Core.Information.Actions;
-using DG.Core.Items.Weapons;
+﻿using System.Linq;
 
-using System.Linq;
-
-namespace DG.Core.Behaviors.Common
+namespace DeadlyGame.Core.Behaviors.Common
 {
     internal sealed class DGEquipmentBehavior : IDGBehaviour
     {

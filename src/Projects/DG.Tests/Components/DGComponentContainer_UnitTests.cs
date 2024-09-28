@@ -1,7 +1,4 @@
-﻿using DG.Core.Components;
-using DG.Core.Exceptions.Components;
-
-namespace DG.Tests.Components
+﻿namespace DeadlyGame.Tests.Components
 {
     public sealed class DGComponentContainer_UnitTests
     {

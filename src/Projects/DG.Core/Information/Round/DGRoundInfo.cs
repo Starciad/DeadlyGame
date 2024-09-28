@@ -1,4 +1,4 @@
-﻿namespace DG.Core.Information.Round
+﻿namespace DeadlyGame.Core.Information.Round
 {
     public struct DGRoundInfo
     {

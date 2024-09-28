@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DG.Core.Exceptions.Components
+namespace DeadlyGame.Core.Exceptions.Components
 {
     internal sealed class DGDuplicateComponentsException : Exception
     {

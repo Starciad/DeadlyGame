@@ -1,6 +1,4 @@
-﻿using DG.Core.Entities;
-
-namespace DG.Core.Effects
+﻿namespace DeadlyGame.Core.Effects
 {
     public enum DGEffectType
     {

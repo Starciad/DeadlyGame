@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace DG.Core.Dice
+namespace DeadlyGame.Core.Dice
 {
     internal sealed class DGDice
     {

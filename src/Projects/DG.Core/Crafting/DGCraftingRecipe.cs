@@ -1,10 +1,6 @@
-﻿using DG.Core.Components.Common;
-using DG.Core.Exceptions.Items;
-using DG.Core.Items;
+﻿using System;
 
-using System;
-
-namespace DG.Core.Crafting
+namespace DeadlyGame.Core.Crafting
 {
     internal sealed class DGCraftingRecipe
     {

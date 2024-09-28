@@ -1,11 +1,6 @@
-﻿using DG.Core.Information.Actions;
-using DG.Core.Information.Players;
-using DG.Core.Information.Round;
-using DG.Core.Information.World;
+﻿using System;
 
-using System;
-
-namespace DG.Core.Information
+namespace DeadlyGame.Core.Information
 {
     [Serializable]
     public struct DGGameInfo

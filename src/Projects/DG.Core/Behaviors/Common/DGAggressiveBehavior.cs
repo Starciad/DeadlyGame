@@ -1,21 +1,10 @@
-﻿using DG.Core.Behaviors.Models;
-using DG.Core.Components.Common;
-using DG.Core.Constants;
-using DG.Core.Entities;
-using DG.Core.Entities.Players;
-using DG.Core.Information.Actions;
-using DG.Core.Items.Weapons;
-using DG.Core.Localization;
-using DG.Core.Managers;
-using DG.Core.Utilities;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Numerics;
 
-namespace DG.Core.Behaviors.Common
+namespace DeadlyGame.Core.Behaviors.Common
 {
     internal sealed class DGAggressiveBehavior : IDGBehaviour
     {

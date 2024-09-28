@@ -1,6 +1,4 @@
-﻿using DG.Core.Items;
-
-namespace DG.Core.Information.Items
+﻿namespace DeadlyGame.Core.Information.Items
 {
     public struct DGItemInfo
     {

@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace DG.Core.Builders
+namespace DeadlyGame.Core.Builders
 {
     public struct DGGameBuilder
     {
