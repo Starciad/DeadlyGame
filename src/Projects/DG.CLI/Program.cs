@@ -14,7 +14,6 @@ namespace DeadlyGame.CLI
             DGWorldBuilder worldBuilder = BuildWorld();
 
             DGGame game = new(gameBuilder, worldBuilder);
-            game.Initialize();
 
             // ======== Game Routine ======== //
 
@@ -34,7 +33,6 @@ namespace DeadlyGame.CLI
             }
 
             game.FinishGame();
-            game.Dispose();
 
             // ============================== //
 

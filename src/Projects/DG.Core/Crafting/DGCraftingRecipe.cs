@@ -52,7 +52,7 @@ namespace DeadlyGame.Core.Crafting
 
         public bool TryCraft(DGInventoryComponent inventoryComponent, out DGItem item)
         {
-            item = default;
+            item = null;
 
             if (!CanCraft(inventoryComponent))
             {
@@ -64,8 +64,8 @@ namespace DeadlyGame.Core.Crafting
                 _ = inventoryComponent.TryRemoveItem(requiredMaterial.ItemType, requiredMaterial.Count);
             }
 
-            DGItem targetItem = this._game.ItemDatabase.GetItem(this.ItemType);
-            item = targetItem;
+            item = (DGItem)Activator.CreateInstance(this.ItemType, [this._game]);
+
             return true;
         }
     }

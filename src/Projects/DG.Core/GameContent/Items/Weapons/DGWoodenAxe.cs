@@ -7,7 +7,7 @@ namespace DeadlyGame.Core.GameContent.Items.Weapons
 {
     public sealed class DGWoodenAxe : DGWeapon
     {
-        public DGWoodenAxe()
+        public DGWoodenAxe(DGGame game) : base(game)
         {
             this.Name = DGLocalization.Read("Items", "Weapon_WoodenAxe");
             this.Rarity = DGItemRarity.Common;

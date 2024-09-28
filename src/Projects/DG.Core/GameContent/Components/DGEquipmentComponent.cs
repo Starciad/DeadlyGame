@@ -1,4 +1,5 @@
 ﻿using DeadlyGame.Core.Components;
+using DeadlyGame.Core.Entities;
 using DeadlyGame.Core.Items.Templates.Weapons;
 
 namespace DeadlyGame.Core.GameContent.Components
@@ -6,6 +7,11 @@ namespace DeadlyGame.Core.GameContent.Components
     public sealed class DGEquipmentComponent : DGComponent
     {
         public DGWeapon Weapon { get; private set; }
+
+        public DGEquipmentComponent(DGGame game, DGEntity entity) : base(game, entity)
+        {
+
+        }
 
         // Weapon
         public void EquipWeapon(DGWeapon weapon)

@@ -1,5 +1,9 @@
-﻿using DeadlyGame.Core.Components;
+﻿using DeadlyGame.Core;
+using DeadlyGame.Core.Components;
+using DeadlyGame.Core.Entities;
 using DeadlyGame.Core.Exceptions.Components;
+using DeadlyGame.Core.Builders;
+using DeadlyGame.Core.Mathematics.Primitives;
 
 namespace DeadlyGame.Tests.Components
 {
@@ -10,19 +14,50 @@ namespace DeadlyGame.Tests.Components
             public bool Initialized { get; private set; }
             public bool Updated { get; private set; }
 
-            protected override void OnAwake()
+            protected DGFakeComponent(DGGame game, DGEntity entity) : base(game, entity)
             {
                 this.Initialized = true;
             }
 
-            protected override void OnUpdate()
+            public override void Update()
             {
                 this.Updated = true;
             }
         }
 
-        private sealed class DGFakeComponent_01 : DGFakeComponent { }
-        private sealed class DGFakeComponent_02 : DGFakeComponent { }
+        private readonly DGGame game = new(
+            new DGGameBuilder()
+            {
+                Players = []
+            },
+
+            new DGWorldBuilder()
+            {
+                Resources = new()
+                {
+                    ShrubCount = 0,
+                    StoneCount = 0,
+                    TreeCount = 0,
+                },
+
+                Size = DGPoint.Origin,
+            }
+        );
+
+        private sealed class DGFakeComponent_01 : DGFakeComponent
+        {
+            public DGFakeComponent_01(DGGame game, DGEntity entity) : base(game, entity)
+            {
+
+            }
+        }
+        private sealed class DGFakeComponent_02 : DGFakeComponent
+        {
+            public DGFakeComponent_02(DGGame game, DGEntity entity) : base(game, entity)
+            {
+
+            }
+        }
 
         [Fact]
         public void AddComponent_ThrowsInvalidTypeException_WhenTypeIsNotSubclassOfDGComponent()

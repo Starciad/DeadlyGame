@@ -8,8 +8,6 @@ using DeadlyGame.Core.Localization;
 using DeadlyGame.Core.Models;
 using DeadlyGame.Core.Models.Infos.Actions;
 
-using System.Drawing;
-
 namespace DeadlyGame.Core.GameContent.Behaviors
 {
     public sealed class DGCraftingBehavior : IDGBehaviour
@@ -50,7 +48,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
         public DGPlayerActionInfo Act()
         {
             // === ACT ===
-            DGCraftingRecipe targetRecipe = this._newRecipes[this._game.Random.Range(0, this._newRecipes.Length)];
+            DGCraftingRecipe targetRecipe = this._newRecipes[this._game.RandomMath.Range(0, this._newRecipes.Length)];
             if (targetRecipe.TryCraft(this._inventoryComponent, out DGItem item))
             {
                 this._inventoryComponent.AddItem(item, 1);

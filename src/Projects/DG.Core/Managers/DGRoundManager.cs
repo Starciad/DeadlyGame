@@ -12,7 +12,7 @@
         public delegate void RoundStartedEventHandler();
         public delegate void RoundEndedEventHandler();
 
-        protected override void OnAwake()
+        public DGRoundManager(DGGame game) : base(game)
         {
             this.currentRound = 0;
         }

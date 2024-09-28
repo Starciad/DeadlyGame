@@ -13,12 +13,12 @@ namespace DeadlyGame.Core.Databases.Crafting
             this.recipes =
             [
                 // Wooden Axe
-                new DGCraftingRecipe(this.Game, typeof(DGWoodenAxe), [
+                new DGCraftingRecipe(this.DGGameInstance, typeof(DGWoodenAxe), [
                     new(typeof(DGWood), 5)
                 ]),
 
                 // Stone Axe
-                new DGCraftingRecipe(this.Game, typeof(DGStoneAxe), [
+                new DGCraftingRecipe(this.DGGameInstance, typeof(DGStoneAxe), [
                     new(typeof(DGWood), 6),
                     new(typeof(DGStone), 5)
                 ])

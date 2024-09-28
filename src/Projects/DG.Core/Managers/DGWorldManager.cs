@@ -29,13 +29,13 @@ namespace DeadlyGame.Core.Managers
         private readonly List<DGEntity> resourceEntities = [];
         private readonly List<DGWorldItem> worldItems = [];
 
-        // === System ===
-        public void Initialize(DGWorldBuilder builder)
+        public DGWorldManager(DGGame game, DGWorldBuilder builder) : base(game)
         {
             InitializeWorld(builder);
             InitializeResources(builder);
         }
-        protected override void OnUpdate()
+
+        public override void Update()
         {
             UpdateDay();
             UpdateResources();
@@ -54,25 +54,19 @@ namespace DeadlyGame.Core.Managers
             // Trees
             for (int i = 0; i < builder.Resources.TreeCount; i++)
             {
-                this.resourceEntities.Add(new DGTree());
+                this.resourceEntities.Add(new DGTree(this.DGGameInstance));
             }
 
             // Stones
             for (int i = 0; i < builder.Resources.StoneCount; i++)
             {
-                this.resourceEntities.Add(new DGTerrainStone());
+                this.resourceEntities.Add(new DGTerrainStone(this.DGGameInstance));
             }
 
             // Bushes
             for (int i = 0; i < builder.Resources.ShrubCount; i++)
             {
-                this.resourceEntities.Add(new DGBush());
-            }
-
-            foreach (DGEntity resourceEntity in this.resourceEntities)
-            {
-                resourceEntity.SetGameInstance(this.Game);
-                resourceEntity.Initialize();
+                this.resourceEntities.Add(new DGBush(this.DGGameInstance));
             }
         }
 
@@ -146,8 +140,8 @@ namespace DeadlyGame.Core.Managers
         }
         public DGPoint GetRandomPosition()
         {
-            int pos_x = this.Game.Random.Range(-this.Size.X, this.Size.X + 1);
-            int pos_y = this.Game.Random.Range(-this.Size.Y, this.Size.Y + 1);
+            int pos_x = this.DGGameInstance.RandomMath.Range(-this.Size.X, this.Size.X + 1);
+            int pos_y = this.DGGameInstance.RandomMath.Range(-this.Size.Y, this.Size.Y + 1);
 
             return new(pos_x, pos_y);
         }

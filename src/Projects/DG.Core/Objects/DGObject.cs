@@ -1,26 +1,17 @@
-﻿namespace DeadlyGame.Core.Objects
+﻿using DeadlyGame.Core.Interface;
+
+namespace DeadlyGame.Core.Objects
 {
-    public abstract class DGObject
+    public abstract class DGObject : IStartable, IUpdatable
     {
-        protected DGGame Game { get; private set; }
+        protected DGGame DGGameInstance { get; private set; }
 
-        public virtual void SetGameInstance(DGGame game)
+        protected DGObject(DGGame game)
         {
-            this.Game = game;
+            this.DGGameInstance = game;
         }
 
-        public void Initialize()
-        {
-            OnAwake();
-            OnStart();
-        }
-        public void Update()
-        {
-            OnUpdate();
-        }
-
-        protected virtual void OnAwake() { }
-        protected virtual void OnStart() { }
-        protected virtual void OnUpdate() { }
+        public virtual void Start() { return; }
+        public virtual void Update() { return; }
     }
 }

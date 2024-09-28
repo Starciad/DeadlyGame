@@ -108,7 +108,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
                 // Feeding loop until you are satiated or the food runs out.
                 while (foods.Count > 0 && this._hungerComponent.CurrentHunger > 0)
                 {
-                    DGFood randomFood = foods[this._game.Random.Range(0, foods.Count)];
+                    DGFood randomFood = foods[this._game.RandomMath.Range(0, foods.Count)];
                     if (!this._inventoryComponent.HasItem(randomFood))
                     {
                         _ = foods.Remove(randomFood);

@@ -1,4 +1,5 @@
 ﻿using DeadlyGame.Core.Components;
+using DeadlyGame.Core.Entities;
 
 namespace DeadlyGame.Core.GameContent.Components
 {
@@ -8,11 +9,14 @@ namespace DeadlyGame.Core.GameContent.Components
         public int CurrentHunger { get; private set; }
         public int MaximumHunger { get; private set; }
 
-        protected override void OnUpdate()
+        public DGHungerComponent(DGGame game, DGEntity entity) : base(game, entity)
         {
-            base.OnUpdate();
 
-            if (this.IsHungry && this.Entity.ComponentContainer.TryGetComponent(out DGHealthComponent value))
+        }
+
+        public override void Update()
+        {
+            if (this.IsHungry && this.DGEntityInstance.ComponentContainer.TryGetComponent(out DGHealthComponent value))
             {
                 ApplyDamage(value);
             }

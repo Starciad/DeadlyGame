@@ -1,4 +1,5 @@
 ﻿using DeadlyGame.Core.Components;
+using DeadlyGame.Core.Entities;
 
 namespace DeadlyGame.Core.GameContent.Components
 {
@@ -11,6 +12,11 @@ namespace DeadlyGame.Core.GameContent.Components
         public event DiedEventHandler OnDied;
 
         public delegate void DiedEventHandler();
+
+        public DGHealthComponent(DGGame game, DGEntity entity) : base(game, entity)
+        {
+
+        }
 
         public void SetCurrentHealth(int value)
         {

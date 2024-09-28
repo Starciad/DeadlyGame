@@ -1,4 +1,5 @@
 ﻿using DeadlyGame.Core.Components;
+using DeadlyGame.Core.Entities;
 
 namespace DeadlyGame.Core.GameContent.Components
 {
@@ -6,9 +7,14 @@ namespace DeadlyGame.Core.GameContent.Components
     {
         public byte Age { get; private set; }
 
+        public DGInformationsComponent(DGGame game, DGEntity entity) : base(game, entity)
+        {
+
+        }
+
         public void Randomize()
         {
-            this.Age = (byte)this.Game.Random.Range(20, 60);
+            this.Age = (byte)this.DGGameInstance.RandomMath.Range(20, 60);
         }
     }
 }

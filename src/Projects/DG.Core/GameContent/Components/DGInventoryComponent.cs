@@ -1,5 +1,6 @@
 ﻿using DeadlyGame.Core.Components;
 using DeadlyGame.Core.Constants;
+using DeadlyGame.Core.Entities;
 using DeadlyGame.Core.Exceptions.Items;
 using DeadlyGame.Core.Items;
 
@@ -18,67 +19,37 @@ namespace DeadlyGame.Core.GameContent.Components
         private readonly List<DGInventorySlot> slots = [];
         private int numberOfSlots;
 
-        private DGTransformComponent _transformComponent;
-        private DGHealthComponent _healthComponent;
+        private readonly DGTransformComponent _transformComponent;
+        private readonly DGHealthComponent _healthComponent;
 
-        protected override void OnAwake()
+        public DGInventoryComponent(DGGame game, DGEntity entity) : base(game, entity)
         {
-            base.OnAwake();
-
             this.numberOfSlots = 20;
 
             // TRANSFORM (Component)
-            if (this.Entity.ComponentContainer.TryGetComponent(out DGTransformComponent transformComponent))
+            if (entity.ComponentContainer.TryGetComponent(out DGTransformComponent transformComponent))
             {
                 this._transformComponent = transformComponent;
             }
 
             // HEALTH (Component)
-            if (this.Entity.ComponentContainer.TryGetComponent(out DGHealthComponent healthComponent))
+            if (entity.ComponentContainer.TryGetComponent(out DGHealthComponent healthComponent))
             {
                 this._healthComponent = healthComponent;
                 this._healthComponent.OnDied += HealthComponent_OnDied;
             }
         }
 
-        // ===== ADD =====
-        public void AddItem(DGWorldItem worldItem)
-        {
-            _ = TryAddItem(worldItem);
-        }
-        public void AddItem<T>(int amount) where T : DGItem
-        {
-            AddItem(typeof(T), amount);
-        }
         public void AddItem(DGItem item, int amount)
         {
             _ = TryAddItem(item, amount);
         }
-        public void AddItem(Type itemType, int amount)
-        {
-            if (!itemType.IsSubclassOf(typeof(DGItem)))
-            {
-                throw new DGInvalidItemTypeException($"The type representing the item trying to be added to the inventory does not correspond to a valid {nameof(DGItem)}.");
-            }
 
-            _ = TryAddItem(this.Game.ItemDatabase.GetItem(itemType), amount);
-        }
-
-        // ===== REMOVE =====
-        public void RemoveItem<T>(int amount) where T : DGItem
-        {
-            RemoveItem(typeof(T), amount);
-        }
         public void RemoveItem(DGItem item, int amount)
         {
-            RemoveItem(item.GetType(), amount);
-        }
-        public void RemoveItem(Type itemType, int amount)
-        {
-            _ = TryRemoveItem(itemType, amount);
+            RemoveItem(item, amount);
         }
 
-        // ===== GET =====
         public DGInventorySlot GetItem<T>() where T : DGItem
         {
             return GetItem(typeof(T));
@@ -94,20 +65,6 @@ namespace DeadlyGame.Core.GameContent.Components
         }
 
         // ===== TRY ADD =====
-        public bool TryAddItem(DGWorldItem worldItem)
-        {
-            return TryAddItem(worldItem.Item, worldItem.Amount);
-        }
-        public bool TryAddItem<T>(int amount) where T : DGItem
-        {
-            return TryAddItem(typeof(T), amount);
-        }
-        public bool TryAddItem(Type itemType, int amount)
-        {
-            return !itemType.IsSubclassOf(typeof(DGItem))
-                ? throw new DGInvalidItemTypeException($"The type representing the item trying to be added to the inventory does not correspond to a valid {nameof(DGItem)}.")
-                : TryAddItem(this.Game.ItemDatabase.GetItem(itemType), amount);
-        }
         public bool TryAddItem(DGItem item, int amount)
         {
             // If the corresponding item is already in the inventory, just increase its count and return true.
@@ -196,7 +153,7 @@ namespace DeadlyGame.Core.GameContent.Components
         {
             foreach (DGInventorySlot slot in this.slots)
             {
-                this.Game.WorldManager.AddWorldItem(DropItem(slot));
+                this.DGGameInstance.WorldManager.AddWorldItem(DropItem(slot));
             }
 
             ClearInventory();

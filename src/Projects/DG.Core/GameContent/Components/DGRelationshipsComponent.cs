@@ -14,9 +14,14 @@ namespace DeadlyGame.Core.GameContent.Components
 
         private readonly Dictionary<DGEntity, DGRelationship> relationships = [];
 
+        public DGRelationshipsComponent(DGGame game, DGEntity entity) : base(game, entity)
+        {
+
+        }
+
         public DGRelationship AddRelationship(DGEntity anotherEntity, float value = 50)
         {
-            DGRelationship relationship = new(this.Entity, anotherEntity, value);
+            DGRelationship relationship = new(this.DGEntityInstance, anotherEntity, value);
             _ = this.relationships.TryAdd(anotherEntity, relationship);
             return relationship;
         }

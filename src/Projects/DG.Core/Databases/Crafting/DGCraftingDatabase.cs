@@ -9,9 +9,8 @@ namespace DeadlyGame.Core.Databases.Crafting
 {
     public partial class DGCraftingDatabase : DGObject
     {
-        protected override void OnAwake()
+        public DGCraftingDatabase(DGGame game) : base(game)
         {
-            base.OnAwake();
             InitializeRecipes();
         }
 

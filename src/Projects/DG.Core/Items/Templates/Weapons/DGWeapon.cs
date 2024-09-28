@@ -6,5 +6,10 @@ namespace DeadlyGame.Core.Items.Templates.Weapons
     {
         public DGWeaponType WeaponType { get; set; }
         public int Damage { get; set; }
+
+        protected DGWeapon(DGGame game) : base(game)
+        {
+
+        }
     }
 }

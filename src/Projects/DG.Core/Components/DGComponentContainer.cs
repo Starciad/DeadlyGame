@@ -4,7 +4,6 @@ using DeadlyGame.Core.Objects;
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 
 namespace DeadlyGame.Core.Components
 {
@@ -14,6 +13,11 @@ namespace DeadlyGame.Core.Components
 
         private readonly Dictionary<Type, DGComponent> _components = [];
         private DGEntity _entity;
+
+        public DGComponentContainer(DGGame game, DGEntity entity) : base(game)
+        {
+            this._entity = entity;
+        }
 
         public void SetEntityInstance(DGEntity entity)
         {
@@ -60,9 +64,8 @@ namespace DeadlyGame.Core.Components
                 throw new DGDuplicateComponentsException($"The entity already contains a '{componentType.Name}' component.");
             }
 
-            DGComponent componentValue = (DGComponent)Activator.CreateInstance(componentType);
-            componentValue.SetGameInstance(this.Game);
-            componentValue.SetEntityInstance(this._entity);
+            DGComponent componentValue = (DGComponent)Activator.CreateInstance(componentType, [this.DGGameInstance, this._entity]);
+
             this._components.Add(componentType, componentValue);
             return componentValue;
         }
@@ -97,14 +100,7 @@ namespace DeadlyGame.Core.Components
             this._components.Clear();
         }
 
-        protected override void OnAwake()
-        {
-            foreach (DGComponent component in this._components.Values)
-            {
-                component.Initialize();
-            }
-        }
-        protected override void OnUpdate()
+        public override void Update()
         {
             foreach (DGComponent component in this._components.Values)
             {

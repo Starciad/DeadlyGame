@@ -6,7 +6,7 @@ namespace DeadlyGame.Core.GameContent.Items.Foods
 {
     public sealed class DGBerry : DGFood
     {
-        public DGBerry()
+        public DGBerry(DGGame game) : base(game)
         {
             this.Name = DGLocalization.Read("Items", "Food_Berry");
             this.Rarity = DGItemRarity.Common;

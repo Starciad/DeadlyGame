@@ -5,11 +5,11 @@ namespace DeadlyGame.Core.Components
 {
     public class DGComponent : DGObject
     {
-        protected DGEntity Entity { get; private set; }
+        protected DGEntity DGEntityInstance { get; private set; }
 
-        public void SetEntityInstance(DGEntity entity)
+        public DGComponent(DGGame game, DGEntity entity) : base(game)
         {
-            this.Entity = entity;
+            this.DGEntityInstance = entity;
         }
     }
 }

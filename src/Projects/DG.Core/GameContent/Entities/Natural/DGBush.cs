@@ -7,39 +7,28 @@ namespace DeadlyGame.Core.GameContent.Entities.Natural
 {
     public sealed class DGBush : DGEntity
     {
-        public DGBush()
+        private readonly DGTransformComponent _transform;
+        private readonly DGInventoryComponent _inventory;
+        private readonly DGHealthComponent _health;
+
+        public DGBush(DGGame game) : base(game)
         {
             this.Name = "Arbusto";
-        }
-
-        private DGTransformComponent _transform;
-        private DGInventoryComponent _inventory;
-        private DGHealthComponent _health;
-
-        protected override void OnAwake()
-        {
-            base.OnAwake();
-
+            
             this._transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
             this._inventory = this.ComponentContainer.AddComponent<DGInventoryComponent>();
             this._health = this.ComponentContainer.AddComponent<DGHealthComponent>();
         }
 
-        protected override void OnStart()
+        public override void Start()
         {
-            base.OnStart();
+            this._transform.SetPosition(this.DGGameInstance.WorldManager.GetRandomPosition());
 
-            // ===== COMPONENTS =====
-            // transform
-            this._transform.SetPosition(this.Game.WorldManager.GetRandomPosition());
-
-            // health
-            this._health.SetMaximumHealth(this.Game.Random.Range(3, 6));
+            this._health.SetMaximumHealth(this.DGGameInstance.RandomMath.Range(3, 6));
             this._health.SetCurrentHealth(this._health.MaximumHealth);
 
-            // inventory
-            _ = this._inventory.TryAddItem(new DGWood(), this.Game.Random.Range(1, 3));
-            _ = this._inventory.TryAddItem(new DGBerry(), this.Game.Random.Range(2, 4));
+            _ = this._inventory.TryAddItem(new DGWood(this.DGGameInstance), this.DGGameInstance.RandomMath.Range(1, 3));
+            _ = this._inventory.TryAddItem(new DGBerry(this.DGGameInstance), this.DGGameInstance.RandomMath.Range(2, 4));
         }
     }
 }

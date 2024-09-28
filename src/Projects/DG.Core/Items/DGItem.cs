@@ -10,5 +10,10 @@ namespace DeadlyGame.Core.Items
         public DGItemRarity Rarity { get; protected set; }
         public bool HasDurability { get; protected set; }
         public int Durability { get; protected set; }
+
+        protected DGItem(DGGame game) : base(game)
+        {
+
+        }
     }
 }

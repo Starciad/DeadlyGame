@@ -68,7 +68,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             foreach (DGWorldItem worldItem in this._nearbyItems)
             {
                 this._game.WorldManager.RemoveWorldItem(worldItem);
-                if (this._inventoryComponent.TryAddItem(worldItem))
+                if (this._inventoryComponent.TryAddItem(worldItem.Item, worldItem.Amount))
                 {
                     itemsObtained.Add(worldItem);
                 }

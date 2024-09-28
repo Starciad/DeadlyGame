@@ -6,7 +6,7 @@ namespace DeadlyGame.Core.GameContent.Items.Materials
 {
     public sealed class DGWood : DGMaterial
     {
-        public DGWood()
+        public DGWood(DGGame game) : base(game)
         {
             this.Name = DGLocalization.Read("Items", "Material_Wood");
             this.Rarity = DGItemRarity.Common;

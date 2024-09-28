@@ -9,27 +9,20 @@ namespace DeadlyGame.Core.GameContent.Entities.Players
 {
     public sealed class DGPlayer : DGEntity
     {
-        // Components
-        private DGBehaviourComponent _behaviour;
+        private readonly DGBehaviourComponent _behaviour;
+        private readonly DGTransformComponent _transform;
+        private readonly DGInformationsComponent _informations;
+        private readonly DGPersonalityComponent _personality;
+        private readonly DGCharacteristicsComponent _characteristics;
+        private readonly DGHealthComponent _health;
+        private readonly DGHungerComponent _hunger;
+        private readonly DGCombatComponent _combatInfos;
+        private readonly DGEffectsComponent _effects;
 
-        public DGPlayer(DGPlayerBuilder builder, int id)
+        public DGPlayer(DGGame game, DGPlayerBuilder builder, int id) : base(game)
         {
             this.Name = builder.Name;
             this.Id = id;
-        }
-
-        private DGTransformComponent _transform;
-        private DGInformationsComponent _informations;
-        private DGPersonalityComponent _personality;
-        private DGCharacteristicsComponent _characteristics;
-        private DGHealthComponent _health;
-        private DGHungerComponent _hunger;
-        private DGCombatComponent _combatInfos;
-        private DGEffectsComponent _effects;
-
-        protected override void OnAwake()
-        {
-            base.OnAwake();
 
             this._transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
             this._informations = this.ComponentContainer.AddComponent<DGInformationsComponent>();
@@ -39,41 +32,24 @@ namespace DeadlyGame.Core.GameContent.Entities.Players
             this._hunger = this.ComponentContainer.AddComponent<DGHungerComponent>();
             this._combatInfos = this.ComponentContainer.AddComponent<DGCombatComponent>();
             this._effects = this.ComponentContainer.AddComponent<DGEffectsComponent>();
+            this._behaviour = this.ComponentContainer.AddComponent<DGBehaviourComponent>();
 
             _ = this.ComponentContainer.AddComponent<DGInventoryComponent>();
             _ = this.ComponentContainer.AddComponent<DGEquipmentComponent>();
             _ = this.ComponentContainer.AddComponent<DGRelationshipsComponent>();
         }
-        protected override void OnStart()
+
+        public override void Start()
         {
-            base.OnStart();
-
-            // ===== COMPONENTS =====
-            // Transform
-            this._transform.SetPosition(this.Game.WorldManager.GetRandomPosition());
-
-            // Infos
+            this._transform.SetPosition(this.DGGameInstance.WorldManager.GetRandomPosition());
             this._informations.Randomize();
-
-            // Personality
             this._personality.Randomize();
-
-            // Characteristics
             this._characteristics.Randomize();
-
-            // Health
             this._health.SetMaximumHealth(10 + DGAttributesMath.GetAttributeModifier(this._characteristics.Constitution));
             this._health.SetCurrentHealth(this._health.MaximumHealth);
-
-            // Hunger
             this._hunger.SetMaximumHunger(100);
             this._hunger.SetCurrentHunger(0);
-
-            // Combat
-            this._combatInfos.SetDisplacementRateValue(9 + this.Game.Random.Range(-2, 3));
-
-            // Behaviour
-            this._behaviour = this.ComponentContainer.AddComponent<DGBehaviourComponent>();
+            this._combatInfos.SetDisplacementRateValue(9 + this.DGGameInstance.RandomMath.Range(-2, 3));
             this._behaviour.RegisterBehaviour(new DGMovementBehavior());
             this._behaviour.RegisterBehaviour(new DGAggressiveBehavior());
             this._behaviour.RegisterBehaviour(new DGCraftingBehavior());
@@ -82,17 +58,15 @@ namespace DeadlyGame.Core.GameContent.Entities.Players
             this._behaviour.RegisterBehaviour(new DGSelfPreservationBehavior());
             this._behaviour.RegisterBehaviour(new DGEquipmentBehavior());
         }
-        protected override void OnUpdate()
-        {
-            base.OnUpdate();
 
+        public override void Update()
+        {
             // If the player has paralyzing effects, he will not act.
             if (this._effects.HasEffect<DGRestEffect>())
             {
                 return;
             }
 
-            // If the player does not have the above paralyzing effects, he executes their components.
             this._behaviour.Act();
         }
     }

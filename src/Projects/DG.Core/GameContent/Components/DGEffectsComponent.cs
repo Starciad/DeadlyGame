@@ -1,5 +1,6 @@
 ﻿using DeadlyGame.Core.Components;
 using DeadlyGame.Core.Effects;
+using DeadlyGame.Core.Entities;
 using DeadlyGame.Core.Exceptions.Effects;
 
 using System;
@@ -18,18 +19,17 @@ namespace DeadlyGame.Core.GameContent.Components
         // components
         private DGHealthComponent _healthComponent;
 
-        protected override void OnAwake()
+        public DGEffectsComponent(DGGame game, DGEntity entity) : base(game, entity)
         {
-            base.OnAwake();
+            game.RoundManager.OnRoundStarted += UpdateEffects;
 
-            this.Game.RoundManager.OnRoundStarted += UpdateEffects;
-
-            if (this.Entity.ComponentContainer.TryGetComponent(out DGHealthComponent healthComponent))
+            if (entity.ComponentContainer.TryGetComponent(out DGHealthComponent healthComponent))
             {
                 this._healthComponent = healthComponent;
                 this._healthComponent.OnDied += HealthComponent_OnDied;
             }
         }
+
         private void UpdateEffects()
         {
             List<Type> finishedEffects = [];
@@ -79,8 +79,8 @@ namespace DeadlyGame.Core.GameContent.Components
 
             DGEffect effect = (DGEffect)Activator.CreateInstance(effectType);
 
-            effect.SetEntity(this.Entity);
-            effect.SetGame(this.Game);
+            effect.SetEntity(this.DGEntityInstance);
+            effect.SetGame(this.DGGameInstance);
 
             _ = this._effects.TryAdd(effectType, effect);
         }
@@ -100,7 +100,7 @@ namespace DeadlyGame.Core.GameContent.Components
         // ===== EVENTS =====
         private void HealthComponent_OnDied()
         {
-            this.Game.RoundManager.OnRoundStarted -= UpdateEffects;
+            this.DGGameInstance.RoundManager.OnRoundStarted -= UpdateEffects;
             this._healthComponent.OnDied -= HealthComponent_OnDied;
         }
     }

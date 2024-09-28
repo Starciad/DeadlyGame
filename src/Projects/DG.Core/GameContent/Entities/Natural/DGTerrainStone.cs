@@ -6,38 +6,25 @@ namespace DeadlyGame.Core.GameContent.Entities.Natural
 {
     public sealed class DGTerrainStone : DGEntity
     {
-        public DGTerrainStone()
+        private readonly DGTransformComponent _transform;
+        private readonly DGInventoryComponent _inventory;
+        private readonly DGHealthComponent _health;
+
+        public DGTerrainStone(DGGame game) : base(game)
         {
             this.Name = "Pedra";
-        }
-
-        private DGTransformComponent _transform;
-        private DGInventoryComponent _inventory;
-        private DGHealthComponent _health;
-
-        protected override void OnAwake()
-        {
-            base.OnAwake();
 
             this._transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
             this._inventory = this.ComponentContainer.AddComponent<DGInventoryComponent>();
             this._health = this.ComponentContainer.AddComponent<DGHealthComponent>();
         }
 
-        protected override void OnStart()
+        public override void Start()
         {
-            base.OnStart();
-
-            // ===== COMPONENTS =====
-            // transform
-            this._transform.SetPosition(this.Game.WorldManager.GetRandomPosition());
-
-            // health
-            this._health.SetMaximumHealth(this.Game.Random.Range(20, 35));
+            this._transform.SetPosition(this.DGGameInstance.WorldManager.GetRandomPosition());
+            this._health.SetMaximumHealth(this.DGGameInstance.RandomMath.Range(20, 35));
             this._health.SetCurrentHealth(this._health.MaximumHealth);
-
-            // inventory
-            _ = this._inventory.TryAddItem(new DGStone(), this.Game.Random.Range(5, 18));
+            _ = this._inventory.TryAddItem(new DGStone(this.DGGameInstance), this.DGGameInstance.RandomMath.Range(5, 18));
         }
     }
 }

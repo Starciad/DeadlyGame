@@ -18,19 +18,24 @@
         private bool isFinished;
         private bool isCanceled;
 
-        public void Start()
+        public DGGameStateManager(DGGame game) : base(game)
+        {
+
+        }
+
+        public void StartGame()
         {
             this.OnGameStarted?.Invoke();
             this.isStarted = true;
         }
 
-        public void Finish()
+        public void FinishGame()
         {
             this.OnGameFinished?.Invoke();
             this.isFinished = true;
         }
 
-        public void Cancel()
+        public void CancelGame()
         {
             this.OnGameCanceled?.Invoke();
             this.isCanceled = true;

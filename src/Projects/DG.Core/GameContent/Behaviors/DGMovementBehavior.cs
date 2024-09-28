@@ -110,8 +110,8 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             // === ACT ===
             int dr = this._combatComponent.DisplacementRate;
 
-            int move_x = this._game.Random.Range(-dr, dr);
-            int move_y = this._game.Random.Range(-dr, dr);
+            int move_x = this._game.RandomMath.Range(-dr, dr);
+            int move_y = this._game.RandomMath.Range(-dr, dr);
 
             this._transformComponent.Move(new(move_x, move_y));
             this._transformComponent.SetPosition(this._game.WorldManager.Clamp(this._transformComponent.Position));

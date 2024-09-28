@@ -1,4 +1,5 @@
 ﻿using DeadlyGame.Core.Components;
+using DeadlyGame.Core.Entities;
 
 namespace DeadlyGame.Core.GameContent.Components
 {
@@ -52,14 +53,19 @@ namespace DeadlyGame.Core.GameContent.Components
         /// </remarks>
         public int Wisdom { get; set; }
 
+        public DGCharacteristicsComponent(DGGame game, DGEntity entity) : base(game, entity)
+        {
+
+        }
+
         public void Randomize()
         {
-            this.Strength = this.Game.Dice.RollAndGetTotalSum(3, 6);
-            this.Constitution = this.Game.Dice.RollAndGetTotalSum(3, 6);
-            this.Dexterity = this.Game.Dice.RollAndGetTotalSum(3, 6);
-            this.Charisma = this.Game.Dice.RollAndGetTotalSum(3, 6);
-            this.Intelligence = this.Game.Dice.RollAndGetTotalSum(3, 6);
-            this.Wisdom = this.Game.Dice.RollAndGetTotalSum(3, 6);
+            this.Strength = this.DGGameInstance.Dice.RollAndGetTotalSum(3, 6);
+            this.Constitution = this.DGGameInstance.Dice.RollAndGetTotalSum(3, 6);
+            this.Dexterity = this.DGGameInstance.Dice.RollAndGetTotalSum(3, 6);
+            this.Charisma = this.DGGameInstance.Dice.RollAndGetTotalSum(3, 6);
+            this.Intelligence = this.DGGameInstance.Dice.RollAndGetTotalSum(3, 6);
+            this.Wisdom = this.DGGameInstance.Dice.RollAndGetTotalSum(3, 6);
         }
     }
 }

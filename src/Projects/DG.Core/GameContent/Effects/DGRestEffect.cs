@@ -19,7 +19,7 @@ namespace DeadlyGame.Core.GameContent.Effects
         {
             if (entity.ComponentContainer.TryGetComponent(out DGHealthComponent healthComponent))
             {
-                if (this.Game.Random.Chance(50, 100))
+                if (this.Game.RandomMath.Chance(50, 100))
                 {
                     healthComponent.Heal(1);
                 }

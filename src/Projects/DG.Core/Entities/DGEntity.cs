@@ -9,20 +9,14 @@ namespace DeadlyGame.Core.Entities
         public int Id { get; set; }
         public DGComponentContainer ComponentContainer => this.componentContainer;
 
-        private readonly DGComponentContainer componentContainer = new();
+        private readonly DGComponentContainer componentContainer;
 
-        public override void SetGameInstance(DGGame game)
+        public DGEntity(DGGame game) : base(game)
         {
-            base.SetGameInstance(game);
-            this.componentContainer.SetGameInstance(game);
-            this.componentContainer.SetEntityInstance(this);
+            this.componentContainer = new(game, this);
         }
 
-        protected override void OnStart()
-        {
-            this.componentContainer.Initialize();
-        }
-        protected override void OnUpdate()
+        public override void Update()
         {
             this.componentContainer.Update();
         }

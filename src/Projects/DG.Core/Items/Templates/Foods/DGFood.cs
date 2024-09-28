@@ -3,5 +3,10 @@
     public abstract class DGFood : DGItem
     {
         public int SatietyFactor { get; set; }
+
+        protected DGFood(DGGame game) : base(game)
+        {
+
+        }
     }
 }

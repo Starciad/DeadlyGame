@@ -20,8 +20,7 @@ namespace DeadlyGame.Core.Managers
 
         private DGPlayer[] players;
 
-        // System
-        public void Initialize(IEnumerable<DGPlayerBuilder> playerBuilders)
+        public DGPlayerManager(DGGame game, IEnumerable<DGPlayerBuilder> playerBuilders) : base(game)
         {
             DGPlayerBuilder[] playerBuildersArray = playerBuilders.ToArray();
             int length = playerBuildersArray.Length;
@@ -30,12 +29,11 @@ namespace DeadlyGame.Core.Managers
 
             for (int i = 0; i < length; i++)
             {
-                this.players[i] = new(playerBuildersArray[i], i);
-                this.players[i].SetGameInstance(this.Game);
-                this.players[i].Initialize();
+                this.players[i] = new(this.DGGameInstance, playerBuildersArray[i], i);
             }
         }
-        protected override void OnUpdate()
+
+        public override void Update()
         {
             foreach (DGPlayer player in this.LivingPlayers)
             {
@@ -43,7 +41,6 @@ namespace DeadlyGame.Core.Managers
             }
         }
 
-        // Utilities
         public DGPlayer[] GetNearbyPlayers(DGPoint position)
         {
             return
