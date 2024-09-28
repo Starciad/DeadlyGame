@@ -28,7 +28,6 @@
 	
 	<ItemGroup Label="Project References">
 		<ProjectReference Include="..\DG.Assets\DG.Assets.Windows.csproj" />
-		<ProjectReference Include="..\DG.GameContent\DG.Assets.Windows.csproj" />
 		<ProjectReference Include="..\DG.Core\DG.Core.Windows.csproj" />
 	</ItemGroup>
 </Project>
