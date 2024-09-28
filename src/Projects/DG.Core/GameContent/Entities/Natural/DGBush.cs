@@ -14,7 +14,7 @@ namespace DeadlyGame.Core.GameContent.Entities.Natural
         public DGBush(DGGame game) : base(game)
         {
             this.Name = "Arbusto";
-            
+
             this._transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
             this._inventory = this.ComponentContainer.AddComponent<DGInventoryComponent>();
             this._health = this.ComponentContainer.AddComponent<DGHealthComponent>();

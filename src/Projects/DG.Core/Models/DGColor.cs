@@ -32,17 +32,17 @@ namespace DeadlyGame.Core.Models
 
         public readonly bool Equals(DGColor other)
         {
-            return R == other.R && G == other.G && B == other.B && A == other.A;
+            return this.R == other.R && this.G == other.G && this.B == other.B && this.A == other.A;
         }
 
         public override readonly int GetHashCode()
         {
-            return HashCode.Combine(R, G, B, A);
+            return HashCode.Combine(this.R, this.G, this.B, this.A);
         }
 
         public override readonly string ToString()
         {
-            return $"RGBA({R}, {G}, {B}, {A})";
+            return $"RGBA({this.R}, {this.G}, {this.B}, {this.A})";
         }
 
         public static bool operator ==(DGColor left, DGColor right)
@@ -58,16 +58,16 @@ namespace DeadlyGame.Core.Models
         public static DGColor Lerp(DGColor from, DGColor to, float amount)
         {
             amount = Math.Clamp(amount, 0, 1);
-            byte r = (byte)(from.R + (to.R - from.R) * amount);
-            byte g = (byte)(from.G + (to.G - from.G) * amount);
-            byte b = (byte)(from.B + (to.B - from.B) * amount);
-            byte a = (byte)(from.A + (to.A - from.A) * amount);
+            byte r = (byte)(from.R + ((to.R - from.R) * amount));
+            byte g = (byte)(from.G + ((to.G - from.G) * amount));
+            byte b = (byte)(from.B + ((to.B - from.B) * amount));
+            byte a = (byte)(from.A + ((to.A - from.A) * amount));
             return new DGColor(r, g, b, a);
         }
 
         public readonly string ToHex()
         {
-            return $"#{R:X2}{G:X2}{B:X2}{A:X2}";
+            return $"#{this.R:X2}{this.G:X2}{this.B:X2}{this.A:X2}";
         }
 
         public readonly void Deconstruct(out byte r, out byte g, out byte b, out byte a)

@@ -29,7 +29,6 @@ namespace DeadlyGame.Core.GameContent.Behaviors
         private DGEntity _resourceEntity;
 
         // Consts
-        
 
         public bool CanAct(DGEntity entity, DGGame game)
         {

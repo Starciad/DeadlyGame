@@ -13,7 +13,6 @@ using DeadlyGame.Core.Models.Infos.Actions;
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Text;
 
 namespace DeadlyGame.Core.GameContent.Behaviors

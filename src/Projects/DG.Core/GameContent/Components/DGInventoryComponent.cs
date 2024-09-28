@@ -1,7 +1,6 @@
 ﻿using DeadlyGame.Core.Components;
 using DeadlyGame.Core.Constants;
 using DeadlyGame.Core.Entities;
-using DeadlyGame.Core.Exceptions.Items;
 using DeadlyGame.Core.Items;
 
 using System;
