@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DG.CLI.OSX", "DG.CLI\DG.CLI.OSX.csproj", "{D634EA12-4C87-47FB-BB5D-07ECA440466A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DG.Core.OSX", "DG.Core\DG.Core.OSX.csproj", "{1824CC11-CCF1-42AB-AD42-5210547025DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DG.Tests.OSX", "DG.Tests\DG.Tests.OSX.csproj", "{A3D96A14-20FF-490C-988C-D03BBB44B127}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D634EA12-4C87-47FB-BB5D-07ECA440466A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D634EA12-4C87-47FB-BB5D-07ECA440466A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D634EA12-4C87-47FB-BB5D-07ECA440466A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D634EA12-4C87-47FB-BB5D-07ECA440466A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1824CC11-CCF1-42AB-AD42-5210547025DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1824CC11-CCF1-42AB-AD42-5210547025DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1824CC11-CCF1-42AB-AD42-5210547025DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1824CC11-CCF1-42AB-AD42-5210547025DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3D96A14-20FF-490C-988C-D03BBB44B127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3D96A14-20FF-490C-988C-D03BBB44B127}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3D96A14-20FF-490C-988C-D03BBB44B127}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3D96A14-20FF-490C-988C-D03BBB44B127}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
