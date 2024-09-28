@@ -1,6 +1,6 @@
 ﻿using DeadlyGame.Core.Behaviors.Models;
 using DeadlyGame.Core.Entities;
-using DeadlyGame.Core.Information.Actions;
+using DeadlyGame.Core.Models.Infos.Actions;
 
 namespace DeadlyGame.Core.Behaviors
 {

@@ -5,10 +5,11 @@ using DeadlyGame.Core.Entities;
 using DeadlyGame.Core.Entities.Players;
 using DeadlyGame.Core.Enums.Personalities;
 using DeadlyGame.Core.Enums.World;
-using DeadlyGame.Core.Information.Actions;
 using DeadlyGame.Core.Items.Templates.Weapons;
 using DeadlyGame.Core.Localization;
-using DeadlyGame.Core.Utilities;
+using DeadlyGame.Core.Mathematics;
+using DeadlyGame.Core.Mathematics.Primitives;
+using DeadlyGame.Core.Models.Infos.Actions;
 
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,6 @@ namespace DeadlyGame.Core.Behaviors.Common
         private DGRelationshipsComponent _relationshipsComponent;
 
         private DGTransformComponent _targetEntityTransform;
-        private DGEquipmentComponent _targetEquipmentComponent;
         private DGHealthComponent _targetEntityHealth;
         private DGRelationshipsComponent _targetRelationshipsComponent;
 
@@ -72,14 +72,12 @@ namespace DeadlyGame.Core.Behaviors.Common
             }
 
             // Get a target entity.
-            this._targetEntity = GetNearbyTarget();
-            if (this._targetEntity == null)
+            if (!TryGetNearbyTarget(out this._targetEntity))
             {
                 return false;
             }
 
             componentChecker.Clear();
-            componentChecker.Add(this._targetEntity.ComponentContainer.TryGetComponent(out this._targetEquipmentComponent));
             componentChecker.Add(this._targetEntity.ComponentContainer.TryGetComponent(out this._targetEntityHealth));
             componentChecker.Add(this._targetEntity.ComponentContainer.TryGetComponent(out this._targetRelationshipsComponent));
 
@@ -136,7 +134,7 @@ namespace DeadlyGame.Core.Behaviors.Common
             // Health
             if (this._healthComponent != null)
             {
-                double healthPercentage = Math.Round(DGPercentageUtilities.CalculatePercentage(this._healthComponent.CurrentHealth, this._healthComponent.MaximumHealth));
+                double healthPercentage = Math.Round(DGPercentageMath.CalculatePercentage(this._healthComponent.CurrentHealth, this._healthComponent.MaximumHealth));
 
                 if (healthPercentage < 50)
                 {
@@ -194,19 +192,21 @@ namespace DeadlyGame.Core.Behaviors.Common
             return infos;
         }
 
-        private DGPlayer GetNearbyTarget()
+        private bool TryGetNearbyTarget(out DGPlayer nearbyPlayer)
         {
             foreach (DGPlayer entity in this._game.PlayerManager.GetNearbyPlayers(this._transformComponent.Position).Where(x => x != this._entity))
             {
                 this._targetEntityTransform = entity.ComponentContainer.GetComponent<DGTransformComponent>();
 
-                if (Vector2.Distance(this._transformComponent.Position, this._targetEntityTransform.Position) <= DGInteractionsConstants.MAXIMUM_RANGE)
+                if (DGPoint.Distance(this._transformComponent.Position, this._targetEntityTransform.Position) <= DGInteractionsConstants.MAXIMUM_RANGE)
                 {
-                    return entity;
+                    nearbyPlayer = entity;
+                    return true;
                 }
             }
 
-            return null;
+            nearbyPlayer = null;
+            return false;
         }
         private void AttemptAttack()
         {
@@ -214,7 +214,7 @@ namespace DeadlyGame.Core.Behaviors.Common
             if (this._weaponUsed == null)
             {
                 // Attack with the hand.
-                this._attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, this._characteristicsComponent.Strength);
+                this._attackTest = DGAttributesMath.GetAttributeTestValue(this._game.Dice, this._characteristicsComponent.Strength);
                 this._attributeValue = this._characteristicsComponent.Strength;
             }
             else
@@ -224,28 +224,28 @@ namespace DeadlyGame.Core.Behaviors.Common
                 {
                     case DGWeaponType.Melee:
                         this._attributeValue = this._characteristicsComponent.Strength;
-                        this._attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, this._attributeValue);
+                        this._attackTest = DGAttributesMath.GetAttributeTestValue(this._game.Dice, this._attributeValue);
                         break;
 
                     case DGWeaponType.Ranged:
                         this._attributeValue = this._characteristicsComponent.Dexterity;
-                        this._attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, this._attributeValue);
+                        this._attackTest = DGAttributesMath.GetAttributeTestValue(this._game.Dice, this._attributeValue);
                         break;
 
                     case DGWeaponType.Magic:
                         this._attributeValue = this._characteristicsComponent.Intelligence;
-                        this._attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, this._attributeValue);
+                        this._attackTest = DGAttributesMath.GetAttributeTestValue(this._game.Dice, this._attributeValue);
                         break;
 
                     default:
                         this._attributeValue = this._characteristicsComponent.Strength;
-                        this._attackTest = DGAttributesUtilities.GetAttributeTestValue(this._game.Dice, this._attributeValue);
+                        this._attackTest = DGAttributesMath.GetAttributeTestValue(this._game.Dice, this._attributeValue);
                         break;
                 }
             }
 
             // Check if it was a critical value
-            this._isCriticalAttack = DGAttributesUtilities.IsMaxAttributeValueInTest(this._attributeValue, this._attackTest);
+            this._isCriticalAttack = DGAttributesMath.IsMaxAttributeValueInTest(this._attributeValue, this._attackTest);
             this._totalDamage = this._combatComponent.GetFullAttackDamage(this._isCriticalAttack);
 
             this._targetEntityHealth.Hurt(this._totalDamage);

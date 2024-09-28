@@ -2,9 +2,10 @@
 using DeadlyGame.Core.Components.Common;
 using DeadlyGame.Core.Constants;
 using DeadlyGame.Core.Entities;
-using DeadlyGame.Core.Information.Actions;
 using DeadlyGame.Core.Items;
 using DeadlyGame.Core.Localization;
+using DeadlyGame.Core.Mathematics.Primitives;
+using DeadlyGame.Core.Models.Infos.Actions;
 
 using System.Collections.Generic;
 using System.Drawing;
@@ -41,7 +42,7 @@ namespace DeadlyGame.Core.Behaviors.Common
                 return false;
             }
 
-            this._nearbyItems = game.WorldManager.GetNearbyItems(this._transformComponent.Position).Where(x => Vector2.Distance(x.Position, this._transformComponent.Position) < DGInteractionsConstants.MAXIMUM_RANGE).ToArray();
+            this._nearbyItems = game.WorldManager.GetNearbyItems(this._transformComponent.Position).Where(x => DGPoint.Distance(x.Position, this._transformComponent.Position) < DGInteractionsConstants.MAXIMUM_RANGE).ToArray();
 
             return this._nearbyItems != null && this._nearbyItems.Length != 0;
         }

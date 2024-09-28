@@ -2,7 +2,7 @@
 using DeadlyGame.Core.Items.Common.Materials;
 using DeadlyGame.Core.Items.Common.Weapons;
 
-namespace DG.Core.Databases.Crafting
+namespace DeadlyGame.Core.Databases.Crafting
 {
     internal partial class DGCraftingDatabase
     {

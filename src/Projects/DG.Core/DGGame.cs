@@ -1,14 +1,12 @@
 ﻿using DeadlyGame.Core.Builders;
 using DeadlyGame.Core.Databases.Items;
 using DeadlyGame.Core.Dice;
-using DeadlyGame.Core.Information;
-using DeadlyGame.Core.Information.Players;
+using DeadlyGame.Core.Entities.Players;
 using DeadlyGame.Core.Localization;
 using DeadlyGame.Core.Managers;
+using DeadlyGame.Core.Mathematics;
 using DeadlyGame.Core.Settings;
-using DeadlyGame.Core.Utilities;
-
-using DG.Core.Databases.Crafting;
+using DeadlyGame.Core.Databases.Crafting;
 
 using System;
 
@@ -26,13 +24,13 @@ namespace DeadlyGame.Core
         internal DGItemDatabase ItemDatabase => this._itemDatabase;
 
         // Managers
-        internal DGPlayerManager PlayerManager => this._playersManager;
-        internal DGWorldManager WorldManager => this._worldManager;
-        internal DGRoundManager RoundManager => this._roundManager;
-        internal DGGameStateManager GameStateManager => this._gameStateManager;
+        public DGPlayerManager PlayerManager => this._playersManager;
+        public DGWorldManager WorldManager => this._worldManager;
+        public DGRoundManager RoundManager => this._roundManager;
+        public DGGameStateManager GameStateManager => this._gameStateManager;
 
         // Utilities
-        internal DGRandomUtilities Random { get; } = new();
+        internal DGRandomMath Random { get; } = new();
         internal DGDice Dice { get; } = new();
 
         // Settings
@@ -74,7 +72,7 @@ namespace DeadlyGame.Core
         }
         public bool ShouldUpdateGame()
         {
-            return !this._playersManager.OnlyOneActivePlayer;
+            return !this._playersManager.OnlyOnePlayerAlive;
         }
         public void UpdateGame()
         {
@@ -93,35 +91,9 @@ namespace DeadlyGame.Core
         }
 
         // Utilities
-        public DGGameInfo GetGameInfo(bool includeActions = true, bool includePlayers = true, bool includeRound = true, bool includeWorld = true)
+        public DGPlayer GetGameWinner()
         {
-            DGGameInfo gameInfo = new();
-
-            if (includeActions)
-            {
-                gameInfo.ActionsInfo = this._playersManager.GetPlayersActionsInfo();
-            }
-
-            if (includePlayers)
-            {
-                gameInfo.PlayersInfo = this._playersManager.GetPlayersInfo();
-            }
-
-            if (includeRound)
-            {
-                gameInfo.RoundInfo = this._roundManager.GetInfo();
-            }
-
-            if (includeWorld)
-            {
-                gameInfo.WorldInfo = this._worldManager.GetInfo();
-            }
-
-            return gameInfo;
-        }
-        public DGPlayerInfo GetGameWinner()
-        {
-            return DGPlayerInfo.Create(this._playersManager.ActivePlayers[0]);
+            return this._playersManager.LivingPlayers[0];
         }
 
         // Tools

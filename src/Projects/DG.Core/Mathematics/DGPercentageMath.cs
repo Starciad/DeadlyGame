@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DeadlyGame.Core.Utilities
+namespace DeadlyGame.Core.Mathematics
 {
-    internal static class DGPercentageUtilities
+    internal static class DGPercentageMath
     {
         /// <summary>
         /// Calculates the percentage of a value in relation to a total.

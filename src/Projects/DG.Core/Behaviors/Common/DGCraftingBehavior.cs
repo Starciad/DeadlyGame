@@ -2,9 +2,9 @@
 using DeadlyGame.Core.Components.Common;
 using DeadlyGame.Core.Crafting;
 using DeadlyGame.Core.Entities;
-using DeadlyGame.Core.Information.Actions;
 using DeadlyGame.Core.Items;
 using DeadlyGame.Core.Localization;
+using DeadlyGame.Core.Models.Infos.Actions;
 
 using System.Drawing;
 

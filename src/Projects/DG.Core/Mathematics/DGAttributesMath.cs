@@ -2,9 +2,9 @@
 
 using System;
 
-namespace DeadlyGame.Core.Utilities
+namespace DeadlyGame.Core.Mathematics
 {
-    internal static class DGAttributesUtilities
+    internal static class DGAttributesMath
     {
         internal static int GetAttributeModifier(int attributeValue)
         {

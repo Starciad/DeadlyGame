@@ -2,11 +2,11 @@
 using DeadlyGame.Core.Builders;
 using DeadlyGame.Core.Components.Common;
 using DeadlyGame.Core.Effects.Common;
-using DeadlyGame.Core.Utilities;
+using DeadlyGame.Core.Mathematics;
 
 namespace DeadlyGame.Core.Entities.Players
 {
-    internal sealed class DGPlayer : DGEntity
+    public sealed class DGPlayer : DGEntity
     {
         // Components
         private DGBehaviourComponent _behaviour;
@@ -61,7 +61,7 @@ namespace DeadlyGame.Core.Entities.Players
             this._characteristics.Randomize();
 
             // Health
-            this._health.SetMaximumHealth(10 + DGAttributesUtilities.GetAttributeModifier(this._characteristics.Constitution));
+            this._health.SetMaximumHealth(10 + DGAttributesMath.GetAttributeModifier(this._characteristics.Constitution));
             this._health.SetCurrentHealth(this._health.MaximumHealth);
 
             // Hunger

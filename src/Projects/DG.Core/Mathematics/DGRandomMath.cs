@@ -1,20 +1,20 @@
 ﻿using System;
 
-namespace DeadlyGame.Core.Utilities
+namespace DeadlyGame.Core.Mathematics
 {
-    internal sealed class DGRandomUtilities
+    internal sealed class DGRandomMath
     {
         private readonly Random _random;
 
-        internal DGRandomUtilities()
+        internal DGRandomMath()
         {
             this._random = new();
         }
-        internal DGRandomUtilities(int seed)
+        internal DGRandomMath(int seed)
         {
             this._random = new(seed);
         }
-        internal DGRandomUtilities(Random random)
+        internal DGRandomMath(Random random)
         {
             this._random = random;
         }

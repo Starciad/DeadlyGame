@@ -1,8 +1,8 @@
 ﻿using DeadlyGame.Core.Behaviors.Models;
 using DeadlyGame.Core.Components.Common;
 using DeadlyGame.Core.Entities;
-using DeadlyGame.Core.Information.Actions;
 using DeadlyGame.Core.Items.Templates.Weapons;
+using DeadlyGame.Core.Models.Infos.Actions;
 
 using System.Linq;
 

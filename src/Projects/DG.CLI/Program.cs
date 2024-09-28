@@ -1,17 +1,12 @@
-﻿using DeadlyGame.CLI.Tools;
-using DeadlyGame.Core;
+﻿using DeadlyGame.Core;
 using DeadlyGame.Core.Builders;
-using DeadlyGame.Core.Information;
 
 using System;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
 
 namespace DeadlyGame.CLI
 {
     internal static class Program
     {
-        [RequiresUnreferencedCode("Calls DeadlyGame.CLI.Tools.DGJsonSerializer.Serialize(String)")]
         private static void Main()
         {
             DGGameBuilder gameBuilder = BuildGame();
@@ -25,32 +20,20 @@ namespace DeadlyGame.CLI
             Console.WriteLine("START");
 
             game.StartGame();
-            DGGameInfo info = new();
 
             while (game.ShouldUpdateGame())
             {
                 game.UpdateGame();
-                info = game.GetGameInfo();
 
                 Console.Clear();
-                Console.WriteLine($"[ Round: {info.RoundInfo.CurrentRound} || Day: {info.WorldInfo.CurrentDay} ({info.WorldInfo.CurrentDaylightCycle}) ]");
-                Console.WriteLine($"Players: {info.PlayersInfo.ActivePlayers.Length}/{info.PlayersInfo.Players.Length};");
-
-                if (info.PlayersInfo.ActivePlayers.Length < 50)
-                {
-                    break;
-                }
+                Console.WriteLine($"[ Round: {game.RoundManager.CurrentRound} || Day: {game.WorldManager.CurrentDay} ({game.WorldManager.CurrentDaylightCycle}) ]");
+                Console.WriteLine($"Players: {game.PlayerManager.LivingPlayers.Length}/{game.PlayerManager.TotalPlayerCount};");
             }
 
             game.FinishGame();
             game.Dispose();
 
             // ============================== //
-            Console.WriteLine("START (Serializer)");
-
-            string filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Ex", "DGGameInfo.json");
-            DGJsonSerializer serializer = new(info);
-            serializer.Serialize(filename);
 
             Console.WriteLine("Finished");
         }
@@ -60,7 +43,7 @@ namespace DeadlyGame.CLI
         {
             return new()
             {
-                Players = BuildPlayers(100)
+                Players = BuildPlayers(50)
             };
         }
 

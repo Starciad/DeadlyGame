@@ -1,6 +1,6 @@
 ﻿namespace DeadlyGame.Core.Managers
 {
-    internal sealed class DGGameStateManager : DGManager
+    public sealed class DGGameStateManager : DGManager
     {
         internal delegate void GameStartedEventHandler();
         internal delegate void GameFinishedEventHandler();

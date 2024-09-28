@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup Label="General">
-		<AssemblyName>DeadlyGame</AssemblyName>
+		<AssemblyName>DeadlyGame.CLI</AssemblyName>
 		<RootNamespace>DeadlyGame.CLI</RootNamespace>
 	</PropertyGroup>
 

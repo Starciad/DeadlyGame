@@ -2,11 +2,11 @@
 using DeadlyGame.Core.Components.Common;
 using DeadlyGame.Core.Effects.Common;
 using DeadlyGame.Core.Entities;
-using DeadlyGame.Core.Information.Actions;
 using DeadlyGame.Core.Items;
 using DeadlyGame.Core.Items.Templates.Foods;
 using DeadlyGame.Core.Localization;
-using DeadlyGame.Core.Utilities;
+using DeadlyGame.Core.Mathematics;
+using DeadlyGame.Core.Models.Infos.Actions;
 
 using System;
 using System.Collections.Generic;
@@ -53,7 +53,7 @@ namespace DeadlyGame.Core.Behaviors.Common
             // HEALTH
             if (this._healthComponent != null)
             {
-                this.healthPercentage = (int)Math.Round(DGPercentageUtilities.CalculatePercentage(this._healthComponent.CurrentHealth, this._healthComponent.MaximumHealth));
+                this.healthPercentage = (int)Math.Round(DGPercentageMath.CalculatePercentage(this._healthComponent.CurrentHealth, this._healthComponent.MaximumHealth));
                 if (this.healthPercentage <= 50)
                 {
                     weight.Add(5f);

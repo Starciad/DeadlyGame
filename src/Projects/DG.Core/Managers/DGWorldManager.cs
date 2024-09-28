@@ -3,28 +3,27 @@ using DeadlyGame.Core.Components.Common;
 using DeadlyGame.Core.Entities;
 using DeadlyGame.Core.Entities.Natural;
 using DeadlyGame.Core.Enums.World;
-using DeadlyGame.Core.Information.World;
 using DeadlyGame.Core.Items;
+using DeadlyGame.Core.Mathematics.Primitives;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 
 namespace DeadlyGame.Core.Managers
 {
-    internal sealed class DGWorldManager : DGManager
+    public sealed class DGWorldManager : DGManager
     {
-        internal int CurrentDay => this.currentDay;
-        internal DGWorldDaylightCycleState CurrentDaylightCycle => this.currentDaylightCycle;
-        internal Vector2 Size => this.worldSize;
+        public int CurrentDay => this.currentDay;
+        public DGWorldDaylightCycleState CurrentDaylightCycle => this.currentDaylightCycle;
+        public DGPoint Size => this.worldSize;
 
         // === Day ===
         private int currentDay;
         private DGWorldDaylightCycleState currentDaylightCycle;
 
         // === World General ===
-        private Vector2 worldSize;
+        private DGPoint worldSize;
 
         // === World Resources ===
         private readonly List<DGEntity> resourceEntities = [];
@@ -106,18 +105,18 @@ namespace DeadlyGame.Core.Managers
         }
 
         // === Utilities ===
-        internal DGEntity[] GetNearbyResources(Vector2 position)
+        internal DGEntity[] GetNearbyResources(DGPoint position)
         {
             return
             [
-                .. this.resourceEntities.OrderByDescending(x => Vector2.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, position)),
+                .. this.resourceEntities.OrderByDescending(x => DGPoint.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, position)),
             ];
         }
-        internal DGWorldItem[] GetNearbyItems(Vector2 position)
+        internal DGWorldItem[] GetNearbyItems(DGPoint position)
         {
             return
             [
-                .. this.worldItems.OrderByDescending(x => Vector2.Distance(x.Position, position)),
+                .. this.worldItems.OrderByDescending(x => DGPoint.Distance(x.Position, position)),
             ];
         }
         internal void AddWorldItem(DGWorldItem worldItem)
@@ -138,66 +137,19 @@ namespace DeadlyGame.Core.Managers
         }
 
         // === Tools ===
-        internal Vector2 Clamp(Vector2 position)
+        internal DGPoint Clamp(DGPoint position)
         {
-            float pos_x = Math.Clamp(position.X, -this.Size.X, this.Size.X);
-            float pos_y = Math.Clamp(position.Y, -this.Size.Y, this.Size.Y);
+            int pos_x = Math.Clamp(position.X, -this.Size.X, this.Size.X);
+            int pos_y = Math.Clamp(position.Y, -this.Size.Y, this.Size.Y);
 
             return new(pos_x, pos_y);
         }
-        internal Vector2 GetRandomPosition()
+        internal DGPoint GetRandomPosition()
         {
-            float pos_x = this.Game.Random.Range(-this.Size.X, this.Size.X + 1);
-            float pos_y = this.Game.Random.Range(-this.Size.Y, this.Size.Y + 1);
+            int pos_x = this.Game.Random.Range(-this.Size.X, this.Size.X + 1);
+            int pos_y = this.Game.Random.Range(-this.Size.Y, this.Size.Y + 1);
 
             return new(pos_x, pos_y);
-        }
-
-        internal DGWorldInfo GetInfo()
-        {
-            // Build world information.
-            return new()
-            {
-                CurrentDay = this.currentDay,
-                CurrentDaylightCycle = this.currentDaylightCycle,
-                WorldSize = new(this.worldSize),
-                ResourceInfo = new()
-                {
-                    Resources = GetAllWorldResources(),
-                    Items = GetAllWorldItems(),
-                },
-            };
-
-            // ===== METHODS =====
-            DGWorldResourceInfo[] GetAllWorldResources()
-            {
-                List<DGWorldResourceInfo> resources = [];
-                string[] resourcesNames = this.resourceEntities.Select(x => x.Name).ToArray();
-
-                foreach (string resourceName in resourcesNames.Distinct().ToArray())
-                {
-                    int count = resourcesNames.Count(x => x.Equals(resourceName));
-                    resources.Add(new()
-                    {
-                        Name = resourceName,
-                        Count = count
-                    });
-                }
-
-                return [.. resources];
-            }
-
-            DGWorldItemInfo[] GetAllWorldItems()
-            {
-                List<DGWorldItemInfo> worldItemsInfo = [];
-
-                foreach (DGWorldItem worldItem in this.worldItems)
-                {
-                    worldItemsInfo.Add(DGWorldItemInfo.Create(worldItem));
-                }
-
-                return [.. worldItemsInfo];
-            }
         }
     }
 }

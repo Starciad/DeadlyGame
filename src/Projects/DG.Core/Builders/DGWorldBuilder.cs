@@ -1,10 +1,10 @@
-﻿using System.Numerics;
+﻿using DeadlyGame.Core.Mathematics.Primitives;
 
 namespace DeadlyGame.Core.Builders
 {
     public struct DGWorldBuilder
     {
-        public required Vector2 Size { get; set; }
+        public required DGPoint Size { get; set; }
         public required DGWorldResourcesBuilder Resources { get; set; }
     }
 

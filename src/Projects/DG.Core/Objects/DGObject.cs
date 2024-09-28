@@ -1,6 +1,6 @@
 ﻿namespace DeadlyGame.Core.Objects
 {
-    internal abstract class DGObject
+    public abstract class DGObject
     {
         protected DGGame Game { get; private set; }
 

@@ -2,7 +2,7 @@
 
 namespace DeadlyGame.Core.Managers
 {
-    internal abstract class DGManager : DGObject
+    public abstract class DGManager : DGObject
     {
 
     }

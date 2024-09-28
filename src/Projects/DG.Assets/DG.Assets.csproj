@@ -1,10 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
+	<PropertyGroup Label="Header">
 		<TargetFramework>net8.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
+	<PropertyGroup Label="General">
+		<AssemblyName>DeadlyGame</AssemblyName>
+		<RootNamespace>DeadlyGame.CLI</RootNamespace>
+	</PropertyGroup>
+	
 	<ItemGroup Label="Files">
 		<None Include="..\..\..\LICENSE.txt">
 			<Pack>True</Pack>

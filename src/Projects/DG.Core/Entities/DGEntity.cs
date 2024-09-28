@@ -3,7 +3,7 @@ using DeadlyGame.Core.Objects;
 
 namespace DeadlyGame.Core.Entities
 {
-    internal abstract class DGEntity : DGObject
+    public abstract class DGEntity : DGObject
     {
         internal string Name { get; set; }
         internal int Id { get; set; }

@@ -2,12 +2,12 @@
 using DeadlyGame.Core.Components.Common;
 using DeadlyGame.Core.Constants;
 using DeadlyGame.Core.Entities;
-using DeadlyGame.Core.Information.Actions;
 using DeadlyGame.Core.Localization;
+using DeadlyGame.Core.Mathematics.Primitives;
+using DeadlyGame.Core.Models.Infos.Actions;
 
 using System.Drawing;
 using System.Linq;
-using System.Numerics;
 
 namespace DeadlyGame.Core.Behaviors.Common
 {
@@ -46,7 +46,7 @@ namespace DeadlyGame.Core.Behaviors.Common
             }
 
             // Infos
-            this._nearbyResources = game.WorldManager.GetNearbyResources(this._transformComponent.Position).Where(x => Vector2.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, this._transformComponent.Position) < DGInteractionsConstants.MAXIMUM_RANGE).ToArray();
+            this._nearbyResources = game.WorldManager.GetNearbyResources(this._transformComponent.Position).Where(x => DGPoint.Distance(x.ComponentContainer.GetComponent<DGTransformComponent>().Position, this._transformComponent.Position) < DGInteractionsConstants.MAXIMUM_RANGE).ToArray();
             return this._nearbyResources != null && this._nearbyResources.Length != 0 && !this._nearbyResources[0].ComponentContainer.TryGetComponent(out this._resourceHealthComponent);
         }
         public DGBehaviourWeight GetWeight()

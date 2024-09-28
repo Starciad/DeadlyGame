@@ -1,18 +1,16 @@
-﻿using DeadlyGame.Core.Information.Round;
-
-namespace DeadlyGame.Core.Managers
+﻿namespace DeadlyGame.Core.Managers
 {
-    internal sealed class DGRoundManager : DGManager
+    public sealed class DGRoundManager : DGManager
     {
-        internal int CurrentRound => this.currentRound;
+        public int CurrentRound => this.currentRound;
 
         private int currentRound;
 
-        internal delegate void RoundStartedEventHandler();
-        internal delegate void RoundEndedEventHandler();
-
         internal event RoundStartedEventHandler OnRoundStarted;
         internal event RoundEndedEventHandler OnRoundEnded;
+
+        internal delegate void RoundStartedEventHandler();
+        internal delegate void RoundEndedEventHandler();
 
         protected override void OnAwake()
         {
@@ -28,14 +26,6 @@ namespace DeadlyGame.Core.Managers
         internal void End()
         {
             OnRoundEnded?.Invoke();
-        }
-
-        internal DGRoundInfo GetInfo()
-        {
-            return new()
-            {
-                CurrentRound = this.currentRound,
-            };
         }
     }
 }

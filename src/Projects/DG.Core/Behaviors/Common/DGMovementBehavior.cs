@@ -3,11 +3,11 @@ using DeadlyGame.Core.Components.Common;
 using DeadlyGame.Core.Entities;
 using DeadlyGame.Core.Enums.Personalities;
 using DeadlyGame.Core.Enums.World;
-using DeadlyGame.Core.Information.Actions;
 using DeadlyGame.Core.Localization;
+using DeadlyGame.Core.Mathematics.Primitives;
+using DeadlyGame.Core.Models.Infos.Actions;
 
 using System.Drawing;
-using System.Numerics;
 
 namespace DeadlyGame.Core.Behaviors.Common
 {
@@ -105,18 +105,18 @@ namespace DeadlyGame.Core.Behaviors.Common
         }
         public DGPlayerActionInfo Act()
         {
-            Vector2 oldPos = this._transformComponent.Position;
+            DGPoint oldPos = this._transformComponent.Position;
 
             // === ACT ===
             int dr = this._combatComponent.DisplacementRate;
 
-            float move_x = this._game.Random.Range(-dr, dr);
-            float move_y = this._game.Random.Range(-dr, dr);
+            int move_x = this._game.Random.Range(-dr, dr);
+            int move_y = this._game.Random.Range(-dr, dr);
 
             this._transformComponent.Move(new(move_x, move_y));
             this._transformComponent.SetPosition(this._game.WorldManager.Clamp(this._transformComponent.Position));
 
-            Vector2 newPos = this._transformComponent.Position;
+            DGPoint newPos = this._transformComponent.Position;
 
             // === INFOS ===
             DGPlayerActionInfo infos = new();

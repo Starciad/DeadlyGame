@@ -1,6 +1,6 @@
 ﻿using DeadlyGame.Core.Behaviors;
 using DeadlyGame.Core.Constants;
-using DeadlyGame.Core.Information.Actions;
+using DeadlyGame.Core.Models.Infos.Actions;
 
 using System.Collections.Generic;
 using System.Linq;

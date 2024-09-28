@@ -5,7 +5,7 @@ using DeadlyGame.Core.Objects;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DG.Core.Databases.Crafting
+namespace DeadlyGame.Core.Databases.Crafting
 {
     internal partial class DGCraftingDatabase : DGObject
     {
