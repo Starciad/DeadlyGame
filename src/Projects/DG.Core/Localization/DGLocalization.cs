@@ -44,10 +44,5 @@ namespace DeadlyGame.Core.Localization
         {
             return string.Concat(definedLanguage, '-', definedLanguageRegion);
         }
-
-        public static string Read(string v1, string v2)
-        {
-            return string.Empty;
-        }
     }
 }

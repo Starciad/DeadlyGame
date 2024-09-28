@@ -11,25 +11,25 @@
 
         #region PROPERTIES
         // Aggressive section
-        public static string AGGRESSIVE_NAME => lMessagesBehaviors.GetSection("aggressive").GetKey("name");
-        public static string AGGRESSIVE_IS_CRITICAL => lMessagesBehaviors.GetSection("aggressive").GetKey("is_critical");
+        public static string MESSAGES_BEHAVIOR_AGGRESSIVE_NAME => lMessagesBehaviors.GetSection("aggressive").GetKey("name");
+        public static string MESSAGES_BEHAVIOR_AGGRESSIVE_IS_CRITICAL => lMessagesBehaviors.GetSection("aggressive").GetKey("is_critical");
 
         // Crafting section
-        public static string CRAFTING_NAME => lMessagesBehaviors.GetSection("crafting").GetKey("name");
+        public static string MESSAGES_BEHAVIOR_CRAFTING_NAME => lMessagesBehaviors.GetSection("crafting").GetKey("name");
 
         // Item Acquisition section
-        public static string ITEM_ACQUISITION_NAME => lMessagesBehaviors.GetSection("item_acquisition").GetKey("name");
+        public static string MESSAGES_BEHAVIOR_ITEM_ACQUISITION_NAME => lMessagesBehaviors.GetSection("item_acquisition").GetKey("name");
 
         // Movement section
-        public static string MOVEMENT_NAME => lMessagesBehaviors.GetSection("movement").GetKey("name");
+        public static string MESSAGES_BEHAVIOR_MOVEMENT_NAME => lMessagesBehaviors.GetSection("movement").GetKey("name");
 
         // Resource Acquisition section
-        public static string RESOURCE_ACQUISITION_NAME => lMessagesBehaviors.GetSection("resource_acquisition").GetKey("name");
+        public static string MESSAGES_BEHAVIOR_RESOURCE_ACQUISITION_NAME => lMessagesBehaviors.GetSection("resource_acquisition").GetKey("name");
 
         // Self Preservation section
-        public static string SELF_PRESERVATION_NAME => lMessagesBehaviors.GetSection("self_preservation").GetKey("name");
-        public static string SELF_PRESERVATION_DESCRIPTION_HEALTH => lMessagesBehaviors.GetSection("self_preservation").GetKey("description_health");
-        public static string SELF_PRESERVATION_DESCRIPTION_HUNGER => lMessagesBehaviors.GetSection("self_preservation").GetKey("description_hunger");
+        public static string MESSAGES_BEHAVIOR_SELF_PRESERVATION_NAME => lMessagesBehaviors.GetSection("self_preservation").GetKey("name");
+        public static string MESSAGES_BEHAVIOR_SELF_PRESERVATION_DESCRIPTION_HEALTH => lMessagesBehaviors.GetSection("self_preservation").GetKey("description_health");
+        public static string MESSAGES_BEHAVIOR_SELF_PRESERVATION_DESCRIPTION_HUNGER => lMessagesBehaviors.GetSection("self_preservation").GetKey("description_hunger");
         #endregion
 
         // ========================== //

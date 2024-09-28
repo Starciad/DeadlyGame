@@ -165,9 +165,10 @@ namespace DeadlyGame.Core.GameContent.Behaviors
 
             string entityName = this._entity.Name;
             string opponentsName = this._targetEntity.Name;
-            string weaponName = this._weaponUsed == null ? DGLocalization.Read("Items", "Weapon_Hand") : this._weaponUsed.Name;
+            string weaponName = this._weaponUsed == null ? DGLocalization.ITEMS_WEAPONS_HAND : this._weaponUsed.Name;
 
-            infos.WithName(DGLocalization.Read(DGBehaviourConstants.S_AGGRESSIVE_BEHAVIOR, "Name"));
+            // infos.WithName(DGLocalization.Read(DGBehaviourConstants.S_AGGRESSIVE_BEHAVIOR, "Name"));
+            infos.WithName(DGLocalization.MESSAGES_BEHAVIOR_AGGRESSIVE_NAME);
             if (this._targetEntityHealth.IsDead)
             {
                 // Death Message
