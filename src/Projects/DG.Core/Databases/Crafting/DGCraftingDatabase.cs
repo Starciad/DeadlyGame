@@ -14,6 +14,16 @@ namespace DeadlyGame.Core.Databases.Crafting
             InitializeRecipes();
         }
 
+        public override void Start()
+        {
+            return;
+        }
+
+        public override void Update()
+        {
+            return;
+        }
+
         public DGCraftingRecipe[] GetOnlyNewCraftableItems(DGInventoryComponent inventoryComponent)
         {
             return [.. GetCraftableItems(inventoryComponent).Where(x => !inventoryComponent.HasItem(x.ItemType))];

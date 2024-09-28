@@ -13,5 +13,15 @@ namespace DeadlyGame.Core.GameContent.Items.Foods
             this.HasDurability = false;
             this.SatietyFactor = 10;
         }
+
+        public override void Start()
+        {
+            return;
+        }
+
+        public override void Update()
+        {
+            return;
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace DeadlyGame.Core.Objects
             this.DGGameInstance = game;
         }
 
-        public virtual void Start() { return; }
-        public virtual void Update() { return; }
+        public abstract void Start();
+        public abstract void Update();
     }
 }

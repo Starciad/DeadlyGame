@@ -12,5 +12,15 @@ namespace DeadlyGame.Core.GameContent.Items.Materials
             this.Rarity = DGItemRarity.Common;
             this.HasDurability = false;
         }
+
+        public override void Start()
+        {
+            return;
+        }
+
+        public override void Update()
+        {
+            return;
+        }
     }
 }

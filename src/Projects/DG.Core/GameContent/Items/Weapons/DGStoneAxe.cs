@@ -16,5 +16,15 @@ namespace DeadlyGame.Core.GameContent.Items.Weapons
             this.WeaponType = DGWeaponType.Melee;
             this.Damage = 5;
         }
+
+        public override void Start()
+        {
+            return;
+        }
+
+        public override void Update()
+        {
+            return;
+        }
     }
 }

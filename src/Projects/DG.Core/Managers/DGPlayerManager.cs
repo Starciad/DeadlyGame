@@ -18,11 +18,11 @@ namespace DeadlyGame.Core.Managers
 
         public bool OnlyOnePlayerAlive => this.LivingPlayers.Length == 1;
 
-        private DGPlayer[] players;
+        private readonly DGPlayer[] players;
 
         public DGPlayerManager(DGGame game, IEnumerable<DGPlayerBuilder> playerBuilders) : base(game)
         {
-            DGPlayerBuilder[] playerBuildersArray = playerBuilders.ToArray();
+            DGPlayerBuilder[] playerBuildersArray = [.. playerBuilders];
             int length = playerBuildersArray.Length;
 
             this.players = new DGPlayer[length];
@@ -30,6 +30,14 @@ namespace DeadlyGame.Core.Managers
             for (int i = 0; i < length; i++)
             {
                 this.players[i] = new(this.DGGameInstance, playerBuildersArray[i], i);
+            }
+        }
+
+        public override void Start()
+        {
+            foreach (DGPlayer player in this.Players)
+            {
+                player.Start();
             }
         }
 

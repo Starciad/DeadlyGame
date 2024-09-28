@@ -19,6 +19,22 @@ namespace DeadlyGame.Core.Components
             this._entity = entity;
         }
 
+        public override void Start()
+        {
+            foreach (DGComponent component in this._components.Values)
+            {
+                component.Start();
+            }
+        }
+
+        public override void Update()
+        {
+            foreach (DGComponent component in this._components.Values)
+            {
+                component.Update();
+            }
+        }
+
         public void SetEntityInstance(DGEntity entity)
         {
             this._entity = entity;
@@ -98,14 +114,6 @@ namespace DeadlyGame.Core.Components
         public void RemoveAllComponents()
         {
             this._components.Clear();
-        }
-
-        public override void Update()
-        {
-            foreach (DGComponent component in this._components.Values)
-            {
-                component.Update();
-            }
         }
     }
 }

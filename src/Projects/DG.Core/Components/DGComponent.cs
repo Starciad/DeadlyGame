@@ -11,5 +11,15 @@ namespace DeadlyGame.Core.Components
         {
             this.DGEntityInstance = entity;
         }
+
+        public override void Start()
+        {
+            return;
+        }
+
+        public override void Update()
+        {
+            return;
+        }
     }
 }

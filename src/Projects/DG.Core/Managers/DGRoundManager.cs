@@ -17,6 +17,16 @@
             this.currentRound = 0;
         }
 
+        public override void Start()
+        {
+            return;
+        }
+
+        public override void Update()
+        {
+            return;
+        }
+
         public void Begin()
         {
             this.currentRound++;

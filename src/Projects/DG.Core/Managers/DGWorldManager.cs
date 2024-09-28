@@ -35,6 +35,11 @@ namespace DeadlyGame.Core.Managers
             InitializeResources(builder);
         }
 
+        public override void Start()
+        {
+            return;
+        }
+
         public override void Update()
         {
             UpdateDay();
