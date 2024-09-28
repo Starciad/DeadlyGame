@@ -1,5 +1,6 @@
 ﻿using DeadlyGame.Core.Components.Common;
 using DeadlyGame.Core.Effects;
+using DeadlyGame.Core.Enums.Effects;
 
 namespace DeadlyGame.Core.Information.Components
 {

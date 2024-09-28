@@ -1,4 +1,5 @@
-﻿using DeadlyGame.Core.Items;
+﻿using DeadlyGame.Core.Enums.Items;
+using DeadlyGame.Core.Items;
 
 namespace DeadlyGame.Core.Information.Items
 {

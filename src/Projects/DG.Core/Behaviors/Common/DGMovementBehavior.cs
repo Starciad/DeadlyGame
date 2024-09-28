@@ -1,7 +1,8 @@
 ﻿using DeadlyGame.Core.Behaviors.Models;
 using DeadlyGame.Core.Components.Common;
 using DeadlyGame.Core.Entities;
-using DeadlyGame.Core.Enums;
+using DeadlyGame.Core.Enums.Personalities;
+using DeadlyGame.Core.Enums.World;
 using DeadlyGame.Core.Information.Actions;
 using DeadlyGame.Core.Localization;
 

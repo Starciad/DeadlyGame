@@ -1,26 +1,47 @@
-﻿using System.IO;
-using System.Runtime.InteropServices;
+using DeadlyGame.Core.Serializers.Ini;
+
+using System;
+using System.IO;
 using System.Text;
 
 namespace DeadlyGame.Core.Localization
 {
-    internal static class DGLocalization
+    internal static partial class DGLocalization
     {
-        private static string Path;
+        internal static string DefinedLanguage => definedLanguage;
+        internal static string DefinedLanguageRegion => definedLanguageRegion;
 
-        [DllImport("kernel32", CharSet = CharSet.Unicode)]
-        private static extern int GetPrivateProfileString(string Section, string Key, string Default, StringBuilder RetVal, int Size, string FilePath);
+        private static string definedLanguage;
+        private static string definedLanguageRegion;
 
-        internal static void Initialize(string filename)
+        private static DGIni lSystem;
+
+        internal static void Initialize(string language, string region)
         {
-            Path = new FileInfo(filename).FullName;
+            // =============================== //
+            // DEFINE
+
+            definedLanguage = language;
+            definedLanguageRegion = region;
+
+            // =============================== //
+            // LOAD
+
+            string langDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "assets", "localization", GetNameOfCurrentDefinedLanguage());
+
+            string langSystemFile = Path.Combine(langDirectory, $"system.ini");
+
+            lSystem = DGIniSerializer.Deserialize(File.ReadAllText(langSystemFile, Encoding.UTF8));
         }
 
-        internal static string Read(string section, string key)
+        internal static string GetNameOfCurrentDefinedLanguage()
         {
-            StringBuilder RetVal = new(255);
-            _ = GetPrivateProfileString(section, key, string.Empty, RetVal, 255, Path);
-            return RetVal.ToString();
+            return string.Concat(definedLanguage, '-', definedLanguageRegion);
+        }
+
+        internal static string Read(string v1, string v2)
+        {
+            throw new NotImplementedException();
         }
     }
 }

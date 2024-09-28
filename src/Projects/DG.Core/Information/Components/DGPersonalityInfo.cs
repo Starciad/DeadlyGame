@@ -1,4 +1,5 @@
 ﻿using DeadlyGame.Core.Components.Common;
+using DeadlyGame.Core.Enums.Personalities;
 
 namespace DeadlyGame.Core.Information.Components
 {

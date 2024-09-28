@@ -1,4 +1,4 @@
-﻿namespace DeadlyGame.Core.Enums
+﻿namespace DeadlyGame.Core.Enums.Relationships
 {
     internal enum DGRelationshipLevelType
     {

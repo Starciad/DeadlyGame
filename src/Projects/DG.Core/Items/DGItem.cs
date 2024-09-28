@@ -1,17 +1,8 @@
-﻿using DeadlyGame.Core.Objects;
+﻿using DeadlyGame.Core.Enums.Items;
+using DeadlyGame.Core.Objects;
 
 namespace DeadlyGame.Core.Items
 {
-    public enum DGItemRarity
-    {
-        None = -1,
-        Common = 0,
-        Uncommon = 1,
-        Rare = 2,
-        Epic = 3,
-        Legendary = 4,
-        Mythic = 5
-    }
 
     internal abstract class DGItem : DGObject
     {

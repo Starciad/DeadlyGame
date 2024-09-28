@@ -52,7 +52,7 @@ namespace DeadlyGame.Core
         // System
         public void Initialize()
         {
-            DGLocalization.Initialize(gameBuilder.LocalizationFilename);
+            DGLocalization.Initialize("pt", "BR");
 
             this._itemDatabase.SetGameInstance(this);
             this._craftingDatabase.SetGameInstance(this);

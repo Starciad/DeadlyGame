@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
     <PropertyGroup>
-        <PublishTrimmed>true</PublishTrimmed>
+        <PublishTrimmed>false</PublishTrimmed>
         <PublishSingleFile>false</PublishSingleFile>
         <PublishAot>false</PublishAot>
         <PublishReadyToRun>false</PublishReadyToRun>
         <TieredCompilation>false</TieredCompilation>
         <UseWindowsForms>false</UseWindowsForms>
         <UseWPF>false</UseWPF>
-    </PropertyGroup>
-
-    <PropertyGroup Condition='&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|AnyCPU&apos;'>
-        <DebugType>embedded</DebugType>
-        <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
-    </PropertyGroup>
-
-    <PropertyGroup Condition='&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|AnyCPU&apos;'>
-        <DebugType>embedded</DebugType>
-        <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+		<DebugType>embedded</DebugType>
+		<CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     </PropertyGroup>
 </Project>

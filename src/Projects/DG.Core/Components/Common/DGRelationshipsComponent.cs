@@ -1,5 +1,5 @@
 ﻿using DeadlyGame.Core.Entities;
-using DeadlyGame.Core.Enums;
+using DeadlyGame.Core.Enums.Relationships;
 using DeadlyGame.Core.Relationships;
 
 using System.Collections.Generic;

@@ -1,4 +1,5 @@
-﻿using DeadlyGame.Core.Items.Templates.Weapons;
+﻿using DeadlyGame.Core.Enums.Items;
+using DeadlyGame.Core.Items.Templates.Weapons;
 using DeadlyGame.Core.Localization;
 
 namespace DeadlyGame.Core.Items.Common.Weapons

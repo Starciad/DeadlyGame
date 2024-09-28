@@ -1,14 +1,8 @@
 ﻿using DeadlyGame.Core.Entities;
+using DeadlyGame.Core.Enums.Effects;
 
 namespace DeadlyGame.Core.Effects
 {
-    public enum DGEffectType
-    {
-        None = -1,
-        Positive = 0,
-        Negative = 1
-    }
-
     internal abstract class DGEffect
     {
         internal string Name { get; set; }

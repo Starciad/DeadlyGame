@@ -1,4 +1,4 @@
-﻿namespace DeadlyGame.Core.Enums
+﻿namespace DeadlyGame.Core.Enums.World
 {
     public enum DGWorldDaylightCycleState
     {

@@ -2,7 +2,7 @@
 using DeadlyGame.Core.Components.Common;
 using DeadlyGame.Core.Entities;
 using DeadlyGame.Core.Entities.Natural;
-using DeadlyGame.Core.Enums;
+using DeadlyGame.Core.Enums.World;
 using DeadlyGame.Core.Information.World;
 using DeadlyGame.Core.Items;
 

@@ -1,4 +1,4 @@
-﻿using DeadlyGame.Core.Enums;
+﻿using DeadlyGame.Core.Enums.World;
 using DeadlyGame.Core.Information.Utils;
 
 namespace DeadlyGame.Core.Information.World

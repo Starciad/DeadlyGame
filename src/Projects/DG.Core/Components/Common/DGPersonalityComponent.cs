@@ -1,22 +1,7 @@
-﻿namespace DeadlyGame.Core.Components.Common
+﻿using DeadlyGame.Core.Enums.Personalities;
+
+namespace DeadlyGame.Core.Components.Common
 {
-    public enum DGPersonalityType
-    {
-        None = -1,
-        Aggressive = 0,
-        Cautious = 1,
-        Impulsive = 2,
-        Strategic = 3,
-        Explorer = 4,
-    }
-    public enum DGCourageLevel
-    {
-        None = -1,
-        Fearless = 0,
-        Brave = 1,
-        Cautious = 2,
-        Fearful = 3
-    }
 
     internal sealed class DGPersonalityComponent : DGComponent
     {

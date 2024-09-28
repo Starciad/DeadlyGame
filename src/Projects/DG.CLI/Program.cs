@@ -1,10 +1,17 @@
-﻿using System;
+﻿using DeadlyGame.CLI.Tools;
+using DeadlyGame.Core;
+using DeadlyGame.Core.Builders;
+using DeadlyGame.Core.Information;
+
+using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace DeadlyGame.CLI
 {
     internal static class Program
     {
+        [RequiresUnreferencedCode("Calls DeadlyGame.CLI.Tools.DGJsonSerializer.Serialize(String)")]
         private static void Main()
         {
             DGGameBuilder gameBuilder = BuildGame();

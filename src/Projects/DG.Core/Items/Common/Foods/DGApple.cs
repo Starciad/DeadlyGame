@@ -1,4 +1,5 @@
-﻿using DeadlyGame.Core.Items.Templates.Foods;
+﻿using DeadlyGame.Core.Enums.Items;
+using DeadlyGame.Core.Items.Templates.Foods;
 using DeadlyGame.Core.Localization;
 
 namespace DeadlyGame.Core.Items.Common.Foods

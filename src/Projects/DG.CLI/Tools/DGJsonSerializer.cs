@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using DeadlyGame.Core.Information;
+
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text.Json;
 
