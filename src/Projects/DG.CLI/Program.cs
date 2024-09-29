@@ -1,82 +1,34 @@
-﻿using DeadlyGame.Core;
-using DeadlyGame.Core.Builders;
+﻿using DeadlyGame.CLI.Interactivity;
 
 using System;
-using System.Threading;
+using System.Text;
 
 namespace DeadlyGame.CLI
 {
-    internal static class Program
+    internal static partial class Program
     {
-        private static void Main()
+        private static readonly DGCommandRegistry commandRegistry = new();
+
+        [STAThread]
+        private static int Main(string[] args)
         {
-            DGGameBuilder gameBuilder = BuildGame();
-            DGWorldBuilder worldBuilder = BuildWorld();
+            Console.InputEncoding = Encoding.Unicode;
+            Console.OutputEncoding = Encoding.Unicode;
 
-            DGGame game = new(gameBuilder, worldBuilder);
+            DGArgumentParser parser = new(args);
 
-            // ======== Game Routine ======== //
-
-            Console.WriteLine("START");
-
-            game.StartGame();
-
-            while (game.ShouldUpdateGame())
+            if (args.Length == 0)
             {
-                game.UpdateGame();
-
-                Console.Clear();
-                Console.WriteLine($"[ Round: {game.RoundManager.CurrentRound} || Day: {game.WorldManager.CurrentDay} ({game.WorldManager.CurrentDaylightCycle}) ]");
-                Console.WriteLine($"Players: {game.PlayerManager.LivingPlayers.Length}/{game.PlayerManager.TotalPlayerCount};");
-
-                Thread.Sleep(TimeSpan.FromMilliseconds(25));
+                DisplayTitleInfo();
+            }
+            else
+            {
+                RegisterCommands();
+                ExecuteCommands(parser);
+                StartGame();
             }
 
-            game.FinishGame();
-
-            // ============================== //
-
-            Console.WriteLine("Finished");
-        }
-
-        // ===== GAME ===== //
-        private static DGGameBuilder BuildGame()
-        {
-            return new()
-            {
-                Players = BuildPlayers(50)
-            };
-        }
-
-        // ===== PLAYERS ===== //
-        private static DGPlayerBuilder[] BuildPlayers(int amount)
-        {
-            DGPlayerBuilder[] players = new DGPlayerBuilder[amount];
-
-            for (int i = 0; i < amount; i++)
-            {
-                players[i] = new()
-                {
-                    Name = $"Player_{i}",
-                };
-            }
-
-            return players;
-        }
-
-        // ===== WORLD ===== //
-        private static DGWorldBuilder BuildWorld()
-        {
-            return new()
-            {
-                Size = new(80),
-                Resources = new()
-                {
-                    TreeCount = 100,
-                    StoneCount = 100,
-                    ShrubCount = 100
-                },
-            };
+            return 0;
         }
     }
 }
