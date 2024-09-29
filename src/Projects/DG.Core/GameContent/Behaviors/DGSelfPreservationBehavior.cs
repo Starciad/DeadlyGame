@@ -120,8 +120,8 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             }
 
             DGPlayerActionInfo infos = new();
-            infos.WithName(DGLocalization.Read(DGBehaviourConstants.S_SELF_PRESERVATION_BEHAVIOR, "Name"));
-            infos.WithTitle(string.Format(DGLocalization.Read(DGBehaviourConstants.S_SELF_PRESERVATION_BEHAVIOR, "Title"), this._entity.Name));
+            infos.WithName(DGLocalization.MESSAGES_BEHAVIOR_SELF_PRESERVATION_NAME);
+            infos.WithTitle(DGLocalization.GetMessage_SelfPreservation_Title(this._entity.Name));
             infos.WithDescription(this.descriptionStringBuilder.ToString());
             infos.WithPriorityLevel(5);
             infos.WithAuthor(this._entity.Id);
