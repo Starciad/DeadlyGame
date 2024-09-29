@@ -46,12 +46,12 @@
             string sentence = lMessagesBehaviors.GetSection("aggressive").GetKey("title_killed");
             return string.Format(sentence, killer, victim);
         }
-        public static string GetMessage_Aggressive_Description_Attack(string attacker, string damage, string weapon, string opponent)
+        public static string GetMessage_Aggressive_Description_Attack(string attacker, int damage, string weapon, string opponent)
         {
             string sentence = lMessagesBehaviors.GetSection("aggressive").GetKey("description_attack");
             return string.Format(sentence, attacker, damage, weapon, opponent);
         }
-        public static string GetMessage_Aggressive_Description_Killed(string killer, string victim, string damage, string weapon)
+        public static string GetMessage_Aggressive_Description_Killed(string killer, string victim, int damage, string weapon)
         {
             string sentence = lMessagesBehaviors.GetSection("aggressive").GetKey("description_killed");
             return string.Format(sentence, killer, victim, damage, weapon);
@@ -63,7 +63,7 @@
             string sentence = lMessagesBehaviors.GetSection("crafting").GetKey("title");
             return string.Format(sentence, crafter);
         }
-        public static string GetMessage_Crafting_Description(string crafter, string amount, string item)
+        public static string GetMessage_Crafting_Description(string crafter, int amount, string item)
         {
             string sentence = lMessagesBehaviors.GetSection("crafting").GetKey("description");
             return string.Format(sentence, crafter, amount, item);
@@ -75,7 +75,7 @@
             string sentence = lMessagesBehaviors.GetSection("item_acquisition").GetKey("title");
             return string.Format(sentence, acquirer);
         }
-        public static string GetMessage_ItemAcquisition_New_Item(string amount, string item)
+        public static string GetMessage_ItemAcquisition_New_Item(int amount, string item)
         {
             string sentence = lMessagesBehaviors.GetSection("item_acquisition").GetKey("new_item");
             return string.Format(sentence, amount, item);
@@ -87,7 +87,7 @@
             string sentence = lMessagesBehaviors.GetSection("movement").GetKey("title");
             return string.Format(sentence, mover);
         }
-        public static string GetMessage_Movement_Description(string mover, string oldX, string oldY, string newX, string newY)
+        public static string GetMessage_Movement_Description(string mover, int oldX, int oldY, int newX, int newY)
         {
             string sentence = lMessagesBehaviors.GetSection("movement").GetKey("description");
             return string.Format(sentence, mover, oldX, oldY, newX, newY);
@@ -99,7 +99,7 @@
             string sentence = lMessagesBehaviors.GetSection("resource_acquisition").GetKey("title");
             return string.Format(sentence, acquirer);
         }
-        public static string GetMessage_ResourceAcquisition_Description(string acquirer, string damage, string resource)
+        public static string GetMessage_ResourceAcquisition_Description(string acquirer, int damage, string resource)
         {
             string sentence = lMessagesBehaviors.GetSection("resource_acquisition").GetKey("description");
             return string.Format(sentence, acquirer, damage, resource);

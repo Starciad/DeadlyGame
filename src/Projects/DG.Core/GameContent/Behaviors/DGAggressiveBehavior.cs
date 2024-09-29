@@ -172,14 +172,14 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             {
                 // Death Message
                 infos.WithTitle(DGLocalization.GetMessage_Aggressive_Title_Killed(entityName, opponentsName));
-                infos.WithDescription(DGLocalization.GetMessage_Aggressive_Description_Killed(entityName, opponentsName, this._totalDamage.ToString(), weaponName));
+                infos.WithDescription(DGLocalization.GetMessage_Aggressive_Description_Killed(entityName, opponentsName, this._totalDamage, weaponName));
                 infos.WithPriorityLevel(10);
                 infos.WithColor(DGColor.DarkRed);
             }
             else
             {
                 infos.WithTitle(DGLocalization.GetMessage_Aggressive_Title_Attack(entityName, opponentsName));
-                infos.WithDescription(DGLocalization.GetMessage_Aggressive_Description_Attack(entityName, opponentsName, this._totalDamage.ToString(), weaponName) + (this._isCriticalAttack ? ' ' + DGLocalization.MESSAGES_BEHAVIOR_AGGRESSIVE_IS_CRITICAL : string.Empty));
+                infos.WithDescription(DGLocalization.GetMessage_Aggressive_Description_Attack(entityName, this._totalDamage, weaponName, opponentsName) + (this._isCriticalAttack ? ' ' + DGLocalization.MESSAGES_BEHAVIOR_AGGRESSIVE_IS_CRITICAL : string.Empty));
                 infos.WithColor(DGColor.Red);
                 infos.WithPriorityLevel(8);
             }

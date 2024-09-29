@@ -119,7 +119,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             DGPlayerActionInfo infos = new();
             infos.WithName(DGLocalization.MESSAGES_BEHAVIOR_MOVEMENT_NAME);
             infos.WithTitle(DGLocalization.GetMessage_Movement_Title(this._entity.Name));
-            infos.WithDescription(DGLocalization.GetMessage_Movement_Description(this._entity.Name, oldPos.X.ToString(), oldPos.Y.ToString(), newPos.X.ToString(), newPos.Y.ToString()));
+            infos.WithDescription(DGLocalization.GetMessage_Movement_Description(this._entity.Name, oldPos.X, oldPos.Y, newPos.X, newPos.Y));
             infos.WithPriorityLevel(4);
             infos.WithAuthor(this._entity.Id);
             infos.WithColor(DGColor.LightCyan);

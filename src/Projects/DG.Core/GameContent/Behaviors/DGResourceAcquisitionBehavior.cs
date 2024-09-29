@@ -65,7 +65,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             DGPlayerActionInfo infos = new();
             infos.WithName(DGLocalization.MESSAGES_BEHAVIOR_RESOURCE_ACQUISITION_NAME);
             infos.WithTitle(DGLocalization.GetMessage_ResourceAcquisition_Title(this._entity.Name));
-            infos.WithDescription(DGLocalization.GetMessage_ResourceAcquisition_Description(this._entity.Name, totalDamage.ToString(), this._resourceEntity.Name));
+            infos.WithDescription(DGLocalization.GetMessage_ResourceAcquisition_Description(this._entity.Name, totalDamage, this._resourceEntity.Name));
             infos.WithPriorityLevel(5);
             infos.WithAuthor(this._entity.Id);
             infos.WithColor(DGColor.SandyBrown);

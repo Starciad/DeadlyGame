@@ -55,7 +55,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             DGPlayerActionInfo infos = new();
             infos.WithName(DGLocalization.MESSAGES_BEHAVIOR_CRAFTING_NAME);
             infos.WithTitle(DGLocalization.GetMessage_Crafting_Title(this._entity.Name));
-            infos.WithDescription(DGLocalization.GetMessage_Crafting_Description(this._entity.Name, "1", item.Name));
+            infos.WithDescription(DGLocalization.GetMessage_Crafting_Description(this._entity.Name, 1, item.Name));
             infos.WithPriorityLevel(5);
             infos.WithAuthor(this._entity.Id);
             infos.WithColor(DGColor.BurlyWood);

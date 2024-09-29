@@ -80,7 +80,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
                 DGWorldItem itemObtained = distinctItemsObtained[i];
                 int count = itemsObtained.Count(x => x.Item.Name == itemObtained.Item.Name);
 
-                _ = itemsObtainedString.Append(DGLocalization.GetMessage_ItemAcquisition_New_Item(count.ToString(), itemObtained.Item.Name) + (i < distinctItemsObtainedCount ? ", " : string.Empty));
+                _ = itemsObtainedString.Append(DGLocalization.GetMessage_ItemAcquisition_New_Item(count, itemObtained.Item.Name) + (i < distinctItemsObtainedCount ? ", " : string.Empty));
             }
 
             DGPlayerActionInfo infos = new();
