@@ -52,8 +52,12 @@ namespace DeadlyGame.CLI
             {
                 game.UpdateGame();
 
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"[ Round: {game.RoundManager.CurrentRound} || Day: {game.WorldManager.CurrentDay} ({game.WorldManager.CurrentDaylightCycle}) ]");
-                Console.WriteLine($"Players: {game.PlayerManager.LivingPlayers.Length}/{game.PlayerManager.TotalPlayerCount};");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine($"- Players: {game.PlayerManager.LivingPlayers.Length}/{game.PlayerManager.TotalPlayerCount};");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine();
 
                 foreach (DGPlayer livingPlayer in game.PlayerManager.LivingPlayers)
                 {
@@ -64,14 +68,19 @@ namespace DeadlyGame.CLI
                         continue;
                     }
 
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine(playerActionInfo.Name);
                     Console.WriteLine(playerActionInfo.Title);
                     Console.WriteLine(playerActionInfo.Description);
                     Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.White;
 
                     Console.ReadKey();
                 }
 
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine(new string('=', 32));
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.ReadKey();
             }
 

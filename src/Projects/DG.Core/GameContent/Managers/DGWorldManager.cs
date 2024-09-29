@@ -51,8 +51,8 @@ namespace DeadlyGame.Core.GameContent.Managers
         // === Initialize ===
         private void InitializeWorld(DGWorldBuilder builder)
         {
-            this.currentDay = 1;
-            this.currentDaylightCycle = DGWorldDaylightCycleState.Day;
+            this.currentDay = 0;
+            this.currentDaylightCycle = DGWorldDaylightCycleState.Night;
             this.worldSize = builder.Size;
         }
         private void InitializeResources(DGWorldBuilder builder)
