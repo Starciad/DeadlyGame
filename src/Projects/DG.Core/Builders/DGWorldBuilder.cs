@@ -10,8 +10,8 @@ namespace DeadlyGame.Core.Builders
 
     public struct DGWorldResourcesBuilder
     {
-        public required int TreeCount { get; set; }
-        public required int StoneCount { get; set; }
-        public required int ShrubCount { get; set; }
+        public required int TreeRate { get; set; }
+        public required int StoneRate { get; set; }
+        public required int ShrubRate { get; set; }
     }
 }

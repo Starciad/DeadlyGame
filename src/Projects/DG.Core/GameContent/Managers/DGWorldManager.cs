@@ -5,6 +5,7 @@ using DeadlyGame.Core.GameContent.Components;
 using DeadlyGame.Core.GameContent.Entities.Natural;
 using DeadlyGame.Core.Items;
 using DeadlyGame.Core.Managers;
+using DeadlyGame.Core.Mathematics;
 using DeadlyGame.Core.Mathematics.Primitives;
 
 using System;
@@ -56,21 +57,23 @@ namespace DeadlyGame.Core.GameContent.Managers
         }
         private void InitializeResources(DGWorldBuilder builder)
         {
-            // === RESOURCES ===
-            // Trees
-            for (int i = 0; i < builder.Resources.TreeCount; i++)
+            int worldSlotCount = this.worldSize.X * this.worldSize.Y;
+
+            int treeCount = (int)Math.Round(DGPercentageMath.GetValueFromPercentage(builder.Resources.TreeRate, worldSlotCount));
+            int stoneCount = (int)Math.Round(DGPercentageMath.GetValueFromPercentage(builder.Resources.StoneRate, worldSlotCount));
+            int bushesCount = (int)Math.Round(DGPercentageMath.GetValueFromPercentage(builder.Resources.ShrubRate, worldSlotCount));
+
+            for (int i = 0; i < treeCount; i++)
             {
                 this.resourceEntities.Add(new DGTree(this.DGGameInstance));
             }
 
-            // Stones
-            for (int i = 0; i < builder.Resources.StoneCount; i++)
+            for (int i = 0; i < stoneCount; i++)
             {
                 this.resourceEntities.Add(new DGTerrainStone(this.DGGameInstance));
             }
 
-            // Bushes
-            for (int i = 0; i < builder.Resources.ShrubCount; i++)
+            for (int i = 0; i < bushesCount; i++)
             {
                 this.resourceEntities.Add(new DGBush(this.DGGameInstance));
             }

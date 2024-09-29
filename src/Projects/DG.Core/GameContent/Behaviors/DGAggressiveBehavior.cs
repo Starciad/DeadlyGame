@@ -132,7 +132,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             // Health
             if (this._healthComponent != null)
             {
-                double healthPercentage = Math.Round(DGPercentageMath.CalculatePercentage(this._healthComponent.CurrentHealth, this._healthComponent.MaximumHealth));
+                double healthPercentage = Math.Round(DGPercentageMath.GetPercentage(this._healthComponent.CurrentHealth, this._healthComponent.MaximumHealth));
 
                 if (healthPercentage < 50)
                 {

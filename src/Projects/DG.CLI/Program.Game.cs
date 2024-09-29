@@ -10,8 +10,20 @@ namespace DeadlyGame.CLI
     {
         private static void StartGame()
         {
-            DGGameBuilder gameBuilder = default;
-            DGWorldBuilder worldBuilder = default;
+            DGGameBuilder gameBuilder = new()
+            {
+                Players = [.. playerBuilders],
+            };
+            DGWorldBuilder worldBuilder = new()
+            {
+                Size = worldSize,
+                Resources = new()
+                {
+                    TreeRate = worldTreeRate,
+                    StoneRate = worldStoneRate,
+                    ShrubRate = worldShrubRate,
+                },
+            };
 
             DGGame game = new(gameBuilder, worldBuilder);
 

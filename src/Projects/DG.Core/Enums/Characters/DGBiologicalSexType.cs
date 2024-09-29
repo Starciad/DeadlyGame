@@ -1,7 +1,8 @@
 ﻿namespace DeadlyGame.Core.Enums.Characters
 {
-    public enum DGSexType
+    public enum DGBiologicalSexType
     {
+        None,
         Male,
         Female
     }

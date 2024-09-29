@@ -1,5 +1,6 @@
 ﻿using DeadlyGame.Core.Builders;
 using DeadlyGame.Core.Entities;
+using DeadlyGame.Core.Enums.Characters;
 using DeadlyGame.Core.GameContent.Behaviors;
 using DeadlyGame.Core.GameContent.Components;
 using DeadlyGame.Core.GameContent.Effects;
@@ -9,6 +10,10 @@ namespace DeadlyGame.Core.GameContent.Entities.Players
 {
     public sealed class DGPlayer : DGEntity
     {
+        public DGBiologicalSexType BiologicalSex => this.biologicalSex;
+
+        private readonly DGBiologicalSexType biologicalSex;
+
         private readonly DGBehaviourComponent _behaviour;
         private readonly DGTransformComponent _transform;
         private readonly DGInformationsComponent _informations;
@@ -23,6 +28,7 @@ namespace DeadlyGame.Core.GameContent.Entities.Players
         {
             this.Name = builder.Name;
             this.Id = id;
+            this.biologicalSex = builder.BiologicalSex;
 
             this._transform = this.ComponentContainer.AddComponent<DGTransformComponent>();
             this._informations = this.ComponentContainer.AddComponent<DGInformationsComponent>();
