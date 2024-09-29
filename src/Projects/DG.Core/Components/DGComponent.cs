@@ -3,7 +3,7 @@ using DeadlyGame.Core.Objects;
 
 namespace DeadlyGame.Core.Components
 {
-    public class DGComponent : DGObject
+    public class DGComponent : DGGameObject
     {
         protected DGEntity DGEntityInstance { get; private set; }
 

@@ -2,11 +2,11 @@
 
 namespace DeadlyGame.Core.Objects
 {
-    public abstract class DGObject : IStartable, IUpdatable
+    public abstract class DGGameObject : IStartable, IUpdatable
     {
         protected DGGame DGGameInstance { get; private set; }
 
-        protected DGObject(DGGame game)
+        protected DGGameObject(DGGame game)
         {
             this.DGGameInstance = game;
         }

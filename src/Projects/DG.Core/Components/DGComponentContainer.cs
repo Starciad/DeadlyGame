@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace DeadlyGame.Core.Components
 {
-    public sealed class DGComponentContainer : DGObject
+    public sealed class DGComponentContainer : DGGameObject
     {
         public int Count => this._components.Count;
 

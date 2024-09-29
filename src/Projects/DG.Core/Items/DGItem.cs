@@ -4,7 +4,7 @@ using DeadlyGame.Core.Objects;
 namespace DeadlyGame.Core.Items
 {
 
-    public abstract class DGItem : DGObject
+    public abstract class DGItem : DGGameObject
     {
         public string Name { get; protected set; }
         public DGItemRarity Rarity { get; protected set; }

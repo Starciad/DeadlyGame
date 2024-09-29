@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace DeadlyGame.Core.Databases.Crafting
 {
-    public partial class DGCraftingDatabase : DGObject
+    public partial class DGCraftingDatabase : DGGameObject
     {
         public DGCraftingDatabase(DGGame game) : base(game)
         {
