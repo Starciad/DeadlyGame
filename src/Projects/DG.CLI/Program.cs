@@ -34,8 +34,8 @@ namespace DeadlyGame.CLI
         {
             args = ["--configuration", "./assets/configurations/game_01.ini"];
 
-            Console.InputEncoding = Encoding.Unicode;
-            Console.OutputEncoding = Encoding.Unicode;
+            Console.InputEncoding = Encoding.UTF8;
+            Console.OutputEncoding = Encoding.UTF8;
 
             DGArgumentParser parser = new(args);
 

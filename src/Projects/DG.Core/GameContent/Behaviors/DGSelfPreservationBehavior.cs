@@ -34,6 +34,8 @@ namespace DeadlyGame.Core.GameContent.Behaviors
 
         public bool CanAct(DGEntity entity, DGGame game)
         {
+            bool result = false;
+
             this._entity = entity;
             this._game = game;
 
@@ -42,7 +44,21 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             this._effectsComponent = entity.ComponentContainer.GetComponent<DGEffectsComponent>();
             this._inventoryComponent = entity.ComponentContainer.GetComponent<DGInventoryComponent>();
 
-            return true;
+            if (this._healthComponent != null)
+            {
+                this.healthPercentage = (int)Math.Round(DGPercentageMath.GetPercentage(this._healthComponent.CurrentHealth, this._healthComponent.MaximumHealth));
+                if (this.healthPercentage <= 50 || this.healthPercentage <= 25 || this.healthPercentage <= 10)
+                {
+                    result = true;
+                }
+            }
+
+            if (this._hungerComponent != null && this._hungerComponent.IsHungry)
+            {
+                result = true;
+            }
+
+            return result;
         }
         public DGBehaviourWeight GetWeight()
         {
@@ -96,6 +112,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
 
             // If I'm hungry, I'll eat some food from the inventory.
             if (this._hungerComponent != null &&
+                this._hungerComponent.IsHungry &&
                 this._inventoryComponent != null)
             {
                 _ = this.descriptionStringBuilder.Append(DGLocalization.MESSAGES_BEHAVIOR_SELF_PRESERVATION_DESCRIPTION_HUNGER);

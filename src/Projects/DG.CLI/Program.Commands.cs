@@ -7,6 +7,7 @@ using DeadlyGame.Core.Serializers.Ini;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace DeadlyGame.CLI
 {
@@ -47,7 +48,7 @@ namespace DeadlyGame.CLI
                         Environment.Exit(1);
                     }
 
-                    DGIni configurationIni = DGIniSerializer.Deserialize(File.ReadAllText(filename));
+                    DGIni configurationIni = DGIniSerializer.Deserialize(File.ReadAllText(filename, Encoding.UTF8));
 
                     ConfigureGeneral(configurationIni);
                     ConfigureGame(configurationIni);
@@ -81,7 +82,7 @@ namespace DeadlyGame.CLI
             // Players
             foreach ((string key, string value) in configurationIni.GetSection("players").GetItems())
             {
-                string[] args = value.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+                string[] args = value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
                 gamePlayerBuilders.Add(new()
                 {

@@ -1,5 +1,8 @@
 ﻿using DeadlyGame.Core;
 using DeadlyGame.Core.Builders;
+using DeadlyGame.Core.GameContent.Components;
+using DeadlyGame.Core.GameContent.Entities.Players;
+using DeadlyGame.Core.Models.Infos.Actions;
 
 using System;
 using System.Threading;
@@ -15,10 +18,12 @@ namespace DeadlyGame.CLI
                 LocalizationCode = (generalLocalizationCode.language, generalLocalizationCode.region),
                 Seed = generalSeed
             };
+
             DGGameBuilder gameBuilder = new()
             {
                 Players = [.. gamePlayerBuilders],
             };
+
             DGWorldBuilder worldBuilder = new()
             {
                 Size = worldSize,
@@ -30,7 +35,14 @@ namespace DeadlyGame.CLI
                 },
             };
 
+            InitializeGameRoutine(generalBuilder, gameBuilder, worldBuilder);
+        }
+
+        private static void InitializeGameRoutine(DGGeneralBuilder generalBuilder, DGGameBuilder gameBuilder, DGWorldBuilder worldBuilder)
+        {
             DGGame game = new(generalBuilder, gameBuilder, worldBuilder);
+
+            // ================================ //
 
             Console.WriteLine("START");
 
@@ -40,16 +52,34 @@ namespace DeadlyGame.CLI
             {
                 game.UpdateGame();
 
-                Console.Clear();
                 Console.WriteLine($"[ Round: {game.RoundManager.CurrentRound} || Day: {game.WorldManager.CurrentDay} ({game.WorldManager.CurrentDaylightCycle}) ]");
                 Console.WriteLine($"Players: {game.PlayerManager.LivingPlayers.Length}/{game.PlayerManager.TotalPlayerCount};");
 
-                Thread.Sleep(TimeSpan.FromMilliseconds(25));
+                foreach (DGPlayer livingPlayer in game.PlayerManager.LivingPlayers)
+                {
+                    DGPlayerActionInfo playerActionInfo = livingPlayer.ComponentContainer.GetComponent<DGBehaviourComponent>().LastActionInfos;
+
+                    if (playerActionInfo.IsEmpty)
+                    {
+                        continue;
+                    }
+
+                    Console.WriteLine(playerActionInfo.Name);
+                    Console.WriteLine(playerActionInfo.Title);
+                    Console.WriteLine(playerActionInfo.Description);
+                    Console.WriteLine();
+
+                    Console.ReadKey();
+                }
+
+                Console.ReadKey();
             }
 
             game.FinishGame();
 
-            Console.WriteLine("Finished");
+            Console.WriteLine("FINISHED");
+
+            // ================================ //
         }
 
         private static void DisplayTitleInfo()

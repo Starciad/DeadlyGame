@@ -52,7 +52,16 @@ namespace DeadlyGame.Core.GameContent.Components
 
             // Get action with higher weight.
             DGAction[] bestActions = possibleActions.Take(DGBehaviourConstants.MAXIMUM_SELECTION_OF_BEST_BEHAVIORS).ToArray();
-            DGAction bestAction = bestActions[this.DGGameInstance.RandomMath.Range(0, bestActions.Length)];
+            DGAction bestAction;
+
+            if (bestActions.Length == 0)
+            {
+                bestAction = bestActions[0];
+            }
+            else
+            {
+                bestAction = bestActions[this.DGGameInstance.RandomMath.Range(0, bestActions.Length)];
+            }
 
             // Take action.
             this.LastActionInfos = ExecuteAction(bestAction);

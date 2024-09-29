@@ -30,9 +30,4 @@
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
-	
-	<ItemGroup>
-	  <None Remove="assets\localization\pt-br\items.ini" />
-	  <None Remove="assets\localization\pt-br\statements.ini" />
-	</ItemGroup>
 </Project>
