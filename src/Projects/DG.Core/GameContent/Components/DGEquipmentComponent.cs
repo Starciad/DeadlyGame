@@ -13,6 +13,16 @@ namespace DeadlyGame.Core.GameContent.Components
 
         }
 
+        public override void Start()
+        {
+            return;
+        }
+
+        public override void Update()
+        {
+            return;
+        }
+
         // Weapon
         public void EquipWeapon(DGWeapon weapon)
         {

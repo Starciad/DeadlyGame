@@ -15,6 +15,16 @@ namespace DeadlyGame.Core.GameContent.Components
 
         }
 
+        public override void Start()
+        {
+            return;
+        }
+
+        public override void Update()
+        {
+            return;
+        }
+
         public void Randomize()
         {
             this.PersonalityType = (DGPersonalityType)this.DGGameInstance.RandomMath.Range(0, 6);

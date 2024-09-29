@@ -14,6 +14,11 @@ namespace DeadlyGame.Core.GameContent.Components
 
         }
 
+        public override void Start()
+        {
+            return;
+        }
+
         public override void Update()
         {
             if (this.IsHungry && this.DGEntityInstance.ComponentContainer.TryGetComponent(out DGHealthComponent value))

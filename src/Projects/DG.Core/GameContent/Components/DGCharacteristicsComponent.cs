@@ -58,6 +58,16 @@ namespace DeadlyGame.Core.GameContent.Components
 
         }
 
+        public override void Start()
+        {
+            return;
+        }
+
+        public override void Update()
+        {
+            return;
+        }
+
         public void Randomize()
         {
             this.Strength = this.DGGameInstance.Dice.RollAndGetTotalSum(3, 6);

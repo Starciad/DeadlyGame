@@ -19,6 +19,16 @@ namespace DeadlyGame.Core.GameContent.Components
 
         }
 
+        public override void Start()
+        {
+            return;
+        }
+
+        public override void Update()
+        {
+            return;
+        }
+
         public DGRelationship AddRelationship(DGEntity anotherEntity, float value = 50)
         {
             DGRelationship relationship = new(this.DGEntityInstance, anotherEntity, value);

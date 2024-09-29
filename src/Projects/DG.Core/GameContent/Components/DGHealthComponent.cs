@@ -18,6 +18,16 @@ namespace DeadlyGame.Core.GameContent.Components
 
         }
 
+        public override void Start()
+        {
+            return;
+        }
+
+        public override void Update()
+        {
+            return;
+        }
+
         public void SetCurrentHealth(int value)
         {
             this.CurrentHealth = value;

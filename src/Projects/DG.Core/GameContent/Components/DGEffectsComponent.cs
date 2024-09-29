@@ -30,6 +30,16 @@ namespace DeadlyGame.Core.GameContent.Components
             }
         }
 
+        public override void Start()
+        {
+            return;
+        }
+
+        public override void Update()
+        {
+            return;
+        }
+
         private void UpdateEffects()
         {
             List<Type> finishedEffects = [];
