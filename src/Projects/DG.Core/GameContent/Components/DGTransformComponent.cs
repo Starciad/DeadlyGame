@@ -12,7 +12,7 @@ namespace DeadlyGame.Core.GameContent.Components
         {
 
         }
-        
+
         public override void Start()
         {
             return;

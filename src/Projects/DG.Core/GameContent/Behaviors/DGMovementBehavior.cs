@@ -1,6 +1,5 @@
 ﻿using DeadlyGame.Core.Behaviors;
 using DeadlyGame.Core.Behaviors.Models;
-using DeadlyGame.Core.Constants;
 using DeadlyGame.Core.Entities;
 using DeadlyGame.Core.Enums.Personalities;
 using DeadlyGame.Core.Enums.World;
