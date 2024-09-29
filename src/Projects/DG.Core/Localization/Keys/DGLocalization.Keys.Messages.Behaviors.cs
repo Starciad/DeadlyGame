@@ -38,88 +38,83 @@
         // Aggressive section
         public static string GetMessage_Aggressive_Title_Attack(string attacker, string target)
         {
-            string format = lMessagesBehaviors.GetSection("aggressive").GetKey("title_attack");
-            return string.Format(format, attacker, target);
+            string sentence = lMessagesBehaviors.GetSection("aggressive").GetKey("title_attack");
+            return string.Format(sentence, attacker, target);
         }
         public static string GetMessage_Aggressive_Title_Killed(string killer, string victim)
         {
-            string format = lMessagesBehaviors.GetSection("aggressive").GetKey("title_killed");
-            return string.Format(format, killer, victim);
+            string sentence = lMessagesBehaviors.GetSection("aggressive").GetKey("title_killed");
+            return string.Format(sentence, killer, victim);
         }
         public static string GetMessage_Aggressive_Description_Attack(string attacker, string damage, string weapon, string opponent)
         {
-            string format = lMessagesBehaviors.GetSection("aggressive").GetKey("description_attack");
-            return string.Format(format, attacker, damage, weapon, opponent);
+            string sentence = lMessagesBehaviors.GetSection("aggressive").GetKey("description_attack");
+            return string.Format(sentence, attacker, damage, weapon, opponent);
         }
         public static string GetMessage_Aggressive_Description_Killed(string killer, string victim, string damage, string weapon)
         {
-            string format = lMessagesBehaviors.GetSection("aggressive").GetKey("description_killed");
-            return string.Format(format, killer, victim, damage, weapon);
+            string sentence = lMessagesBehaviors.GetSection("aggressive").GetKey("description_killed");
+            return string.Format(sentence, killer, victim, damage, weapon);
         }
 
         // Crafting section
         public static string GetMessage_Crafting_Title(string crafter)
         {
-            string format = lMessagesBehaviors.GetSection("crafting").GetKey("title");
-            return string.Format(format, crafter);
+            string sentence = lMessagesBehaviors.GetSection("crafting").GetKey("title");
+            return string.Format(sentence, crafter);
         }
         public static string GetMessage_Crafting_Description(string crafter, string amount, string item)
         {
-            string format = lMessagesBehaviors.GetSection("crafting").GetKey("description");
-            return string.Format(format, crafter, amount, item);
+            string sentence = lMessagesBehaviors.GetSection("crafting").GetKey("description");
+            return string.Format(sentence, crafter, amount, item);
         }
 
         // Item Acquisition section
         public static string GetMessage_ItemAcquisition_Title(string acquirer)
         {
-            string format = lMessagesBehaviors.GetSection("item_acquisition").GetKey("title");
-            return string.Format(format, acquirer);
-        }
-        public static string GetMessage_ItemAcquisition_Description(string acquirer, string item)
-        {
-            string format = lMessagesBehaviors.GetSection("item_acquisition").GetKey("description");
-            return string.Format(format, acquirer, item);
+            string sentence = lMessagesBehaviors.GetSection("item_acquisition").GetKey("title");
+            return string.Format(sentence, acquirer);
         }
         public static string GetMessage_ItemAcquisition_New_Item(string amount, string item)
         {
-            string format = lMessagesBehaviors.GetSection("item_acquisition").GetKey("new_item");
-            return string.Format(format, amount, item);
+            string sentence = lMessagesBehaviors.GetSection("item_acquisition").GetKey("new_item");
+            return string.Format(sentence, amount, item);
         }
 
         // Movement section
         public static string GetMessage_Movement_Title(string mover)
         {
-            string format = lMessagesBehaviors.GetSection("movement").GetKey("title");
-            return string.Format(format, mover);
+            string sentence = lMessagesBehaviors.GetSection("movement").GetKey("title");
+            return string.Format(sentence, mover);
         }
         public static string GetMessage_Movement_Description(string mover, string oldX, string oldY, string newX, string newY)
         {
-            string format = lMessagesBehaviors.GetSection("movement").GetKey("description");
-            return string.Format(format, mover, oldX, oldY, newX, newY);
+            string sentence = lMessagesBehaviors.GetSection("movement").GetKey("description");
+            return string.Format(sentence, mover, oldX, oldY, newX, newY);
         }
 
         // Resource Acquisition section
         public static string GetMessage_ResourceAcquisition_Title(string acquirer)
         {
-            string format = lMessagesBehaviors.GetSection("resource_acquisition").GetKey("title");
-            return string.Format(format, acquirer);
+            string sentence = lMessagesBehaviors.GetSection("resource_acquisition").GetKey("title");
+            return string.Format(sentence, acquirer);
         }
         public static string GetMessage_ResourceAcquisition_Description(string acquirer, string damage, string resource)
         {
-            string format = lMessagesBehaviors.GetSection("resource_acquisition").GetKey("description");
-            return string.Format(format, acquirer, damage, resource);
+            string sentence = lMessagesBehaviors.GetSection("resource_acquisition").GetKey("description");
+            return string.Format(sentence, acquirer, damage, resource);
         }
 
         // Self Preservation section
         public static string GetMessage_SelfPreservation_Title(string person)
         {
-            string format = lMessagesBehaviors.GetSection("self_preservation").GetKey("title");
-            return string.Format(format, person);
+            string sentence = lMessagesBehaviors.GetSection("self_preservation").GetKey("title");
+            return string.Format(sentence, person);
         }
         public static string GetMessage_SelfPreservation_Description_Intro(string person)
         {
-            string format = lMessagesBehaviors.GetSection("self_preservation").GetKey("description_intro");
-            return string.Format(format, person);
+            string sentence = lMessagesBehaviors.GetSection("self_preservation").GetKey("description_intro");
+            return string.Format(sentence, person);
         }
 
         #endregion
