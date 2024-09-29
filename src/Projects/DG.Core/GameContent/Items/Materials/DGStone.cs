@@ -8,7 +8,7 @@ namespace DeadlyGame.Core.GameContent.Items.Materials
     {
         public DGStone(DGGame game) : base(game)
         {
-            this.Name = DGLocalization.Read("Items", "Material_Stone");
+            this.Name = DGLocalization.ITEMS_MATERIALS_STONE;
             this.Rarity = DGItemRarity.Common;
             this.HasDurability = false;
         }

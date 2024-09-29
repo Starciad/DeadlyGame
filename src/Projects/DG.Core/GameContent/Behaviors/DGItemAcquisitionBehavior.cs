@@ -79,13 +79,13 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             {
                 DGWorldItem itemObtained = distinctItemsObtained[i];
                 int count = itemsObtained.Count(x => x.Item.Name == itemObtained.Item.Name);
-                _ = itemsObtainedString.AppendFormat(DGLocalization.Read(DGBehaviourConstants.S_ITEM_ACQUISITION_BEHAVIOUR, "New_Item") + (i < distinctItemsObtainedCount ? ", " : string.Empty), count, itemObtained.Item.Name);
+
+                _ = itemsObtainedString.Append(DGLocalization.GetMessage_ItemAcquisition_New_Item(count.ToString(), itemObtained.Item.Name) + (i < distinctItemsObtainedCount ? ", " : string.Empty));
             }
 
-            _ = DGLocalization.Read(DGBehaviourConstants.S_ITEM_ACQUISITION_BEHAVIOUR, "Description");
             DGPlayerActionInfo infos = new();
-            infos.WithName(DGLocalization.Read(DGBehaviourConstants.S_ITEM_ACQUISITION_BEHAVIOUR, "Name"));
-            infos.WithTitle(DGLocalization.Read(DGBehaviourConstants.S_ITEM_ACQUISITION_BEHAVIOUR, "Title"));
+            infos.WithName(DGLocalization.MESSAGES_BEHAVIOR_ITEM_ACQUISITION_NAME);
+            infos.WithTitle(DGLocalization.GetMessage_ItemAcquisition_Title(this._entity.Name));
             infos.WithDescription(itemsObtainedString.ToString());
             infos.WithPriorityLevel(4);
             infos.WithAuthor(this._entity.Id);

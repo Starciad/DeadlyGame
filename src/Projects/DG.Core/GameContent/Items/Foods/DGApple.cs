@@ -8,7 +8,7 @@ namespace DeadlyGame.Core.GameContent.Items.Foods
     {
         public DGApple(DGGame game) : base(game)
         {
-            this.Name = DGLocalization.Read("Items", "Food_Apple");
+            this.Name = DGLocalization.ITEMS_FOODS_APPLE;
             this.Rarity = DGItemRarity.Common;
             this.HasDurability = false;
             this.SatietyFactor = 10;

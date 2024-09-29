@@ -167,20 +167,19 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             string opponentsName = this._targetEntity.Name;
             string weaponName = this._weaponUsed == null ? DGLocalization.ITEMS_WEAPONS_HAND : this._weaponUsed.Name;
 
-            // infos.WithName(DGLocalization.Read(DGBehaviourConstants.S_AGGRESSIVE_BEHAVIOR, "Name"));
             infos.WithName(DGLocalization.MESSAGES_BEHAVIOR_AGGRESSIVE_NAME);
             if (this._targetEntityHealth.IsDead)
             {
                 // Death Message
-                infos.WithTitle(string.Format(DGLocalization.Read(DGBehaviourConstants.S_AGGRESSIVE_BEHAVIOR, "Attack_Killed_Title"), entityName, opponentsName));
-                infos.WithDescription(string.Format(DGLocalization.Read(DGBehaviourConstants.S_AGGRESSIVE_BEHAVIOR, "Attack_Killed_Description"), entityName, opponentsName, this._totalDamage, weaponName));
+                infos.WithTitle(DGLocalization.GetMessage_Aggressive_Title_Killed(entityName, opponentsName));
+                infos.WithDescription(DGLocalization.GetMessage_Aggressive_Description_Killed(entityName, opponentsName, this._totalDamage.ToString(), weaponName));
                 infos.WithPriorityLevel(10);
                 infos.WithColor(DGColor.DarkRed);
             }
             else
             {
-                infos.WithTitle(string.Format(DGLocalization.Read(DGBehaviourConstants.S_AGGRESSIVE_BEHAVIOR, "Attack_Success_Title"), entityName, opponentsName));
-                infos.WithDescription(string.Format(DGLocalization.Read(DGBehaviourConstants.S_AGGRESSIVE_BEHAVIOR, "Attack_Success_Description") + (this._isCriticalAttack ? ' ' + DGLocalization.Read(DGBehaviourConstants.S_AGGRESSIVE_BEHAVIOR, "Attack_IsCritical") : string.Empty), entityName, this._totalDamage, weaponName, opponentsName));
+                infos.WithTitle(DGLocalization.GetMessage_Aggressive_Title_Attack(entityName, opponentsName));
+                infos.WithDescription(DGLocalization.GetMessage_Aggressive_Description_Attack(entityName, opponentsName, this._totalDamage.ToString(), weaponName) + (this._isCriticalAttack ? ' ' + DGLocalization.MESSAGES_BEHAVIOR_AGGRESSIVE_IS_CRITICAL : string.Empty));
                 infos.WithColor(DGColor.Red);
                 infos.WithPriorityLevel(8);
             }

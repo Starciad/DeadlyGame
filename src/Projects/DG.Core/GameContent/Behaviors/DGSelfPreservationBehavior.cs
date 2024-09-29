@@ -80,7 +80,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
         public DGPlayerActionInfo Act()
         {
             _ = this.descriptionStringBuilder.Clear();
-            _ = this.descriptionStringBuilder.AppendFormat(DGLocalization.Read(DGBehaviourConstants.S_SELF_PRESERVATION_BEHAVIOR, "Description_Intro"), this._entity.Name);
+            _ = this.descriptionStringBuilder.Append(DGLocalization.GetMessage_SelfPreservation_Description_Intro(this._entity.Name));
             _ = this.descriptionStringBuilder.Append(' ');
 
             // If health is less than 50%, start a rest.
@@ -90,7 +90,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
                 {
                     this._effectsComponent.AddEffect<DGRestEffect>();
 
-                    _ = this.descriptionStringBuilder.AppendFormat(DGLocalization.Read(DGBehaviourConstants.S_SELF_PRESERVATION_BEHAVIOR, "Description_Health"));
+                    _ = this.descriptionStringBuilder.Append(DGLocalization.MESSAGES_BEHAVIOR_SELF_PRESERVATION_DESCRIPTION_HEALTH);
                     _ = this.descriptionStringBuilder.Append(' ');
                 }
             }
@@ -99,7 +99,7 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             if (this._hungerComponent != null &&
                 this._inventoryComponent != null)
             {
-                _ = this.descriptionStringBuilder.Append(DGLocalization.Read(DGBehaviourConstants.S_SELF_PRESERVATION_BEHAVIOR, "Description_Hunger"));
+                _ = this.descriptionStringBuilder.Append(DGLocalization.MESSAGES_BEHAVIOR_SELF_PRESERVATION_DESCRIPTION_HUNGER);
                 List<DGFood> foods = GetFoodFromInventory(this._inventoryComponent);
 
                 // Feeding loop until you are satiated or the food runs out.
@@ -120,8 +120,8 @@ namespace DeadlyGame.Core.GameContent.Behaviors
             }
 
             DGPlayerActionInfo infos = new();
-            infos.WithName(DGLocalization.Read(DGBehaviourConstants.S_SELF_PRESERVATION_BEHAVIOR, "Name"));
-            infos.WithTitle(string.Format(DGLocalization.Read(DGBehaviourConstants.S_SELF_PRESERVATION_BEHAVIOR, "Title"), this._entity.Name));
+            infos.WithName(DGLocalization.MESSAGES_BEHAVIOR_SELF_PRESERVATION_NAME);
+            infos.WithTitle(DGLocalization.GetMessage_SelfPreservation_Title(this._entity.Name));
             infos.WithDescription(this.descriptionStringBuilder.ToString());
             infos.WithPriorityLevel(5);
             infos.WithAuthor(this._entity.Id);

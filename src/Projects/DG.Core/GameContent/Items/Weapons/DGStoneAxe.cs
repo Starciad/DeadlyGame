@@ -9,7 +9,7 @@ namespace DeadlyGame.Core.GameContent.Items.Weapons
     {
         public DGStoneAxe(DGGame game) : base(game)
         {
-            this.Name = DGLocalization.Read("Items", "Weapon_StoneAxe");
+            this.Name = DGLocalization.ITEMS_WEAPONS_STONE_AXE;
             this.Rarity = DGItemRarity.Common;
             this.HasDurability = true;
             this.Durability = 30;

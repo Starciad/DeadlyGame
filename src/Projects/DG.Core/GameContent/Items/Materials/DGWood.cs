@@ -8,7 +8,7 @@ namespace DeadlyGame.Core.GameContent.Items.Materials
     {
         public DGWood(DGGame game) : base(game)
         {
-            this.Name = DGLocalization.Read("Items", "Material_Wood");
+            this.Name = DGLocalization.ITEMS_MATERIALS_WOOD;
             this.Rarity = DGItemRarity.Common;
             this.HasDurability = false;
         }
