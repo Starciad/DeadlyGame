@@ -38,9 +38,18 @@ namespace DeadlyGame.Core
 
         private readonly Random _rnd;
 
-        public DGGame(DGGameBuilder gameBuilder, DGWorldBuilder worldBuilder)
+        public DGGame(DGGeneralBuilder generalBuilder, DGGameBuilder gameBuilder, DGWorldBuilder worldBuilder)
         {
-            this._rnd = new();
+            DGLocalization.Initialize(generalBuilder.LocalizationCode.language, generalBuilder.LocalizationCode.region);
+
+            if (generalBuilder.Seed == -1)
+            {
+                this._rnd = new();
+            }
+            else
+            {
+                this._rnd = new(generalBuilder.Seed);
+            }
 
             this.RandomMath = new(this._rnd);
             this.Dice = new(this._rnd);
@@ -58,8 +67,6 @@ namespace DeadlyGame.Core
             this._gameStateManager.Start();
             this._worldManager.Start();
             this._playersManager.Start();
-
-            DGLocalization.Initialize("pt", "BR");
         }
 
         // Game

@@ -15,8 +15,12 @@ namespace DeadlyGame.CLI
         private static readonly DGRandomMath randomMath = new();
 
         #region Settings
+        // General
+        private static (string language, string region) generalLocalizationCode;
+        private static int generalSeed = -1;
+
         // Game
-        private static readonly List<DGPlayerBuilder> playerBuilders = [];
+        private static readonly List<DGPlayerBuilder> gamePlayerBuilders = [];
 
         // World
         private static DGPoint worldSize;

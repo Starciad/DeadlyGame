@@ -49,6 +49,7 @@ namespace DeadlyGame.CLI
 
                     DGIni configurationIni = DGIniSerializer.Deserialize(File.ReadAllText(filename));
 
+                    ConfigureGeneral(configurationIni);
                     ConfigureGame(configurationIni);
                     ConfigureWorld(configurationIni);
                 }
@@ -66,6 +67,15 @@ namespace DeadlyGame.CLI
 
         // ========================================================= //
 
+        private static void ConfigureGeneral(DGIni configurationIni)
+        {
+            EPIniSection section = configurationIni.GetSection("general");
+
+            string[] localizationCodeTokens = section.GetKey("localizationCode").Split('-', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+            generalLocalizationCode = (localizationCodeTokens[0], localizationCodeTokens[1]);
+            generalSeed = int.Parse(section.GetKey("seed"));
+        }
         private static void ConfigureGame(DGIni configurationIni)
         {
             // Players
@@ -73,7 +83,7 @@ namespace DeadlyGame.CLI
             {
                 string[] args = value.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
-                playerBuilders.Add(new()
+                gamePlayerBuilders.Add(new()
                 {
                     Name = args[0],
                     BiologicalSex = GetBiologicalSex(args[1]),

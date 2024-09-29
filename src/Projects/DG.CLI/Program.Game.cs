@@ -10,9 +10,14 @@ namespace DeadlyGame.CLI
     {
         private static void StartGame()
         {
+            DGGeneralBuilder generalBuilder = new()
+            {
+                LocalizationCode = (generalLocalizationCode.language, generalLocalizationCode.region),
+                Seed = generalSeed
+            };
             DGGameBuilder gameBuilder = new()
             {
-                Players = [.. playerBuilders],
+                Players = [.. gamePlayerBuilders],
             };
             DGWorldBuilder worldBuilder = new()
             {
@@ -25,7 +30,7 @@ namespace DeadlyGame.CLI
                 },
             };
 
-            DGGame game = new(gameBuilder, worldBuilder);
+            DGGame game = new(generalBuilder, gameBuilder, worldBuilder);
 
             Console.WriteLine("START");
 
