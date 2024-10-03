@@ -32,8 +32,6 @@ namespace DeadlyGame.CLI
         [STAThread]
         private static int Main(string[] args)
         {
-            args = ["--configuration", "./assets/configurations/game_01.ini"];
-
             Console.InputEncoding = Encoding.UTF8;
             Console.OutputEncoding = Encoding.UTF8;
 
